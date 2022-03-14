@@ -1,445 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: hrm_b4t
@@ -894,7 +452,7 @@ CREATE TABLE `phanloai_bacluong` (
 
 LOCK TABLES `phanloai_bacluong` WRITE;
 /*!40000 ALTER TABLE `phanloai_bacluong` DISABLE KEYS */;
-INSERT INTO `phanloai_bacluong` VALUES (1,1,'GVK1','Luong gi�o vi�n kh� lo?i 1',7000000,10000000),(2,1,'GVK2','Luong gi�o vi�n kh� lo?i 2',10000000,12000000),(3,1,'GVK3','Luong gi�o vi�n kh� lo?i 3',12000000,14000000),(4,2,'GVT1','Luong gi�o vi�n t?t lo?i 1',14000000,16000000),(5,2,'GVT2','Luong gi�o vi�n t?t lo?i 2',16000000,18000000),(6,2,'GVT3','Luong gi�o vi�n t?t lo?i 3',18000000,20000000),(7,3,'GVG1','Luong gi�o vi�n gi?i lo?i 1',20000000,22000000),(8,3,'GVG2','Luong gi�o vi�n gi?i lo?i 2',22000000,24000000),(9,3,'GVG3','Luong gi�o vi�n gi?i lo?i 3',24000000,30000000),(10,4,'NVL1','Luong nh�n vi�n lo?i 1',10000000,15000000),(11,4,'NVL2','Luong nh�n vi�n lo?i 2',15000000,25000000),(12,4,'NVL3','Luong nh�n vi�n lo?i 3',25000000,35000000),(13,5,'NVP1','Luong ph� ph�ng lo?i 1',20000000,30000000),(14,5,'NVP2','Luong ph� ph�ng lo?i 2',30000000,40000000),(15,6,'NVT1','Luong tru?ng ph�ng lo?i 1',30000000,40000000),(16,6,'NVT2','Luong tru?ng ph�ng lo?i 2',40000000,55000000),(17,7,'PGD','Luong PGD',55000000,65000000),(18,7,'GD','Luong GD',65000000,75000000);
+INSERT INTO `phanloai_bacluong` VALUES (1,1,'GVK1','Lương giáo viên khá loại 1',7000000,10000000),(2,1,'GVK2','Lương giáo viên khá loại 2',10000000,12000000),(3,1,'GVK3','Lương giáo viên khá loại 3',12000000,14000000),(4,2,'GVT1','Lương giáo viên tốt loại 1',14000000,16000000),(5,2,'GVT2','Lương giáo viên tốt loại 2',16000000,18000000),(6,2,'GVT3','Lương giáo viên tốt loại 3',18000000,20000000),(7,3,'GVG1','Lương giáo viên giỏi loại 1',20000000,22000000),(8,3,'GVG2','Lương giáo viên giỏi loại 2',22000000,24000000),(9,3,'GVG3','Lương giáo viên giỏi loại 3',24000000,30000000),(10,4,'NVL1','Lương nhân viên loại 1',10000000,15000000),(11,4,'NVL2','Lương nhân viên loại 2',15000000,25000000),(12,4,'NVL3','Lương nhân viên loại 3',25000000,35000000),(13,5,'NVP1','Lương phó phòng loại 1',20000000,30000000),(14,5,'NVP2','Lương phó phòng loại 2',30000000,40000000),(15,6,'NVT1','Lương trưởng phòng loại 1',30000000,40000000),(16,6,'NVT2','Lương trưởng phòng loại 2',40000000,55000000),(17,7,'PGD','Lương PGD',55000000,65000000),(18,7,'GD','Lương GD',65000000,75000000);
 /*!40000 ALTER TABLE `phanloai_bacluong` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -918,7 +476,7 @@ CREATE TABLE `phanloai_bangcap` (
 
 LOCK TABLES `phanloai_bangcap` WRITE;
 /*!40000 ALTER TABLE `phanloai_bangcap` DISABLE KEYS */;
-INSERT INTO `phanloai_bangcap` VALUES (1,'Trung b�nh'),(2,'Trung b�nh kh�'),(3,'Kh�'),(4,'Gi?i');
+INSERT INTO `phanloai_bangcap` VALUES (1,'Trung bình'),(2,'Trung bình khá'),(3,'Khá'),(4,'Giỏi');
 /*!40000 ALTER TABLE `phanloai_bangcap` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -944,7 +502,7 @@ CREATE TABLE `phanloai_baohiem` (
 
 LOCK TABLES `phanloai_baohiem` WRITE;
 /*!40000 ALTER TABLE `phanloai_baohiem` DISABLE KEYS */;
-INSERT INTO `phanloai_baohiem` VALUES (1,'BH1','B?o hi?m x� h?i'),(2,'BH2','B?o hi?m y t?'),(3,'BH3','B?o hi?m th?t nghi?p');
+INSERT INTO `phanloai_baohiem` VALUES (1,'BH1','Bảo hiểm xã hội'),(2,'BH2','Bảo hiểm y tế'),(3,'BH3','Bảo hiểm thất nghiệp');
 /*!40000 ALTER TABLE `phanloai_baohiem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -997,7 +555,7 @@ CREATE TABLE `phanloai_chucvu` (
 
 LOCK TABLES `phanloai_chucvu` WRITE;
 /*!40000 ALTER TABLE `phanloai_chucvu` DISABLE KEYS */;
-INSERT INTO `phanloai_chucvu` VALUES (1,'CV01','Nh�n vi�n',500000),(2,'CV02','Ph� ph�ng',1000000),(3,'CV03','Tru?ng ph�ng',1500000),(4,'CV04','Ph� gi�m d?c',3000000),(5,'CV05','Gi�m d?c',3500000);
+INSERT INTO `phanloai_chucvu` VALUES (1,'CV01','Nhân viên',500000),(2,'CV02','Phó phòng',1000000),(3,'CV03','Trưởng phòng',1500000),(4,'CV04','Phó giám đốc',3000000),(5,'CV05','Giám đốc',3500000);
 /*!40000 ALTER TABLE `phanloai_chucvu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1049,7 +607,7 @@ CREATE TABLE `phanloai_chuyenmon` (
 
 LOCK TABLES `phanloai_chuyenmon` WRITE;
 /*!40000 ALTER TABLE `phanloai_chuyenmon` DISABLE KEYS */;
-INSERT INTO `phanloai_chuyenmon` VALUES (1,'CM01','T�i ch�nh � ng�n h�ng'),(2,'CM02','H�nh ch�nh van ph�ng'),(3,'CM03','Qu?n tr? kinh doanh'),(4,'CM04','K? to�n � ki?m to�n'),(5,'CM05','Kinh t?'),(6,'CM06','C�ng ngh? th�ng tin'),(7,'CM07','Su ph?m ngo?i ng?'),(8,'CM08','Kh�c');
+INSERT INTO `phanloai_chuyenmon` VALUES (1,'CM01','Tài chính – ngân hàng'),(2,'CM02','Hành chính văn phòng'),(3,'CM03','Quản trị kinh doanh'),(4,'CM04','Kế toán – kiểm toán'),(5,'CM05','Kinh tế'),(6,'CM06','Công nghệ thông tin'),(7,'CM07','Sư phạm ngoại ngữ'),(8,'CM08','Khác');
 /*!40000 ALTER TABLE `phanloai_chuyenmon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1075,7 +633,7 @@ CREATE TABLE `phanloai_hopdong` (
 
 LOCK TABLES `phanloai_hopdong` WRITE;
 /*!40000 ALTER TABLE `phanloai_hopdong` DISABLE KEYS */;
-INSERT INTO `phanloai_hopdong` VALUES (1,'LHD01','H?p d?ng 1 nam'),(2,'LHD02','H?p d?ng 2 nam'),(3,'LHD03','H?p d?ng 3 nam');
+INSERT INTO `phanloai_hopdong` VALUES (1,'LHD01','Hợp đồng 1 năm'),(2,'LHD02','Hợp đồng 2 năm'),(3,'LHD03','Hợp đồng 3 năm');
 /*!40000 ALTER TABLE `phanloai_hopdong` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1100,7 +658,7 @@ CREATE TABLE `phanloai_khenthuongkiluat` (
 
 LOCK TABLES `phanloai_khenthuongkiluat` WRITE;
 /*!40000 ALTER TABLE `phanloai_khenthuongkiluat` DISABLE KEYS */;
-INSERT INTO `phanloai_khenthuongkiluat` VALUES (1,'Thu?ng nh�n vi�n xu?t s?c th�ng 1/2021','Khen thu?ng'),(2,'Thu?ng nh�n vi�n xu?t s?c th�ng 2/2021','Khen thu?ng'),(3,'Thu?ng nh�n vi�n xu?t s?c th�ng 3/2021','Khen thu?ng'),(4,'Thu?ng nh�n vi�n xu?t s?c th�ng 4/2021','Khen thu?ng'),(5,'Thu?ng nh�n vi�n xu?t s?c th�ng 5/2021','Khen thu?ng'),(6,'Thu?ng nh�n vi�n xu?t s?c th�ng 6/2021','Khen thu?ng'),(7,'Thu?ng nh�n vi�n xu?t s?c th�ng 7/2021','Khen thu?ng'),(8,'Thu?ng nh�n vi�n xu?t s?c th�ng 8/2021','Khen thu?ng'),(9,'Thu?ng nh�n vi�n xu?t s?c th�ng 9/2021','Khen thu?ng'),(10,'Thu?ng nh�n vi�n xu?t s?c th�ng 10/2021','Khen thu?ng'),(11,'Thu?ng nh�n vi�n xu?t s?c th�ng 11/2021','Khen thu?ng'),(12,'Thu?ng nh�n vi�n xu?t s?c th�ng 12/2021','Khen thu?ng'),(13,'Thu?ng nh�n vi�n xu?t s?c qu� 1/2021','Khen thu?ng'),(14,'Thu?ng nh�n vi�n xu?t s?c qu� 2/2021','Khen thu?ng'),(15,'Thu?ng nh�n vi�n xu?t s?c qu� 3/2021','Khen thu?ng'),(16,'Thu?ng nh�n vi�n xu?t s?c qu� 4/2021','Khen thu?ng'),(17,'Thu?ng nh�n vi�n xu?t s?c nam 2021','Khen thu?ng'),(18,'K? lu?t nh�n vi�n di l�m mu?n','K? lu?t'),(19,'K? lu?t nh�n vi�n b? d�nh gi� k�m','K? lu?t'),(20,'K? lu?t kh�c','K? lu?t');
+INSERT INTO `phanloai_khenthuongkiluat` VALUES (1,'Thưởng nhân viên xuất sắc tháng 1/2021','Khen thưởng'),(2,'Thưởng nhân viên xuất sắc tháng 2/2021','Khen thưởng'),(3,'Thưởng nhân viên xuất sắc tháng 3/2021','Khen thưởng'),(4,'Thưởng nhân viên xuất sắc tháng 4/2021','Khen thưởng'),(5,'Thưởng nhân viên xuất sắc tháng 5/2021','Khen thưởng'),(6,'Thưởng nhân viên xuất sắc tháng 6/2021','Khen thưởng'),(7,'Thưởng nhân viên xuất sắc tháng 7/2021','Khen thưởng'),(8,'Thưởng nhân viên xuất sắc tháng 8/2021','Khen thưởng'),(9,'Thưởng nhân viên xuất sắc tháng 9/2021','Khen thưởng'),(10,'Thưởng nhân viên xuất sắc tháng 10/2021','Khen thưởng'),(11,'Thưởng nhân viên xuất sắc tháng 11/2021','Khen thưởng'),(12,'Thưởng nhân viên xuất sắc tháng 12/2021','Khen thưởng'),(13,'Thưởng nhân viên xuất sắc quý 1/2021','Khen thưởng'),(14,'Thưởng nhân viên xuất sắc quý 2/2021','Khen thưởng'),(15,'Thưởng nhân viên xuất sắc quý 3/2021','Khen thưởng'),(16,'Thưởng nhân viên xuất sắc quý 4/2021','Khen thưởng'),(17,'Thưởng nhân viên xuất sắc năm 2021','Khen thưởng'),(18,'Kỷ luật nhân viên đi làm muộn','Kỷ luật'),(19,'Kỷ luật nhân viên bị đánh giá kém','Kỷ luật'),(20,'Kỷ luật khác','Kỷ luật');
 /*!40000 ALTER TABLE `phanloai_khenthuongkiluat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1124,7 +682,7 @@ CREATE TABLE `phanloai_ngaynghi` (
 
 LOCK TABLES `phanloai_ngaynghi` WRITE;
 /*!40000 ALTER TABLE `phanloai_ngaynghi` DISABLE KEYS */;
-INSERT INTO `phanloai_ngaynghi` VALUES (1,'Ngh? c? ng�y'),(2,'Ngh? ca'),(3,'Ngh? n?a ng�y'),(4,'Ngh? d?'),(5,'Ngh? kh�ng luong');
+INSERT INTO `phanloai_ngaynghi` VALUES (1,'Nghỉ cả ngày'),(2,'Nghỉ ca'),(3,'Nghỉ nửa ngày'),(4,'Nghỉ đẻ'),(5,'Nghỉ không lương');
 /*!40000 ALTER TABLE `phanloai_ngaynghi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1149,7 +707,7 @@ CREATE TABLE `phanloai_ngaynghile` (
 
 LOCK TABLES `phanloai_ngaynghile` WRITE;
 /*!40000 ALTER TABLE `phanloai_ngaynghile` DISABLE KEYS */;
-INSERT INTO `phanloai_ngaynghile` VALUES (1,'2022-01-29','T?t'),(2,'2022-01-30','T?t'),(3,'2022-01-31','T?t'),(4,'2022-02-01','T?t'),(5,'2022-02-02','T?t'),(6,'2022-02-03','T?t'),(7,'2022-02-04','T?t'),(8,'2022-02-05','T?t'),(9,'2022-02-06','T?t'),(10,'2022-04-10','Gi? t?'),(11,'2022-04-30','Gi?i ph�ng Mi?n Nam'),(12,'2022-05-01','Qu?c t? lao d?ng'),(13,'2022-09-02','Qu?c kh�nh');
+INSERT INTO `phanloai_ngaynghile` VALUES (1,'2022-01-29','Tết'),(2,'2022-01-30','Tết'),(3,'2022-01-31','Tết'),(4,'2022-02-01','Tết'),(5,'2022-02-02','Tết'),(6,'2022-02-03','Tết'),(7,'2022-02-04','Tết'),(8,'2022-02-05','Tết'),(9,'2022-02-06','Tết'),(10,'2022-04-10','Giỗ tổ'),(11,'2022-04-30','Giải phóng Miền Nam'),(12,'2022-05-01','Quốc tế lao động'),(13,'2022-09-02','Quốc khánh');
 /*!40000 ALTER TABLE `phanloai_ngaynghile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1173,7 +731,7 @@ CREATE TABLE `phanloai_nguoithan` (
 
 LOCK TABLES `phanloai_nguoithan` WRITE;
 /*!40000 ALTER TABLE `phanloai_nguoithan` DISABLE KEYS */;
-INSERT INTO `phanloai_nguoithan` VALUES (1,'B?'),(2,'M?'),(3,'Anh'),(4,'Ch?'),(5,'Em'),(6,'V?'),(7,'Con');
+INSERT INTO `phanloai_nguoithan` VALUES (1,'Bố'),(2,'Mẹ'),(3,'Anh'),(4,'Chị'),(5,'Em'),(6,'Vợ'),(7,'Con');
 /*!40000 ALTER TABLE `phanloai_nguoithan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1199,7 +757,7 @@ CREATE TABLE `phanloai_nhomluong` (
 
 LOCK TABLES `phanloai_nhomluong` WRITE;
 /*!40000 ALTER TABLE `phanloai_nhomluong` DISABLE KEYS */;
-INSERT INTO `phanloai_nhomluong` VALUES (1,'GV1','Luong gi�o vi�n kh�'),(2,'GV2','Luong gi�o vi�n t?t'),(3,'GV3','Luong gi�o vi�n gi?i'),(4,'NV1','Luong nh�n vi�n'),(5,'NV2','Luong ph� ph�ng'),(6,'NV3','Luong tru?ng ph�ng'),(7,'QL','Luong qu?n l�');
+INSERT INTO `phanloai_nhomluong` VALUES (1,'GV1','Lương giáo viên khá'),(2,'GV2','Lương giáo viên tốt'),(3,'GV3','Lương giáo viên giỏi'),(4,'NV1','Lương nhân viên'),(5,'NV2','Lương phó phòng'),(6,'NV3','Lương trưởng phòng'),(7,'QL','Lương quản lý');
 /*!40000 ALTER TABLE `phanloai_nhomluong` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1225,7 +783,7 @@ CREATE TABLE `phanloai_phongban` (
 
 LOCK TABLES `phanloai_phongban` WRITE;
 /*!40000 ALTER TABLE `phanloai_phongban` DISABLE KEYS */;
-INSERT INTO `phanloai_phongban` VALUES (1,'PB01','Ph�ng h�nh ch�nh-nh�n s?'),(2,'PB02','Ph�ng ph�p ch?'),(3,'PB03','Ph�ng t�i ch�nh k? to�n'),(4,'PB04','Ph�ng k? Thu?t'),(5,'PB05','Ph�ng k? ho?ch'),(6,'PB06','Ban qu?n l� ca l�m'),(7,'PB07','Ph�ng gi�o vi�n Ielts'),(8,'PB08','Ph�ng gi�o vi�n Toefl'),(9,'PB09','Ph�ng gi�o vi�n Toeic'),(10,'PB10','Ph�ng gi�o vi�n SAT'),(11,'PB11','Ph�ng gi�o vi�n ESOL');
+INSERT INTO `phanloai_phongban` VALUES (1,'PB01','Phòng hành chính-nhân sự'),(2,'PB02','Phòng pháp chế'),(3,'PB03','Phòng tài chính kế toán'),(4,'PB04','Phòng kỹ Thuật'),(5,'PB05','Phòng kế hoạch'),(6,'PB06','Ban quản lý ca làm'),(7,'PB07','Phòng giáo viên Ielts'),(8,'PB08','Phòng giáo viên Toefl'),(9,'PB09','Phòng giáo viên Toeic'),(10,'PB10','Phòng giáo viên SAT'),(11,'PB11','Phòng giáo viên ESOL');
 /*!40000 ALTER TABLE `phanloai_phongban` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1251,7 +809,7 @@ CREATE TABLE `phanloai_phonghoc` (
 
 LOCK TABLES `phanloai_phonghoc` WRITE;
 /*!40000 ALTER TABLE `phanloai_phonghoc` DISABLE KEYS */;
-INSERT INTO `phanloai_phonghoc` VALUES (1,'PH1','Ph�ng h?c 1'),(2,'PH2','Ph�ng h?c 2'),(3,'PH3','Ph�ng h?c 3'),(4,'PH4','Ph�ng h?c 4'),(5,'PH5','Ph�ng h?c 5'),(6,'PH6','Ph�ng h?c 6'),(7,'PH7','Ph�ng h?c 7'),(8,'PH8','Ph�ng h?c 8'),(9,'PH9','Ph�ng h?c 9'),(10,'PH10','Ph�ng h?c 10');
+INSERT INTO `phanloai_phonghoc` VALUES (1,'PH1','Phòng học 1'),(2,'PH2','Phòng học 2'),(3,'PH3','Phòng học 3'),(4,'PH4','Phòng học 4'),(5,'PH5','Phòng học 5'),(6,'PH6','Phòng học 6'),(7,'PH7','Phòng học 7'),(8,'PH8','Phòng học 8'),(9,'PH9','Phòng học 9'),(10,'PH10','Phòng học 10');
 /*!40000 ALTER TABLE `phanloai_phonghoc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1275,7 +833,7 @@ CREATE TABLE `phanloai_quoctich` (
 
 LOCK TABLES `phanloai_quoctich` WRITE;
 /*!40000 ALTER TABLE `phanloai_quoctich` DISABLE KEYS */;
-INSERT INTO `phanloai_quoctich` VALUES (1,'Vi?t Nam'),(2,'M?'),(3,'Anh'),(4,'�c'),(5,'New Zealand'),(6,'Malaysia'),(7,'Singapore');
+INSERT INTO `phanloai_quoctich` VALUES (1,'Việt Nam'),(2,'Mỹ'),(3,'Anh'),(4,'Úc'),(5,'New Zealand'),(6,'Malaysia'),(7,'Singapore');
 /*!40000 ALTER TABLE `phanloai_quoctich` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1325,7 +883,7 @@ CREATE TABLE `phanloai_thue` (
 
 LOCK TABLES `phanloai_thue` WRITE;
 /*!40000 ALTER TABLE `phanloai_thue` DISABLE KEYS */;
-INSERT INTO `phanloai_thue` VALUES (1,'LT01','Thu? thu nh?p c� nh�n');
+INSERT INTO `phanloai_thue` VALUES (1,'LT01','Thuế thu nhập cá nhân');
 /*!40000 ALTER TABLE `phanloai_thue` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1349,7 +907,7 @@ CREATE TABLE `phanloai_tinhchathopdong` (
 
 LOCK TABLES `phanloai_tinhchathopdong` WRITE;
 /*!40000 ALTER TABLE `phanloai_tinhchathopdong` DISABLE KEYS */;
-INSERT INTO `phanloai_tinhchathopdong` VALUES (1,'Ch�nh th?c'),(2,'Th? vi?c'),(3,'Th?c t?p');
+INSERT INTO `phanloai_tinhchathopdong` VALUES (1,'Chính thức'),(2,'Thử việc'),(3,'Thực tập');
 /*!40000 ALTER TABLE `phanloai_tinhchathopdong` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1373,7 +931,7 @@ CREATE TABLE `phanloai_tinhtranghonnhan` (
 
 LOCK TABLES `phanloai_tinhtranghonnhan` WRITE;
 /*!40000 ALTER TABLE `phanloai_tinhtranghonnhan` DISABLE KEYS */;
-INSERT INTO `phanloai_tinhtranghonnhan` VALUES (1,'�?c th�n'),(2,'�� k?t h�n');
+INSERT INTO `phanloai_tinhtranghonnhan` VALUES (1,'Độc thân'),(2,'Đã kết hôn');
 /*!40000 ALTER TABLE `phanloai_tinhtranghonnhan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1397,7 +955,7 @@ CREATE TABLE `phanloai_trinhdohocvan` (
 
 LOCK TABLES `phanloai_trinhdohocvan` WRITE;
 /*!40000 ALTER TABLE `phanloai_trinhdohocvan` DISABLE KEYS */;
-INSERT INTO `phanloai_trinhdohocvan` VALUES (1,'T?t nghi?p c?p 3'),(2,'T?t nghi?p d?i h?c'),(3,'T?t nghi?p cao d?ng'),(4,'Th?c si'),(5,'Ti?n si');
+INSERT INTO `phanloai_trinhdohocvan` VALUES (1,'Tốt nghiệp cấp 3'),(2,'Tốt nghiệp đại học'),(3,'Tốt nghiệp cao đẳng'),(4,'Thạc sĩ'),(5,'Tiến sĩ');
 /*!40000 ALTER TABLE `phanloai_trinhdohocvan` ENABLE KEYS */;
 UNLOCK TABLES;
 
