@@ -26,7 +26,6 @@ public class EduLevelCategoryService {
 
     public EduLevelCategory update(EduLevelCategory eduLevelCategory)
     {
-        eduLevelCategory.setId(repo.getLastID()+1);
         return repo.save(eduLevelCategory);
     }
 
