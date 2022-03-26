@@ -1,7 +1,7 @@
 package backend.controller;
 
-import backend.entity.InsuranceCategory;
-import backend.service.InsuranceCategoryService;
+import backend.entity.HolidayCategory;
+import backend.service.HolidayCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,16 +11,16 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value = "/insuranceCategory")
-public class InsuranceCategoryController {
+@RequestMapping(value = "/holidayCategory")
+public class HolidayCategoryController {
 
     @Autowired
-    private InsuranceCategoryService service;
+    private HolidayCategoryService service;
 
     @GetMapping("")
     public ResponseEntity<?> getAll() {
         try {
-            List<InsuranceCategory> list = service.getAll();
+            List<HolidayCategory> list = service.getAll();
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -28,9 +28,9 @@ public class InsuranceCategoryController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> create(@RequestBody InsuranceCategory insuranceCategory) {
+    public ResponseEntity<?> create(@RequestBody HolidayCategory holidayCategory) {
         try {
-            service.create(insuranceCategory);
+            service.create(holidayCategory);
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -38,9 +38,9 @@ public class InsuranceCategoryController {
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<?> update(@RequestBody InsuranceCategory insuranceCategory) {
+    public ResponseEntity<?> update(@RequestBody HolidayCategory holidayCategory) {
         try {
-            service.update(insuranceCategory);
+            service.update(holidayCategory);
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);

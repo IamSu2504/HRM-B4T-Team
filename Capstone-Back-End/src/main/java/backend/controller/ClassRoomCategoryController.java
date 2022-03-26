@@ -1,7 +1,7 @@
 package backend.controller;
 
-import backend.entity.InsuranceCategory;
-import backend.service.InsuranceCategoryService;
+import backend.entity.ClassRoomCategory;
+import backend.service.ClassRoomCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,39 +11,39 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value = "/insuranceCategory")
-public class InsuranceCategoryController {
+@RequestMapping(value = "/classRoomCategory")
+public class ClassRoomCategoryController {
 
     @Autowired
-    private InsuranceCategoryService service;
+    private ClassRoomCategoryService service;
 
     @GetMapping("")
     public ResponseEntity<?> getAll() {
         try {
-            List<InsuranceCategory> list = service.getAll();
+            List<ClassRoomCategory> list = service.getAll();
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> create(@RequestBody InsuranceCategory insuranceCategory) {
+    public ResponseEntity<?> create(@RequestBody ClassRoomCategory classRoomCategory) {
         try {
-            service.create(insuranceCategory);
+            service.create(classRoomCategory);
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<?> update(@RequestBody InsuranceCategory insuranceCategory) {
+    public ResponseEntity<?> update(@RequestBody ClassRoomCategory classRoomCategory) {
         try {
-            service.update(insuranceCategory);
+            service.update(classRoomCategory);
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -53,7 +53,7 @@ public class InsuranceCategoryController {
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
