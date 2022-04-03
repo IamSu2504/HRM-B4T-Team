@@ -1,5 +1,6 @@
 package backend.controller;
 
+import backend.entity.ContractNatureCategory;
 import backend.entity.NationCategory;
 import backend.entity.TaxCategory;
 import backend.service.NationCategoryService;
@@ -22,8 +23,11 @@ public class NationCategoryController {
     @GetMapping(value = "")
     public ResponseEntity<?> getAll() {
         try {
-            List<NationCategory> listNationCategory = service.getAll();
-            return new ResponseEntity<>(listNationCategory, HttpStatus.OK);
+            List<NationCategory> list = service.getAll();
+            if(list.isEmpty()){
+                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.EXPECTATION_FAILED);
+            }
+            return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -32,7 +36,10 @@ public class NationCategoryController {
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody NationCategory nationCategory) {
         try {
-            service.create(nationCategory);
+            NationCategory c = service.save(nationCategory);
+            if(c == null){
+                return new ResponseEntity<>("Danh mục đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -42,15 +49,18 @@ public class NationCategoryController {
     @PutMapping(value = "")
     public ResponseEntity<?> update(@RequestBody NationCategory nationCategory) {
         try {
-            service.update(nationCategory);
+            NationCategory c = service.save(nationCategory);
+            if(c == null){
+                return new ResponseEntity<>("Danh mục đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bột", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @DeleteMapping(value="/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    @DeleteMapping(value="")
+    public ResponseEntity<?> delete(String id) {
         try {
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);

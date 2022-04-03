@@ -20,18 +20,17 @@ public class NationCategoryService {
         return repo.findAll();
     }
 
-    public NationCategory create(NationCategory nationCategory)
+    public NationCategory save(NationCategory nationCategory)
     {
-        nationCategory.setId(repo.getLastID()+1);
-        return repo.save(nationCategory);
+        if(repo.getById(nationCategory.getId())==null){
+            return repo.save(nationCategory);
+        }
+        else{
+            return null;
+        }
     }
 
-    public NationCategory update(NationCategory nationCategory)
-    {
-        return repo.save(nationCategory);
-    }
-
-    public void delete(int id)
+    public void delete(String id)
     {
         repo.deleteById(id);
     }

@@ -39,7 +39,7 @@ public class ContractNatureCategoryController {
         try {
             ContractNatureCategory c = service.save(contractNatureCategory);
             if(c == null){
-                return new ResponseEntity<>("Danh mục đã tồn tại", HttpStatus.OK);
+                return new ResponseEntity<>("Danh mục đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
@@ -52,7 +52,7 @@ public class ContractNatureCategoryController {
         try {
             ContractNatureCategory c = service.save(contractNatureCategory);
             if(c == null){
-                return new ResponseEntity<>("Danh mục đã tồn tại", HttpStatus.OK);
+                return new ResponseEntity<>("Danh mục đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
