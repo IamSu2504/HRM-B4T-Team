@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value = "/departmentCategory")
+@RequestMapping(value = "/category/department")
 public class DepartmentCategoryController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class DepartmentCategoryController {
             List<DepartmentCategory> list = service.getAll();
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -34,7 +34,7 @@ public class DepartmentCategoryController {
             service.create(departmentCategory);
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -44,7 +44,7 @@ public class DepartmentCategoryController {
             service.update(departmentCategory);
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -54,7 +54,7 @@ public class DepartmentCategoryController {
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

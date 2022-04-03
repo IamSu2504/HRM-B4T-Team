@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value = "/specializeCategory")
+@RequestMapping(value = "/category/specialize")
 public class SpecializeCategoryController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class SpecializeCategoryController {
             List<SpecializeCategory> list = service.getAll();
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -33,7 +33,7 @@ public class SpecializeCategoryController {
             service.create(specializeCategory);
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -43,7 +43,7 @@ public class SpecializeCategoryController {
             service.update(specializeCategory);
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -53,7 +53,7 @@ public class SpecializeCategoryController {
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
