@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value = "/nationCategory")
+@RequestMapping(value = "/category/nation")
 public class NationCategoryController {
 
     @Autowired

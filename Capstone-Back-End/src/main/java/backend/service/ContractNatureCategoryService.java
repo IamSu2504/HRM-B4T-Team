@@ -19,15 +19,14 @@ public class ContractNatureCategoryService {
         return repo.findAll();
     }
 
-    public ContractNatureCategory create(ContractNatureCategory contractNatureCategory)
+    public ContractNatureCategory save(ContractNatureCategory contractNatureCategory)
     {
-        contractNatureCategory.setId(repo.getLastID()+1);
-        return repo.save(contractNatureCategory);
-    }
-
-    public ContractNatureCategory update(ContractNatureCategory contractNatureCategory)
-    {
-        return repo.save(contractNatureCategory);
+        if(repo.getByTinhChatHopDong(contractNatureCategory.getTinhChatHopDong())==null){
+            return repo.save(contractNatureCategory);
+        }
+        else{
+            return null;
+        }
     }
 
     public void delete(int id)

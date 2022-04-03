@@ -12,4 +12,7 @@ public interface ContractNatureCategoryRepository extends JpaRepository<Contract
     @Query(value = "select max(id) from phanloai_tinhchathopdong", nativeQuery = true)
     int getLastID();
 
+    @Query(value = "select * from phanloai_tinhchathopdong where tinh_chat_hop_dong = ?", nativeQuery = true)
+    ContractNatureCategory getByTinhChatHopDong(String tinhChatHopDong);
+
 }

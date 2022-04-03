@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value = "/contractNatureCategory")
+@RequestMapping(value = "/category/contractNature")
 public class ContractNatureCategoryController {
 
     @Autowired
@@ -22,8 +22,13 @@ public class ContractNatureCategoryController {
     @GetMapping(value = "")
     public ResponseEntity<?> getAll() {
         try {
-            List<ContractNatureCategory> listContractNatureCategory = service.getAll();
-            return new ResponseEntity<>(listContractNatureCategory, HttpStatus.OK);
+            List<ContractNatureCategory> list = service.getAll();
+            if(list.isEmpty()){
+                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(list, HttpStatus.OK);
+            }
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -32,7 +37,10 @@ public class ContractNatureCategoryController {
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody ContractNatureCategory contractNatureCategory) {
         try {
-            service.create(contractNatureCategory);
+            ContractNatureCategory c = service.save(contractNatureCategory);
+            if(c == null){
+                return new ResponseEntity<>("Danh mục đã tồn tại", HttpStatus.OK);
+            }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -42,7 +50,10 @@ public class ContractNatureCategoryController {
     @PutMapping(value = "")
     public ResponseEntity<?> update(@RequestBody ContractNatureCategory contractNatureCategory) {
         try {
-            service.update(contractNatureCategory);
+            ContractNatureCategory c = service.save(contractNatureCategory);
+            if(c == null){
+                return new ResponseEntity<>("Danh mục đã tồn tại", HttpStatus.OK);
+            }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bột", HttpStatus.INTERNAL_SERVER_ERROR);
