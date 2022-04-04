@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TaxCategoryRepository extends JpaRepository<TaxCategory,Integer> {
 
-    @Query(value = "select max(id) from phanloai_thue", nativeQuery = true)
-    int getLastID();
+    @Query(value = "select * from phanloai_thue where ma_phan_loai = ?", nativeQuery = true)
+    TaxCategory getByMaPhanLoai(String maPhanLoai);
 
 }

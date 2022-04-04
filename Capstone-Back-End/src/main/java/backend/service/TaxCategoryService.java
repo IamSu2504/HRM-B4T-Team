@@ -20,15 +20,24 @@ public class TaxCategoryService {
         return repo.findAll();
     }
 
-    public TaxCategory create(TaxCategory taxCategory)
+    public TaxCategory getById(int id)
     {
-        taxCategory.setId(repo.getLastID()+1);
-        return repo.save(taxCategory);
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
     }
 
-    public TaxCategory update(TaxCategory taxCategory)
+    public TaxCategory save(TaxCategory taxCategory)
     {
-        return repo.save(taxCategory);
+        if(repo.getByMaPhanLoai(taxCategory.getMaPhanLoai())==null){
+            return repo.save(taxCategory);
+        }
+        else{
+            return null;
+        }
     }
 
     public void delete(int id)

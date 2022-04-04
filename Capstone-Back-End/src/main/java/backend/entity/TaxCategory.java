@@ -17,6 +17,7 @@ public class TaxCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "ma_phan_loai")

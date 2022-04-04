@@ -1,6 +1,5 @@
 package backend.controller;
 
-import backend.entity.MarriageCategory;
 import backend.entity.TaxCategory;
 import backend.service.TaxCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,23 @@ public class TaxCategoryController {
     public ResponseEntity<?> getAll() {
         try {
             List<TaxCategory> listTaxCategory = service.getAll();
+            if(listTaxCategory.isEmpty()){
+                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+            }
             return new ResponseEntity<>(listTaxCategory, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") int id) {
+        try {
+            TaxCategory t = service.getById(id);
+            if(t==null){
+                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(t, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -31,20 +46,27 @@ public class TaxCategoryController {
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody TaxCategory taxCategory) {
         try {
-            service.create(taxCategory);
+            TaxCategory t = service.save(taxCategory);
+            if(t==null){
+                return new ResponseEntity<>("Mã phân loại thuế đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping(value = "")
-    public ResponseEntity<?> update(@RequestBody TaxCategory taxCategory) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody TaxCategory taxCategory) {
         try {
-            service.update(taxCategory);
+            taxCategory.setId(id);
+            TaxCategory t = service.save(taxCategory);
+            if(t==null){
+                return new ResponseEntity<>("Mã phân loại thuế đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bột", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
