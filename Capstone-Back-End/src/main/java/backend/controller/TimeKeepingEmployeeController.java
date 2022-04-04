@@ -14,8 +14,8 @@ public class TimeKeepingEmployeeController {
     @Autowired
     private TimeKeepingEmployeeService service;
 
-    @GetMapping(value = "")
-    public ResponseEntity<?> getByID(@RequestBody String maNV) {
+    @PostMapping(value = "/user/{id}")
+    public ResponseEntity<?> getByMaNV(@PathVariable("id") String maNV) {
         try {
             return new ResponseEntity<>(service.viewTimeKeeping(maNV), HttpStatus.OK);
         }catch(Exception e){
