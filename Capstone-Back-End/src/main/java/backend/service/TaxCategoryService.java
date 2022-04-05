@@ -1,14 +1,11 @@
 package backend.service;
 
-import backend.entity.MarriageCategory;
 import backend.entity.TaxCategory;
-import backend.repository.MarriageCategoryRepository;
 import backend.repository.TaxCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 @Service
 public class TaxCategoryService {
 
@@ -44,5 +41,4 @@ public class TaxCategoryService {
     {
         repo.deleteById(id);
     }
-
 }
