@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ShiftCategoryRepository extends JpaRepository<ShiftCategory,Integer> {
 
-    @Query(value = "select * from phanloai_calam where ten_ca = ?", nativeQuery = true)
+    @Query(value = "select * from phanloai_calam where upper(ten_ca) = upper(?)", nativeQuery = true)
     ShiftCategory getByTenCaLam(String tenCa);
 
 }

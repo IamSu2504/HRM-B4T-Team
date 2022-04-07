@@ -20,9 +20,19 @@ public class NationCategoryService {
         return repo.findAll();
     }
 
+    public NationCategory getById(int id)
+    {
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
+    }
+
     public NationCategory save(NationCategory nationCategory)
     {
-        if(repo.getById(nationCategory.getId())==null){
+        if(repo.getByQuocTich(nationCategory.getQuocTich())==null){
             return repo.save(nationCategory);
         }
         else{
@@ -30,9 +40,8 @@ public class NationCategoryService {
         }
     }
 
-    public void delete(String id)
+    public void delete(int id)
     {
         repo.deleteById(id);
     }
-
 }

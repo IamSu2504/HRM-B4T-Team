@@ -1,8 +1,6 @@
 package backend.controller;
 
-import backend.entity.EduLevelCategory;
 import backend.entity.MarriageCategory;
-import backend.service.EduLevelCategoryService;
 import backend.service.MarriageCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,8 +20,25 @@ public class MarriageCategoryController {
     @GetMapping(value = "")
     public ResponseEntity<?> getAll() {
         try {
-            List<MarriageCategory> listMarriageCategory = service.getAll();
-            return new ResponseEntity<>(listMarriageCategory, HttpStatus.OK);
+            List<MarriageCategory> list = service.getAll();
+            if(list.isEmpty()){
+                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") String pv) {
+        try {
+            int id = Integer.parseInt(pv);
+            MarriageCategory c = service.getById(id);
+            if(c==null){
+                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -32,17 +47,25 @@ public class MarriageCategoryController {
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody MarriageCategory marriageCategory) {
         try {
-            service.create(marriageCategory);
+            MarriageCategory c = service.save(marriageCategory);
+            if(c==null){
+                return new ResponseEntity<>("Tình trạng hôn nhân đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping(value = "")
-    public ResponseEntity<?> update(@RequestBody MarriageCategory marriageCategory) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody MarriageCategory marriageCategory) {
         try {
-            service.update(marriageCategory);
+            int id = Integer.parseInt(pv);
+            marriageCategory.setId(id);
+            MarriageCategory c = service.save(marriageCategory);
+            if(c==null){
+                return new ResponseEntity<>("Tình trạng hôn nhân đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -50,8 +73,9 @@ public class MarriageCategoryController {
     }
 
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    public ResponseEntity<?> delete(@PathVariable("id") String pv) {
         try {
+            int id = Integer.parseInt(pv);
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
         }catch(Exception e){

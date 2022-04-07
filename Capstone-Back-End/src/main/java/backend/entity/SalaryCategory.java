@@ -13,8 +13,9 @@ public class SalaryCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "id_nhom_luong")
-    private int idNhomLuong;
+    @OneToOne
+    @JoinColumn(name = "id_nhom_luong")
+    private SalaryGroupCategory nhomLuong;
 
     @Column(name = "ma_bac_luong")
     private String maBacLuong;
@@ -26,6 +27,6 @@ public class SalaryCategory {
     private double khoangLuongTu;
 
     @Column(name = "khoang_luong_den")
-    private Double khoangLuongDen;
+    private double khoangLuongDen;
 
 }

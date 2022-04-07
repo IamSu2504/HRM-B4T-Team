@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SpecializeCategoryRepository extends JpaRepository<SpecializeCategory,Integer> {
 
-    @Query(value = "select * from phanloai_chuyenmon where ma_chuyen_mon = ?", nativeQuery = true)
+    @Query(value = "select * from phanloai_chuyenmon where upper(ma_chuyen_mon) = upper(?)", nativeQuery = true)
     SpecializeCategory getByMaChuyenMon(String maChuyenMon);
 }

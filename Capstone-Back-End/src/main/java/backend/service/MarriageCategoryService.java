@@ -1,9 +1,9 @@
 package backend.service;
 
-import backend.entity.EduLevelCategory;
 import backend.entity.MarriageCategory;
-import backend.repository.EduLevelCategoryRepository;
+import backend.entity.NationCategory;
 import backend.repository.MarriageCategoryRepository;
+import backend.repository.NationCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,20 +20,28 @@ public class MarriageCategoryService {
         return repo.findAll();
     }
 
-    public MarriageCategory create(MarriageCategory marriageCategory)
+    public MarriageCategory getById(int id)
     {
-        marriageCategory.setId(repo.getLastID()+1);
-        return repo.save(marriageCategory);
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
     }
 
-    public MarriageCategory update(MarriageCategory marriageCategory)
+    public MarriageCategory save(MarriageCategory marriageCategory)
     {
-        return repo.save(marriageCategory);
+        if(repo.getByTinhTrang(marriageCategory.getTinhTrang())==null){
+            return repo.save(marriageCategory);
+        }
+        else{
+            return null;
+        }
     }
 
     public void delete(int id)
     {
         repo.deleteById(id);
     }
-
 }

@@ -1,6 +1,7 @@
 package backend.service;
 
 import backend.entity.SalaryCategory;
+import backend.entity.TaxCategory;
 import backend.repository.SalaryCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,23 +12,29 @@ import java.util.List;
 public class SalaryCategoryService {
 
     @Autowired
-    private SalaryCategoryRepository repository;
+    private SalaryCategoryRepository repo;
 
     public List<SalaryCategory> getAll(){
-        return repository.findAll();
+        return repo.findAll();
     }
 
-    public SalaryCategory create(SalaryCategory salaryCategory){
-        salaryCategory.setId(repository.getLastID()+1);
-        return repository.save(salaryCategory);
-    };
-
-    public SalaryCategory update(SalaryCategory salaryCategory)
+    public SalaryCategory getById(int id)
     {
-        return repository.save(salaryCategory);
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
+    }
+
+
+    public SalaryCategory save(SalaryCategory salaryCategory)
+    {
+        return repo.save(salaryCategory);
     }
 
     public void delete(int id){
-        repository.deleteById(id);
+        repo.deleteById(id);
     };
 }

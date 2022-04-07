@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SalaryGroupCategoryRepository extends JpaRepository<SalaryGroupCategory, Integer> {
 
-    @Query(value = "select * from phanloai_nhomluong where ma_nhom_luong = ?", nativeQuery = true)
+    @Query(value = "select * from phanloai_nhomluong where upper(ma_nhom_luong) = upper(?)", nativeQuery = true)
     SalaryGroupCategory getByMaNhomLuong(String maNhomLuong);
 
 }
