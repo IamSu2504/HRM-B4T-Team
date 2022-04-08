@@ -11,7 +11,8 @@ public class PositionCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id")
+    private Integer id;
 
     @Column(name = "ma_chuc_vu")
     private String maChucVu;
@@ -20,5 +21,5 @@ public class PositionCategory {
     private String tenChucVu;
 
     @Column(name = "phu_cap")
-    private Double phuCap;
+    private double phuCap;
 }

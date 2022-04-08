@@ -1,7 +1,7 @@
 package backend.service;
 
-
 import backend.entity.SalaryGroupCategory;
+import backend.entity.ShiftCategory;
 import backend.repository.SalaryGroupCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,23 +11,33 @@ import java.util.List;
 @Service
 public class SalaryGroupCategoryService {
     @Autowired
-    private SalaryGroupCategoryRepository repository;
+    private SalaryGroupCategoryRepository repo;
 
     public List<SalaryGroupCategory> getAll(){
-        return repository.findAll();
+        return repo.findAll();
     }
 
-    public SalaryGroupCategory create(SalaryGroupCategory salaryGroupCategory){
-        salaryGroupCategory.setId(repository.getLastID()+1);
-        return repository.save(salaryGroupCategory);
-    };
-
-    public SalaryGroupCategory update(SalaryGroupCategory salaryGroupCategory)
+    public SalaryGroupCategory getById(int id)
     {
-        return repository.save(salaryGroupCategory);
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
+    }
+
+    public SalaryGroupCategory save(SalaryGroupCategory salaryGroupCategory)
+    {
+        if(repo.getByMaNhomLuong(salaryGroupCategory.getMaNhomLuong())==null){
+            return repo.save(salaryGroupCategory);
+        }
+        else{
+            return null;
+        }
     }
 
     public void delete(int id){
-        repository.deleteById(id);
+        repo.deleteById(id);
     };
 }

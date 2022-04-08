@@ -17,7 +17,8 @@ public class NationCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    @Column(name = "id")
+    private Integer id;
 
     @Column(name = "quoc_tich")
     private String quocTich;

@@ -2,7 +2,9 @@ package backend.service;
 
 
 import backend.entity.RewardDisciplineCategory;
+import backend.entity.TaxCategory;
 import backend.repository.RewardDisciplineCategoryRepository;
+import backend.repository.TaxCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,23 +12,37 @@ import java.util.List;
 
 @Service
 public class RewardDisciplineCategoryService {
+
     @Autowired
-    private RewardDisciplineCategoryRepository repository;
+    private RewardDisciplineCategoryRepository repo;
 
-    public List<RewardDisciplineCategory> getAll(){
-        return repository.findAll();
+    public List<RewardDisciplineCategory> getAll()
+    {
+        return repo.findAll();
     }
 
-    public RewardDisciplineCategory create(RewardDisciplineCategory rewardDisciplineCategory){
-        rewardDisciplineCategory.setId(repository.getLastID()+1);
-        return repository.save(rewardDisciplineCategory);
+    public RewardDisciplineCategory getById(int id)
+    {
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
     }
 
-    public RewardDisciplineCategory update(RewardDisciplineCategory rewardDisciplineCategory){
-        return repository.save(rewardDisciplineCategory);
+    public RewardDisciplineCategory save(RewardDisciplineCategory rewardDisciplineCategory)
+    {
+        if(repo.getByDanhMuc(rewardDisciplineCategory.getDanhMuc())==null){
+            return repo.save(rewardDisciplineCategory);
+        }
+        else{
+            return null;
+        }
     }
 
-    public void delete(int id){
-        repository.deleteById(id);
+    public void delete(int id)
+    {
+        repo.deleteById(id);
     }
 }
