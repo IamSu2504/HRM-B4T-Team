@@ -64,7 +64,7 @@ public class CertificateCategoryController {
             certificateCategory.setId(id);
             CertificateCategory t = service.save(certificateCategory);
             if(t==null){
-                return new ResponseEntity<>("Mã chứng chỉ đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Mã chứng chỉ đã tồn tại.", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
