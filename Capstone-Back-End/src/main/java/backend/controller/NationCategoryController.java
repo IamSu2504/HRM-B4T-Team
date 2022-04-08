@@ -59,8 +59,8 @@ public class NationCategoryController {
         }
     }
 
-    @DeleteMapping(value="")
-    public ResponseEntity<?> delete(String id) {
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") String id) {
         try {
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);

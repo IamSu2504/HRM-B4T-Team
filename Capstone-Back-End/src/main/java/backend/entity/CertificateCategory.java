@@ -13,6 +13,9 @@ public class CertificateCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "ma_chung_chi")
+    private String maChungChi;
+
     @Column(name = "loai_chung_chi")
     private String loaiChungChi;
 

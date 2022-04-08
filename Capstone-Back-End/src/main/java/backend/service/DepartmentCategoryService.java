@@ -11,23 +11,33 @@ import java.util.List;
 @Service
 public class DepartmentCategoryService {
     @Autowired
-    private DepartmentCategoryRepository repository;
+    private DepartmentCategoryRepository repo;
 
     public List<DepartmentCategory> getAll(){
-        return repository.findAll();
+        return repo.findAll();
     }
 
-    public DepartmentCategory create(DepartmentCategory departmentCategory){
-        departmentCategory.setId(repository.getLastID()+1);
-        return repository.save(departmentCategory);
-    };
-
-    public DepartmentCategory update(DepartmentCategory departmentCategory)
+    public DepartmentCategory getById(int id)
     {
-        return repository.save(departmentCategory);
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
+    }
+
+    public DepartmentCategory save(DepartmentCategory departmentCategory)
+    {
+        if(repo.getByMaPhongBan(departmentCategory.getMaPhongBan())==null){
+            return repo.save(departmentCategory);
+        }
+        else{
+            return null;
+        }
     }
 
     public void delete(int id){
-        repository.deleteById(id);
+        repo.deleteById(id);
     };
 }

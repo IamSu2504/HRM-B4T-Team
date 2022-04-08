@@ -11,23 +11,32 @@ import java.util.List;
 @Service
 public class ClassRoomCategoryService {
     @Autowired
-    private ClassRoomCategoryRepository repository;
+    private ClassRoomCategoryRepository repo;
 
     public List<ClassRoomCategory> getAll(){
-        return repository.findAll();
+        return repo.findAll();
     }
 
-    public ClassRoomCategory create(ClassRoomCategory classRoomCategory){
-        classRoomCategory.setId(repository.getLastID()+1);
-        return repository.save(classRoomCategory);
-    };
-
-    public ClassRoomCategory update(ClassRoomCategory classRoomCategory)
+    public ClassRoomCategory getById(int id)
     {
-        return repository.save(classRoomCategory);
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
     }
 
+    public ClassRoomCategory save(ClassRoomCategory classRoomCategory)
+    {
+        if(repo.getByMaPhongHoc(classRoomCategory.getMaPhongHoc())==null){
+            return repo.save(classRoomCategory);
+        }
+        else{
+            return null;
+        }
+    }
     public void delete(int id){
-        repository.deleteById(id);
+        repo.deleteById(id);
     };
 }

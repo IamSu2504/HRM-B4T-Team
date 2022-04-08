@@ -10,23 +10,33 @@ import java.util.List;
 @Service
 public class CertificateCategoryService {
     @Autowired
-    private CertificateCategoryRepository repository;
+    private CertificateCategoryRepository repo;
 
     public List<CertificateCategory> getAll(){
-        return repository.findAll();
+        return repo.findAll();
     }
 
-    public CertificateCategory create(CertificateCategory certificateCategory){
-        certificateCategory.setId(repository.getLastID()+1);
-        return repository.save(certificateCategory);
-    };
-
-    public CertificateCategory update(CertificateCategory certificateCategory)
+    public CertificateCategory getById(int id)
     {
-        return repository.save(certificateCategory);
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
+    }
+
+    public CertificateCategory save(CertificateCategory certificateCategory)
+    {
+        if(repo.getByMaChungChi(certificateCategory.getMaChungChi())==null){
+            return repo.save(certificateCategory);
+        }
+        else{
+            return null;
+        }
     }
 
     public void delete(int id){
-        repository.deleteById(id);
+        repo.deleteById(id);
     };
 }

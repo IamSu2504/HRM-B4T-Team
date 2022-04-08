@@ -60,8 +60,8 @@ public class ContractNatureCategoryController {
         }
     }
 
-    @DeleteMapping(value="")
-    public ResponseEntity<?> delete(@RequestBody int id) {
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
         try {
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);

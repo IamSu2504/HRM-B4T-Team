@@ -19,8 +19,25 @@ public class EduLevelCategoryController {
     @GetMapping(value = "")
     public ResponseEntity<?> getAll() {
         try {
-            List<EduLevelCategory> listEduLevelCategory = service.getAll();
-            return new ResponseEntity<>(listEduLevelCategory, HttpStatus.OK);
+            List<EduLevelCategory> listEduCategory = service.getAll();
+            if(listEduCategory.isEmpty()){
+                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(listEduCategory, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") String pv) {
+        try {
+            int id = Integer.parseInt(pv);
+            EduLevelCategory c = service.getById(id);
+            if(c==null){
+                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -29,26 +46,35 @@ public class EduLevelCategoryController {
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody EduLevelCategory eduLevelCategory) {
         try {
-            service.create(eduLevelCategory);
+            EduLevelCategory t = service.save(eduLevelCategory);
+            if(t==null){
+                return new ResponseEntity<>("Trình độ học vấn đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping(value = "")
-    public ResponseEntity<?> update(@RequestBody EduLevelCategory eduLevelCategory) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody EduLevelCategory eduLevelCategory) {
         try {
-            service.update(eduLevelCategory);
+            int id = Integer.parseInt(pv);
+            eduLevelCategory.setId(id);
+            EduLevelCategory t = service.save(eduLevelCategory);
+            if(t==null){
+                return new ResponseEntity<>("Trình độ học vấn đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bột", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    public ResponseEntity<?> delete(@PathVariable("id") String pv) {
         try {
+            int id = Integer.parseInt(pv);
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
         }catch(Exception e){

@@ -17,11 +17,28 @@ public class CertificateCategoryController {
     @Autowired
     private CertificateCategoryService service;
 
-    @GetMapping("")
+    @GetMapping(value = "")
     public ResponseEntity<?> getAll() {
         try {
-            List<CertificateCategory> list = service.getAll();
-            return new ResponseEntity<>(list, HttpStatus.OK);
+            List<CertificateCategory> listCertificateCategory = service.getAll();
+            if(listCertificateCategory.isEmpty()){
+                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(listCertificateCategory, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") String pv) {
+        try {
+            int id = Integer.parseInt(pv);
+            CertificateCategory c = service.getById(id);
+            if(c==null){
+                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -30,17 +47,25 @@ public class CertificateCategoryController {
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody CertificateCategory certificateCategory) {
         try {
-            service.create(certificateCategory);
+            CertificateCategory t = service.save(certificateCategory);
+            if(t==null){
+                return new ResponseEntity<>("Mã chứng chỉ đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping(value = "")
-    public ResponseEntity<?> update(@RequestBody CertificateCategory certificateCategory) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody CertificateCategory certificateCategory) {
         try {
-            service.update(certificateCategory);
+            int id = Integer.parseInt(pv);
+            certificateCategory.setId(id);
+            CertificateCategory t = service.save(certificateCategory);
+            if(t==null){
+                return new ResponseEntity<>("Mã chứng chỉ đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -48,8 +73,9 @@ public class CertificateCategoryController {
     }
 
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    public ResponseEntity<?> delete(@PathVariable("id") String pv) {
         try {
+            int id = Integer.parseInt(pv);
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
         }catch(Exception e){

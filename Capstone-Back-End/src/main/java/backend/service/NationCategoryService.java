@@ -22,7 +22,7 @@ public class NationCategoryService {
 
     public NationCategory save(NationCategory nationCategory)
     {
-        if(repo.getById(nationCategory.getId())==null){
+        if(!repo.findById(nationCategory.getId()).isPresent()){
             return repo.save(nationCategory);
         }
         else{
