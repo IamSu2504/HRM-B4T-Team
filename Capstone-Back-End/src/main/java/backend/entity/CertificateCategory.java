@@ -11,7 +11,7 @@ public class CertificateCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "ma_chung_chi")
     private String maChungChi;

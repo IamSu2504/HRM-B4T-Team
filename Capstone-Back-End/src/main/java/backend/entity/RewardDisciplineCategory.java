@@ -11,7 +11,7 @@ public class RewardDisciplineCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "danh_muc")
     private String danhMuc;

@@ -11,7 +11,8 @@ public class ContractCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id")
+    private Integer id;
 
     @Column(name = "ma_loai_hop_dong")
     private String maLoaiHopDong;

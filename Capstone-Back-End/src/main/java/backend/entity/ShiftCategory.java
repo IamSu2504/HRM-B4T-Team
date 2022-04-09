@@ -13,7 +13,7 @@ public class ShiftCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "ten_ca")
     private String tenCa;

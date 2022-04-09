@@ -11,7 +11,7 @@ public class SalaryGroupCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "ma_nhom_luong")
     private String maNhomLuong;

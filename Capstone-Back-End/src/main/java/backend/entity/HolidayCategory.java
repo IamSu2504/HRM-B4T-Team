@@ -13,7 +13,7 @@ public class HolidayCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "ngay")
     @Temporal(TemporalType.DATE)

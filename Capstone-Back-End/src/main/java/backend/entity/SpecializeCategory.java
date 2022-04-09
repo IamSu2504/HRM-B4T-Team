@@ -11,7 +11,7 @@ public class SpecializeCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "ma_chuyen_mon")
     private String maChuyenMon;

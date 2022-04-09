@@ -11,7 +11,7 @@ public class ClassRoomCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "ma_phong_hoc")
     private String maPhongHoc;
