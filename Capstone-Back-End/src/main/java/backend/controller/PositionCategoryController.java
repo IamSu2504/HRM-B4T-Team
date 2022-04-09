@@ -49,9 +49,9 @@ public class PositionCategoryController {
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody PositionCategory positionCategory) {
         try {
-            String message = service.getSaveMessage(positionCategory);
-            if(message!=null){
-                return new ResponseEntity<>(message, HttpStatus.EXPECTATION_FAILED);
+            PositionCategory c = service.save(positionCategory);
+            if(c==null){
+                return new ResponseEntity<>("Mã chức vụ đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
@@ -64,9 +64,9 @@ public class PositionCategoryController {
         try {
             int id = Integer.parseInt(pv);
             positionCategory.setId(id);
-            String message = service.getSaveMessage(positionCategory);
-            if(message!=null){
-                return new ResponseEntity<>(message, HttpStatus.EXPECTATION_FAILED);
+            PositionCategory c = service.save(positionCategory);
+            if(c==null){
+                return new ResponseEntity<>("Mã chức vụ đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,19 +21,27 @@ public class User {
     @Column(name = "ma_nv")
     private String id;
 
-    @Column(name = "tai_khoan_nv")
-    private String username;
+    @ManyToOne
+    @JoinColumn(name = "id_tinh_chat_hop_dong")
+    private ContractNatureCategory tinhChatHopDong;
 
-    @Column(name = "mat_khau_nv")
-    private String password;
+    @ManyToOne
+    @JoinColumn(name = "id_tinh_trang_hon_nhan")
+    private MarriageCategory tinhTrangHonNhan;
+
+    @ManyToOne
+    @JoinColumn(name = "id_chuc_vu")
+    private PositionCategory chucVu;
+
+    @ManyToOne
+    @JoinColumn(name = "ma_quoc_tich")
+    private NationCategory quocTich;
 
     @Column(name = "ten_nv")
     private String tenNv;
 
-    @Column(name = "quoc_tich")
-    private String quocTich;
-
     @Column(name = "ngay_sinh")
+    @Temporal(TemporalType.DATE)
     private Date ngaySinh;
 
     @Column(name = "gioi_tinh")
@@ -47,12 +56,6 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "facebook")
-    private String facebook;
-
-    @Column(name = "skype")
-    private String skype;
-
     @Column(name = "cccd")
     private String cccd;
 
@@ -60,9 +63,11 @@ public class User {
     private String noiCapCccd;
 
     @Column(name = "ngay_cap_cccd")
+    @Temporal(TemporalType.DATE)
     private Date ngayCapCccd;
 
     @Column(name = "ngay_het_han_cccd")
+    @Temporal(TemporalType.DATE)
     private Date ngayHetHanCccd;
 
     @Column(name = "ho_chieu")
@@ -72,9 +77,11 @@ public class User {
     private String noiCapHoChieu;
 
     @Column(name = "ngay_cap_ho_chieu")
+    @Temporal(TemporalType.DATE)
     private Date ngayCapHoChieu;
 
     @Column(name = "ngay_het_han_ho_chieu")
+    @Temporal(TemporalType.DATE)
     private Date ngayHetHanHoChieu;
 
     @Column(name = "noi_sinh")
@@ -89,9 +96,6 @@ public class User {
     @Column(name = "dia_chi_tam_tru")
     private String diaChiTamTru;
 
-    @Column(name = "chuc_vu_hien_tai")
-    private String chucVuHienTai;
-
     @Column(name = "atm_ngan_hang")
     private String atmNganHang;
 
@@ -101,7 +105,12 @@ public class User {
     @Column(name = "trang_thai_lao_dong")
     private boolean trangThaiLaoDong;
 
+    @Column(name = "ngay_bat_dau_lam")
+    @Temporal(TemporalType.DATE)
+    private Date ngayBatDauLam;
+
     @Column(name = "ngay_nghi_viec")
+    @Temporal(TemporalType.DATE)
     private Date ngayNghiViec;
 
     @Column(name = "ly_do_nghi")
@@ -110,27 +119,12 @@ public class User {
     @Column(name = "image")
     private String image;
 
-    @Column(name = "role")
-    private String role;
-
-    //    @OneToOne(cascade = CascadeType.ALL)
-    //    @JoinColumn(name = "id_tinh_chat_hop_dong", referencedColumnName = "id")
-    @ManyToOne
-    @JoinColumn(name = "id_tinh_chat_hop_dong") // thông qua khóa ngoại address_id
-    private ContractNatureCategory tinhChatHopDong;
-
-    //    @OneToOne(cascade = CascadeType.ALL)
-    //    @JoinColumn(name = "id_tinh_trang_hon_nhan", referencedColumnName = "id")
-    @ManyToOne
-    @JoinColumn(name = "id_tinh_trang_hon_nhan") // thông qua khóa ngoại address_id
-    private MarriageCategory tinhTrangHonNhan;
-
     public String getNgaySinh(){
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             if(ngaySinh != null){
                 return sdf.format(ngaySinh);
             }
-            else{
+            else {
                 return null;
             }
     }
@@ -139,6 +133,16 @@ public class User {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         if(ngayCapCccd != null){
             return sdf.format(ngayCapCccd);
+        }
+        else{
+            return null;
+        }
+    }
+
+    public String getNgayBatDauLam(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        if(ngayBatDauLam != null){
+            return sdf.format(ngayBatDauLam);
         }
         else{
             return null;
