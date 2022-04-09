@@ -18,17 +18,25 @@ public class EduLevelCategoryService {
         return repo.findAll();
     }
 
-    public EduLevelCategory create(EduLevelCategory eduLevelCategory)
+    public EduLevelCategory getById(int id)
     {
-        eduLevelCategory.setId(repo.getLastID()+1);
-        return repo.save(eduLevelCategory);
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
     }
 
-    public EduLevelCategory update(EduLevelCategory eduLevelCategory)
+    public EduLevelCategory save(EduLevelCategory eduLevelCategory)
     {
-        return repo.save(eduLevelCategory);
+        if(repo.getByTrinhDo(eduLevelCategory.getTrinhDo())==null){
+            return repo.save(eduLevelCategory);
+        }
+        else{
+            return null;
+        }
     }
-
     public void delete(int id)
     {
         repo.deleteById(id);

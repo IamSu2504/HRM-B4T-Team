@@ -1,9 +1,7 @@
 package backend.controller;
 
 import backend.entity.ContractNatureCategory;
-import backend.entity.MarriageCategory;
 import backend.service.ContractNatureCategoryService;
-import backend.service.MarriageCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,8 +58,8 @@ public class ContractNatureCategoryController {
         }
     }
 
-    @DeleteMapping(value="")
-    public ResponseEntity<?> delete(@RequestBody int id) {
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
         try {
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);

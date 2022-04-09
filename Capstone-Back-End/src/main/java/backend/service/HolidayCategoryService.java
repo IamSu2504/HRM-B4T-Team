@@ -1,6 +1,5 @@
 package backend.service;
 
-
 import backend.entity.HolidayCategory;
 import backend.repository.HolidayCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,22 +10,32 @@ import java.util.List;
 @Service
 public class HolidayCategoryService {
     @Autowired
-    private HolidayCategoryRepository repository;
+    private HolidayCategoryRepository repo;
 
     public List<HolidayCategory> getAll(){
-        return repository.findAll();
+        return repo.findAll();
     }
 
-    public HolidayCategory create(HolidayCategory holidayCategory){
-        holidayCategory.setId(repository.getLastID()+1);
-        return repository.save(holidayCategory);
+    public HolidayCategory getById(int id)
+    {
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
     }
 
-    public HolidayCategory update(HolidayCategory holidayCategory){
-        return repository.save(holidayCategory);
+    public HolidayCategory save(HolidayCategory holidayCategory)
+    {
+        if(repo.getByTenNgayLe(holidayCategory.getTenNgayLe())==null){
+            return repo.save(holidayCategory);
+        }
+        else{
+            return null;
+        }
     }
-
     public void delete(int id){
-        repository.deleteById(id);
+        repo.deleteById(id);
     }
 }

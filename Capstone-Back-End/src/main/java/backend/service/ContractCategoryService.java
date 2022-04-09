@@ -10,23 +10,32 @@ import java.util.List;
 @Service
 public class ContractCategoryService {
     @Autowired
-    private ContractCategoryRepository repository;
+    private ContractCategoryRepository repo;
 
     public List<ContractCategory> getAll(){
-        return repository.findAll();
+        return repo.findAll();
     }
 
-    public ContractCategory create(ContractCategory contractCategory){
-        contractCategory.setId(repository.getLastID()+1);
-        return repository.save(contractCategory);
-    };
-
-    public ContractCategory update(ContractCategory contractCategory)
+    public ContractCategory getById(int id)
     {
-        return repository.save(contractCategory);
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
     }
 
+    public ContractCategory save(ContractCategory contractCategory)
+    {
+        if(repo.getByMaLoaiHopDong(contractCategory.getMaLoaiHopDong())==null){
+            return repo.save(contractCategory);
+        }
+        else{
+            return null;
+        }
+    }
     public void delete(int id){
-        repository.deleteById(id);
+        repo.deleteById(id);
     };
 }

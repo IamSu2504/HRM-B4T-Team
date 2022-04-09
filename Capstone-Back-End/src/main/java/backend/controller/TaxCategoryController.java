@@ -31,13 +31,14 @@ public class TaxCategoryController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> getById(@PathVariable("id") int id) {
+    public ResponseEntity<?> getById(@PathVariable("id") String pv) {
         try {
-            TaxCategory t = service.getById(id);
-            if(t==null){
+            int id = Integer.parseInt(pv);
+            TaxCategory c = service.getById(id);
+            if(c==null){
                 return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
             }
-            return new ResponseEntity<>(t, HttpStatus.OK);
+            return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -57,8 +58,9 @@ public class TaxCategoryController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody TaxCategory taxCategory) {
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody TaxCategory taxCategory) {
         try {
+            int id = Integer.parseInt(pv);
             taxCategory.setId(id);
             TaxCategory t = service.save(taxCategory);
             if(t==null){
@@ -71,8 +73,9 @@ public class TaxCategoryController {
     }
 
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    public ResponseEntity<?> delete(@PathVariable("id") String pv) {
         try {
+            int id = Integer.parseInt(pv);
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
         }catch(Exception e){

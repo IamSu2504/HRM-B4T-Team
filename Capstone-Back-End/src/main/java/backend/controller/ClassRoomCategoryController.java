@@ -17,11 +17,28 @@ public class ClassRoomCategoryController {
     @Autowired
     private ClassRoomCategoryService service;
 
-    @GetMapping("")
+    @GetMapping(value = "")
     public ResponseEntity<?> getAll() {
         try {
-            List<ClassRoomCategory> list = service.getAll();
-            return new ResponseEntity<>(list, HttpStatus.OK);
+            List<ClassRoomCategory> listClassRoomCategory = service.getAll();
+            if(listClassRoomCategory.isEmpty()){
+                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(listClassRoomCategory, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") String pv) {
+        try {
+            int id = Integer.parseInt(pv);
+            ClassRoomCategory c = service.getById(id);
+            if(c==null){
+                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -30,17 +47,25 @@ public class ClassRoomCategoryController {
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody ClassRoomCategory classRoomCategory) {
         try {
-            service.create(classRoomCategory);
+            ClassRoomCategory t = service.save(classRoomCategory);
+            if(t==null){
+                return new ResponseEntity<>("Mã phòng học đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping(value = "")
-    public ResponseEntity<?> update(@RequestBody ClassRoomCategory classRoomCategory) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody ClassRoomCategory classRoomCategory) {
         try {
-            service.update(classRoomCategory);
+            int id = Integer.parseInt(pv);
+            classRoomCategory.setId(id);
+            ClassRoomCategory t = service.save(classRoomCategory);
+            if(t==null){
+                return new ResponseEntity<>("Mã phòng học đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -48,8 +73,9 @@ public class ClassRoomCategoryController {
     }
 
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    public ResponseEntity<?> delete(@PathVariable("id") String pv) {
         try {
+            int id = Integer.parseInt(pv);
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
         }catch(Exception e){

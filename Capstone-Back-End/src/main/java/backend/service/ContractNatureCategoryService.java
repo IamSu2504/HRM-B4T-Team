@@ -1,9 +1,7 @@
 package backend.service;
 
 import backend.entity.ContractNatureCategory;
-import backend.entity.MarriageCategory;
 import backend.repository.ContractNatureCategoryRepository;
-import backend.repository.MarriageCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -17,6 +15,16 @@ public class ContractNatureCategoryService {
     public List<ContractNatureCategory> getAll()
     {
         return repo.findAll();
+    }
+
+    public ContractNatureCategory getById(int id)
+    {
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
     }
 
     public ContractNatureCategory save(ContractNatureCategory contractNatureCategory)

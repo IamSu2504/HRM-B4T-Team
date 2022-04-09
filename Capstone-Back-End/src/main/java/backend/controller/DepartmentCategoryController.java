@@ -18,43 +18,69 @@ public class DepartmentCategoryController {
     @Autowired
     private DepartmentCategoryService service;
 
-    @GetMapping("")
+    @GetMapping(value = "")
     public ResponseEntity<?> getAll() {
         try {
-            List<DepartmentCategory> list = service.getAll();
-            return new ResponseEntity<>(list, HttpStatus.OK);
+            List<DepartmentCategory> listDepartmentCategory = service.getAll();
+            if(listDepartmentCategory.isEmpty()){
+                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(listDepartmentCategory, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") String pv) {
+        try {
+            int id = Integer.parseInt(pv);
+            DepartmentCategory c = service.getById(id);
+            if(c==null){
+                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(c, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody DepartmentCategory departmentCategory) {
         try {
-            service.create(departmentCategory);
+            DepartmentCategory t = service.save(departmentCategory);
+            if(t==null){
+                return new ResponseEntity<>("Mã phòng ban đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping(value = "")
-    public ResponseEntity<?> update(@RequestBody DepartmentCategory departmentCategory) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody DepartmentCategory departmentCategory) {
         try {
-            service.update(departmentCategory);
+            int id = Integer.parseInt(pv);
+            departmentCategory.setId(id);
+            DepartmentCategory t = service.save(departmentCategory);
+            if(t==null){
+                return new ResponseEntity<>("Mã phòng ban đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    public ResponseEntity<?> delete(@PathVariable("id") String pv) {
         try {
+            int id = Integer.parseInt(pv);
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

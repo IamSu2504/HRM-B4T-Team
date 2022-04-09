@@ -10,23 +10,34 @@ import java.util.List;
 @Service
 public class DayOffCategoryService {
     @Autowired
-    private DayOffCategoryRepository repository;
+    private DayOffCategoryRepository repo;
 
     public List<DayOffCategory> getAll(){
-        return repository.findAll();
+        return repo.findAll();
     }
 
-    public DayOffCategory create(DayOffCategory dayOffCategory){
-        dayOffCategory.setId(repository.getLastID()+1);
-        return repository.save(dayOffCategory);
-    };
-
-    public DayOffCategory update(DayOffCategory dayOffCategory)
+    public DayOffCategory getById(int id)
     {
-        return repository.save(dayOffCategory);
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
     }
+
+    public DayOffCategory save(DayOffCategory dayOffCategory)
+    {
+        if(repo.getByLoaiNghi(dayOffCategory.getLoaiNghi())==null){
+            return repo.save(dayOffCategory);
+        }
+        else{
+            return null;
+        }
+    }
+
 
     public void delete(int id){
-        repository.deleteById(id);
+        repo.deleteById(id);
     };
 }

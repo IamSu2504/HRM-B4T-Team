@@ -10,37 +10,47 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Table(name = "hopdong")
+@Table(name = "luongnhanvien")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Contract {
+public class SalaryEmployee {
 
     @Id
-    @Column(name = "ma_hop_dong")
-    private String id;
+    @Column(name = "id")
+    private int id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_loai_hop_dong")
-    private ContractCategory loaiHopDong;
+    @JoinColumn(name = "ma_hop_dong")
+    private Contract maHopDong;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_bac_luong")
+    private SalaryCategory idBacLuong;
+
+    @Column(name = "luong_co_ban")
+    private Double luongCoBan;
+
+    @Column(name = "phu_cap_khac")
+    private Double phuCapKhac;
+
+    @Column(name = "tong_luong")
+    private Double tongLuong;
 
     @Column(name = "ngay_hieu_luc")
     @Temporal(TemporalType.DATE)
     private Date ngayHieuLuc;
 
-    @Column(name = "ngay_het_han")
+    @Column(name = "ngay_ket_thuc")
     @Temporal(TemporalType.DATE)
-    private Date ngayHetHan;
+    private Date ngayKetThuc;
 
     @Column(name = "ghi_chu")
     private String ghiChu;
 
     @Column(name = "trang_thai")
     private boolean trangThai;
-
-    @Column(name = "ma_nv")
-    private String maNV;
 
     public String getNgayHieuLuc(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -51,10 +61,10 @@ public class Contract {
         }
     }
 
-    public String getNgayHetHan(){
+    public String getNgayKetThuc(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        if(ngayHetHan != null){
-            return sdf.format(ngayHetHan);
+        if(ngayKetThuc != null){
+            return sdf.format(ngayKetThuc);
         } else {
             return null;
         }

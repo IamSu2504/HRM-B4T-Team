@@ -11,22 +11,32 @@ import java.util.List;
 public class InsuranceCategoryService {
 
     @Autowired
-    private InsuranceCategoryRepository repository;
+    private InsuranceCategoryRepository repo;
 
     public List<InsuranceCategory> getAll(){
-        return repository.findAll();
+        return repo.findAll();
     }
 
-    public InsuranceCategory create(InsuranceCategory insuranceCategory){
-        insuranceCategory.setId(repository.getLastID()+1);
-        return repository.save(insuranceCategory);
+    public InsuranceCategory getById(int id)
+    {
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
+        }
     }
 
-    public InsuranceCategory update(InsuranceCategory insuranceCategory){
-        return repository.save(insuranceCategory);
+    public InsuranceCategory save(InsuranceCategory insuranceCategory)
+    {
+        if(repo.getByMaBH(insuranceCategory.getMaBH())==null){
+            return repo.save(insuranceCategory);
+        }
+        else{
+            return null;
+        }
     }
-
     public void delete(int id){
-        repository.deleteById(id);
+        repo.deleteById(id);
     }
 }

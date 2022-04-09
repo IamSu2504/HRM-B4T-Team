@@ -17,43 +17,69 @@ public class HolidayCategoryController {
     @Autowired
     private HolidayCategoryService service;
 
-    @GetMapping("")
+    @GetMapping(value = "")
     public ResponseEntity<?> getAll() {
         try {
-            List<HolidayCategory> list = service.getAll();
-            return new ResponseEntity<>(list, HttpStatus.OK);
+            List<HolidayCategory> listHolidayCategory = service.getAll();
+            if(listHolidayCategory.isEmpty()){
+                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(listHolidayCategory, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") String pv) {
+        try {
+            int id = Integer.parseInt(pv);
+            HolidayCategory c = service.getById(id);
+            if(c==null){
+                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(c, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody HolidayCategory holidayCategory) {
         try {
-            service.create(holidayCategory);
+            HolidayCategory t = service.save(holidayCategory);
+            if(t==null){
+                return new ResponseEntity<>("Tên ngày lễ đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping(value = "")
-    public ResponseEntity<?> update(@RequestBody HolidayCategory holidayCategory) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody HolidayCategory holidayCategory) {
         try {
-            service.update(holidayCategory);
+            int id = Integer.parseInt(pv);
+            holidayCategory.setId(id);
+            HolidayCategory t = service.save(holidayCategory);
+            if(t==null){
+                return new ResponseEntity<>("Tên ngày lễ đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    public ResponseEntity<?> delete(@PathVariable("id") String pv) {
         try {
+            int id = Integer.parseInt(pv);
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

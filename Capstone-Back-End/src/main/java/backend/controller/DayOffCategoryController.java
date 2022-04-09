@@ -17,11 +17,28 @@ public class DayOffCategoryController {
     @Autowired
     private DayOffCategoryService service;
 
-    @GetMapping("")
+    @GetMapping(value = "")
     public ResponseEntity<?> getAll() {
         try {
-            List<DayOffCategory> list = service.getAll();
-            return new ResponseEntity<>(list, HttpStatus.OK);
+            List<DayOffCategory> listDayOffCategory = service.getAll();
+            if(listDayOffCategory.isEmpty()){
+                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(listDayOffCategory, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") String pv) {
+        try {
+            int id = Integer.parseInt(pv);
+            DayOffCategory c = service.getById(id);
+            if(c==null){
+                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -30,17 +47,25 @@ public class DayOffCategoryController {
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody DayOffCategory dayOffCategory) {
         try {
-            service.create(dayOffCategory);
+            DayOffCategory t = service.save(dayOffCategory);
+            if(t==null){
+                return new ResponseEntity<>("Loại nghỉ đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping(value = "")
-    public ResponseEntity<?> update(@RequestBody DayOffCategory dayOffCategory) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody DayOffCategory dayOffCategory) {
         try {
-            service.update(dayOffCategory);
+            int id = Integer.parseInt(pv);
+            dayOffCategory.setId(id);
+            DayOffCategory t = service.save(dayOffCategory);
+            if(t==null){
+                return new ResponseEntity<>("Loại nghỉ đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -48,8 +73,9 @@ public class DayOffCategoryController {
     }
 
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    public ResponseEntity<?> delete(@PathVariable("id") String pv) {
         try {
+            int id = Integer.parseInt(pv);
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
         }catch(Exception e){
