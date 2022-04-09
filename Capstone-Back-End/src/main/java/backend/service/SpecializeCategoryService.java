@@ -1,7 +1,6 @@
 package backend.service;
 
 import backend.entity.SpecializeCategory;
-import backend.entity.TaxCategory;
 import backend.repository.SpecializeCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +27,29 @@ public class SpecializeCategoryService {
         }
     }
 
-    public SpecializeCategory save(SpecializeCategory specializeCategory)
+    public SpecializeCategory save(SpecializeCategory newCategory)
     {
-        if(repo.getByMaChuyenMon(specializeCategory.getMaChuyenMon())==null){
-            return repo.save(specializeCategory);
+        // update
+        if(newCategory.getId()!=null){
+            SpecializeCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getMaChuyenMon().equalsIgnoreCase(oldCategory.getMaChuyenMon())){
+                if(repo.getByMaChuyenMon(newCategory.getMaChuyenMon())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByMaChuyenMon(newCategory.getMaChuyenMon())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
 

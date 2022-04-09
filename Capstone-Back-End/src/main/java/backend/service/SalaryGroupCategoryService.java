@@ -2,6 +2,7 @@ package backend.service;
 
 import backend.entity.SalaryGroupCategory;
 import backend.entity.ShiftCategory;
+import backend.entity.TaxCategory;
 import backend.repository.SalaryGroupCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,13 +28,29 @@ public class SalaryGroupCategoryService {
         }
     }
 
-    public SalaryGroupCategory save(SalaryGroupCategory salaryGroupCategory)
+    public SalaryGroupCategory save(SalaryGroupCategory newCategory)
     {
-        if(repo.getByMaNhomLuong(salaryGroupCategory.getMaNhomLuong())==null){
-            return repo.save(salaryGroupCategory);
+        // update
+        if(newCategory.getId()!=null){
+            SalaryGroupCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getMaNhomLuong().equalsIgnoreCase(oldCategory.getMaNhomLuong())){
+                if(repo.getByMaNhomLuong(newCategory.getMaNhomLuong())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByMaNhomLuong(newCategory.getMaNhomLuong())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
 

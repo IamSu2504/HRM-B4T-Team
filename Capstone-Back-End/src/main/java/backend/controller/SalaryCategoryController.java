@@ -1,10 +1,9 @@
 package backend.controller;
 
-import backend.entity.CreateUserRequest;
-import backend.entity.LoginRequest;
-import backend.entity.SalaryCategory;
-import backend.entity.User;
+import backend.entity.*;
+import backend.entity.CreateUpdateSalaryCategoryRequest;
 import backend.service.SalaryCategoryService;
+import backend.service.TaxCategoryService;
 import backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,30 +24,67 @@ public class SalaryCategoryController {
     public ResponseEntity<?> getAll() {
         try {
             List<SalaryCategory> list = service.getAll();
+            if(list.isEmpty()){
+                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+            }
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-//    @PostMapping(value = "/create")
-//    public ResponseEntity<?> create(@RequestBody CreateUserRequest request) {
-//        try {
-//            String message = service.getCreateUserMessage(request);
-//            if(message == null)
-//            {
-//                return new ResponseEntity("Tạo tài khoản thành công", HttpStatus.OK);
-//            }
-//            else{
-//                return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
-//            }
-//        }catch(Exception e){
-//            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") String pv) {
+        try {
+            int id = Integer.parseInt(pv);
+            SalaryCategory c = service.getById(id);
+            if(c==null){
+                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(c, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
+    @PostMapping(value = "")
+    public ResponseEntity<?> create(@RequestBody CreateUpdateSalaryCategoryRequest request) {
+        try {
+            String mess = service.getSaveMessage(request);
+            if(mess!=null){
+                return new ResponseEntity<>(mess, HttpStatus.EXPECTATION_FAILED);
+            }
+            return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody CreateUpdateSalaryCategoryRequest request) {
+        try {
+            int id = Integer.parseInt(pv);
+            request.setId(id);
+            String mess = service.getSaveMessage(request);
+            if(mess!=null){
+                return new ResponseEntity<>(mess, HttpStatus.EXPECTATION_FAILED);
+            }
+            return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") String pv) {
+        try {
+            int id = Integer.parseInt(pv);
+            service.delete(id);
+            return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 }
