@@ -27,13 +27,29 @@ public class TaxCategoryService {
         }
     }
 
-    public TaxCategory save(TaxCategory taxCategory)
+    public TaxCategory save(TaxCategory newCategory)
     {
-        if(repo.getByMaPhanLoai(taxCategory.getMaPhanLoai())==null){
-            return repo.save(taxCategory);
+        // update
+        if(newCategory.getId()!=null){
+            TaxCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getMaPhanLoai().equalsIgnoreCase(oldCategory.getMaPhanLoai())){
+                if(repo.getByMaPhanLoai(newCategory.getMaPhanLoai())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByMaPhanLoai(newCategory.getMaPhanLoai())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
 
