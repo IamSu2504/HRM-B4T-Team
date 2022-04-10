@@ -18,8 +18,9 @@ import java.util.Date;
 public class SalaryEmployee {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ma_hop_dong")

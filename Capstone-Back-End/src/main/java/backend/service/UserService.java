@@ -1,15 +1,12 @@
 package backend.service;
 
-import backend.entity.CreateUserRequest;
-import backend.entity.LoginRequest;
+import backend.entity.Account;
+import backend.entity.CreateUpdateUserRequest;
 import backend.entity.User;
-import backend.repository.UserRepository;
+import backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.bind.DatatypeConverter;
-import java.security.MessageDigest;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -17,63 +14,127 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    private UserRepository repo;
+    private UserRepository userRepo;
 
-    public User getLoginUser(LoginRequest loginRequest){
-        String usernameInput = loginRequest.getUsername();
-        String EncryptedPasswordInput = getEncryptedPassword(loginRequest.getPassword());
-        return repo.getLoginUser(usernameInput,EncryptedPasswordInput);
+    @Autowired
+    private MarriageCategoryRepository marriageRepo;
+
+    @Autowired
+    private ContractNatureCategoryRepository contractRepo;
+
+    @Autowired
+    private PositionCategoryRepository positionRepo;
+
+    @Autowired
+    private NationCategoryRepository nationRepo;
+
+    public List<User> getAll() {
+        return userRepo.findAll();
     }
 
-//    public boolean createUser(CreateUserRequest request){
-//        try {
-//            if(repo.getById(request.getId())==null){
-//                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//                User u = new User();
-//                u.setId(request.getId());
-//                u.setNgaySinh(sdf.parse(request.getNgaySinh()));
-//                u.setCccd(request.getCccd());
-//                u.setAtmNganHang(request.getAtmNganHang());
-//                u.setChucVuHienTai(request.getChucVuHienTai());
-//                u.setDiaChiTamTru(request.getDiaChiTamTru());
-//                u.setEmail(request.getEmail());
-//                u.setFacebook(request.getFacebook());
-//                u.setGioiTinh(request.isGioiTinh());
-//                u.setImage(request.getImage());
-//                u.setHoChieu(request.getHoChieu());
-//                u.setLyDoNghi(request.getLyDoNghi());
-//
-//                u.setNgayCapCccd(sdf.parse(request.getNgayCapCccd()));
-//                u.setNgayHetHanCccd(sdf.parse(request.getNgayHetHanCccd()));
-//                u.setNgayCapHoChieu(sdf.parse(request.getNgayCapHoChieu()));
-//                u.setNgayHetHanHoChieu(sdf.parse(request.getNgayHetHanHoChieu()));
-//
-//
-//                return true;
-//            }
-//            else{
-//                return false;
-//            }
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public String getUpdateUserMessage(CreateUpdateUserRequest request) {
 
-    public List<User> getAll(){
-        return repo.findAll();
+            User oldUser = userRepo.findById(request.getId()).get();
+            User newUser = getNewUser(request);
+
+            if(newUser==null)
+                return "Sai định dạng ngày tháng (dd/MM/yyyy). Vui lòng nhập lại";
+            if (!oldUser.getId().equalsIgnoreCase(newUser.getId()) && userRepo.findById(newUser.getId()).isPresent()) {
+                return "Mã nhân viên đã tồn tại";
+            } else if (!oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && userRepo.getBySdt(newUser.getSoDienThoai()) != null) {
+                return "Số điện thoại đã tồn tại";
+            } else if (!oldUser.getEmail().equalsIgnoreCase(newUser.getEmail()) && userRepo.getByEmail(newUser.getEmail()) != null) {
+                return "Email đã tồn tại";
+            } else if (!oldUser.getSoAtm().equalsIgnoreCase(newUser.getSoAtm()) && userRepo.getBySoAtm(newUser.getSoAtm()) != null) {
+                return "Số ATM đã tồn tại";
+            } else if (!oldUser.getCccd().equalsIgnoreCase(newUser.getCccd()) && userRepo.getByCccd(newUser.getCccd()) != null) {
+                return "Số căn cước đã tồn tại";
+            } else if (!oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu()) && newUser.getHoChieu() != null && userRepo.getByHoChieu(newUser.getHoChieu()) != null) {
+                return "Số hộ chiếu đã tồn tại";
+            }
+            userRepo.save(newUser);
+            return null;
     }
 
-    public String getEncryptedPassword(String pass){
+    public User getById(String id) {
+        return userRepo.findById(id).get();
+    }
+
+    public User getNewUser(CreateUpdateUserRequest request){
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(pass.getBytes());
-            byte[] digest = md.digest();
-            String result = DatatypeConverter
-                    .printHexBinary(digest).toUpperCase();
-            return result;
-        }catch(Exception e){
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            User newUser = new User();
+
+            if (request.getQuocTichID() != 0)
+                newUser.setQuocTich(nationRepo.getById(request.getQuocTichID()));
+            if (request.getChucVuID() != 0)
+                newUser.setChucVu(positionRepo.getById(request.getChucVuID()));
+            if (request.getTinhChatHopDongID() != 0)
+                newUser.setTinhChatHopDong(contractRepo.getById(request.getTinhChatHopDongID()));
+            if (request.getTinhTrangHonNhanID() != 0)
+                newUser.setTinhTrangHonNhan(marriageRepo.getById(request.getTinhTrangHonNhanID()));
+
+            newUser.setId(request.getId());
+            newUser.setTenNv(request.getTenNv());
+            newUser.setGioiTinh(request.isGioiTinh());
+            newUser.setSoDienThoai(request.getSoDienThoai());
+            newUser.setEmail(request.getEmail());
+            newUser.setCccd(request.getCccd());
+            newUser.setQueQuan(request.getQueQuan());
+            newUser.setDiaChiThuongTru(request.getDiaChiThuongTru());
+            newUser.setDiaChiTamTru(request.getDiaChiTamTru());
+            newUser.setAtmNganHang(request.getAtmNganHang());
+            newUser.setSoAtm(request.getSoAtm());
+            newUser.setDiaChiTamTru(request.getDiaChiTamTru());
+            newUser.setEmail(request.getEmail());
+            newUser.setGioiTinh(request.isGioiTinh());
+            newUser.setEmail(request.getEmail());
+            newUser.setImage(request.getImage());
+            newUser.setHoChieu(request.getHoChieu());
+            newUser.setLyDoNghi(request.getLyDoNghi());
+            newUser.setNoiCapCccd(request.getNoiCapCccd());
+            newUser.setDiaChiTamTru(request.getDiaChiTamTru());
+            newUser.setNoiSinh(request.getNoiSinh());
+
+            if (request.getNgayBatDauLam() != null)
+                newUser.setNgayBatDauLam(sdf.parse(request.getNgayBatDauLam()));
+            if (request.getNgaySinh() != null)
+                newUser.setNgaySinh(sdf.parse(request.getNgaySinh()));
+            if (request.getNgayCapCccd() != null)
+                newUser.setNgayCapCccd(sdf.parse(request.getNgayCapCccd()));
+            if (request.getNgayHetHanCccd() != null)
+                newUser.setNgayHetHanCccd(sdf.parse(request.getNgayHetHanCccd()));
+            if (request.getNgayCapHoChieu() != null)
+                newUser.setNgayCapHoChieu(sdf.parse(request.getNgayCapHoChieu()));
+            if (request.getNgayHetHanHoChieu() != null)
+                newUser.setNgayHetHanHoChieu(sdf.parse(request.getNgayHetHanHoChieu()));
+            if (request.getNgayNghiViec() != null)
+                newUser.setNgayNghiViec(sdf.parse(request.getNgayNghiViec()));
+            return newUser;
+        } catch (Exception e) {
             return null;
         }
     }
 
+    public String getCreateUserMessage(CreateUpdateUserRequest request) {
+
+        User newUser = getNewUser(request);
+        if (userRepo.findById(newUser.getId()).isPresent()) {
+            return "Mã nhân viên đã tồn tại";
+        } else if (userRepo.getBySdt(newUser.getSoDienThoai()) != null) {
+            return "Số điện thoại đã tồn tại";
+        } else if (userRepo.getByEmail(newUser.getEmail()) != null) {
+            return "Email đã tồn tại";
+        } else if (userRepo.getBySoAtm(newUser.getSoAtm()) != null) {
+            return "Số ATM đã tồn tại";
+        } else if (newUser.getCccd() != null && userRepo.getByCccd(newUser.getCccd()) != null) {
+            return "Số căn cước đã tồn tại";
+        } else if (newUser.getHoChieu() != null && userRepo.getByHoChieu(newUser.getHoChieu()) != null) {
+            return "Số hộ chiếu đã tồn tại";
+        }
+        userRepo.save(newUser);
+        return null;
+
+    }
 }
+

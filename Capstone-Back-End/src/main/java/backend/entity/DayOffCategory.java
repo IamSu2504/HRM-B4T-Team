@@ -11,7 +11,7 @@ public class DayOffCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "loai_nghi")
     private String loaiNghi;

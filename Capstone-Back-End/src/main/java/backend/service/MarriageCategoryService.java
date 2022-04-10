@@ -30,13 +30,27 @@ public class MarriageCategoryService {
         }
     }
 
-    public MarriageCategory save(MarriageCategory marriageCategory)
+    public MarriageCategory save(MarriageCategory newCategory)
     {
-        if(repo.getByTinhTrang(marriageCategory.getTinhTrang())==null){
-            return repo.save(marriageCategory);
+        // update
+        if (newCategory.getId() != null) {
+            MarriageCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if (!newCategory.getTinhTrang().equalsIgnoreCase(oldCategory.getTinhTrang())) {
+                if (repo.getByTinhTrang(newCategory.getTinhTrang()) == null) {
+                    return repo.save(newCategory);
+                } else {
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
-        else{
-            return null;
+        // add
+        else {
+            if (repo.getByTinhTrang(newCategory.getTinhTrang()) == null) {
+                return repo.save(newCategory);
+            } else {
+                return null;
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package backend.service;
 
 import backend.entity.PositionCategory;
+import backend.entity.RelativeCategory;
 import backend.entity.TaxCategory;
 import backend.repository.PositionCategoryRepository;
 import backend.repository.TaxCategoryRepository;
@@ -27,14 +28,26 @@ public class PositionCategoryService {
         }
     }
 
-    public String getSaveMessage(PositionCategory positionCategory) {
-        if (repo.getByMaChucVu(positionCategory.getMaChucVu()) != null) {
-            return "Mã chức vụ đã tồn tại";
-        } else if (repo.getByTenChucVu(positionCategory.getTenChucVu()) != null) {
-            return "Tên chức vụ đã tồn tại";
-        } else {
-            repo.save(positionCategory);
-            return null;
+    public PositionCategory save(PositionCategory newCategory) {
+        // update
+        if (newCategory.getId() != null) {
+            PositionCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if (!newCategory.getMaChucVu().equalsIgnoreCase(oldCategory.getMaChucVu())) {
+                if (repo.getByMaChucVu(newCategory.getMaChucVu()) == null) {
+                    return repo.save(newCategory);
+                } else {
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
+        }
+        // add
+        else {
+            if (repo.getByMaChucVu(newCategory.getMaChucVu()) == null) {
+                return repo.save(newCategory);
+            } else {
+                return null;
+            }
         }
     }
 

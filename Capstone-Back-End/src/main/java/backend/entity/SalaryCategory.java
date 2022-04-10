@@ -11,9 +11,9 @@ public class SalaryCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_nhom_luong")
     private SalaryGroupCategory nhomLuong;
 

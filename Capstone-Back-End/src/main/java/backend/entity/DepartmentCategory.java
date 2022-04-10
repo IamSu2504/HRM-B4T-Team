@@ -11,7 +11,7 @@ public class DepartmentCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "ma_phong_ban")
     private String maPhongBan;

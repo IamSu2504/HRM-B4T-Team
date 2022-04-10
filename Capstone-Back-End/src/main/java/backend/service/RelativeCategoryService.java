@@ -31,13 +31,29 @@ public class RelativeCategoryService {
         }
     }
 
-    public RelativeCategory save(RelativeCategory relativeCategory)
+    public RelativeCategory save(RelativeCategory newCategory)
     {
-        if(repo.getByQuanHe(relativeCategory.getQuanHe())==null){
-            return repo.save(relativeCategory);
+        // update
+        if(newCategory.getId()!=null){
+            RelativeCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getQuanHe().equalsIgnoreCase(oldCategory.getQuanHe())){
+                if(repo.getByQuanHe(newCategory.getQuanHe())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByQuanHe(newCategory.getQuanHe())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
 

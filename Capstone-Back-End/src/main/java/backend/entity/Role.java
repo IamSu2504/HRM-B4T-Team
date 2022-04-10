@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "phanloai_role")
+@Table(name = "role")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,9 +15,9 @@ public class Role {
 
     @Id
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
-    @Column(name = "ten_role")
+    @Column(name = "role")
     private String tenRole;
 
 }

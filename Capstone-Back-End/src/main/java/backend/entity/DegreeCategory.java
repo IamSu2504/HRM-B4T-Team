@@ -11,7 +11,7 @@ public class DegreeCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "loai_bang_cap")
     private String loaiBangCap;

@@ -4,7 +4,6 @@ package backend.service;
 import backend.entity.RewardDisciplineCategory;
 import backend.entity.TaxCategory;
 import backend.repository.RewardDisciplineCategoryRepository;
-import backend.repository.TaxCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,13 +30,29 @@ public class RewardDisciplineCategoryService {
         }
     }
 
-    public RewardDisciplineCategory save(RewardDisciplineCategory rewardDisciplineCategory)
+    public RewardDisciplineCategory save(RewardDisciplineCategory newCategory)
     {
-        if(repo.getByDanhMuc(rewardDisciplineCategory.getDanhMuc())==null){
-            return repo.save(rewardDisciplineCategory);
+        // update
+        if(newCategory.getId()!=null){
+            RewardDisciplineCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getDanhMuc().equalsIgnoreCase(oldCategory.getDanhMuc())){
+                if(repo.getByDanhMuc(newCategory.getDanhMuc())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByDanhMuc(newCategory.getDanhMuc())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
 
