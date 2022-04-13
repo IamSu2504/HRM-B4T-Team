@@ -137,5 +137,9 @@ public class UserService {
             return null;
         }
     }
+
+    public User getByEmail(String mail){
+       return userRepo.getByEmail(mail);
+    }
 }
 
