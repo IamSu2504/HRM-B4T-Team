@@ -1,8 +1,6 @@
 package backend.service;
 
-import backend.entity.Account;
-import backend.entity.CreateUpdateAccountRequest;
-import backend.entity.LoginRequest;
+import backend.entity.*;
 import backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +23,7 @@ public class AccountService {
 
     public Account getLoginAccount(LoginRequest loginRequest) {
         String usernameInput = loginRequest.getUsername();
-        String EncryptedPasswordInput = getEncryptedPassword(loginRequest.getPassword());
+        String EncryptedPasswordInput = getEncryptedString(loginRequest.getPassword());
         return accountRepo.getLoginAccount(usernameInput, EncryptedPasswordInput);
     }
 
@@ -38,6 +36,12 @@ public class AccountService {
             return false;
         }
         return true;
+    }
+
+    public Account changePassword(int id, String newPassword){
+        Account a = accountRepo.findById(id).get();
+        a.setPassword(getEncryptedString(newPassword));
+        return accountRepo.save(a);
     }
 
     public String getSaveMessage(CreateUpdateAccountRequest request) {
@@ -54,7 +58,7 @@ public class AccountService {
             Account newAccount = new Account();
             newAccount.setId(request.getId());
             newAccount.setUsername(request.getUsername());
-            newAccount.setPassword(request.getPassword());
+            newAccount.setPassword(getEncryptedString(request.getPassword()));
             newAccount.setMaNv(request.getMaNv().toUpperCase());
             newAccount.setRole(roleRepo.findById(request.getRoleID()).get());
             accountRepo.save(newAccount);
@@ -70,7 +74,21 @@ public class AccountService {
         accountRepo.deleteById(id);
     }
 
-    public String getEncryptedPassword(String pass) {
+    public Account getByMaNv(String maNv){
+        return accountRepo.getByMaNv(maNv);
+    }
+
+    public int getForgotAccountID(String encryptedID){
+        int lastID = accountRepo.getLastID();
+        for(int i=1;i<lastID;i++){
+            if(getEncryptedString(i+"").equals(encryptedID)){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public String getEncryptedString(String pass) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(pass.getBytes());
