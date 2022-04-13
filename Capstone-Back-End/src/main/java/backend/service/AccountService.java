@@ -78,14 +78,14 @@ public class AccountService {
         return accountRepo.getByMaNv(maNv);
     }
 
-    public int getForgotAccountID(String encryptedID){
+    public Account getForgotAccount(String encryptedID){
         int lastID = accountRepo.getLastID();
         for(int i=1;i<lastID;i++){
             if(getEncryptedString(i+"").equals(encryptedID)){
-                return i;
+                return accountRepo.findById(i).get();
             }
         }
-        return 0;
+        return null;
     }
 
     public String getEncryptedString(String pass) {
