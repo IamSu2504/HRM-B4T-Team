@@ -27,13 +27,29 @@ public class ClassRoomCategoryService {
         }
     }
 
-    public ClassRoomCategory save(ClassRoomCategory classRoomCategory)
+    public ClassRoomCategory save(ClassRoomCategory newCategory)
     {
-        if(repo.getByMaPhongHoc(classRoomCategory.getMaPhongHoc())==null){
-            return repo.save(classRoomCategory);
+        // update
+        if(newCategory.getId()!=null){
+            ClassRoomCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getMaPhongHoc().equalsIgnoreCase(oldCategory.getMaPhongHoc())){
+                if(repo.getByMaPhongHoc(newCategory.getMaPhongHoc())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByMaPhongHoc(newCategory.getMaPhongHoc())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
     public void delete(int id){

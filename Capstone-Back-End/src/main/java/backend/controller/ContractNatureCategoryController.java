@@ -1,5 +1,6 @@
 package backend.controller;
 
+import backend.entity.ContractCategory;
 import backend.entity.ContractNatureCategory;
 import backend.service.ContractNatureCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,20 @@ public class ContractNatureCategoryController {
         }
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") String pv) {
+        try {
+            int id = Integer.parseInt(pv);
+            ContractNatureCategory c = service.getById(id);
+            if(c==null){
+                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(c, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody ContractNatureCategory contractNatureCategory) {
         try {
@@ -45,16 +60,18 @@ public class ContractNatureCategoryController {
         }
     }
 
-    @PutMapping(value = "")
-    public ResponseEntity<?> update(@RequestBody ContractNatureCategory contractNatureCategory) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody ContractNatureCategory contractNatureCategory) {
         try {
-            ContractNatureCategory c = service.save(contractNatureCategory);
-            if(c == null){
-                return new ResponseEntity<>("Danh mục đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            int id = Integer.parseInt(pv);
+            contractNatureCategory.setId(id);
+            ContractNatureCategory t = service.save(contractNatureCategory);
+            if(t==null){
+                return new ResponseEntity<>("Tính chất hợp đồng đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bột", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

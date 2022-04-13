@@ -28,13 +28,29 @@ public class EduLevelCategoryService {
         }
     }
 
-    public EduLevelCategory save(EduLevelCategory eduLevelCategory)
+    public EduLevelCategory save(EduLevelCategory newCategory)
     {
-        if(repo.getByTrinhDo(eduLevelCategory.getTrinhDo())==null){
-            return repo.save(eduLevelCategory);
+        // update
+        if(newCategory.getId()!=null){
+            EduLevelCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getTrinhDo().equalsIgnoreCase(oldCategory.getTrinhDo())){
+                if(repo.getByTrinhDo(newCategory.getTrinhDo())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByTrinhDo(newCategory.getTrinhDo())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
     public void delete(int id)

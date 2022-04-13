@@ -26,13 +26,29 @@ public class HolidayCategoryService {
         }
     }
 
-    public HolidayCategory save(HolidayCategory holidayCategory)
+    public HolidayCategory save(HolidayCategory newCategory)
     {
-        if(repo.getByTenNgayLe(holidayCategory.getTenNgayLe())==null){
-            return repo.save(holidayCategory);
+        // update
+        if(newCategory.getId()!=null){
+            HolidayCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getTenNgayLe().equalsIgnoreCase(oldCategory.getTenNgayLe())){
+                if(repo.getByTenNgayLe(newCategory.getTenNgayLe())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByTenNgayLe(newCategory.getTenNgayLe())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
     public void delete(int id){

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InsuranceCategoryRepository extends JpaRepository<InsuranceCategory, Integer> {
-    @Query(value = "select * from phanloai_baohiem where UPPER(ma_bao_hiem) = UPPER(?)", nativeQuery = true)
+    @Query(value = "select * from phanloai_baohiem where UPPER(ma_bh) = UPPER(?)", nativeQuery = true)
     InsuranceCategory getByMaBH(String maBH);
 }

@@ -27,13 +27,29 @@ public class ContractNatureCategoryService {
         }
     }
 
-    public ContractNatureCategory save(ContractNatureCategory contractNatureCategory)
+    public ContractNatureCategory save(ContractNatureCategory newCategory)
     {
-        if(repo.getByTinhChatHopDong(contractNatureCategory.getTinhChatHopDong())==null){
-            return repo.save(contractNatureCategory);
+        // update
+        if(newCategory.getId()!=null){
+            ContractNatureCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getTinhChatHopDong().equalsIgnoreCase(oldCategory.getTinhChatHopDong())){
+                if(repo.getByTinhChatHopDong(newCategory.getTinhChatHopDong())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByTinhChatHopDong(newCategory.getTinhChatHopDong())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
 

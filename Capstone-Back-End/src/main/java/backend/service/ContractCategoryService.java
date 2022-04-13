@@ -26,13 +26,29 @@ public class ContractCategoryService {
         }
     }
 
-    public ContractCategory save(ContractCategory contractCategory)
+    public ContractCategory save(ContractCategory newCategory)
     {
-        if(repo.getByMaLoaiHopDong(contractCategory.getMaLoaiHopDong())==null){
-            return repo.save(contractCategory);
+        // update
+        if(newCategory.getId()!=null){
+            ContractCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getMaLoaiHopDong().equalsIgnoreCase(oldCategory.getMaLoaiHopDong())){
+                if(repo.getByMaLoaiHopDong(newCategory.getMaLoaiHopDong())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByMaLoaiHopDong(newCategory.getMaLoaiHopDong())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
     public void delete(int id){

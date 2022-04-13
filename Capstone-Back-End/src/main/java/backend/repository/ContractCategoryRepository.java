@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ContractCategoryRepository extends JpaRepository<ContractCategory,Integer> {
-    @Query(value = "select * from phanloai_hopdong where UPPER(ma_phan_loai) = UPPER(?)", nativeQuery = true)
+    @Query(value = "select * from phanloai_hopdong where UPPER(ma_loai_hop_dong) = UPPER(?)", nativeQuery = true)
     ContractCategory getByMaLoaiHopDong(String maLoaiHopDong);
 }

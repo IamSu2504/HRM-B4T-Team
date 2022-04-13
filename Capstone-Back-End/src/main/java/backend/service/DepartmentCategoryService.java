@@ -27,13 +27,29 @@ public class DepartmentCategoryService {
         }
     }
 
-    public DepartmentCategory save(DepartmentCategory departmentCategory)
+    public DepartmentCategory save(DepartmentCategory newCategory)
     {
-        if(repo.getByMaPhongBan(departmentCategory.getMaPhongBan())==null){
-            return repo.save(departmentCategory);
+        // update
+        if(newCategory.getId()!=null){
+            DepartmentCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getMaPhongBan().equalsIgnoreCase(oldCategory.getMaPhongBan())){
+                if(repo.getByMaPhongBan(newCategory.getMaPhongBan())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByMaPhongBan(newCategory.getMaPhongBan())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
 

@@ -1,6 +1,5 @@
 package backend.service;
 
-import backend.entity.DayOffCategory;
 import backend.entity.DegreeCategory;
 import backend.repository.DegreeCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +26,29 @@ public class DegreeCategoryService {
         }
     }
 
-    public DegreeCategory save(DegreeCategory degreeCategory)
+    public DegreeCategory save(DegreeCategory newCategory)
     {
-        if(repo.getByLoaiBangCap(degreeCategory.getLoaiBangCap())==null){
-            return repo.save(degreeCategory);
+        // update
+        if(newCategory.getId()!=null){
+            DegreeCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getLoaiBangCap().equalsIgnoreCase(oldCategory.getLoaiBangCap())){
+                if(repo.getByLoaiBangCap(newCategory.getLoaiBangCap())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByLoaiBangCap(newCategory.getLoaiBangCap())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
     public void delete(int id){

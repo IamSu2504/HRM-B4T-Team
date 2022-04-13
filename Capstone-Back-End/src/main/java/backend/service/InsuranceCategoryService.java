@@ -27,13 +27,29 @@ public class InsuranceCategoryService {
         }
     }
 
-    public InsuranceCategory save(InsuranceCategory insuranceCategory)
+    public InsuranceCategory save(InsuranceCategory newCategory)
     {
-        if(repo.getByMaBH(insuranceCategory.getMaBH())==null){
-            return repo.save(insuranceCategory);
+        // update
+        if(newCategory.getId()!=null){
+            InsuranceCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getMaBH().equalsIgnoreCase(oldCategory.getMaBH())){
+                if(repo.getByMaBH(newCategory.getMaBH())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByMaBH(newCategory.getMaBH())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
     public void delete(int id){

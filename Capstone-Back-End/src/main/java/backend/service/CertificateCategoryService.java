@@ -26,13 +26,29 @@ public class CertificateCategoryService {
         }
     }
 
-    public CertificateCategory save(CertificateCategory certificateCategory)
+    public CertificateCategory save(CertificateCategory newCategory)
     {
-        if(repo.getByMaChungChi(certificateCategory.getMaChungChi())==null){
-            return repo.save(certificateCategory);
+        // update
+        if(newCategory.getId()!=null){
+            CertificateCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getMaChungChi().equalsIgnoreCase(oldCategory.getMaChungChi())){
+                if(repo.getByMaChungChi(newCategory.getMaChungChi())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByMaChungChi(newCategory.getMaChungChi())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
 

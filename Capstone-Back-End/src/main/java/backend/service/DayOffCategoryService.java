@@ -26,13 +26,29 @@ public class DayOffCategoryService {
         }
     }
 
-    public DayOffCategory save(DayOffCategory dayOffCategory)
+    public DayOffCategory save(DayOffCategory newCategory)
     {
-        if(repo.getByLoaiNghi(dayOffCategory.getLoaiNghi())==null){
-            return repo.save(dayOffCategory);
+        // update
+        if(newCategory.getId()!=null){
+            DayOffCategory oldCategory = repo.findById(newCategory.getId()).get();
+            if(!newCategory.getLoaiNghi().equalsIgnoreCase(oldCategory.getLoaiNghi())){
+                if(repo.getByLoaiNghi(newCategory.getLoaiNghi())==null){
+                    return repo.save(newCategory);
+                }
+                else{
+                    return null;
+                }
+            }
+            return repo.save(newCategory);
         }
+        // add
         else{
-            return null;
+            if(repo.getByLoaiNghi(newCategory.getLoaiNghi())==null){
+                return repo.save(newCategory);
+            }
+            else{
+                return null;
+            }
         }
     }
 
