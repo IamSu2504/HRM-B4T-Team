@@ -1,6 +1,5 @@
 package backend.service;
 
-import backend.entity.Account;
 import backend.entity.CreateUpdateUserRequest;
 import backend.entity.User;
 import backend.repository.*;
@@ -32,38 +31,61 @@ public class UserService {
         return userRepo.findAll();
     }
 
+    public User getById(String id) {
+        return userRepo.findById(id.toUpperCase()).get();
+    }
+
     public String getUpdateUserMessage(CreateUpdateUserRequest request) {
 
-            User oldUser = userRepo.findById(request.getId()).get();
-            User newUser = getNewUser(request);
+        User oldUser = userRepo.findById(request.getId().toUpperCase()).get();
+        User newUser = getNewUser(request);
 
-            if(newUser==null)
-                return "Sai định dạng ngày tháng (dd/MM/yyyy). Vui lòng nhập lại";
-            if (!oldUser.getId().equalsIgnoreCase(newUser.getId()) && userRepo.findById(newUser.getId()).isPresent()) {
-                return "Mã nhân viên đã tồn tại";
-            } else if (!oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && userRepo.getBySdt(newUser.getSoDienThoai()) != null) {
-                return "Số điện thoại đã tồn tại";
-            } else if (!oldUser.getEmail().equalsIgnoreCase(newUser.getEmail()) && userRepo.getByEmail(newUser.getEmail()) != null) {
-                return "Email đã tồn tại";
-            } else if (!oldUser.getSoAtm().equalsIgnoreCase(newUser.getSoAtm()) && userRepo.getBySoAtm(newUser.getSoAtm()) != null) {
-                return "Số ATM đã tồn tại";
-            } else if (!oldUser.getCccd().equalsIgnoreCase(newUser.getCccd()) && userRepo.getByCccd(newUser.getCccd()) != null) {
-                return "Số căn cước đã tồn tại";
-            } else if (!oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu()) && newUser.getHoChieu() != null && userRepo.getByHoChieu(newUser.getHoChieu()) != null) {
-                return "Số hộ chiếu đã tồn tại";
-            }
-            userRepo.save(newUser);
-            return null;
+        if (newUser == null)
+            return "Sai định dạng ngày tháng (dd/MM/yyyy). Vui lòng nhập lại";
+        if (!oldUser.getId().equalsIgnoreCase(newUser.getId()) && userRepo.findById(newUser.getId()).isPresent()) {
+            return "Mã nhân viên đã tồn tại";
+        } else if (!oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && userRepo.getBySdt(newUser.getSoDienThoai()) != null) {
+            return "Số điện thoại đã tồn tại";
+        } else if (!oldUser.getEmail().equalsIgnoreCase(newUser.getEmail()) && userRepo.getByEmail(newUser.getEmail()) != null) {
+            return "Email đã tồn tại";
+        } else if (!oldUser.getSoAtm().equalsIgnoreCase(newUser.getSoAtm()) && userRepo.getBySoAtm(newUser.getSoAtm()) != null) {
+            return "Số ATM đã tồn tại";
+        } else if (!oldUser.getCccd().equalsIgnoreCase(newUser.getCccd()) && userRepo.getByCccd(newUser.getCccd()) != null) {
+            return "Số căn cước đã tồn tại";
+        } else if (!oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu()) && newUser.getHoChieu() != null && userRepo.getByHoChieu(newUser.getHoChieu()) != null) {
+            return "Số hộ chiếu đã tồn tại";
+        }
+        userRepo.save(newUser);
+        return null;
+
     }
 
-    public User getById(String id) {
-        return userRepo.findById(id).get();
+    public String getCreateUserMessage(CreateUpdateUserRequest request) {
+
+        User newUser = getNewUser(request);
+        if (userRepo.findById(newUser.getId()).isPresent()) {
+            return "Mã nhân viên đã tồn tại";
+        } else if (userRepo.getBySdt(newUser.getSoDienThoai()) != null) {
+            return "Số điện thoại đã tồn tại";
+        } else if (userRepo.getByEmail(newUser.getEmail()) != null) {
+            return "Email đã tồn tại";
+        } else if (userRepo.getBySoAtm(newUser.getSoAtm()) != null) {
+            return "Số ATM đã tồn tại";
+        } else if (newUser.getCccd() != null && userRepo.getByCccd(newUser.getCccd()) != null) {
+            return "Số căn cước đã tồn tại";
+        } else if (newUser.getHoChieu() != null && userRepo.getByHoChieu(newUser.getHoChieu()) != null) {
+            return "Số hộ chiếu đã tồn tại";
+        }
+        userRepo.save(newUser);
+        return null;
+
     }
 
-    public User getNewUser(CreateUpdateUserRequest request){
+    public User getNewUser(CreateUpdateUserRequest request) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             User newUser = new User();
+            String upperCaseID = request.getId().toUpperCase();
 
             if (request.getQuocTichID() != 0)
                 newUser.setQuocTich(nationRepo.getById(request.getQuocTichID()));
@@ -74,7 +96,7 @@ public class UserService {
             if (request.getTinhTrangHonNhanID() != 0)
                 newUser.setTinhTrangHonNhan(marriageRepo.getById(request.getTinhTrangHonNhanID()));
 
-            newUser.setId(request.getId());
+            newUser.setId(upperCaseID);
             newUser.setTenNv(request.getTenNv());
             newUser.setGioiTinh(request.isGioiTinh());
             newUser.setSoDienThoai(request.getSoDienThoai());
@@ -114,27 +136,6 @@ public class UserService {
         } catch (Exception e) {
             return null;
         }
-    }
-
-    public String getCreateUserMessage(CreateUpdateUserRequest request) {
-
-        User newUser = getNewUser(request);
-        if (userRepo.findById(newUser.getId()).isPresent()) {
-            return "Mã nhân viên đã tồn tại";
-        } else if (userRepo.getBySdt(newUser.getSoDienThoai()) != null) {
-            return "Số điện thoại đã tồn tại";
-        } else if (userRepo.getByEmail(newUser.getEmail()) != null) {
-            return "Email đã tồn tại";
-        } else if (userRepo.getBySoAtm(newUser.getSoAtm()) != null) {
-            return "Số ATM đã tồn tại";
-        } else if (newUser.getCccd() != null && userRepo.getByCccd(newUser.getCccd()) != null) {
-            return "Số căn cước đã tồn tại";
-        } else if (newUser.getHoChieu() != null && userRepo.getByHoChieu(newUser.getHoChieu()) != null) {
-            return "Số hộ chiếu đã tồn tại";
-        }
-        userRepo.save(newUser);
-        return null;
-
     }
 }
 

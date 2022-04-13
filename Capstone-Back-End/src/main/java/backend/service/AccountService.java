@@ -18,6 +18,9 @@ public class AccountService {
     private AccountRepository accountRepo;
 
     @Autowired
+    private UserRepository userRepo;
+
+    @Autowired
     private RoleRepository roleRepo;
 
     public Account getLoginAccount(LoginRequest loginRequest) {
@@ -39,17 +42,20 @@ public class AccountService {
 
     public String getSaveMessage(CreateUpdateAccountRequest request) {
         if (accountRepo.getByUsername(request.getUsername()) != null) {
-            return "Tên đăng nhập đã tồn tại";
+            return "Tên đăng nhập đã được sử dụng";
         }
-        else if (accountRepo.getByMaNv(request.getMaNv()) != null) {
-            return "Mã nhân viên đã tồn tại";
+        else if (accountRepo.getByMaNv(request.getMaNv().toUpperCase()) != null) {
+            return "Mã nhân viên đã được sử dụng";
+        }
+        else if (userRepo.findById(request.getMaNv().toUpperCase()) == null) {
+            return "Chưa có người dùng được tạo với mã nhân viên này";
         }
         else {
             Account newAccount = new Account();
             newAccount.setId(request.getId());
             newAccount.setUsername(request.getUsername());
             newAccount.setPassword(request.getPassword());
-            newAccount.setMaNv(request.getMaNv());
+            newAccount.setMaNv(request.getMaNv().toUpperCase());
             newAccount.setRole(roleRepo.findById(request.getRoleID()).get());
             accountRepo.save(newAccount);
             return null;
