@@ -11,8 +11,4 @@ public interface SalaryCategoryRepository extends JpaRepository<SalaryCategory, 
 
     @Query(value = "select * from phanloai_bacluong where ma_bac_luong = ?", nativeQuery = true)
     SalaryCategory getByMaBacLuong(String maBacLuong);
-
-    @Query(value = "select * from phanloai_bacluong where ten_bac_luong = ?", nativeQuery = true)
-    SalaryCategory getByTenBacLuong(String tenBacLuong);
-
 }

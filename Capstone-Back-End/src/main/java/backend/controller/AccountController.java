@@ -122,14 +122,16 @@ public class AccountController {
     public ResponseEntity<?> forgotPassword(@RequestBody String[] toEmail) {
         try {
             User u = userService.getByEmail(toEmail[0]);
-            if(u==null){
+            if (u == null) {
                 return new ResponseEntity<>("Email này chưa được đăng kí", HttpStatus.NOT_FOUND);
             }
             Account forgotAccount = accountService.getByMaNv(u.getId());
             final String fromEmail = "speaklxss2001@gmail.com";
             final String fromEmailPassword = "Speakless2000";
-            String encryptedAccountID = accountService.getEncryptedString(forgotAccount.getId()+"");
-            final String url = "http://localhost:3000/account/"+encryptedAccountID+"/forgot";
+//          final String fromEmail = "speaklxss2001@gmail.com";
+//          final String fromEmailPassword = "Speakless2000";
+            String encryptedAccountID = accountService.getEncryptedString(forgotAccount.getId() + "");
+            final String url = "http://localhost:3000/account/" + encryptedAccountID + "/forgot";
             final String subject = "Yêu cầu đổi mật khẩu";
             final String body = "Nhấn vào đường dẫn sau để đổi mật khẩu: " + url;
 
@@ -153,7 +155,7 @@ public class AccountController {
             msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
             msg.addHeader("format", "flowed");
             msg.addHeader("Content-Transfer-Encoding", "8bit");
-            msg.setFrom(new InternetAddress(fromEmail,"Admin"));
+            msg.setFrom(new InternetAddress(fromEmail, "Admin"));
             msg.setReplyTo(InternetAddress.parse(fromEmail, false));
             msg.setSubject(subject, "UTF-8");
             msg.setText(body, "UTF-8");
@@ -172,7 +174,7 @@ public class AccountController {
     public ResponseEntity<?> getForgotAccount(@PathVariable("id") String encryptedID) {
         try {
             Account forgotAccount = accountService.getForgotAccount(encryptedID);
-            if (forgotAccount==null) {
+            if (forgotAccount == null) {
                 return new ResponseEntity("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
             } else {
                 return new ResponseEntity<>(forgotAccount, HttpStatus.OK);
