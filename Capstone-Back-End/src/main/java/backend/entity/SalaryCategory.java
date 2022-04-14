@@ -13,10 +13,6 @@ public class SalaryCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_nhom_luong")
-    private SalaryGroupCategory nhomLuong;
-
     @Column(name = "ma_bac_luong")
     private String maBacLuong;
 

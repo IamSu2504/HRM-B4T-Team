@@ -35,7 +35,6 @@ public class SalaryCategoryService {
 
         SalaryCategory newCategory = new SalaryCategory();
         newCategory.setId(request.getId());
-        newCategory.setNhomLuong(salaryGroupCategoryRepo.findById(request.getNhomLuongID()).get());
         newCategory.setMaBacLuong(request.getMaBacLuong());
         newCategory.setTenBacLuong(request.getTenBacLuong());
         newCategory.setKhoangLuongDen(request.getKhoangLuongDen());

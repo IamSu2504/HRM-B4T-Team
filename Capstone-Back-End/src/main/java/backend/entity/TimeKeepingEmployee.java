@@ -26,14 +26,13 @@ public class TimeKeepingEmployee {
     private String maNV;
 
     @Column(name = "datetime")
-    @Temporal(TemporalType.DATE)
     private Date dateTime;
 
     @Column(name = "status")
     private String status;
 
     private String getDateTime(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         if(sdf != null){
             return sdf.format(dateTime);
         } else {
