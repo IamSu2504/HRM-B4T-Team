@@ -2,9 +2,7 @@ package backend.service;
 
 import backend.entity.CreateUpdateSalaryCategoryRequest;
 import backend.entity.SalaryCategory;
-import backend.entity.SalaryGroupCategory;
 import backend.repository.SalaryCategoryRepository;
-import backend.repository.SalaryGroupCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +13,6 @@ public class SalaryCategoryService {
 
     @Autowired
     private SalaryCategoryRepository salaryCategoryRepo;
-
-    @Autowired
-    private SalaryGroupCategoryRepository salaryGroupCategoryRepo;
 
     public List<SalaryCategory> getAll() {
         return salaryCategoryRepo.findAll();

@@ -3,8 +3,6 @@ package backend.controller;
 import backend.entity.*;
 import backend.entity.CreateUpdateSalaryCategoryRequest;
 import backend.service.SalaryCategoryService;
-import backend.service.TaxCategoryService;
-import backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
