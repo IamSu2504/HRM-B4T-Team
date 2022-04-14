@@ -119,9 +119,9 @@ public class AccountController {
     }
 
     @PostMapping(value = "/forgot")
-    public ResponseEntity<?> forgotPassword(@RequestBody String toEmail) {
+    public ResponseEntity<?> forgotPassword(@RequestBody String[] toEmail) {
         try {
-            User u = userService.getByEmail(toEmail);
+            User u = userService.getByEmail(toEmail[0]);
             if(u==null){
                 return new ResponseEntity<>("Email này chưa được đăng kí", HttpStatus.NOT_FOUND);
             }
@@ -158,10 +158,10 @@ public class AccountController {
             msg.setSubject(subject, "UTF-8");
             msg.setText(body, "UTF-8");
             msg.setSentDate(new Date());
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail[0], false));
             Transport.send(msg);
 
-            String successMess = "Yêu cầu đổi mật khẩu đã được gửi. Vui lòng kiểm tra email " + toEmail;
+            String successMess = "Yêu cầu đổi mật khẩu đã được gửi. Vui lòng kiểm tra email " + toEmail[0];
             return new ResponseEntity<>(successMess, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
