@@ -168,7 +168,7 @@ public class AccountController {
         }
     }
 
-   @GetMapping(value = "/{id}/forgot")
+    @GetMapping(value = "/{id}/forgot")
     public ResponseEntity<?> getForgotAccount(@PathVariable("id") String encryptedID) {
         try {
             Account forgotAccount = accountService.getForgotAccount(encryptedID);
