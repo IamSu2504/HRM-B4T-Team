@@ -169,13 +169,13 @@ public class AccountController {
     }
 
     @GetMapping(value = "/{id}/forgot")
-    public ResponseEntity<?> getForgotAccountID(@PathVariable("id") String encryptedID) {
+    public ResponseEntity<?> getForgotAccount(@PathVariable("id") String encryptedID) {
         try {
-            int forgotAccountID = accountService.getForgotAccountID(encryptedID);
-            if (forgotAccountID==0) {
+            Account forgotAccount = accountService.getForgotAccount(encryptedID);
+            if (forgotAccount==null) {
                 return new ResponseEntity("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
             } else {
-                return new ResponseEntity<>(forgotAccountID, HttpStatus.OK);
+                return new ResponseEntity<>(forgotAccount, HttpStatus.OK);
             }
         } catch (Exception e) {
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
