@@ -32,11 +32,16 @@ public class UserService {
     }
 
     public User getById(String id) {
-        return userRepo.findById(id.toUpperCase()).get();
+        if (userRepo.findById(id.toUpperCase()).isPresent())
+            return userRepo.findById(id.toUpperCase()).get();
+        else
+            return null;
     }
 
     public String getUpdateUserMessage(CreateUpdateUserRequest request) {
-
+        if(userRepo.findById(request.getId().toUpperCase()).isPresent()){
+            return "Lỗi nội bộ";
+        }
         User oldUser = userRepo.findById(request.getId().toUpperCase()).get();
         User newUser = getNewUser(request);
 
@@ -138,8 +143,8 @@ public class UserService {
         }
     }
 
-    public User getByEmail(String mail){
-       return userRepo.getByEmail(mail);
+    public User getByEmail(String mail) {
+        return userRepo.getByEmail(mail);
     }
 }
 
