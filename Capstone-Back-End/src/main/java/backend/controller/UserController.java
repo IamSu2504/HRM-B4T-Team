@@ -23,11 +23,11 @@ public class UserController {
         try {
             List<User> list = service.getAll();
             if(list.isEmpty()){
-                return new ResponseEntity<>("Chưa có người dùng được tạo", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("No User was created", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -36,47 +36,38 @@ public class UserController {
         try {
             User u = service.getById(id);
             if(u==null){
-                return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("User isn't existed", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(u, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody CreateUpdateUserRequest request) {
         try {
-            String message = service.getCreateUserMessage(request);
-            if(message == null)
-            {
-                return new ResponseEntity("Tạo tài khoản thành công", HttpStatus.OK);
+            String mess = service.getCreateUserMessage(request);
+            if(mess==null){
+                return new ResponseEntity<>("User created successfully", HttpStatus.OK);
             }
-            else{
-                return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<?> update(@PathVariable("id") String id, @RequestBody CreateUpdateUserRequest request) {
         try {
-            System.out.println(id);
             request.setId(id);
-            String message = service.getUpdateUserMessage(request);
-            if(message == null)
-            {
-                return new ResponseEntity("Tạo tài khoản thành công", HttpStatus.OK);
+            String mess = service.getUpdateUserMessage(request);
+            if(mess==null){
+                return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
             }
-            else{
-                return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 }

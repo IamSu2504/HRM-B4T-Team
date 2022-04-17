@@ -39,26 +39,26 @@ public class UserService {
     }
 
     public String getUpdateUserMessage(CreateUpdateUserRequest request) {
-        if(userRepo.findById(request.getId().toUpperCase()).isPresent()){
-            return "Lỗi nội bộ";
+        if(!userRepo.findById(request.getId().toUpperCase()).isPresent()){
+            return "User isn't existed";
         }
         User oldUser = userRepo.findById(request.getId().toUpperCase()).get();
         User newUser = getNewUser(request);
 
         if (newUser == null)
-            return "Sai định dạng ngày tháng (dd/MM/yyyy). Vui lòng nhập lại";
+            return "Wrong date format (dd/MM/yyyy)";
         if (!oldUser.getId().equalsIgnoreCase(newUser.getId()) && userRepo.findById(newUser.getId()).isPresent()) {
-            return "Mã nhân viên đã tồn tại";
+            return "User ID existed";
         } else if (!oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && userRepo.getBySdt(newUser.getSoDienThoai()) != null) {
-            return "Số điện thoại đã tồn tại";
+            return "Phone number existed";
         } else if (!oldUser.getEmail().equalsIgnoreCase(newUser.getEmail()) && userRepo.getByEmail(newUser.getEmail()) != null) {
-            return "Email đã tồn tại";
+            return "Email existed";
         } else if (!oldUser.getSoAtm().equalsIgnoreCase(newUser.getSoAtm()) && userRepo.getBySoAtm(newUser.getSoAtm()) != null) {
-            return "Số ATM đã tồn tại";
+            return "ATM number existed";
         } else if (!oldUser.getCccd().equalsIgnoreCase(newUser.getCccd()) && userRepo.getByCccd(newUser.getCccd()) != null) {
-            return "Số căn cước đã tồn tại";
+            return "Citizen ID Number existed";
         } else if (!oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu()) && newUser.getHoChieu() != null && userRepo.getByHoChieu(newUser.getHoChieu()) != null) {
-            return "Số hộ chiếu đã tồn tại";
+            return "Passport number existed";
         }
         userRepo.save(newUser);
         return null;
@@ -69,17 +69,17 @@ public class UserService {
 
         User newUser = getNewUser(request);
         if (userRepo.findById(newUser.getId()).isPresent()) {
-            return "Mã nhân viên đã tồn tại";
+            return "User ID existed";
         } else if (userRepo.getBySdt(newUser.getSoDienThoai()) != null) {
-            return "Số điện thoại đã tồn tại";
+            return "Phone number existed";
         } else if (userRepo.getByEmail(newUser.getEmail()) != null) {
-            return "Email đã tồn tại";
+            return "Email existed";
         } else if (userRepo.getBySoAtm(newUser.getSoAtm()) != null) {
-            return "Số ATM đã tồn tại";
+            return "ATM number existed";
         } else if (newUser.getCccd() != null && userRepo.getByCccd(newUser.getCccd()) != null) {
-            return "Số căn cước đã tồn tại";
+            return "Citizen ID Number existed";
         } else if (newUser.getHoChieu() != null && userRepo.getByHoChieu(newUser.getHoChieu()) != null) {
-            return "Số hộ chiếu đã tồn tại";
+            return "Passport number existed";
         }
         userRepo.save(newUser);
         return null;
