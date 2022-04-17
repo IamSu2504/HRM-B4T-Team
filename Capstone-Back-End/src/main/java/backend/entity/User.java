@@ -1,12 +1,12 @@
 package backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -42,6 +42,7 @@ public class User {
 
     @Column(name = "ngay_sinh")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="dd/MM/yyyy")
     private Date ngaySinh;
 
     @Column(name = "gioi_tinh")
@@ -64,10 +65,12 @@ public class User {
 
     @Column(name = "ngay_cap_cccd")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="dd/MM/yyyy")
     private Date ngayCapCccd;
 
     @Column(name = "ngay_het_han_cccd")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="dd/MM/yyyy")
     private Date ngayHetHanCccd;
 
     @Column(name = "ho_chieu")
@@ -78,10 +81,12 @@ public class User {
 
     @Column(name = "ngay_cap_ho_chieu")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="dd/MM/yyyy")
     private Date ngayCapHoChieu;
 
     @Column(name = "ngay_het_han_ho_chieu")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="dd/MM/yyyy")
     private Date ngayHetHanHoChieu;
 
     @Column(name = "noi_sinh")
@@ -107,10 +112,12 @@ public class User {
 
     @Column(name = "ngay_bat_dau_lam")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="dd/MM/yyyy")
     private Date ngayBatDauLam;
 
     @Column(name = "ngay_nghi_viec")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="dd/MM/yyyy")
     private Date ngayNghiViec;
 
     @Column(name = "ly_do_nghi")
@@ -118,75 +125,5 @@ public class User {
 
     @Column(name = "image")
     private String image;
-
-    public String getNgaySinh(){
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            if(ngaySinh != null){
-                return sdf.format(ngaySinh);
-            }
-            else {
-                return null;
-            }
-    }
-
-    public String getNgayCapCccd(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        if(ngayCapCccd != null){
-            return sdf.format(ngayCapCccd);
-        }
-        else{
-            return null;
-        }
-    }
-
-    public String getNgayBatDauLam(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        if(ngayBatDauLam != null){
-            return sdf.format(ngayBatDauLam);
-        }
-        else{
-            return null;
-        }
-    }
-
-    public String getNgayHetHanCccd(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        if(ngayHetHanCccd != null){
-            return sdf.format(ngayHetHanCccd);
-        }
-        else{
-            return null;
-        }
-    }
-
-    public String getNgayCapHoChieu(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        if(ngayCapHoChieu != null){
-            return sdf.format(ngayCapHoChieu);
-        }
-        else{
-            return null;
-        }
-    }
-
-    public String getNgayHetHanHoChieu(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        if(ngayHetHanHoChieu != null){
-            return sdf.format(ngayHetHanHoChieu);
-        }
-        else{
-            return null;
-        }
-    }
-
-    public String getNgayNghiViec(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        if(ngayNghiViec != null){
-            return sdf.format(ngayNghiViec);
-        }
-        else{
-            return null;
-        }
-    }
 
 }
