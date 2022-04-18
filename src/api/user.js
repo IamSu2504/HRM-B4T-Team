@@ -1,0 +1,66 @@
+import AxiosClient from "./axiosClient"
+
+const UserAPI = {
+    getAll() {
+        const url = `/user`;
+        return AxiosClient.get(url);
+    },
+
+    getUserById(id) {
+        const url = `/user/${id}`;
+        return AxiosClient.get(url);
+    },
+
+    updateUser({ id, tinhChatHopDongID, tinhTrangHonNhanID, chucVuID,
+        quocTichID, tenNv, ngaySinh, gioiTinh,
+        soDienThoai, soDienThoai2, email,
+        cccd, noiCapCccd, ngayCapCccd,
+        ngayHetHanCccd, hoChieu, noiCapHoChieu,
+        ngayCapHoChieu, ngayHetHanHoChieu, noiSinh,
+        queQuan, diaChiThuongTru, diaChiTamTru,
+        atmNganHang, soAtm, trangThaiLaoDong,
+        ngayBatDauLam, ngayNghiViec, lyDoNghi, image }) {
+        const url = `/user/${id}`;
+        return AxiosClient.put(url, {
+            tinhChatHopDongID, tinhTrangHonNhanID, chucVuID,
+            quocTichID, tenNv, ngaySinh, gioiTinh,
+            soDienThoai, soDienThoai2, email,
+            cccd, noiCapCccd, ngayCapCccd,
+            ngayHetHanCccd, hoChieu, noiCapHoChieu,
+            ngayCapHoChieu, ngayHetHanHoChieu, noiSinh,
+            queQuan, diaChiThuongTru, diaChiTamTru,
+            atmNganHang, soAtm, trangThaiLaoDong,
+            ngayBatDauLam, ngayNghiViec, lyDoNghi, image
+        });
+    },
+
+    addNewUser({ tinhChatHopDongID, tinhTrangHonNhanID, chucVuID,
+        quocTichID, tenNv, ngaySinh, gioiTinh,
+        soDienThoai, soDienThoai2, email,
+        cccd, noiCapCccd, ngayCapCccd,
+        ngayHetHanCccd, hoChieu, noiCapHoChieu,
+        ngayCapHoChieu, ngayHetHanHoChieu, noiSinh,
+        queQuan, diaChiThuongTru, diaChiTamTru,
+        atmNganHang, soAtm, trangThaiLaoDong,
+        ngayBatDauLam, ngayNghiViec, lyDoNghi, image }) {
+        const url = `/user/tax`;
+        return AxiosClient.post(url, {
+            tinhChatHopDongID, tinhTrangHonNhanID, chucVuID,
+            quocTichID, tenNv, ngaySinh, gioiTinh,
+            soDienThoai, soDienThoai2, email,
+            cccd, noiCapCccd, ngayCapCccd,
+            ngayHetHanCccd, hoChieu, noiCapHoChieu,
+            ngayCapHoChieu, ngayHetHanHoChieu, noiSinh,
+            queQuan, diaChiThuongTru, diaChiTamTru,
+            atmNganHang, soAtm, trangThaiLaoDong,
+            ngayBatDauLam, ngayNghiViec, lyDoNghi, image
+        });
+    },
+
+    deleteUser(id) {
+        const url = `/user/tax/${id}`;
+        return AxiosClient.delete(url);
+    },
+}
+
+export default UserAPI;
