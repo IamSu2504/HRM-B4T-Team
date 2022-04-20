@@ -11,13 +11,13 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value = "/category/rewardDiscipline")
+@RequestMapping(value = "/category")
 public class RewardDisciplineCategoryController {
 
     @Autowired
     private RewardDisciplineCategoryService service;
 
-    @GetMapping(value = "")
+    @GetMapping(value = "rewardDiscipline")
     public ResponseEntity<?> getAll() {
         try {
             List<RewardDisciplineCategory> list = service.getAll();
@@ -30,7 +30,33 @@ public class RewardDisciplineCategoryController {
         }
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/reward")
+    public ResponseEntity<?> getAllReward() {
+        try {
+            List<RewardDisciplineCategory> list = service.getAllReward();
+            if(list.isEmpty()){
+                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/discipline")
+    public ResponseEntity<?> getAllDiscipline() {
+        try {
+            List<RewardDisciplineCategory> list = service.getAllDiscipline();
+            if(list.isEmpty()){
+                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/rewardDiscipline/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") String pv) {
         try {
             int id = Integer.parseInt(pv);
@@ -44,7 +70,7 @@ public class RewardDisciplineCategoryController {
         }
     }
 
-    @PostMapping(value = "")
+    @PostMapping(value = "/rewardDiscipline")
     public ResponseEntity<?> create(@RequestBody RewardDisciplineCategory rewardDisciplineCategory) {
         try {
             RewardDisciplineCategory c = service.save(rewardDisciplineCategory);
@@ -57,7 +83,7 @@ public class RewardDisciplineCategoryController {
         }
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/rewardDiscipline/{id}")
     public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody RewardDisciplineCategory rewardDisciplineCategory) {
         try {
             int id = Integer.parseInt(pv);
@@ -72,7 +98,7 @@ public class RewardDisciplineCategoryController {
         }
     }
 
-    @DeleteMapping(value="/{id}")
+    @DeleteMapping(value="/rewardDiscipline/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") String pv) {
         try {
             int id = Integer.parseInt(pv);

@@ -20,6 +20,16 @@ public class RewardDisciplineCategoryService {
         return repo.findAll();
     }
 
+    public List<RewardDisciplineCategory> getAllReward()
+    {
+        return repo.getAllReward();
+    }
+
+    public List<RewardDisciplineCategory> getAllDiscipline()
+    {
+        return repo.getAllDiscipline();
+    }
+
     public RewardDisciplineCategory getById(int id)
     {
         if(repo.findById(id).isPresent()){

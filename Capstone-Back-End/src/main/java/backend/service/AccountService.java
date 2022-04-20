@@ -89,7 +89,7 @@ public class AccountService {
     }
 
     public List<Account> getAll() {
-        return accountRepo.findAll();
+        return accountRepo.getAll();
     }
 
     public void delete(int id) {

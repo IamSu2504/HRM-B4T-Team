@@ -1,5 +1,6 @@
 package backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,29 +21,12 @@ public class ShiftCategory {
 
     @Column(name = "gio_bat_dau")
     @Temporal(TemporalType.TIME)
+    @JsonFormat(pattern="HH:mm")
     private Date gioBatDau;
 
     @Column(name = "gio_ket_thuc")
     @Temporal(TemporalType.TIME)
+    @JsonFormat(pattern="HH:mm")
     private Date gioKetThuc;
-
-    public String getGioBatDau(){
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        if(gioBatDau != null){
-            return sdf.format(gioBatDau);
-        }
-        else {
-            return null;
-        }
-    }
-    public String getGioKetThuc(){
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        if(gioKetThuc != null){
-            return sdf.format(gioKetThuc);
-        }
-        else {
-            return null;
-        }
-    }
 
 }

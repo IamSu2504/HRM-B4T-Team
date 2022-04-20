@@ -16,6 +16,6 @@ public class RewardDisciplineCategory {
     @Column(name = "danh_muc")
     private String danhMuc;
 
-    @Column(name = "tieu_de")
-    private String tieuDe;
+    @Column(name = "loai_danh_muc")
+    private boolean loaiDanhMuc;
 }

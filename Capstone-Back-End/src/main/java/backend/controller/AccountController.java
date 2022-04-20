@@ -6,10 +6,10 @@ import backend.entity.LoginRequest;
 import backend.entity.User;
 import backend.service.AccountService;
 import backend.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import javax.mail.*;
@@ -33,16 +33,16 @@ public class AccountController {
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         try {
             if (!accountService.checkUsernameExisted(request.getUsername())) {
-                return new ResponseEntity<>("Tên đăng nhập không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Username not existed", HttpStatus.NOT_FOUND);
             }
             Account account = accountService.getLoginAccount(request);
             if (account != null) {
                 return new ResponseEntity<>(account, HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("Sai tên đăng nhập hoặc mật khẩu", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Wrong username or password", HttpStatus.EXPECTATION_FAILED);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -51,11 +51,11 @@ public class AccountController {
         try {
             List<Account> list = accountService.getAll();
             if (list.isEmpty()) {
-                return new ResponseEntity<>("Chưa có tài khoản được tạo", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("No account was created", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -65,11 +65,11 @@ public class AccountController {
             int id = Integer.parseInt(pv);
             Account a = accountService.getById(id);
             if (a == null) {
-                return new ResponseEntity<>("Tài khoản không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Account not existed", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(a, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -78,12 +78,12 @@ public class AccountController {
         try {
             String message = accountService.getSaveMessage(request);
             if (message == null) {
-                return new ResponseEntity("Tạo tài khoản thành công", HttpStatus.OK);
+                return new ResponseEntity("Account created successfully", HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -94,12 +94,12 @@ public class AccountController {
             request.setId(id);
             String message = accountService.getSaveMessage(request);
             if (message == null) {
-                return new ResponseEntity("Cập nhật tài khoản thành công", HttpStatus.OK);
+                return new ResponseEntity("Account updated successfully", HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
