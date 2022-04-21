@@ -126,4 +126,7 @@ public class User {
     @Column(name = "image")
     private String image;
 
+    @Transient
+    private byte[] imageData;
+
 }
