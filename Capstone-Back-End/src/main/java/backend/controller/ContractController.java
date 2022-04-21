@@ -14,7 +14,7 @@ public class ContractController {
     @Autowired
     private ContractService service;
 
-    @PostMapping("/user/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<?> getContract(@PathVariable("id") String maNV) {
         try {
             return new ResponseEntity<>(service.getContract(maNV), HttpStatus.OK);

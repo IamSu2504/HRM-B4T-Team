@@ -14,7 +14,7 @@ public class ViewDayOffEmployeeController {
     @Autowired
     private ViewDayOffEmployeeService service;
 
-    @PostMapping(value = "/user/{id}")
+    @GetMapping(value = "/user/{id}")
     public ResponseEntity<?> getByMaNV(@PathVariable("id") String maNV) {
         try {
             return new ResponseEntity<>(service.viewDayOff(maNV), HttpStatus.OK);

@@ -1,5 +1,6 @@
 package backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,17 +18,10 @@ public class HolidayCategory {
 
     @Column(name = "ngay")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="dd/MM/yyyy")
     private Date ngay;
 
     @Column(name = "ten_ngay_le")
     private String tenNgayLe;
 
-    private String getNgayNghiLe(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        if(sdf != null){
-            return sdf.format(ngay);
-        } else {
-            return null;
-        }
-    }
 }
