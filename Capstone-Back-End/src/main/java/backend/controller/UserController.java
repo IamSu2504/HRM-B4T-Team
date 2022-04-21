@@ -113,7 +113,6 @@ public class UserController {
                 return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
 
-//            String absolutePath = context.getRealPath("resources/avatar");
             String path = new File("./src/main/resources/avatar").getCanonicalPath()+"\\"+user.getImage();
             File imageFile = new File(path);
 

@@ -140,7 +140,10 @@ public class User {
             if(image==null || image==""){
                 return null;
             }
-            BufferedImage bImage = ImageIO.read(new File("C:\\Users\\Admin\\Desktop\\Back-End\\Capstone-Back-End\\avatar\\"+image));
+            String path = new File("./src/main/resources/avatar").getCanonicalPath()+"\\"+image;
+            File imageFile = new File(path);
+
+            BufferedImage bImage = ImageIO.read(imageFile);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ImageIO.write(bImage, "jpg", bos);
             byte[] data = bos.toByteArray();
