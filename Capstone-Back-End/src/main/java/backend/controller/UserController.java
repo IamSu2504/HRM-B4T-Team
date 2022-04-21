@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.List;
 
@@ -109,7 +112,12 @@ public class UserController {
             if (user == null) {
                 return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
-            BufferedImage bImage = ImageIO.read(new File("C:\\Users\\Admin\\Desktop\\Back-End\\Capstone-Back-End\\avatar\\" + user.getImage()));
+
+//            String absolutePath = context.getRealPath("resources/avatar");
+            String path = new File("./src/main/resources/avatar").getCanonicalPath()+"\\"+user.getImage();
+            File imageFile = new File(path);
+
+            BufferedImage bImage = ImageIO.read(imageFile);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ImageIO.write(bImage, "jpg", bos);
             byte[] data = bos.toByteArray();

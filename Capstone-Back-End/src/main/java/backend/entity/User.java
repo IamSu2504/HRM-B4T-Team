@@ -6,7 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.imageio.ImageIO;
 import javax.persistence.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.Date;
 
 @Entity
@@ -128,5 +134,20 @@ public class User {
 
     @Transient
     private byte[] imageData;
+
+    public byte[] getImageData(){
+        try {
+            if(image==null || image==""){
+                return null;
+            }
+            BufferedImage bImage = ImageIO.read(new File("C:\\Users\\Admin\\Desktop\\Back-End\\Capstone-Back-End\\avatar\\"+image));
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(bImage, "jpg", bos);
+            byte[] data = bos.toByteArray();
+            return Base64.getEncoder().encode(data);
+        } catch (IOException e) {
+            return null;
+        }
+    }
 
 }
