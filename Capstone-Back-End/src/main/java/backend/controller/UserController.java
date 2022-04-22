@@ -21,7 +21,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value="/user")
+@RequestMapping(value = "/user")
 public class UserController {
 
     @Autowired
@@ -31,12 +31,12 @@ public class UserController {
     public ResponseEntity<?> getAll() {
         try {
             List<User> list = service.getAll();
-            if(list.isEmpty()){
-                return new ResponseEntity<>("No User was created", HttpStatus.NOT_FOUND);
+            if (list.isEmpty()) {
+                return new ResponseEntity<>("Chưa có người dùng được tạo", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -44,12 +44,12 @@ public class UserController {
     public ResponseEntity<?> getById(@PathVariable("id") String id) {
         try {
             User u = service.getById(id);
-            if(u==null){
-                return new ResponseEntity<>("User isn't existed", HttpStatus.NOT_FOUND);
+            if (u == null) {
+                return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(u, HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -57,12 +57,12 @@ public class UserController {
     public ResponseEntity<?> create(@RequestBody User user) {
         try {
             String mess = service.getCreateUserMessage(user);
-            if(mess==null){
-                return new ResponseEntity<>("User created successfully", HttpStatus.OK);
+            if (mess == null) {
+                return new ResponseEntity<>("Tạo thành công", HttpStatus.OK);
             }
             return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
-        }catch(Exception e){
-            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -71,37 +71,40 @@ public class UserController {
         try {
             user.setId(id);
             String mess = service.getUpdateUserMessage(user);
-            if(mess==null){
-                return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
+            if (mess == null) {
+                return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
             }
             return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
-        }catch(Exception e){
-            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping(value = "/{id}/image")
-    public ResponseEntity changeProfileImage(@RequestParam("file") MultipartFile file,@PathVariable String id) {
+    public ResponseEntity changeProfileImage(@RequestParam("file") MultipartFile file, @PathVariable String id) {
         try {
             User user = service.getById(id);
-            if(user==null){
-                return new ResponseEntity<>("Người dùng không tồn tại",HttpStatus.EXPECTATION_FAILED);
+            if (user == null) {
+                return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
 
-            String fileName = user.getId()+".jpg";
-
+            String fileName = user.getId() + ".jpg";
+            String fileDirectory = new File("./src/main/resources/avatar").getCanonicalPath() + "\\" + fileName;
             //creating a new file in some local directory
-            File fileToSave = new File("C:\\Users\\Admin\\Desktop\\Back-End\\Capstone-Back-End\\avatar\\" + fileName);
+            File fileToSave = new File(fileDirectory);
             //copy file content from received file to new local file
             file.transferTo(fileToSave);
 
+            // update image
             user.setImage(fileName);
             String updateMess = service.getUpdateUserMessage(user);
-
-            return new ResponseEntity<>("Thay đổi avatar thành công",HttpStatus.OK);
+            if (updateMess == null)
+                return new ResponseEntity<>(HttpStatus.OK);
+            else
+                return new ResponseEntity<>(updateMess, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (IOException ioe) {
             //if something went bad, we need to inform client about it
-            return new ResponseEntity<>("Lỗi nội bộ",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -112,17 +115,15 @@ public class UserController {
             if (user == null) {
                 return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
-
-            String path = new File("./src/main/resources/avatar").getCanonicalPath()+"\\"+user.getImage();
+            String path = new File("./src/main/resources/avatar").getCanonicalPath() + "\\" + user.getImage();
             File imageFile = new File(path);
-
             BufferedImage bImage = ImageIO.read(imageFile);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ImageIO.write(bImage, "jpg", bos);
             byte[] data = bos.toByteArray();
             byte[] base64encodedData = Base64.getEncoder().encode(data);
             return new ResponseEntity<>(base64encodedData, HttpStatus.OK);
-        }catch(Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

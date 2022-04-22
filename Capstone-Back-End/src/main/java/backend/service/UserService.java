@@ -25,23 +25,24 @@ public class UserService {
 
     public String getUpdateUserMessage(User newUser) {
         if(!userRepo.findById(newUser.getId().toUpperCase()).isPresent()){
-            return "User isn't existed";
+            return "Người dùng không tồn tại";
         }
         User oldUser = userRepo.findById(newUser.getId().toUpperCase()).get();
 
         if (!oldUser.getId().equalsIgnoreCase(newUser.getId()) && userRepo.findById(newUser.getId()).isPresent()) {
-            return "User ID existed";
+            return "Mã nhân viên đã tồn tại";
         } else if (!oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && userRepo.getBySdt(newUser.getSoDienThoai()) != null) {
-            return "Phone number existed";
+            return "Số điện thoại đã tồn tại";
         } else if (!oldUser.getEmail().equalsIgnoreCase(newUser.getEmail()) && userRepo.getByEmail(newUser.getEmail()) != null) {
-            return "Email existed";
+            return "Email đã tồn tại";
         } else if (!oldUser.getSoAtm().equalsIgnoreCase(newUser.getSoAtm()) && userRepo.getBySoAtm(newUser.getSoAtm()) != null) {
-            return "ATM number existed";
+            return "Số ATM đã tồn tại";
         } else if (!oldUser.getCccd().equalsIgnoreCase(newUser.getCccd()) && userRepo.getByCccd(newUser.getCccd()) != null) {
-            return "Citizen ID Number existed";
+            return "Số căn cước công dân đã tồn tại";
         } else if (!oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu()) && newUser.getHoChieu() != null && userRepo.getByHoChieu(newUser.getHoChieu()) != null) {
-            return "Passport number existed";
+            return "Số hộ chiếu đã tồn tại";
         }
+        newUser.setImage(oldUser.getImage());
         userRepo.save(newUser);
         return null;
 
@@ -50,18 +51,19 @@ public class UserService {
     public String getCreateUserMessage(User newUser) {
 
         if (userRepo.findById(newUser.getId()).isPresent()) {
-            return "User ID existed";
+            return "Mã nhân viên đã tồn tại";
         } else if (userRepo.getBySdt(newUser.getSoDienThoai()) != null) {
-            return "Phone number existed";
+            return "Số điện thoại đã tồn tại";
         } else if (userRepo.getByEmail(newUser.getEmail()) != null) {
-            return "Email existed";
+            return "Email đã tồn tại";
         } else if (userRepo.getBySoAtm(newUser.getSoAtm()) != null) {
-            return "ATM number existed";
+            return "Số ATM đã tồn tại";
         } else if (newUser.getCccd() != null && userRepo.getByCccd(newUser.getCccd()) != null) {
-            return "Citizen ID Number existed";
+            return "Số căn cước công dân đã tồn tại";
         } else if (newUser.getHoChieu() != null && userRepo.getByHoChieu(newUser.getHoChieu()) != null) {
-            return "Passport number existed";
+            return "Số hộ chiếu đã tồn tại";
         }
+        newUser.setImage("default.jpg");
         userRepo.save(newUser);
         return null;
 
@@ -70,63 +72,6 @@ public class UserService {
     public User getByEmail(String mail) {
         return userRepo.getByEmail(mail);
     }
-
-//    public User getNewUser(CreateUpdateUserRequest request) {
-//        try {
-//            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//            User newUser = new User();
-//            String upperCaseID = request.getId().toUpperCase();
-//
-//            if (request.getQuocTichID() != 0)
-//                newUser.setQuocTich(nationRepo.getById(request.getQuocTichID()));
-//            if (request.getChucVuID() != 0)
-//                newUser.setChucVu(positionRepo.getById(request.getChucVuID()));
-//            if (request.getTinhChatHopDongID() != 0)
-//                newUser.setTinhChatHopDong(contractRepo.getById(request.getTinhChatHopDongID()));
-//            if (request.getTinhTrangHonNhanID() != 0)
-//                newUser.setTinhTrangHonNhan(marriageRepo.getById(request.getTinhTrangHonNhanID()));
-//
-//            newUser.setId(upperCaseID);
-//            newUser.setTenNv(request.getTenNv());
-//            newUser.setGioiTinh(request.isGioiTinh());
-//            newUser.setSoDienThoai(request.getSoDienThoai());
-//            newUser.setEmail(request.getEmail());
-//            newUser.setCccd(request.getCccd());
-//            newUser.setQueQuan(request.getQueQuan());
-//            newUser.setDiaChiThuongTru(request.getDiaChiThuongTru());
-//            newUser.setDiaChiTamTru(request.getDiaChiTamTru());
-//            newUser.setAtmNganHang(request.getAtmNganHang());
-//            newUser.setSoAtm(request.getSoAtm());
-//            newUser.setDiaChiTamTru(request.getDiaChiTamTru());
-//            newUser.setEmail(request.getEmail());
-//            newUser.setGioiTinh(request.isGioiTinh());
-//            newUser.setEmail(request.getEmail());
-//            newUser.setImage(request.getImage());
-//            newUser.setHoChieu(request.getHoChieu());
-//            newUser.setLyDoNghi(request.getLyDoNghi());
-//            newUser.setNoiCapCccd(request.getNoiCapCccd());
-//            newUser.setDiaChiTamTru(request.getDiaChiTamTru());
-//            newUser.setNoiSinh(request.getNoiSinh());
-//
-//            if (request.getNgayBatDauLam() != null)
-//                newUser.setNgayBatDauLam(sdf.parse(request.getNgayBatDauLam()));
-//            if (request.getNgaySinh() != null)
-//                newUser.setNgaySinh(sdf.parse(request.getNgaySinh()));
-//            if (request.getNgayCapCccd() != null)
-//                newUser.setNgayCapCccd(sdf.parse(request.getNgayCapCccd()));
-//            if (request.getNgayHetHanCccd() != null)
-//                newUser.setNgayHetHanCccd(sdf.parse(request.getNgayHetHanCccd()));
-//            if (request.getNgayCapHoChieu() != null)
-//                newUser.setNgayCapHoChieu(sdf.parse(request.getNgayCapHoChieu()));
-//            if (request.getNgayHetHanHoChieu() != null)
-//                newUser.setNgayHetHanHoChieu(sdf.parse(request.getNgayHetHanHoChieu()));
-//            if (request.getNgayNghiViec() != null)
-//                newUser.setNgayNghiViec(sdf.parse(request.getNgayNghiViec()));
-//            return newUser;
-//        } catch (Exception e) {
-//            return null;
-//        }
-//    }
 
 }
 
