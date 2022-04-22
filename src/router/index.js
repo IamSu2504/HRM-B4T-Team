@@ -6,15 +6,14 @@ import {
   Navigate,
 } from "react-router-dom";
 import ManagerLayout from "../layouts/ManagerLayout";
-import AdminLayoutPrivateRoute from './privateRouter/admin';
+import LayoutPrivateRoute from './privateRouter/layout';
 import EmployeeLayout from '../layouts/EmployeeLayout';
-import ViewAllEmployee from "../pages/Manager/ViewAllEmployee";
+import ViewAllUser from "../pages/Manager/ViewAllUser";
 import Login from "../pages/Login";
 import Forgot from "../pages/Admin/Forgot";
 import NewPassword from "../pages/Admin/NewPassword";
 import UpdateUser from "../pages/User/UpdateUser";
 import AddNewAccount from "../pages/Admin/AddNewAccount";
-import AddAccount from "../pages/Manager/AddAccount";
 import ViewUser from "../pages/User/ViewUser";
 
 import ViewSalaryGrade from "../pages/Admin/SalaryGrade/ViewSalaryGrade";
@@ -101,13 +100,15 @@ import ViewAccount from "../pages/Admin/Account/ViewAccount";
 import UpdateAccount from "../pages/Admin/Account/UpdateAccount";
 import AAddAccount from "../pages/Admin/Account/AddNewAccount";
 
-import AdminHomePagePrivateRoute from "./privateRouter/adminHomepage";
+import HomePagePrivateRoute from "./privateRouter/Homepage";
 import ManagerHomePage from "../pages/Manager/HomePage";
 import EmployeeHomepage from "../pages/Employee/HomePage";
 import RegisterShifts from "../pages/Employee/RegisterShifts";
 import ViewTimekeeping from "../pages/Employee/TimeKeeping";
 import EViewContract from "../pages/Employee/ViewContract";
 import TimeKeeping from "../pages/Employee/TimeKeeping";
+import AddUser from "../pages/User/AddNewUser";
+import RegisterShift from "../pages/User/RegisterShift";
 
 export default function MainApp() {
   return (
@@ -118,115 +119,119 @@ export default function MainApp() {
         
         
         {/* admin */}
-        {/* <Route exact path="/admin/add-account" element={<AdminLayoutPrivateRoute><AddNewAccount /></AdminLayoutPrivateRoute>} /> */}
+        {/* <Route exact path="/admin/add-account" element={<LayoutPrivateRoute><AddNewAccount /></LayoutPrivateRoute>} /> */}
         <Route exact path="/forgot" element={<Forgot />} />
         
         <Route exact path="/account/:forgotId/forgot" element={<NewPassword />}/>
         {/* admin category */}
 
-        <Route exact path="/admin/viewsalarygrade" element={<AdminLayoutPrivateRoute><ViewSalaryGrade /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updatesalarygrade" element={<AdminLayoutPrivateRoute><UpdateSalaryGrade /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addsalarygrade" element={<AdminLayoutPrivateRoute><AddSalaryGrade /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewsalarygrade" element={<LayoutPrivateRoute><ViewSalaryGrade /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updatesalarygrade" element={<LayoutPrivateRoute><UpdateSalaryGrade /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addsalarygrade" element={<LayoutPrivateRoute><AddSalaryGrade /></LayoutPrivateRoute>} />
 
-        <Route exact path="/admin/viewtax" element={<AdminLayoutPrivateRoute><ViewTax /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updatetax/:taxId" element={<AdminLayoutPrivateRoute><UpdateTax /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addtax" element={<AdminLayoutPrivateRoute><AddTax /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewtax" element={<LayoutPrivateRoute><ViewTax /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updatetax/:taxId" element={<LayoutPrivateRoute><UpdateTax /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addtax" element={<LayoutPrivateRoute><AddTax /></LayoutPrivateRoute>} />
 
-        <Route exact path="/admin/viewshift" element={<AdminLayoutPrivateRoute><ViewShift /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updateshift/:shiftId" element={<AdminLayoutPrivateRoute><UpdateShift /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addshift" element={<AdminLayoutPrivateRoute><AddShift /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewshift" element={<LayoutPrivateRoute><ViewShift /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updateshift/:shiftId" element={<LayoutPrivateRoute><UpdateShift /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addshift" element={<LayoutPrivateRoute><AddShift /></LayoutPrivateRoute>} />
 
-        <Route exact path="/admin/viewposition" element={<AdminLayoutPrivateRoute><ViewPosition /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updateposition/:positionId" element={<AdminLayoutPrivateRoute><UpdatePosition /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addposition" element={<AdminLayoutPrivateRoute><AddPosition /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewposition" element={<LayoutPrivateRoute><ViewPosition /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updateposition/:positionId" element={<LayoutPrivateRoute><UpdatePosition /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addposition" element={<LayoutPrivateRoute><AddPosition /></LayoutPrivateRoute>} />
 
-        <Route exact path="/admin/viewspecialize" element={<AdminLayoutPrivateRoute><ViewSpecialize /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updatespecialize/:specializeId" element={<AdminLayoutPrivateRoute><UpdateSpecialize /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addspecialize" element={<AdminLayoutPrivateRoute><AddSpecialize /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewspecialize" element={<LayoutPrivateRoute><ViewSpecialize /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updatespecialize/:specializeId" element={<LayoutPrivateRoute><UpdateSpecialize /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addspecialize" element={<LayoutPrivateRoute><AddSpecialize /></LayoutPrivateRoute>} />
 
-        <Route exact path="/admin/viewrewardDiscipline" element={<AdminLayoutPrivateRoute><ViewRewardDiscipline /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updaterewardDiscipline/:rewardDisciplineId" element={<AdminLayoutPrivateRoute><UpdateRewardDiscipline /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addrewardDiscipline" element={<AdminLayoutPrivateRoute><AddRewardDiscipline /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewrewardDiscipline" element={<LayoutPrivateRoute><ViewRewardDiscipline /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updaterewardDiscipline/:rewardDisciplineId" element={<LayoutPrivateRoute><UpdateRewardDiscipline /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addrewardDiscipline" element={<LayoutPrivateRoute><AddRewardDiscipline /></LayoutPrivateRoute>} />
 
-        <Route exact path="/admin/viewrelative" element={<AdminLayoutPrivateRoute><ViewRelative /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updaterelative/:relativeId" element={<AdminLayoutPrivateRoute><UpdateRelative /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addrelative" element={<AdminLayoutPrivateRoute><AddRelative /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewrelative" element={<LayoutPrivateRoute><ViewRelative /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updaterelative/:relativeId" element={<LayoutPrivateRoute><UpdateRelative /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addrelative" element={<LayoutPrivateRoute><AddRelative /></LayoutPrivateRoute>} />
 
-        <Route exact path="/admin/viewsalaryGroup" element={<AdminLayoutPrivateRoute><ViewSalaryGroup /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updatesalaryGroup/:salaryGroupId" element={<AdminLayoutPrivateRoute><UpdateSalaryGroup /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addsalaryGroup" element={<AdminLayoutPrivateRoute><AddSalaryGroup /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewsalaryGroup" element={<LayoutPrivateRoute><ViewSalaryGroup /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updatesalaryGroup/:salaryGroupId" element={<LayoutPrivateRoute><UpdateSalaryGroup /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addsalaryGroup" element={<LayoutPrivateRoute><AddSalaryGroup /></LayoutPrivateRoute>} />
 
-        <Route exact path="/admin/viewnation" element={<AdminLayoutPrivateRoute><ViewNation /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updatenation/:nationId" element={<AdminLayoutPrivateRoute><UpdateNation /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addnation" element={<AdminLayoutPrivateRoute><AddNation /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewnation" element={<LayoutPrivateRoute><ViewNation /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updatenation/:nationId" element={<LayoutPrivateRoute><UpdateNation /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addnation" element={<LayoutPrivateRoute><AddNation /></LayoutPrivateRoute>} />
 
-        <Route exact path="/admin/viewmarriage" element={<AdminLayoutPrivateRoute><ViewMarriage /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updatemarriage/:marriageId" element={<AdminLayoutPrivateRoute><UpdateMarriage /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addmarriage" element={<AdminLayoutPrivateRoute><AddMarriage /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewmarriage" element={<LayoutPrivateRoute><ViewMarriage /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updatemarriage/:marriageId" element={<LayoutPrivateRoute><UpdateMarriage /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addmarriage" element={<LayoutPrivateRoute><AddMarriage /></LayoutPrivateRoute>} />
         {/* degree */}
-        <Route exact path="/admin/viewdegree" element={<AdminLayoutPrivateRoute><ViewDegree /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updatedegree/:degreeId" element={<AdminLayoutPrivateRoute><UpdateDegree /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/adddegree" element={<AdminLayoutPrivateRoute><AddDegree /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewdegree" element={<LayoutPrivateRoute><ViewDegree /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updatedegree/:degreeId" element={<LayoutPrivateRoute><UpdateDegree /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/adddegree" element={<LayoutPrivateRoute><AddDegree /></LayoutPrivateRoute>} />
         {/* insurance */}
-        <Route exact path="/admin/viewinsurance" element={<AdminLayoutPrivateRoute><ViewInsurance /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updateinsurance/:insuranceId" element={<AdminLayoutPrivateRoute><UpdateInsurance /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addinsurance" element={<AdminLayoutPrivateRoute><AddInsurance /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewinsurance" element={<LayoutPrivateRoute><ViewInsurance /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updateinsurance/:insuranceId" element={<LayoutPrivateRoute><UpdateInsurance /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addinsurance" element={<LayoutPrivateRoute><AddInsurance /></LayoutPrivateRoute>} />
         {/* certificate */}
-        <Route exact path="/admin/viewcertificate" element={<AdminLayoutPrivateRoute><ViewCertificate /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updatecertificate/:certificateId" element={<AdminLayoutPrivateRoute><UpdateCertificate /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addcertificate" element={<AdminLayoutPrivateRoute><AddCertificate /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewcertificate" element={<LayoutPrivateRoute><ViewCertificate /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updatecertificate/:certificateId" element={<LayoutPrivateRoute><UpdateCertificate /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addcertificate" element={<LayoutPrivateRoute><AddCertificate /></LayoutPrivateRoute>} />
         {/* contract */}
-        <Route exact path="/admin/viewcontract" element={<AdminLayoutPrivateRoute><ViewContract /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updatecontract/:contractId" element={<AdminLayoutPrivateRoute><UpdateContract /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addcontract" element={<AdminLayoutPrivateRoute><AddContract /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewcontract" element={<LayoutPrivateRoute><ViewContract /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updatecontract/:contractId" element={<LayoutPrivateRoute><UpdateContract /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addcontract" element={<LayoutPrivateRoute><AddContract /></LayoutPrivateRoute>} />
         {/* classRoom */}
-        <Route exact path="/admin/viewclassRoom" element={<AdminLayoutPrivateRoute><ViewClassRoom /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updateclassRoom/:classRoomId" element={<AdminLayoutPrivateRoute><UpdateClassRoom /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addclassRoom" element={<AdminLayoutPrivateRoute><AddClassRoom /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewclassRoom" element={<LayoutPrivateRoute><ViewClassRoom /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updateclassRoom/:classRoomId" element={<LayoutPrivateRoute><UpdateClassRoom /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addclassRoom" element={<LayoutPrivateRoute><AddClassRoom /></LayoutPrivateRoute>} />
         {/* holiday */}
-        <Route exact path="/admin/viewholiday" element={<AdminLayoutPrivateRoute><ViewHoliday /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updateholiday/:holidayId" element={<AdminLayoutPrivateRoute><UpdateHoliday /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addholiday" element={<AdminLayoutPrivateRoute><AddHoliday /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewholiday" element={<LayoutPrivateRoute><ViewHoliday /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updateholiday/:holidayId" element={<LayoutPrivateRoute><UpdateHoliday /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addholiday" element={<LayoutPrivateRoute><AddHoliday /></LayoutPrivateRoute>} />
         {/* dayOff */}
-        <Route exact path="/admin/viewdayOff" element={<AdminLayoutPrivateRoute><ViewDayOff /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updatedayOff/:dayOffId" element={<AdminLayoutPrivateRoute><UpdateDayOff /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/adddayOff" element={<AdminLayoutPrivateRoute><AddDayOff /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewdayOff" element={<LayoutPrivateRoute><ViewDayOff /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updatedayOff/:dayOffId" element={<LayoutPrivateRoute><UpdateDayOff /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/adddayOff" element={<LayoutPrivateRoute><AddDayOff /></LayoutPrivateRoute>} />
         {/* department */}
-        <Route exact path="/admin/viewdepartment" element={<AdminLayoutPrivateRoute><ViewDepartment /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updatedepartment/:departmentId" element={<AdminLayoutPrivateRoute><UpdateDepartment /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/adddepartment" element={<AdminLayoutPrivateRoute><AddDepartment /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewdepartment" element={<LayoutPrivateRoute><ViewDepartment /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updatedepartment/:departmentId" element={<LayoutPrivateRoute><UpdateDepartment /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/adddepartment" element={<LayoutPrivateRoute><AddDepartment /></LayoutPrivateRoute>} />
         {/* contractNature */}
-        <Route exact path="/admin/viewcontractNature" element={<AdminLayoutPrivateRoute><ViewContractNature /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updatecontractNature/:contractNatureId" element={<AdminLayoutPrivateRoute><UpdateContractNature /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addcontractNature" element={<AdminLayoutPrivateRoute><AddContractNature /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewcontractNature" element={<LayoutPrivateRoute><ViewContractNature /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updatecontractNature/:contractNatureId" element={<LayoutPrivateRoute><UpdateContractNature /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addcontractNature" element={<LayoutPrivateRoute><AddContractNature /></LayoutPrivateRoute>} />
         {/* eduLevel */}
-        <Route exact path="/admin/vieweduLevel" element={<AdminLayoutPrivateRoute><ViewEduLevel /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updateeduLevel/:eduLevelId" element={<AdminLayoutPrivateRoute><UpdateEduLevel /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addeduLevel" element={<AdminLayoutPrivateRoute><AddEduLevel /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/vieweduLevel" element={<LayoutPrivateRoute><ViewEduLevel /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updateeduLevel/:eduLevelId" element={<LayoutPrivateRoute><UpdateEduLevel /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addeduLevel" element={<LayoutPrivateRoute><AddEduLevel /></LayoutPrivateRoute>} />
 
-        <Route exact path="/admin/viewaccount" element={<AdminLayoutPrivateRoute><ViewAccount /></AdminLayoutPrivateRoute>} />
-        <Route exact path="admin/updateaccount/:accountId" element={<AdminLayoutPrivateRoute><UpdateAccount /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addaccount" element={<AdminLayoutPrivateRoute><AAddAccount /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewaccount" element={<LayoutPrivateRoute><ViewAccount /></LayoutPrivateRoute>} />
+        <Route exact path="admin/updateaccount/:accountId" element={<LayoutPrivateRoute><UpdateAccount /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addaccount" element={<LayoutPrivateRoute><AAddAccount /></LayoutPrivateRoute>} />
+
         {/* admin user */}
-        <Route exact path="/admin/viewuser" element={<AdminLayoutPrivateRoute><ViewUser /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updateuser/:maNv" element={<AdminLayoutPrivateRoute><UpdateUser /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewuser/:maNv" element={<LayoutPrivateRoute><ViewUser /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/updateuser/:maNv" element={<LayoutPrivateRoute><UpdateUser /></LayoutPrivateRoute>} />
 
-        <Route exact path="/admin/homepage" element={<AdminHomePagePrivateRoute />} />
+        {/* RegisterShift */}
+        <Route exact path="/admin/registerShift" element={<LayoutPrivateRoute><RegisterShift /></LayoutPrivateRoute>} />
 
-        <Route exact path="/manager/viewallemployee" element={<ManagerLayout><ViewAllEmployee /></ManagerLayout>} />
-        <Route exact path="/manager/viewuser" element={<ManagerLayout><ViewUser /></ManagerLayout>} />
-        <Route exact path="/manager/updateuser/:maNv" element={<ManagerLayout><UpdateUser /></ManagerLayout>} />
-        <Route exact path="/manager/addaccount"  element={<ManagerLayout><AddAccount /></ManagerLayout>} />
+        <Route exact path="/admin/homepage" element={<HomePagePrivateRoute />} />
+
+        <Route exact path="/manager/viewallUser" element={<LayoutPrivateRoute><ViewAllUser /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/viewuser/:maNv" element={<LayoutPrivateRoute><ViewUser /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/updateuser/:maNv" element={<LayoutPrivateRoute><UpdateUser /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/adduser"  element={<LayoutPrivateRoute><AddUser /></LayoutPrivateRoute>} />
         <Route exact path="/manager/homepage" element={<ManagerHomePage />} />  
 
         {/* employee */}
         <Route exact path="/employee/homepage" element={<EmployeeHomepage />} />
-        <Route exact path="/employee/viewuser"  element={<EmployeeLayout><ViewUser /></EmployeeLayout>} />
-        <Route exact path="/employee/updateuser"  element={<EmployeeLayout><UpdateUser /></EmployeeLayout>} />
-        <Route exact path="/employee/registershifts"  element={<EmployeeLayout><RegisterShifts /></EmployeeLayout>} />
-        <Route exact path="/employee/viewtimekeeping"  element={<EmployeeLayout><ViewTimekeeping /></EmployeeLayout>} />
-        <Route exact path="/employee/viewcontract"  element={<EmployeeLayout><EViewContract /></EmployeeLayout>} />
-        <Route exact path="/employee/timeKeeping"  element={<EmployeeLayout><TimeKeeping /></EmployeeLayout>} />
+        <Route exact path="/employee/viewuser/:maNv"  element={<LayoutPrivateRoute><ViewUser /></LayoutPrivateRoute>} />
+        <Route exact path="/employee/updateuser/:maNv"  element={<LayoutPrivateRoute><UpdateUser /></LayoutPrivateRoute>} />
+        <Route exact path="/employee/registershifts"  element={<LayoutPrivateRoute><RegisterShifts /></LayoutPrivateRoute>} />
+        <Route exact path="/employee/viewtimekeeping"  element={<LayoutPrivateRoute><ViewTimekeeping /></LayoutPrivateRoute>} />
+        <Route exact path="/employee/viewcontract"  element={<LayoutPrivateRoute><EViewContract /></LayoutPrivateRoute>} />
+        <Route exact path="/employee/timeKeeping"  element={<LayoutPrivateRoute><TimeKeeping /></LayoutPrivateRoute>} />
       </Routes>
     </Router>
   );

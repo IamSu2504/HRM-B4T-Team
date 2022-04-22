@@ -15,7 +15,7 @@ export default function ManagerLayout(props) {
       <div className="container-fluid fixed-top py-3 top-menu">
         <div className="row collapse show no-gutters d-flex h-100 position-relative">
           <div className="col-3 px-0 w-sidebar navbar-collapse collapse d-none d-md-flex">
-            <div style={{color: 'white', fontSize: '20px'}}>LOGO</div>
+            <div ><img style={{ height: '38px', width: '200px' }} src="../../b4tLogo.png"></img></div>
           </div>
           <div className="col px-3 px-md-0">
             <div className="header-frame">
@@ -37,12 +37,15 @@ export default function ManagerLayout(props) {
                 <Popover
                   isOpen={visibleInfoPopover}
                   positions="bottom"
-                  onClickOutside={()=>setVisibleInfoPopover(false)}
+                  onClickOutside={() => setVisibleInfoPopover(false)}
                   content={
                     <div className="header-popover-content">
-                      <div>Thông tin tài khoản</div>
+                      <div onClick={() => navigate(`/manager/viewuser/${localStorage.getItem('maNv')}`)}>Thông tin tài khoản</div>
                       <hr />
-                      <div onClick={logout}>Đăng xuất</div>
+                      <div onClick={() => {
+                        localStorage.clear()
+                        navigate("/login");
+                      }}>Đăng xuất</div>
                     </div>
                   }
                 >
@@ -55,7 +58,7 @@ export default function ManagerLayout(props) {
                     <div className="user-avatar">
                       <img src="/menu/user.svg" alt="user-avatar" />
                     </div>
-                    <div className="user-name">Lê Quang Tuấn</div>
+                    <div className="user-name">{localStorage.getItem('name')}</div>
                   </div>
                 </Popover>
               </div>
@@ -73,10 +76,10 @@ export default function ManagerLayout(props) {
                   <img src="/menu/user.svg" alt="user-avatar" />
                 </div>
                 <div className="right">
-                  <div className="name">Lê Quang Tuấn</div>
+                  <div className="name">{localStorage.getItem('name')}</div>
                   <div className="active">
                     <img src="/menu/active.svg" />
-                    Trực tuyến
+                    Quản Lý
                   </div>
                 </div>
               </div>
@@ -110,13 +113,13 @@ export default function ManagerLayout(props) {
                     data-parent="#accordion"
                   >
                     <div className="card-body">
-                      <div>
+                      <div onClick={() => navigate(`/manager/viewallUser`)}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{marginLeft: '15px'}}>Danh sách nhân viên</span>
+                        <span style={{ marginLeft: '15px' }}>Danh sách nhân viên</span>
                       </div>
-                      <div>
+                      <div onClick={() => navigate(`/manager/adduser`)}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{marginLeft: '15px'}}>Thêm mới nhân viên</span>
+                        <span style={{ marginLeft: '15px' }}>Thêm mới nhân viên</span>
                       </div>
                     </div>
                   </div>
@@ -165,7 +168,7 @@ export default function ManagerLayout(props) {
                     <a
                       className="card-link"
                       data-toggle="collapse"
-                      // href="#collapseOne"
+                    // href="#collapseOne"
                     >
                       <div className="card-head-content">
                         <div className="left">
@@ -186,7 +189,7 @@ export default function ManagerLayout(props) {
                     <a
                       className="card-link"
                       data-toggle="collapse"
-                      // href="#collapseOne"
+                    // href="#collapseOne"
                     >
                       <div className="card-head-content">
                         <div className="left">
@@ -207,7 +210,7 @@ export default function ManagerLayout(props) {
                     <a
                       className="card-link"
                       data-toggle="collapse"
-                      // href="#collapseOne"
+                    // href="#collapseOne"
                     >
                       <div className="card-head-content">
                         <div className="left">
@@ -228,7 +231,7 @@ export default function ManagerLayout(props) {
                     <a
                       className="card-link"
                       data-toggle="collapse"
-                      // href="#collapseOne"
+                    // href="#collapseOne"
                     >
                       <div className="card-head-content">
                         <div className="left">

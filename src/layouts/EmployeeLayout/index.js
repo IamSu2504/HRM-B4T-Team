@@ -12,7 +12,7 @@ export default function EmployeeLayout(props) {
             <div className="container-fluid fixed-top py-3 top-menu">
                 <div className="row collapse show no-gutters d-flex h-100 position-relative">
                     <div className="col-3 px-0 w-sidebar navbar-collapse collapse d-none d-md-flex">
-                        <div style={{ color: 'white', fontSize: '20px' }}>LOGO</div>
+                        <div ><img style={{ height: '38px', width: '200px' }} src="../../b4tLogo.png"></img></div>
                     </div>
                     <div className="col px-3 px-md-0">
                         <div className="header-frame">
@@ -34,15 +34,15 @@ export default function EmployeeLayout(props) {
                                 <Popover
                                     isOpen={visibleInfoPopover}
                                     positions="bottom"
-                                    onClickOutside={()=>setVisibleInfoPopover(false)}
+                                    onClickOutside={() => setVisibleInfoPopover(false)}
                                     content={
                                         <div className="header-popover-content">
                                             <div onClick={() => {
-                                                navigate("/employee/viewaccount");
+                                                navigate(`/admin/viewuser/${localStorage.getItem('maNv')}`);
                                             }}>Thông tin tài khoản</div>
                                             <hr />
                                             <div onClick={() => {
-                                                localStorage.removeItem("user");
+                                                localStorage.clear()
                                                 navigate("/login");
                                             }}>Đăng xuất</div>
                                         </div>
@@ -57,7 +57,7 @@ export default function EmployeeLayout(props) {
                                         <div className="user-avatar">
                                             <img src="/menu/user.svg" alt="user-avatar" />
                                         </div>
-                                        <div className="user-name">Đăng xuất</div>
+                                        <div className="user-name">{localStorage.getItem('name')}</div>
                                     </div>
                                 </Popover>
                             </div>
@@ -75,10 +75,10 @@ export default function EmployeeLayout(props) {
                                     <img src="/menu/user.svg" alt="user-avatar" />
                                 </div>
                                 <div className="right">
-                                    <div className="name">Lê Quang Tuấn</div>
+                                    <div className="name">{localStorage.getItem('name')}</div>
                                     <div className="active">
                                         <img src="/menu/active.svg" />
-                                        Trực tuyến
+                                        Nhân Viên
                                     </div>
                                 </div>
                             </div>
@@ -154,14 +154,18 @@ export default function EmployeeLayout(props) {
                                         data-parent="#accordion"
                                     >
                                         <div className="card-body">
-                                            <div onClick={()=>navigate('/employee/timeKeeping')}>
+                                            <div onClick={() => navigate('/employee/timeKeeping')}>
                                                 <img src="/menu/list-icon.svg" />
                                                 <span style={{ marginLeft: '15px' }}>Chấm công</span>
                                             </div>
-                                            {/* <div>
+                                            <div>
                                                 <img src="/menu/list-icon.svg" />
                                                 <span style={{ marginLeft: '15px' }}>Nghỉ phép</span>
-                                            </div> */}
+                                            </div>
+                                            <div onClick={() => navigate('/admin/registerShift')}>
+                                                <img src="/menu/list-icon.svg" />
+                                                <span style={{ marginLeft: '15px' }}>Đăng Kí Ca Làm</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

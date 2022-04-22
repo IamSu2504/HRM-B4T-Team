@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomPopover from "../../../../components/CustomPopover";
 import "./style.css";
@@ -12,9 +12,9 @@ export default function ViewAccount() {
 
     const navigate = useNavigate()
 
-    const getAllAccount = async() => {
+    const getAllAccount = async () => {
         const accountRes = await AccountAPI.getAll()
-        if ( accountRes?.status === 200 ){
+        if (accountRes?.status === 200) {
             setListAccount(accountRes?.data)
         }
     }
@@ -23,20 +23,6 @@ export default function ViewAccount() {
         getAllAccount()
     }, [])
 
-    // const deleteAccount = async(accountId) => {
-    //     try{
-    //         const deleteRes = await AccountAPI.deleteAccount(taxId)
-
-    //         if (deleteRes?.status === 200){
-    //             toast('Xóa thành công')
-    //             getAllTax()
-    //         }
-    //     }catch(error){
-    //         if (error.response) {
-    //             toast(error.response.data)
-    //         }
-    //     }
-    // }
 
     return (
         <div className="homepage">
@@ -48,7 +34,6 @@ export default function ViewAccount() {
                             <th scope="col">STT</th>
                             <th scope="col">Mã Số Nhân Viên</th>
                             <th scope="col">Tên Đăng Nhập</th>
-                            <th scope="col">Mật Khẩu</th>
                             <th scope="col">Quyền Hạn</th>
                             <th scope="col">Sửa</th>
                         </tr>
@@ -60,34 +45,13 @@ export default function ViewAccount() {
                                     <th scope="row">{accountIndex + 1}</th>
                                     <td>{accountItem?.maNv}</td>
                                     <td>{accountItem?.username}</td>
-                                    <td>{accountItem?.password}</td>
+
                                     <td>{accountItem?.role?.tenRole}</td>
                                     <td>
-                                        <div onClick={()=>navigate(`/admin/updateaccount/${accountItem?.id}`)}>
+                                        <div onClick={() => navigate(`/admin/updateaccount/${accountItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-                                    {/* <td>                
-                                        <CustomPopover
-                                            open={popoverId === taxItem?.id}
-                                            onClose={() => setPopoverId("")}
-                                            handleSubmit={() => {
-                                                deleteTax(taxItem?.id)
-                                            }}
-                                        >          
-                                            <div 
-                                                onClick={() => {
-                                                    if (popoverId !== taxItem?.id) {
-                                                        setPopoverId(taxItem?.id);
-                                                    } else {
-                                                        setPopoverId("");
-                                                    }
-                                                }}
-                                            >
-                                                <img src="/home/delete-icon.svg" />
-                                            </div>
-                                        </CustomPopover>
-                                    </td> */}
                                 </tr>
                             )
                         })}
@@ -130,7 +94,7 @@ export default function ViewAccount() {
             </div>
 
             <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addaccount`)}>
+                <button className="save-button" onClick={() => navigate(`/admin/addaccount`)}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>

@@ -11,55 +11,15 @@ import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const userKey = ['tenNv', 'soDienThoai', 'soDienThoai2', 'email', 'soAtm', 'cccd', 
+'noiCapCccd', 'hoChieu', 'noiCapHoChieu', 'noiSinh', 'queQuan', 'diaChiThuongTru', 
+'diaChiTamTru', 'atmNganHang', 'lyDoNghi', 'ngaySinh', 'ngayHetHanCccd', 'ngayCapCccd', 'ngayCapHoChieu']
+
 export default function UpdateUser() {
   const [listPosition, setListPosition] = useState([])
-  const getAllPosition = async () => {
-    const positionRes = await PositionAPI.getAll()
-    if (positionRes?.status === 200) {
-      setListPosition(positionRes?.data)
-    }
-  }
-
-  useEffect(() => {
-    getAllPosition()
-  }, [])
-
   const [listContractNature, setListContractNature] = useState([])
-  const getAllContractNature = async () => {
-    const ContractNatureRes = await ContractNatureAPI.getAll()
-    if (ContractNatureRes?.status === 200) {
-      setListContractNature(ContractNatureRes?.data)
-    }
-  }
-
-  useEffect(() => {
-    getAllContractNature()
-  }, [])
-
   const [listNation, setListNation] = useState([])
-  const getAllNation = async () => {
-    const nationRes = await NationAPI.getAll()
-    if (nationRes?.status === 200) {
-      setListNation(nationRes?.data)
-    }
-  }
-
-  useEffect(() => {
-    getAllNation()
-  }, [])
-
   const [listMarriage, setListMarriage] = useState([])
-  const getAllMarriage = async () => {
-    const marriageRes = await MarriageAPI.getAll()
-    if (marriageRes?.status === 200) {
-      setListMarriage(marriageRes?.data)
-    }
-  }
-
-  useEffect(() => {
-    getAllMarriage()
-  }, [])
-
   const [userDetail, setUserDetail] = useState({
     tinhChatHopDongID: '', tinhTrangHonNhanID: '', chucVuID: '',
     quocTichID: '', tenNv: '', ngaySinh: '', gioiTinh: '',
@@ -74,6 +34,50 @@ export default function UpdateUser() {
   const [submitError, setSubmitError] = useState({ status: false, error: '' })
   const [isSubmit, setIsSubmit] = useState(false)
   const { maNv } = useParams()
+
+  const getAllPosition = async () => {
+    const positionRes = await PositionAPI.getAll()
+    if (positionRes?.status === 200) {
+      setListPosition(positionRes?.data)
+    }
+  }
+
+  useEffect(() => {
+    getAllPosition()
+  }, [])
+
+  const getAllContractNature = async () => {
+    const ContractNatureRes = await ContractNatureAPI.getAll()
+    if (ContractNatureRes?.status === 200) {
+      setListContractNature(ContractNatureRes?.data)
+    }
+  }
+
+  useEffect(() => {
+    getAllContractNature()
+  }, [])
+
+  const getAllNation = async () => {
+    const nationRes = await NationAPI.getAll()
+    if (nationRes?.status === 200) {
+      setListNation(nationRes?.data)
+    }
+  }
+
+  useEffect(() => {
+    getAllNation()
+  }, [])
+
+  const getAllMarriage = async () => {
+    const marriageRes = await MarriageAPI.getAll()
+    if (marriageRes?.status === 200) {
+      setListMarriage(marriageRes?.data)
+    }
+  }
+
+  useEffect(() => {
+    getAllMarriage()
+  }, [])
 
   const getUserDetail = async () => {
     if (maNv) {
@@ -90,32 +94,23 @@ export default function UpdateUser() {
 
   const handleUpdate = async () => {
     try {
+      let bug = false
+      for(let key of userKey){
+        if ( userDetail[`${key}`] ){
+          if ( userDetail[`${key}`]?.length <= 0 ){
+            bug = true
+            break;
+          }
+        }else{
+          bug= true
+          break;
+        }
+      }
       setSubmitError({ status: false, error: '' })
-      const {
-        tinhChatHopDongID, tinhTrangHonNhanID, chucVuID,
-        quocTichID, tenNv, ngaySinh, gioiTinh,
-        soDienThoai, soDienThoai2, email,
-        cccd, noiCapCccd, ngayCapCccd,
-        ngayHetHanCccd, hoChieu, noiCapHoChieu,
-        ngayCapHoChieu, ngayHetHanHoChieu, noiSinh,
-        queQuan, diaChiThuongTru, diaChiTamTru,
-        atmNganHang, soAtm, trangThaiLaoDong,
-        ngayBatDauLam, ngayNghiViec, lyDoNghi, image
-      } = userDetail
-
-      if (!tinhChatHopDongID.trim().length || !tinhTrangHonNhanID.trim().length || !chucVuID.trim().length
-        || !quocTichID.trim().length || !tenNv.trim().length || !ngaySinh.trim().length || !gioiTinh.trim().length
-        || !soDienThoai.trim().length || !soDienThoai2.trim().length || !email.trim().length
-        || !cccd.trim().length || !noiCapCccd.trim().length || !ngayCapCccd.trim().length
-        || !ngayHetHanCccd.trim().length || !hoChieu.trim().length || !noiCapHoChieu.trim().length
-        || !ngayCapHoChieu.trim().length || !ngayHetHanHoChieu.trim().length || !noiSinh.trim().length
-        || !queQuan.trim().length || !diaChiThuongTru.trim().length || !diaChiTamTru.trim().length
-        || !atmNganHang.trim().length || !soAtm.trim().length || !trangThaiLaoDong.trim().length
-        || !ngayBatDauLam.trim().length || !ngayNghiViec.trim().length || !lyDoNghi.trim().length || !image.trim().length) {
+      if (bug) {
         setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
       } else {
         setIsSubmit(true)
-
         const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail })
         if (updateRes?.status === 200) {
           toast.success('Cập nhật thông tin thành công')
@@ -129,6 +124,7 @@ export default function UpdateUser() {
       setIsSubmit(false)
     }
   }
+
   return (
     <div className="update-account-page">
       <div className="row">
@@ -461,7 +457,7 @@ export default function UpdateUser() {
         </div>
       </div>
       <div>
-        {submitError.status && <div >{submitError.error}</div>}
+        {submitError.status && <div style={{color: 'red'}}>{submitError.error}</div>}
       </div>
       <div>
         <button className="save-button" disabled={isSubmit} onClick={() => handleUpdate()}>

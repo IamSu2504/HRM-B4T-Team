@@ -1,11 +1,26 @@
-import React from 'react'
 import './style.css'
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginAPI from '../../api/login';
 import { ToastContainer, toast } from 'react-toastify';
+import UserAPI from "../../api/user";
+
 
 export default function Login() {
+  const [userDetail, setUserDetail] = useState()
+  const getUserDetail = async () => {
+    if (localStorage.getItem('maNv')) {
+      const userRes = await UserAPI.getUserById(localStorage.getItem('maNv'))
+      if (userRes?.status === 200) {
+        setUserDetail(userRes?.data)
+      }
+    }
+  }
+
+  useEffect(() => {
+    getUserDetail()
+  }, [])
+
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState({ status: false, error: '' })
@@ -24,9 +39,9 @@ export default function Login() {
         if (loginRes?.status === 200) {
           const loginData = loginRes?.data
           const roleName = loginData?.role?.tenRole
-
           localStorage.setItem('username',loginData?.username)
           localStorage.setItem('password',loginData?.password)
+          localStorage.setItem('name',userDetail?.tenNv)
           localStorage.setItem('role',loginData?.role?.tenRole)
           localStorage.setItem('maNv',loginData?.maNv)
           if (roleName === 'Employee') navigate('/employee/homepage')

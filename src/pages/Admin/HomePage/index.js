@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function AdminHomePage(props) {
   const navigate = useNavigate();
-  console.log(localStorage.getItem('username'))
   return (
    
     <div className="admin-homepage">
@@ -17,7 +16,7 @@ export default function AdminHomePage(props) {
       </div>
       <div className="content">
           <div className="name">
-            LE QUANG TUAN
+            {localStorage.getItem('name')}
           </div>
           <div className="position">
             <p>

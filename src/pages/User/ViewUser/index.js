@@ -3,6 +3,7 @@ import "./style.css";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import UserAPI from "../../../api/user";
+import { useParams } from "react-router-dom";
 
 export default function ViewUser() {
 
@@ -18,7 +19,7 @@ export default function ViewUser() {
     ngayBatDauLam: '', ngayNghiViec: '', lyDoNghi: '', image: ''
   })
   const navigate = useNavigate();
-  const maNv = localStorage.getItem('maNv')
+  const {maNv} = useParams();
   const getUserDetail = async () => {
     if (maNv) {
      
@@ -73,7 +74,16 @@ export default function ViewUser() {
         </div>
       </div>
       <div onClick={() => {
-        navigate(`/admin/updateuser/${maNv}`);
+        if (localStorage.getItem('role') === 'Admin'){
+          navigate(`/admin/updateuser/${maNv}`)
+        } 
+        else
+        if (localStorage.getItem('role') === 'Manager'){
+          navigate(`/manager/updateuser/${maNv}`)
+        }
+        else{
+          navigate(`/employee/updateuser/${maNv}`)
+        }
       }}>
         <button className="save-button">
           <span class="image">

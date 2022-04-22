@@ -12,7 +12,7 @@ export default function EmployeeHomepage(){
 
       <div className='bg-top'>
         <div className='name'>
-          LE QUANG TUAN
+          {localStorage.getItem('name')}
         </div>
         <div className='position'>
           Nhân viên

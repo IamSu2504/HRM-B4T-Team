@@ -43,7 +43,7 @@ const UserAPI = {
         queQuan, diaChiThuongTru, diaChiTamTru,
         atmNganHang, soAtm, trangThaiLaoDong,
         ngayBatDauLam, ngayNghiViec, lyDoNghi, image }) {
-        const url = `/user/tax`;
+        const url = `/user`;
         return AxiosClient.post(url, {
             tinhChatHopDongID, tinhTrangHonNhanID, chucVuID,
             quocTichID, tenNv, ngaySinh, gioiTinh,
@@ -58,7 +58,7 @@ const UserAPI = {
     },
 
     deleteUser(id) {
-        const url = `/user/tax/${id}`;
+        const url = `/user/${id}`;
         return AxiosClient.delete(url);
     },
 }

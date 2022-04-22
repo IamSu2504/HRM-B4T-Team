@@ -1,7 +1,10 @@
 import React from 'react'
 import './style.css'
+import { useNavigate } from "react-router-dom";
 
 export default function ManagerHomePage(){
+  console.log(localStorage.getItem('name'))
+  const navigate = useNavigate();
   return (
     <div className='manager-homepage'>
       <div className='left'>
@@ -9,14 +12,15 @@ export default function ManagerHomePage(){
         </div>
         <div className='content'>
           <div className='name'>
-            LE QUANG TUAN
+            {localStorage.getItem('name')}
+            
           </div> 
           <div className='position'>
             Quản lý
           </div>
           <div className='menu'>
             <ul>
-              <li>Nhân Sự</li>
+              <li onClick={() => navigate('/manager/viewallUser')}>Nhân Sự</li>
               <li>Thông Tin Hợp Đồng</li>
               <li>Chấm Công</li>
             </ul>
