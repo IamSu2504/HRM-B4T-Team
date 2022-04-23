@@ -4,19 +4,16 @@ import backend.entity.User;
 import backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Paths;
-import java.util.Base64;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -109,7 +106,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}/image")
-    public ResponseEntity<?> getProfileImage(@PathVariable String id) throws IOException {
+    public ResponseEntity<?> getProfileImage(@PathVariable String id){
         try {
             User user = service.getById(id);
             if (user == null) {
@@ -121,8 +118,8 @@ public class UserController {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ImageIO.write(bImage, "jpg", bos);
             byte[] data = bos.toByteArray();
-            byte[] base64encodedData = Base64.getEncoder().encode(data);
-            return new ResponseEntity<>(base64encodedData, HttpStatus.OK);
+
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(data);
         } catch (Exception e) {
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }

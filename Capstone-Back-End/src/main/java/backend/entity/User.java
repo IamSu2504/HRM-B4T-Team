@@ -131,28 +131,6 @@ public class User {
     private String lyDoNghi;
 
     @Column(name = "image")
-    @JsonIgnore
     private String image;
-
-    @Transient
-    private byte[] imageData;
-
-    public byte[] getImageData(){
-        try {
-            if(image==null || image==""){
-                return null;
-            }
-            String path = new File("./src/main/resources/avatar").getCanonicalPath()+"\\"+image;
-            File imageFile = new File(path);
-
-            BufferedImage bImage = ImageIO.read(imageFile);
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ImageIO.write(bImage, "jpg", bos);
-            byte[] data = bos.toByteArray();
-            return Base64.getEncoder().encode(data);
-        } catch (IOException e) {
-            return null;
-        }
-    }
 
 }

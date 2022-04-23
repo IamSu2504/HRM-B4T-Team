@@ -42,6 +42,7 @@ public class UserService {
         } else if (!oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu()) && newUser.getHoChieu() != null && userRepo.getByHoChieu(newUser.getHoChieu()) != null) {
             return "Số hộ chiếu đã tồn tại";
         }
+
         newUser.setImage(oldUser.getImage());
         userRepo.save(newUser);
         return null;
