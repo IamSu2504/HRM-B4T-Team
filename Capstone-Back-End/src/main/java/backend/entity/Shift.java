@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -33,7 +32,7 @@ public class Shift {
 
     @OneToOne
     @JoinColumn(name = "id_phong")
-    private ClassRoomCategory room;
+    private RoomCategory room;
 
     @Column(name = "ngay")
     @Temporal(TemporalType.DATE)

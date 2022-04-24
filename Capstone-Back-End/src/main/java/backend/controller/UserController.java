@@ -1,5 +1,6 @@
 package backend.controller;
 
+import backend.entity.CreateUpdateUserRequest;
 import backend.entity.User;
 import backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,9 +52,9 @@ public class UserController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> create(@RequestBody User user) {
+    public ResponseEntity<?> create(@RequestBody CreateUpdateUserRequest request) {
         try {
-            String mess = service.getCreateUserMessage(user);
+            String mess = service.getCreateUserMessage(request);
             if (mess == null) {
                 return new ResponseEntity<>("Tạo thành công", HttpStatus.OK);
             }
@@ -64,10 +65,10 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") String id, @RequestBody User user) {
+    public ResponseEntity<?> update(@PathVariable("id") String id, @RequestBody CreateUpdateUserRequest request) {
         try {
-            user.setId(id);
-            String mess = service.getUpdateUserMessage(user);
+            request.setId(id);
+            String mess = service.getUpdateUserMessage(request);
             if (mess == null) {
                 return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
             }
@@ -98,7 +99,7 @@ public class UserController {
             if (updateMess == null)
                 return new ResponseEntity<>(HttpStatus.OK);
             else
-                return new ResponseEntity<>(updateMess, HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (IOException ioe) {
             //if something went bad, we need to inform client about it
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);

@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "phanloai_phonghoc")
-public class ClassRoomCategory {
+public class RoomCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

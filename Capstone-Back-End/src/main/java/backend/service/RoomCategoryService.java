@@ -1,23 +1,23 @@
 package backend.service;
 
 
-import backend.entity.ClassRoomCategory;
-import backend.repository.ClassRoomCategoryRepository;
+import backend.entity.RoomCategory;
+import backend.repository.RoomCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ClassRoomCategoryService {
+public class RoomCategoryService {
     @Autowired
-    private ClassRoomCategoryRepository repo;
+    private RoomCategoryRepository repo;
 
-    public List<ClassRoomCategory> getAll(){
+    public List<RoomCategory> getAll(){
         return repo.findAll();
     }
 
-    public ClassRoomCategory getById(int id)
+    public RoomCategory getById(int id)
     {
         if(repo.findById(id).isPresent()){
             return repo.findById(id).get();
@@ -27,11 +27,11 @@ public class ClassRoomCategoryService {
         }
     }
 
-    public ClassRoomCategory save(ClassRoomCategory newCategory)
+    public RoomCategory save(RoomCategory newCategory)
     {
         // update
         if(newCategory.getId()!=null){
-            ClassRoomCategory oldCategory = repo.findById(newCategory.getId()).get();
+            RoomCategory oldCategory = repo.findById(newCategory.getId()).get();
             if(!newCategory.getMaPhongHoc().equalsIgnoreCase(oldCategory.getMaPhongHoc())){
                 if(repo.getByMaPhongHoc(newCategory.getMaPhongHoc())==null){
                     return repo.save(newCategory);

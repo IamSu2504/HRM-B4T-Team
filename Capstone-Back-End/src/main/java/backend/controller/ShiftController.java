@@ -1,5 +1,6 @@
 package backend.controller;
 
+import backend.entity.CreateUpdateShiftRequest;
 import backend.entity.Shift;
 import backend.service.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,9 @@ public class ShiftController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> create(@RequestBody Shift shift) {
+    public ResponseEntity<?> create(@RequestBody CreateUpdateShiftRequest request) {
         try {
-            String mess = service.getSaveShiftMessage(shift);
+            String mess = service.getSaveShiftMessage(request);
             return new ResponseEntity<>(mess,HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
