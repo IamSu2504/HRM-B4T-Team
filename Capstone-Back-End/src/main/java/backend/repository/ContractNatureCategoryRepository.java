@@ -1,6 +1,5 @@
 package backend.repository;
 
-import backend.entity.ClassRoomCategory;
 import backend.entity.ContractNatureCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

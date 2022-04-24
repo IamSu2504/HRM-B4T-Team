@@ -1,7 +1,7 @@
 package backend.controller;
 
-import backend.entity.ClassRoomCategory;
-import backend.service.ClassRoomCategoryService;
+import backend.entity.RoomCategory;
+import backend.service.RoomCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +15,12 @@ import java.util.List;
 public class ClassRoomCategoryController {
 
     @Autowired
-    private ClassRoomCategoryService service;
+    private RoomCategoryService service;
 
     @GetMapping(value = "")
     public ResponseEntity<?> getAll() {
         try {
-            List<ClassRoomCategory> listClassRoomCategory = service.getAll();
+            List<RoomCategory> listClassRoomCategory = service.getAll();
             if(listClassRoomCategory.isEmpty()){
                 return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
             }
@@ -34,7 +34,7 @@ public class ClassRoomCategoryController {
     public ResponseEntity<?> getById(@PathVariable("id") String pv) {
         try {
             int id = Integer.parseInt(pv);
-            ClassRoomCategory c = service.getById(id);
+            RoomCategory c = service.getById(id);
             if(c==null){
                 return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
             }
@@ -45,9 +45,9 @@ public class ClassRoomCategoryController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> create(@RequestBody ClassRoomCategory classRoomCategory) {
+    public ResponseEntity<?> create(@RequestBody RoomCategory classRoomCategory) {
         try {
-            ClassRoomCategory t = service.save(classRoomCategory);
+            RoomCategory t = service.save(classRoomCategory);
             if(t==null){
                 return new ResponseEntity<>("Mã phòng học đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
@@ -58,11 +58,11 @@ public class ClassRoomCategoryController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody ClassRoomCategory classRoomCategory) {
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody RoomCategory classRoomCategory) {
         try {
             int id = Integer.parseInt(pv);
             classRoomCategory.setId(id);
-            ClassRoomCategory t = service.save(classRoomCategory);
+            RoomCategory t = service.save(classRoomCategory);
             if(t==null){
                 return new ResponseEntity<>("Mã phòng học đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
