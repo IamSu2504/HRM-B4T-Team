@@ -1,6 +1,6 @@
 package backend.controller;
 
-import backend.service.SalaryEmployeeService;
+import backend.service.ContractEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,18 +8,20 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value = "/employee/salary")
-public class SalaryEmployeeController {
-    @Autowired
-    private SalaryEmployeeService service;
+@RequestMapping(value = "/employee/contract")
+public class ContractEmployeeController {
 
-    @PostMapping("/user/{id}")
-    public ResponseEntity<?> getContract(@PathVariable("id") String maHD) {
+    @Autowired
+    private ContractEmployeeService service;
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getContract(@PathVariable("id") String maNV) {
         try {
-            return new ResponseEntity<>(service.getSalary(maHD), HttpStatus.OK);
+            return new ResponseEntity<>(service.getContract(maNV), HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
 }

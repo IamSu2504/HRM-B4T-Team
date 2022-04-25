@@ -1,11 +1,13 @@
 package backend.service;
 
+import backend.entity.CreateUpdateSalaryRequest;
 import backend.entity.Salary;
-import backend.repository.SalaryRepository;
-import backend.repository.UserRepository;
+import backend.entity.SalaryCategory;
+import backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -15,6 +17,12 @@ public class SalaryService {
 
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private ContractEmployeeRepository contractEmployeeRepository;
+
+    @Autowired
+    private SalaryCategoryRepository salaryCategoryRepository;
 
     public List<Salary> getAll() {
         return salaryRepo.findAll();
@@ -28,7 +36,9 @@ public class SalaryService {
         }
     }
 
-    public Salary save(Salary newSalary) {
+    public Salary save(CreateUpdateSalaryRequest request) {
+        Salary newSalary = getNewSalary(request);
+
         // update
         if (newSalary.getId() != null) {
             Salary oldSalary = salaryRepo.findById(newSalary.getId()).get();
@@ -52,6 +62,27 @@ public class SalaryService {
             } else {
                 return null;
             }
+        }
+    }
+
+    public Salary getNewSalary(CreateUpdateSalaryRequest request){
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+            Salary s = new Salary();
+            s.setId(request.getId());
+            s.setMaHD(contractEmployeeRepository.findById(request.getMaHD()).get());
+            s.setIdBacLuong(salaryCategoryRepository.findById(request.getIdBacLuong()).get());
+            s.setLuongCoBan(request.getLuongCoBan());
+            s.setPhuCapKhac(request.getPhuCapKhac());
+            s.setTongLuong(request.getTongLuong());
+            s.setNgayHieuLuc(sdf.parse(request.getNgayHieuLuc()));
+            s.setNgayKetThuc(sdf.parse(request.getNgayKetThuc()));
+            if (request.getTrangThai() != null)
+                s.setTrangThai(request.getTrangThai());
+            return s;
+        } catch (Exception e){
+            return null;
         }
     }
 }

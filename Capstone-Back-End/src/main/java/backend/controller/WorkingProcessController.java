@@ -1,8 +1,8 @@
 package backend.controller;
 
-
-import backend.entity.Contract;
-import backend.service.ContractService;
+import backend.entity.CreateUpdateWorkingProcess;
+import backend.entity.WorkingProcess;
+import backend.service.WorkingProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,20 +12,20 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value = "/contract")
-public class ContractController {
+@RequestMapping(value = "/workingProcess")
+public class WorkingProcessController {
 
     @Autowired
-    private ContractService service;
+    private WorkingProcessService service;
 
     @GetMapping(value = "")
     public ResponseEntity<?> getAll() {
         try {
-            List<Contract> listContract = service.getAll();
-            if(listContract.isEmpty()){
-                return new ResponseEntity<>("Danh sách hợp đồng trống", HttpStatus.NOT_FOUND);
+            List<WorkingProcess> listWP = service.getAll();
+            if(listWP.isEmpty()){
+                return new ResponseEntity<>("Danh sách quá trình làm việc trống", HttpStatus.NOT_FOUND);
             }
-            return new ResponseEntity<>(listContract, HttpStatus.OK);
+            return new ResponseEntity<>(listWP, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -34,9 +34,10 @@ public class ContractController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") String pv) {
         try {
-            Contract c = service.getById(pv);
+            int id = Integer.parseInt(pv);
+            WorkingProcess c = service.getById(id);
             if(c==null){
-                return new ResponseEntity<>("Không tìm thấy hợp đồng", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Không tìm thấy quá trình làm việc này", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
@@ -45,11 +46,11 @@ public class ContractController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> create(@RequestBody Contract contract) {
+    public ResponseEntity<?> create(@RequestBody CreateUpdateWorkingProcess request) {
         try {
-            Contract t = service.save(contract);
+            WorkingProcess t = service.save(request);
             if(t==null){
-                return new ResponseEntity<>("Mã hợp đồng đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Quá trình công tác này đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
@@ -58,12 +59,15 @@ public class ContractController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody Contract contract) {
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody CreateUpdateWorkingProcess request) {
         try {
-            contract.setMaHD(pv);
-            Contract t = service.save(contract);
+            int id = Integer.parseInt(pv);
+            if (service.getById(id) == null) {
+                return new ResponseEntity<>("Quá trình công tác này không tồn tại", HttpStatus.NOT_FOUND);
+            }
+            WorkingProcess t = service.save(request);
             if(t==null){
-                return new ResponseEntity<>("Mã hợp đồng đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Quá trình công tác này đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
