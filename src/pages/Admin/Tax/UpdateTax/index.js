@@ -38,7 +38,7 @@ export default function UpdateTax() {
     
                 const updateRes = await TaxAPI.updateTax({id: taxId, ...taxDetail})
                 if ( updateRes?.status === 200 ){
-                    toast.success('Cập nhật thông tin thành công')
+                    toast.success(setIsSubmit.error)
                 }
             }
         }catch(error){

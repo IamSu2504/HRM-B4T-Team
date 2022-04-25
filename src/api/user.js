@@ -61,6 +61,11 @@ const UserAPI = {
         const url = `/user/${id}`;
         return AxiosClient.delete(url);
     },
+
+    getUserImage(userId) {
+        const url = `user/${userId}/image`;
+        return AxiosClient.get(url);
+    }
 }
 
 export default UserAPI;

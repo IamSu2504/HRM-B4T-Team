@@ -11,10 +11,6 @@ import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const userKey = ['tenNv', 'soDienThoai', 'soDienThoai2', 'email', 'soAtm', 'cccd', 
-'noiCapCccd', 'hoChieu', 'noiCapHoChieu', 'noiSinh', 'queQuan', 'diaChiThuongTru', 
-'diaChiTamTru', 'atmNganHang', 'lyDoNghi', 'ngaySinh', 'ngayHetHanCccd', 'ngayCapCccd', 'ngayCapHoChieu']
-
 export default function UpdateUser() {
   const [listPosition, setListPosition] = useState([])
   const [listContractNature, setListContractNature] = useState([])
@@ -33,6 +29,7 @@ export default function UpdateUser() {
   })
   const [submitError, setSubmitError] = useState({ status: false, error: '' })
   const [isSubmit, setIsSubmit] = useState(false)
+  const [userImage, setUserImage] = useState('')
   const { maNv } = useParams()
 
   const getAllPosition = async () => {
@@ -92,28 +89,51 @@ export default function UpdateUser() {
     getUserDetail()
   }, [])
 
-  const handleUpdate = async () => {
+  const getUserImage = async () => {
     try {
-      let bug = false
-      for(let key of userKey){
-        if ( userDetail[`${key}`] ){
-          if ( userDetail[`${key}`]?.length <= 0 ){
-            bug = true
-            break;
-          }
-        }else{
-          bug= true
-          break;
+      if (maNv) {
+        const userRes = await UserAPI.getUserImage(maNv)
+        if (userRes?.status === 200) {
+          if (userRes?.data?.length) setUserImage(userRes?.data)
         }
       }
+    } catch (error) {
+      console.log('get user image error >>>>> ', error)
+    }
+  }
+
+  useEffect(() => {
+    getUserImage()
+  }, [])
+
+  const handleUpdate = async () => {
+    try {
       setSubmitError({ status: false, error: '' })
-      if (bug) {
+      const { tinhChatHopDongID, tinhTrangHonNhanID, chucVuID,
+        quocTichID, tenNv, ngaySinh,
+        gioiTinh, soDienThoai, soDienThoai2,
+        email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
+        hoChieu, noiCapHoChieu, ngayCapHoChieu, ngayHetHanHoChieu,
+        noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
+        soAtm, trangThaiLaoDong, ngayBatDauLam, ngayNghiViec, lyDoNghi
+      } = userDetail
+      if (!tinhChatHopDongID.trim().length || !tinhTrangHonNhanID.trim().length || !chucVuID.trim().length
+        || !quocTichID.trim().length || !tenNv.trim().length || !ngaySinh.trim().length
+        || !gioiTinh.trim().length || !soDienThoai.trim().length || !soDienThoai2.trim().length
+        || !email.trim().length || !cccd.trim().length || !noiCapCccd.trim().length
+        || !ngayCapCccd.trim().length || !ngayHetHanCccd.trim().length || !hoChieu.trim().length
+        || !noiCapHoChieu.trim().length || !ngayCapHoChieu.trim().length || !ngayHetHanHoChieu.trim().length
+        || !noiSinh.trim().length || !queQuan.trim().length || !diaChiThuongTru.trim().length
+        || !diaChiTamTru.trim().length || !atmNganHang.trim().length || !soAtm.trim().length
+        || !trangThaiLaoDong.trim().length || !ngayBatDauLam.trim().length || !ngayNghiViec.trim().length || !lyDoNghi.trim().length
+      ) {
         setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
       } else {
         setIsSubmit(true)
+        console.log(userDetail)
         const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail })
         if (updateRes?.status === 200) {
-          toast.success('Cập nhật thông tin thành công')
+          toast.success(setIsSubmit.error)
         }
       }
     } catch (error) {
@@ -136,7 +156,10 @@ export default function UpdateUser() {
 
       <div className="row avatar-row">
         <div>
-          <img src="/home/user-avatar.svg" alt="avatar" />
+          {/* {userImage?.length ?
+            <img src={`data:image/png;base64, ${userImage}`} alt="avatar" width={220} height={180} /> : */}
+            <img src="/image-placeholder.png" alt="avatar" />
+          {/* } */}
         </div>
 
         <div>
@@ -162,20 +185,26 @@ export default function UpdateUser() {
 
       <div className="row fied-data-row">
         <div>
-          <CustomInputField
+          {/* <CustomInputField
             title="Ảnh 3*4"
             type="file"
             disabled={false}
             require={true}
             handleChange={(event) => {
-              setUserDetail({ ...userDetail, image: event.target.value })
+              let reader = new FileReader();
+              reader.readAsDataURL(event.target.files[0]);
+              reader.onload = function () {
+                setUserImage(reader.result.replace(/^data:[a-z]+\/[a-z\-]+;base64,/, ""))
+              };
+              reader.onerror = function (error) {
+                console.log('Error: ', error);
+              };
             }}
-          />
+          /> */}
           <CustomSelectBox
             title="Giới Tính :"
             option={[{ label: "Nam", value: true }, { label: "Nữ", value: false }]}
             require={true}
-            value={userDetail?.gioiTinh || ''}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, gioiTinh: event.currentTarget.value })
             }}
@@ -232,12 +261,13 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="Ngày cấp hộ chiếu"
-            value={userDetail?.ngayCapHoChieu || ''}
+
             type="date"
             disabled={false}
             require={true}
             handleChange={(event) => {
-              setUserDetail({ ...userDetail, ngayCapHoChieu: event.target.value })
+              const date = event.target.value.format('dd/mm/yyyy')
+              setUserDetail({ ...userDetail, ngayCapHoChieu: date })
             }}
           />
           <CustomInputField
@@ -268,14 +298,12 @@ export default function UpdateUser() {
               )
             })}
             require={true}
-            value={userDetail?.chucVuID || ''}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, chucVuID: event.currentTarget.value })
             }}
           />
           <CustomInputField
             title="Ngày Bắt Đầu Làm: "
-            value={userDetail?.ngayBatDauLam || ''}
             type="date"
             disabled={false}
             handleChange={(event) => {
@@ -301,7 +329,6 @@ export default function UpdateUser() {
               )
             })}
             require={true}
-            value={userDetail?.tinhChatHopDongID || ''}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, tinhChatHopDongID: event.currentTarget.value })
             }}
@@ -311,12 +338,13 @@ export default function UpdateUser() {
         <div>
           <CustomInputField
             title="Ngày sinh"
-            value={userDetail?.ngaySinh || ''}
+
             type="date"
             disabled={false}
             require={true}
             handleChange={(event) => {
-              setUserDetail({ ...userDetail, ngaySinh: event.target.value })
+              const date = event.target.value.format('dd/mm/yyyy')
+              setUserDetail({ ...userDetail, ngaySinh: date })
             }}
           />
           <CustomSelectBox
@@ -327,7 +355,6 @@ export default function UpdateUser() {
               )
             })}
             require={true}
-            value={userDetail?.quocTichID || ''}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, quocTichID: event.currentTarget.value })
             }}
@@ -344,7 +371,6 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="Ngày cấp căn cước"
-            value={userDetail?.ngayCapCccd || ''}
             type="date"
             disabled={false}
             require={true}
@@ -355,7 +381,6 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="Ngày hết hạn căn cước"
-            value={userDetail?.ngayHetHanCccd || ''}
             type="date"
             disabled={false}
             require={true}
@@ -375,7 +400,7 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="Ngày hết hạn hộ chiếu"
-            value={userDetail?.ngayHetHanHoChieu || ''}
+
             type="date"
             disabled={false}
             require={true}
@@ -417,14 +442,12 @@ export default function UpdateUser() {
             title="Trạng Thái Lao Động"
             option={[{ label: "Đang Hoạt Động", value: true }, { label: "Không Hoạt Động", value: false }]}
             require={true}
-            value={userDetail?.trangThaiLaoDong || ''}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, trangThaiLaoDong: event.currentTarget.value })
             }}
           />
           <CustomInputField
             title="Ngày nghỉ việc: "
-            value={userDetail?.ngayNghiViec || ''}
             type="date"
             disabled={false}
             handleChange={(event) => {
@@ -449,15 +472,15 @@ export default function UpdateUser() {
               )
             })}
             require={true}
-            value={userDetail?.tinhTrangHonNhanID || ''}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, tinhTrangHonNhanID: event.currentTarget.value })
             }}
+
           />
         </div>
       </div>
       <div>
-        {submitError.status && <div style={{color: 'red'}}>{submitError.error}</div>}
+        {submitError.status && <div style={{ color: 'red' }}>{submitError.error}</div>}
       </div>
       <div>
         <button className="save-button" disabled={isSubmit} onClick={() => handleUpdate()}>

@@ -102,11 +102,17 @@ import AAddAccount from "../pages/Admin/Account/AddNewAccount";
 
 import HomePagePrivateRoute from "./privateRouter/Homepage";
 import ManagerHomePage from "../pages/Manager/HomePage";
+
+//manager
+import MViewInsurance from "../pages/Manager/Insurance/ViewInsurance";
+import MAddInsurance from "../pages/Manager/Insurance/AddNewInsurance";
+import MUpdateInsurance from "../pages/Manager/Insurance/UpdateInsurance";
+
 import EmployeeHomepage from "../pages/Employee/HomePage";
-import RegisterShifts from "../pages/Employee/RegisterShifts";
-import ViewTimekeeping from "../pages/Employee/TimeKeeping";
-import EViewContract from "../pages/Employee/ViewContract";
-import TimeKeeping from "../pages/Employee/TimeKeeping";
+import RegisterShifts from "../pages/User/RegisterShifts";
+import ViewTimekeeping from "../pages/User/TimeKeeping";
+import EViewContract from "../pages/User/ViewContract";
+import TimeKeeping from "../pages/User/TimeKeeping";
 import AddUser from "../pages/User/AddNewUser";
 import RegisterShift from "../pages/User/RegisterShift";
 
@@ -217,6 +223,10 @@ export default function MainApp() {
         <Route exact path="/admin/registerShift" element={<LayoutPrivateRoute><RegisterShift /></LayoutPrivateRoute>} />
 
         <Route exact path="/admin/homepage" element={<HomePagePrivateRoute />} />
+        {/* manager */}
+        <Route exact path="/manager/viewallInsurance" element={<LayoutPrivateRoute><MViewInsurance /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/addInsurance" element={<LayoutPrivateRoute><MAddInsurance /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/updateInsurance/:managerInsuranceId" element={<LayoutPrivateRoute><MUpdateInsurance /></LayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewallUser" element={<LayoutPrivateRoute><ViewAllUser /></LayoutPrivateRoute>} />
         <Route exact path="/manager/viewuser/:maNv" element={<LayoutPrivateRoute><ViewUser /></LayoutPrivateRoute>} />
@@ -230,7 +240,7 @@ export default function MainApp() {
         <Route exact path="/employee/updateuser/:maNv"  element={<LayoutPrivateRoute><UpdateUser /></LayoutPrivateRoute>} />
         <Route exact path="/employee/registershifts"  element={<LayoutPrivateRoute><RegisterShifts /></LayoutPrivateRoute>} />
         <Route exact path="/employee/viewtimekeeping"  element={<LayoutPrivateRoute><ViewTimekeeping /></LayoutPrivateRoute>} />
-        <Route exact path="/employee/viewcontract"  element={<LayoutPrivateRoute><EViewContract /></LayoutPrivateRoute>} />
+        <Route exact path="/employee/viewcontract/:maNv"  element={<LayoutPrivateRoute><EViewContract /></LayoutPrivateRoute>} />
         <Route exact path="/employee/timeKeeping"  element={<LayoutPrivateRoute><TimeKeeping /></LayoutPrivateRoute>} />
       </Routes>
     </Router>

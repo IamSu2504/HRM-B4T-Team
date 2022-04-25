@@ -19,7 +19,7 @@ export default function EmployeeHomepage(){
         </div>
         <div className='menu'>
           <ul>
-            <li onClick={()=>navigate('/employee/viewcontract')}>Thông Tin Hợp Đồng</li>
+            <li onClick={()=>navigate(`/employee/viewcontract/${localStorage.getItem('maNv')}`)}>Thông Tin Hợp Đồng</li>
             <li>Chấm Công</li>
           </ul>
         </div>

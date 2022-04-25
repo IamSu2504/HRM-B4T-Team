@@ -120,7 +120,7 @@ export default function EmployeeLayout(props) {
                                         data-parent="#accordion"
                                     >
                                         <div className="card-body">
-                                            <div onClick={() => navigate('/employee/viewcontract')}>
+                                            <div onClick={() => navigate(`/employee/viewcontract/${localStorage.getItem('maNv')}`)}>
                                                 <img src="/menu/list-icon.svg" />
                                                 <span style={{ marginLeft: '15px' }}>Hợp đồng lao động</span>
                                             </div>

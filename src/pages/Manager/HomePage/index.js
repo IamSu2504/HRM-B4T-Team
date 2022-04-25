@@ -23,6 +23,7 @@ export default function ManagerHomePage(){
               <li onClick={() => navigate('/manager/viewallUser')}>Nhân Sự</li>
               <li>Thông Tin Hợp Đồng</li>
               <li>Chấm Công</li>
+              <li onClick={() => navigate('/manager/viewallInsurance')}>Bảo Hiểm</li>
             </ul>
           </div>
         </div>

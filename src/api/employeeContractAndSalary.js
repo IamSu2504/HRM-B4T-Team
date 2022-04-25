@@ -3,9 +3,9 @@ import AxiosClient from "./axiosClient"
 const employeeContractAndSalaryAPI = {
 
 
-    getContractAndSalary(id) {
-        const url = `/employee/salary/user/HD0001`;
-        return AxiosClient.post(url);
+    getContract(id) {
+        const url = `/contract/user/${id}`;
+        return AxiosClient.get(url);
     },
 
     // updateTax({id, maPhanLoai, tenLoaiThue}) {

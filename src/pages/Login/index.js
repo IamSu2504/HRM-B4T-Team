@@ -7,22 +7,10 @@ import UserAPI from "../../api/user";
 
 
 export default function Login() {
-  const [userDetail, setUserDetail] = useState()
-  const getUserDetail = async () => {
-    if (localStorage.getItem('maNv')) {
-      const userRes = await UserAPI.getUserById(localStorage.getItem('maNv'))
-      if (userRes?.status === 200) {
-        setUserDetail(userRes?.data)
-      }
-    }
-  }
-
-  useEffect(() => {
-    getUserDetail()
-  }, [])
 
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
+
   const [loginError, setLoginError] = useState({ status: false, error: '' })
   const [loginLoading, setLoginLoading] = useState(false)
   const navigate = useNavigate();
@@ -39,11 +27,20 @@ export default function Login() {
         if (loginRes?.status === 200) {
           const loginData = loginRes?.data
           const roleName = loginData?.role?.tenRole
-          localStorage.setItem('username',loginData?.username)
-          localStorage.setItem('password',loginData?.password)
-          localStorage.setItem('name',userDetail?.tenNv)
-          localStorage.setItem('role',loginData?.role?.tenRole)
-          localStorage.setItem('maNv',loginData?.maNv)
+
+          localStorage.setItem('username', loginData?.username)
+          localStorage.setItem('password', loginData?.password)
+          localStorage.setItem('maNv', loginData?.maNv)
+          console.log(localStorage.getItem('maNv'))
+
+          const userRes = await UserAPI.getUserById(localStorage.getItem('maNv'))
+          if (userRes?.status === 200) {
+            
+            localStorage.setItem('name', userRes?.data?.tenNv)
+          }
+
+          localStorage.setItem('role', loginData?.role?.tenRole)
+
           if (roleName === 'Employee') navigate('/employee/homepage')
           else if (roleName === 'Manager') navigate('/manager/homepage')
           else if (roleName === 'Admin') navigate('/admin/homepage')
@@ -60,6 +57,19 @@ export default function Login() {
     }
   }
 
+
+  // const getUserDetail = async () => {
+  //   if (localStorage.getItem('maNv')) {
+  //     const userRes = await UserAPI.getUserById(localStorage.getItem('maNv'))
+  //     if (userRes?.status === 200) {
+  //       setUserDetail(userRes?.data)
+  //     }
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getUserDetail()
+  // }, [])
   return (
     <div className='login-page'>
       <div className='login-frame'>
@@ -108,13 +118,13 @@ export default function Login() {
                 onClick={login}
                 disabled={loginLoading}
               >
-                {loginLoading ? <img src='/loading-animate.svg' className='login-loading'/> :
+                {loginLoading ? <img src='/loading-animate.svg' className='login-loading' /> :
                   'ĐĂNG NHẬP'
                 }
               </button>
             </div>
 
-            <div className='fogot-pw-txt' onClick={()=>navigate('/forgot')}>
+            <div className='fogot-pw-txt' onClick={() => navigate('/forgot')}>
               <a>Quên mật khẩu?</a>
             </div>
           </div>
