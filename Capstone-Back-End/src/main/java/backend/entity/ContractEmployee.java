@@ -1,18 +1,25 @@
 package backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
 @Entity
 @Table(name = "hopdong")
-public class Contract {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class ContractEmployee {
+
     @Id
     @Column(name = "ma_hop_dong")
-    private String maHD;
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "id_loai_hop_dong")
@@ -36,7 +43,6 @@ public class Contract {
 
     @Column(name = "ma_nv")
     private String maNV;
-
 
 
 }

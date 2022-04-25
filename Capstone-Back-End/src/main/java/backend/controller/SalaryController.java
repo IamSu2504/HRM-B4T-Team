@@ -1,5 +1,6 @@
 package backend.controller;
 
+import backend.entity.CreateUpdateSalaryRequest;
 import backend.entity.Salary;
 import backend.service.SalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +46,9 @@ public class SalaryController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> create(@RequestBody Salary salary) {
+    public ResponseEntity<?> create(@RequestBody CreateUpdateSalaryRequest request) {
         try {
-            Salary t = service.save(salary);
+            Salary t = service.save(request);
             if(t==null){
                 return new ResponseEntity<>("Lương cho mã hợp đồng này đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
@@ -58,11 +59,13 @@ public class SalaryController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody Salary salary) {
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody CreateUpdateSalaryRequest request) {
         try {
             int id = Integer.parseInt(pv);
-            salary.setId(id);
-            Salary t = service.save(salary);
+            if (service.getById(id) == null) {
+                return new ResponseEntity<>("Lương không tồn tại", HttpStatus.NOT_FOUND);
+            }
+            Salary t = service.save(request);
             if(t==null){
                 return new ResponseEntity<>("Lương cho mã hợp đồng này đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }

@@ -10,49 +10,34 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "luongnhanvien")
+@Table(name = "quatrinhcongtac")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class Salary {
+public class WorkingProcess {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "ma_hop_dong")
-    private ContractEmployee maHD;
+    @JoinColumn(name = "id_phong_ban")
+    private DepartmentCategory idPhongBan;
 
-    @ManyToOne
-    @JoinColumn(name = "id_bac_luong")
-    private SalaryCategory idBacLuong;
-
-    @Column(name = "luong_co_ban")
-    private Double luongCoBan;
-
-    @Column(name = "phu_cap_khac")
-    private Double phuCapKhac;
-
-    @Column(name = "tong_luong")
-    private Double tongLuong;
-
-    @Column(name = "ngay_hieu_luc")
+    @Column(name = "ngay_vao")
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern="dd/MM/yyyy")
-    private Date ngayHieuLuc;
+    private Date ngayVao;
 
-    @Column(name = "ngay_ket_thuc")
+    @Column(name = "ngay_ra")
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern="dd/MM/yyyy")
-    private Date ngayKetThuc;
-
-    @Column(name = "ghi_chu")
-    private String ghiChu;
+    private Date ngayRa;
 
     @Column(name = "trang_thai")
     private boolean trangThai;
 
+    @Column(name = "ma_nv")
+    private String maNV;
 }
