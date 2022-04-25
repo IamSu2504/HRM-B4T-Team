@@ -22,12 +22,12 @@ public class RewardDisciplineCategoryService {
 
     public List<RewardDisciplineCategory> getAllReward()
     {
-        return repo.getAllReward();
+        return repo.getAllRewardCategory();
     }
 
     public List<RewardDisciplineCategory> getAllDiscipline()
     {
-        return repo.getAllDiscipline();
+        return repo.getAllDisciplineCategory();
     }
 
     public RewardDisciplineCategory getById(int id)

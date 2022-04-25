@@ -20,6 +20,7 @@ public class RewardDiscipline {
     @Column(name = "ly_do")
     private String lyDo;
 
-    @Column(name = "ma_nv")
-    private String maNv;
+    @ManyToOne
+    @JoinColumn(name = "ma_nv")
+    private User user;
 }

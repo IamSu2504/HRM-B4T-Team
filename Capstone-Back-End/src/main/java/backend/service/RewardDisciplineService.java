@@ -1,6 +1,9 @@
 package backend.service;
 
+import backend.entity.CreateUpdateRewardDisciplineRequest;
 import backend.entity.RewardDiscipline;
+import backend.entity.RewardDisciplineCategory;
+import backend.repository.RewardDisciplineCategoryRepository;
 import backend.repository.RewardDisciplineRepository;
 import backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,27 +20,43 @@ public class RewardDisciplineService {
     @Autowired
     private UserRepository userRepo;
 
-    public List<RewardDiscipline> getAll() {
-        return rewardDisciplineRepo.getAll();
+    @Autowired
+    private RewardDisciplineCategoryRepository rewardDisciplineCategoryRepo;
+
+    public List<RewardDiscipline> getAllReward() {
+        return rewardDisciplineRepo.getAllReward();
     }
 
-    public RewardDiscipline getById(int id) {
-        return rewardDisciplineRepo.getById(id);
+    public List<RewardDiscipline> getAllDiscipline() {
+        return rewardDisciplineRepo.getAllDiscipline();
     }
 
-    public String getSaveMessage(RewardDiscipline rewardDiscipline) {
+    public RewardDiscipline getRewardById(int id) {
+        return rewardDisciplineRepo.getRewardByID(id);
+    }
 
-        if (!userRepo.findById(rewardDiscipline.getMaNv()).isPresent()) {
+    public RewardDiscipline getDisciplineById(int id) {
+        return rewardDisciplineRepo.getDisciplineByID(id);
+    }
+
+    public String getSaveMessage(CreateUpdateRewardDisciplineRequest request) {
+
+        if (!userRepo.findById(request.getMaNv()).isPresent()) {
             return "Mã nhân viên không tồn tại";
         }
 
-        if (rewardDisciplineRepo.getDublicate(rewardDiscipline.getMaNv(), rewardDiscipline.getPhanLoai().getId()) != null) {
+        if (rewardDisciplineRepo.getDublicate(request.getMaNv(), request.getPhanLoaiID()) != null) {
             return "Thông tin khen thưởng/kỉ luật đã tồn tại";
         }
 
-        rewardDisciplineRepo.save(rewardDiscipline);
-        return null;
+        RewardDiscipline rd = new RewardDiscipline();
+        rd.setId(request.getId());
+        rd.setLyDo(request.getLyDo());
+        rd.setPhanLoai(rewardDisciplineCategoryRepo.findById(request.getPhanLoaiID()).get());
+        rd.setUser(userRepo.findById(request.getMaNv()).get());
 
+        rewardDisciplineRepo.save(rd);
+        return null;
     }
 
 }

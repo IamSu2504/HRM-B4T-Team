@@ -1,6 +1,6 @@
 package backend.controller;
 
-import backend.service.ViewDayOffEmployeeService;
+import backend.service.DayOffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class ViewDayOffEmployeeController {
 
     @Autowired
-    private ViewDayOffEmployeeService service;
+    private DayOffService service;
 
     @GetMapping(value = "/user/{id}")
     public ResponseEntity<?> getByMaNV(@PathVariable("id") String maNV) {

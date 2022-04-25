@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ViewDayOffEmployee {
+public class DayOff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

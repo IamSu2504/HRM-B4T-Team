@@ -1,6 +1,5 @@
 package backend.repository;
 
-import backend.entity.RewardDiscipline;
 import backend.entity.RewardDisciplineCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,10 +14,9 @@ public interface RewardDisciplineCategoryRepository extends JpaRepository<Reward
     RewardDisciplineCategory getByDanhMuc(String danhMuc);
 
     @Query(value = "SELECT * from phanloai_khenthuongkiluat where loai_danh_muc = 1 order by id desc", nativeQuery = true)
-    List<RewardDisciplineCategory> getAllReward();
+    List<RewardDisciplineCategory> getAllRewardCategory();
 
     @Query(value = "SELECT * from phanloai_khenthuongkiluat where loai_danh_muc = 0 order by id desc", nativeQuery = true)
-    List<RewardDisciplineCategory> getAllDiscipline();
-
+    List<RewardDisciplineCategory> getAllDisciplineCategory();
 
 }
