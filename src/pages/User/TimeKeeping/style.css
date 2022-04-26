@@ -1,0 +1,62 @@
+.view-timekeeping-page {
+    background: #EFECEC;
+    padding: 20px;
+    margin-top: 10px;
+    border: 1px solid black;
+    background: #FFFFFF;
+}
+
+.view-timekeeping-page .title {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 35px;
+    color: #000000;
+    margin-bottom: 30px;
+}
+
+.view-timekeeping-page .title-sub {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 21px;
+    color: #000000;
+    margin-top: 9px;
+    margin-bottom: 15px;
+}
+
+.view-timekeeping-page .fied-data-row {
+    justify-content: space-between;
+}
+
+.view-timekeeping-page .fied-data-row>div {
+    width: 48%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.view-timekeeping-page table{
+    margin: auto;
+}
+.view-timekeeping-page th, .view-timekeeping-page td{
+    border: 1px solid rgb(170, 170, 170);
+    text-align: center;
+    padding: 10px 20px 10px 20px;
+}
+
+.description{
+    margin-left: 0;
+}
+
+.description>tr>td{
+    text-align: right;
+}
+
+.description>tr>th{
+    text-align: left;
+}
+
+@media screen and (max-width: 768px) {
+    .view-timekeeping-page .fied-data-row>div {
+        width: 100%;
+    }
+}

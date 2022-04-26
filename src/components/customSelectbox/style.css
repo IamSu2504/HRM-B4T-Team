@@ -1,0 +1,32 @@
+.custom-select-frame {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+
+.custom-select-frame label {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 21px;
+  
+  color: #000000;
+}
+
+.custom-select-frame select {
+  background: #FFFFFF;
+  border: 0.5px solid #000000;
+  box-sizing: border-box;
+  border-radius: 8px;
+  height: 40px;
+  padding-left: 16px;
+  padding-right: 5px;
+}
+
+.custom-select-frame .input-title span {
+  color: red;
+}
+
+.custom-select-frame .input-title p {
+  margin-bottom: 0 !important;
+}
