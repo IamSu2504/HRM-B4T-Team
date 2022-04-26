@@ -108,6 +108,13 @@ import MViewInsurance from "../pages/Manager/Insurance/ViewInsurance";
 import MAddInsurance from "../pages/Manager/Insurance/AddNewInsurance";
 import MUpdateInsurance from "../pages/Manager/Insurance/UpdateInsurance";
 
+import MViewReward from "../pages/Manager/RewardDiscipline/ViewReward";
+import MViewDiscipline from "../pages/Manager/RewardDiscipline/ViewDiscipline";
+import MAddReward from "../pages/Manager/RewardDiscipline/AddNewReward";
+import MAddDiscipline from "../pages/Manager/RewardDiscipline/AddNewDiscipline";
+import MUpdateReward from "../pages/Manager/RewardDiscipline/UpdateReward";
+import MUpdateDiscipline from "../pages/Manager/RewardDiscipline/UpdateDiscipline";
+
 import EmployeeHomepage from "../pages/Employee/HomePage";
 import RegisterShifts from "../pages/User/RegisterShifts";
 import ViewTimekeeping from "../pages/User/TimeKeeping";
@@ -232,6 +239,14 @@ export default function MainApp() {
         <Route exact path="/manager/viewuser/:maNv" element={<LayoutPrivateRoute><ViewUser /></LayoutPrivateRoute>} />
         <Route exact path="/manager/updateuser/:maNv" element={<LayoutPrivateRoute><UpdateUser /></LayoutPrivateRoute>} />
         <Route exact path="/manager/adduser"  element={<LayoutPrivateRoute><AddUser /></LayoutPrivateRoute>} />
+
+        <Route exact path="/manager/viewallreward" element={<LayoutPrivateRoute><MViewReward /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/viewalldiscipline" element={<LayoutPrivateRoute><MViewDiscipline /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/addreward" element={<LayoutPrivateRoute><MAddReward /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/adddiscipline"  element={<LayoutPrivateRoute><MAddDiscipline /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/updatereward/:rewardDisciplineId" element={<LayoutPrivateRoute><MUpdateReward /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/updatediscipline/:rewardDisciplineId"  element={<LayoutPrivateRoute><MUpdateDiscipline /></LayoutPrivateRoute>} />
+
         <Route exact path="/manager/homepage" element={<ManagerHomePage />} />  
 
         {/* employee */}

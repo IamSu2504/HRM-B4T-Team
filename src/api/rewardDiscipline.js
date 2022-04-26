@@ -5,6 +5,14 @@ const RewardDisciplineAPI = {
         const url = `/category/rewardDiscipline`;
         return AxiosClient.get(url);
     },
+    getAllReward() {
+        const url = `/category/reward`;
+        return AxiosClient.get(url);
+    },
+    getAllDiscipline() {
+        const url = `/category/discipline`;
+        return AxiosClient.get(url);
+    },
 
     getRewardDisciplineById(id) {
         const url = `/category/rewardDiscipline/${id}`;

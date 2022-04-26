@@ -231,6 +231,43 @@ export default function ManagerLayout(props) {
                     <a
                       className="card-link"
                       data-toggle="collapse"
+                      href="#collapseTwo"
+                    >
+                      <div className="card-head-content">
+                        <div className="left">
+                          <div className="content1">
+                            <img src="/menu/employer.svg" />
+                          </div>
+                          <div className="content2">Khen Thưởng Kỉ Luật</div>
+                        </div>
+                        <div className="content3">
+                          <img src="/menu/down-arrow.svg" />
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div
+                    id="collapseTwo"
+                    className="collapse show"
+                    data-parent="#accordion"
+                  >
+                    <div className="card-body">
+                      <div onClick={() => navigate('/manager/viewallreward')}>
+                        <img src="/menu/list-icon.svg" />
+                        <span style={{ marginLeft: '15px' }}>Khen Thưởng</span>
+                      </div>
+                      <div onClick={() => navigate('/manager/viewalldiscipline')}>
+                        <img src="/menu/list-icon.svg" />
+                        <span style={{ marginLeft: '15px' }}>Kỉ Luật</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="card">
+                  <div className="card-header">
+                    <a
+                      className="card-link"
+                      data-toggle="collapse"
                     // href="#collapseOne"
                     >
                       <div className="card-head-content">

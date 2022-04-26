@@ -133,7 +133,7 @@ export default function UpdateUser() {
         console.log(userDetail)
         const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail })
         if (updateRes?.status === 200) {
-          toast.success(setIsSubmit.error)
+          toast.success('Cập nhật thông tin thành công')
         }
       }
     } catch (error) {
