@@ -25,6 +25,10 @@ public class WorkingProcess {
     @JoinColumn(name = "id_phong_ban")
     private DepartmentCategory idPhongBan;
 
+    @ManyToOne
+    @JoinColumn(name = "id_chuc_vu")
+    private PositionCategory idChucVu;
+
     @Column(name = "ngay_vao")
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern="dd/MM/yyyy")

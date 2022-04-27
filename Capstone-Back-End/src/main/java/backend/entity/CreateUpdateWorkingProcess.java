@@ -14,7 +14,9 @@ public class CreateUpdateWorkingProcess {
 
     private Integer id;
 
-    private int idPhongBan;
+    private Integer idPhongBan;
+
+    private Integer idChucVu;
 
     private String ngayVao;
 
