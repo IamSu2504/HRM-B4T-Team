@@ -24,7 +24,7 @@ public class Shift {
 
     @ManyToOne
     @JoinColumn(name = "ma_nv")
-    private User user;
+    private Employee user;
 
     @ManyToOne
     @JoinColumn(name = "id_calam")

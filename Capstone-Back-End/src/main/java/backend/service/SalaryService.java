@@ -15,7 +15,7 @@ public class SalaryService {
     private SalaryRepository salaryRepo;
 
     @Autowired
-    private UserRepository userRepo;
+    private EmployeeRepository userRepo;
 
     @Autowired
     private ContractEmployeeRepository contractEmployeeRepository;

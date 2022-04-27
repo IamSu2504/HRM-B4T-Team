@@ -1,8 +1,8 @@
 package backend.controller;
 
 import backend.entity.CreateUpdateUserRequest;
-import backend.entity.User;
-import backend.service.UserService;
+import backend.entity.Employee;
+import backend.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,12 +23,12 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService service;
+    private EmployeeService service;
 
     @GetMapping(value = "")
     public ResponseEntity<?> getAll() {
         try {
-            List<User> list = service.getAll();
+            List<Employee> list = service.getAll();
             if (list.isEmpty()) {
                 return new ResponseEntity<>("Chưa có người dùng được tạo", HttpStatus.NOT_FOUND);
             }
@@ -41,7 +41,7 @@ public class UserController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") String id) {
         try {
-            User u = service.getById(id);
+            Employee u = service.getById(id);
             if (u == null) {
                 return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.NOT_FOUND);
             }
@@ -81,7 +81,7 @@ public class UserController {
     @PutMapping(value = "/{id}/image")
     public ResponseEntity changeProfileImage(@RequestParam("file") MultipartFile file, @PathVariable String id) {
         try {
-            User user = service.getById(id);
+            Employee user = service.getById(id);
             if (user == null) {
                 return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
@@ -109,7 +109,7 @@ public class UserController {
     @GetMapping("/{id}/image")
     public ResponseEntity<?> getProfileImage(@PathVariable String id){
         try {
-            User user = service.getById(id);
+            Employee user = service.getById(id);
             if (user == null) {
                 return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.EXPECTATION_FAILED);
             }

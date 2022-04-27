@@ -1,19 +1,12 @@
 package backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.imageio.ImageIO;
 import javax.persistence.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.util.Base64;
 import java.util.Date;
 
 @Entity
@@ -22,7 +15,7 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Employee {
 
     @Id
     @Column(name = "ma_nv")
@@ -35,10 +28,6 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "id_tinh_trang_hon_nhan")
     private MarriageCategory tinhTrangHonNhan;
-
-    @ManyToOne
-    @JoinColumn(name = "id_chuc_vu")
-    private PositionCategory chucVu;
 
     @ManyToOne
     @JoinColumn(name = "ma_quoc_tich")

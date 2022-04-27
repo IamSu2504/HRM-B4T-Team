@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class ShiftService {
@@ -20,7 +19,7 @@ public class ShiftService {
     private ShiftRepository shiftRepo;
 
     @Autowired
-    private UserRepository userRepo;
+    private EmployeeRepository userRepo;
 
     @Autowired
     private ShiftCategoryRepository shiftCategoryRepo;

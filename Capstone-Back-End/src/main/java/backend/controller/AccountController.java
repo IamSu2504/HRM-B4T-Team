@@ -3,9 +3,9 @@ package backend.controller;
 import backend.entity.Account;
 import backend.entity.CreateUpdateAccountRequest;
 import backend.entity.LoginRequest;
-import backend.entity.User;
+import backend.entity.Employee;
 import backend.service.AccountService;
-import backend.service.UserService;
+import backend.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +27,7 @@ public class AccountController {
     private AccountService accountService;
 
     @Autowired
-    private UserService userService;
+    private EmployeeService userService;
 
     @PostMapping(value = "/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
@@ -121,7 +121,7 @@ public class AccountController {
     @PostMapping(value = "/forgot")
     public ResponseEntity<?> forgotPassword(@RequestBody String[] toEmail) {
         try {
-            User u = userService.getByEmail(toEmail[0]);
+            Employee u = userService.getByEmail(toEmail[0]);
             if (u == null) {
                 return new ResponseEntity<>("Email này chưa được đăng kí", HttpStatus.NOT_FOUND);
             }

@@ -20,7 +20,7 @@ public class LeaveRequest {
 
     @ManyToOne
     @JoinColumn(name = "ma_nv")
-    private User user;
+    private Employee user;
 
     @ManyToOne
     @JoinColumn(name = "id_loai_nghi")
