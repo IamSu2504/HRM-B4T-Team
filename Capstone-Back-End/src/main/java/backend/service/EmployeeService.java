@@ -1,7 +1,7 @@
 package backend.service;
 
 import backend.entity.CreateUpdateUserRequest;
-import backend.entity.User;
+import backend.entity.Employee;
 import backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,10 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
-public class UserService {
+public class EmployeeService {
 
     @Autowired
-    private UserRepository userRepo;
+    private EmployeeRepository userRepo;
 
     @Autowired
     private MarriageCategoryRepository marriageRepo;
@@ -22,27 +22,24 @@ public class UserService {
     private ContractNatureCategoryRepository contractRepo;
 
     @Autowired
-    private PositionCategoryRepository positionRepo;
-
-    @Autowired
     private NationCategoryRepository nationRepo;
 
-    public List<User> getAll() {
+    public List<Employee> getAll() {
         return userRepo.findAll();
     }
 
-    public User getById(String id) {
+    public Employee getById(String id) {
         if (userRepo.findById(id.toUpperCase()).isPresent())
             return userRepo.findById(id.toUpperCase()).get();
         else
             return null;
     }
 
-    public String getUpdateUserMessage(User newUser) {
+    public String getUpdateUserMessage(Employee newUser) {
         if (!userRepo.findById(newUser.getId().toUpperCase()).isPresent()) {
             return "Người dùng không tồn tại";
         }
-        User oldUser = userRepo.findById(newUser.getId().toUpperCase()).get();
+        Employee oldUser = userRepo.findById(newUser.getId().toUpperCase()).get();
 
         if (!oldUser.getId().equalsIgnoreCase(newUser.getId()) && userRepo.findById(newUser.getId()).isPresent()) {
             return "Mã nhân viên đã tồn tại";
@@ -68,8 +65,8 @@ public class UserService {
         if (!userRepo.findById(request.getId().toUpperCase()).isPresent()) {
             return "Người dùng không tồn tại";
         }
-        User oldUser = userRepo.findById(request.getId().toUpperCase()).get();
-        User newUser = getNewUser(request);
+        Employee oldUser = userRepo.findById(request.getId().toUpperCase()).get();
+        Employee newUser = getNewUser(request);
 
         if (newUser == null)
             return "Sai định dạng ngày tháng (dd/MM/yyyy). Vui lòng nhập lại";
@@ -94,7 +91,7 @@ public class UserService {
 
     public String getCreateUserMessage(CreateUpdateUserRequest request) {
 
-        User newUser = getNewUser(request);
+        Employee newUser = getNewUser(request);
         newUser.setId( newUser.getId().toUpperCase());
 
         if (userRepo.findById(newUser.getId()).isPresent()) {
@@ -116,16 +113,14 @@ public class UserService {
         return null;
     }
 
-    public User getNewUser(CreateUpdateUserRequest request) {
+    public Employee getNewUser(CreateUpdateUserRequest request) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            User newUser = new User();
+            Employee newUser = new Employee();
             String upperCaseID = request.getId().toUpperCase();
 
             if (request.getQuocTichID() != 0)
                 newUser.setQuocTich(nationRepo.findById(request.getQuocTichID()).get());
-            if (request.getChucVuID() != 0)
-                newUser.setChucVu(positionRepo.findById(request.getChucVuID()).get());
             if (request.getTinhChatHopDongID() != 0)
                 newUser.setTinhChatHopDong(contractRepo.findById(request.getTinhChatHopDongID()).get());
             if (request.getTinhTrangHonNhanID() != 0)
@@ -172,7 +167,7 @@ public class UserService {
         }
     }
 
-    public User getByEmail(String mail) {
+    public Employee getByEmail(String mail) {
         return userRepo.getByEmail(mail);
     }
 

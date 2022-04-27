@@ -16,7 +16,7 @@ public class AccountService {
     private AccountRepository accountRepo;
 
     @Autowired
-    private UserRepository userRepo;
+    private EmployeeRepository userRepo;
 
     @Autowired
     private RoleRepository roleRepo;

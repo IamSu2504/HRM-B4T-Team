@@ -22,5 +22,5 @@ public class RewardDiscipline {
 
     @ManyToOne
     @JoinColumn(name = "ma_nv")
-    private User user;
+    private Employee user;
 }
