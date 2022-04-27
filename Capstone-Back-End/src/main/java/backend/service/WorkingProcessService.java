@@ -70,12 +70,12 @@ public class WorkingProcessService {
             WorkingProcess s = new WorkingProcess();
             s.setId(request.getId());
             s.setIdPhongBan(departmentCategoryRepository.findById(request.getIdPhongBan()).get());
+            if(request.getNgayVao()!=null)
             s.setNgayVao(sdf.parse(request.getNgayVao()));
+            if(request.getNgayRa()!=null)
             s.setNgayRa(sdf.parse(request.getNgayRa()));
             s.setMaNV(request.getMaNV());
-
-            if (request.getTrangThai() != null)
-                s.setTrangThai(request.getTrangThai());
+            s.setTrangThai(request.getTrangThai());
 
             return s;
         } catch (Exception e) {
