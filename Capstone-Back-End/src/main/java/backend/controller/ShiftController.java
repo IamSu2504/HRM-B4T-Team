@@ -35,6 +35,9 @@ public class ShiftController {
     public ResponseEntity<?> create(@RequestBody CreateUpdateShiftRequest request) {
         try {
             String mess = service.getSaveShiftMessage(request);
+            if(mess==null){
+                return new ResponseEntity<>("Đăng kí ca làm thành công", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
             if (mess.contains("thành công")) {
                 return new ResponseEntity<>(mess, HttpStatus.OK);
             }

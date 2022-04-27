@@ -19,7 +19,7 @@ public class ShiftService {
     private ShiftRepository shiftRepo;
 
     @Autowired
-    private EmployeeRepository userRepo;
+    private EmployeeRepository empRepo;
 
     @Autowired
     private ShiftCategoryRepository shiftCategoryRepo;
@@ -42,6 +42,7 @@ public class ShiftService {
         try {
             String mess = null;
             Shift newShift = getNewShift(request);
+            String chucVu = empRepo.getChucVu(newShift.getUser().getId());
 
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
@@ -49,7 +50,7 @@ public class ShiftService {
             String shiftName = newShift.getShiftCategory().getTenCa();
 
             //------------ check if user is a teacher -------------------
-            if (newShift.getUser().getChucVu().getTenChucVu().equalsIgnoreCase("giáo viên")) {
+            if (chucVu.equalsIgnoreCase("giáo viên")) {
 
                 // check invalid shift
                 List<Integer> listInvalidTeacherShifts = shiftRepo.getSpecialShifts();
@@ -123,7 +124,7 @@ public class ShiftService {
                 // check not teacher
             } else {
 
-                if (newShift.getUser().getChucVu().getTenChucVu().toLowerCase().contains("giám đốc") || newShift.getUser().getChucVu().getTenChucVu().toLowerCase().contains("phó giám đốc")) {
+                if (chucVu.toLowerCase().contains("giám đốc") || chucVu.toLowerCase().contains("phó giám đốc")) {
                     return "Chức vụ giám đốc hoặc phó giám đốc không phải đăng kí ca làm";
                 }
 
@@ -134,7 +135,7 @@ public class ShiftService {
                     }
                 }
 
-                if (newShift.getUser().getChucVu().getTenChucVu().toLowerCase().contains("nhân viên")) {
+                if (chucVu.toLowerCase().contains("nhân viên")) {
                     Integer dayTotal = shiftRepo.getDayTotal(sdf1.format(newShift.getDate()), newShift.getUser().getId());
 
                     //----------- validate day total --------------------
@@ -222,7 +223,7 @@ public class ShiftService {
 
             Shift s = new Shift();
             s.setId(request.getId());
-            s.setUser(userRepo.findById(request.getUserID()).get());
+            s.setUser(empRepo.findById(request.getUserID()).get());
             s.setDate(sdf.parse(request.getDate()));
             s.setShiftCategory(shiftCategoryRepo.findById(request.getShiftCategoryID()).get());
             s.setNote(request.getNote());

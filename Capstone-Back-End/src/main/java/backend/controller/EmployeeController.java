@@ -20,7 +20,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value = "/user")
-public class UserController {
+public class EmployeeController {
 
     @Autowired
     private EmployeeService service;

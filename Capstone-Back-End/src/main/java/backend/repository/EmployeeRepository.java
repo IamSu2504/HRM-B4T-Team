@@ -31,5 +31,12 @@ public interface EmployeeRepository extends JpaRepository<Employee,String> {
     @Query(value = "select * from nhanvien where tai_khoan_nv = ?", nativeQuery = true)
     Employee getByUsername(String username);
 
+    @Query(value = "select cv.ten_chuc_vu from nhanvien n, quatrinhcongtac ct, phanloai_chucvu cv\n" +
+            "where n.ma_nv = ct.ma_nv and ct.id_chuc_vu = cv.id\n" +
+            "and ct.trang_thai = true and n.ma_nv = ?", nativeQuery = true)
+    String getChucVu(String maNv);
+
+    
+
 
 }

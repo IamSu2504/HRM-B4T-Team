@@ -18,6 +18,9 @@ public class SalaryService {
     private EmployeeRepository userRepo;
 
     @Autowired
+    private PositionCategoryRepository positionRepo;
+
+    @Autowired
     private ContractEmployeeRepository contractEmployeeRepository;
 
     @Autowired
@@ -37,6 +40,7 @@ public class SalaryService {
 
     public Salary save(CreateUpdateSalaryRequest request) {
         Salary newSalary = getNewSalary(request);
+        double phuCapChucVu = positionRepo.getByMaNv(newSalary.getMaHD().getMaNV()).getPhuCap();
 
         // update
         if (newSalary.getId() != null) {
@@ -48,14 +52,14 @@ public class SalaryService {
                     return null;
                 }
             }
-            double tongLuong = newSalary.getLuongCoBan() + newSalary.getPhuCapKhac() + userRepo.findById(newSalary.getMaHD().getMaNV()).get().getChucVu().getPhuCap();
+            double tongLuong = newSalary.getLuongCoBan() + newSalary.getPhuCapKhac() + phuCapChucVu;
             newSalary.setTongLuong(tongLuong);
             return salaryRepo.save(newSalary);
         }
         // add
         else {
             if (salaryRepo.getByMaHD(newSalary.getMaHD().getId()) == null) {
-                double tongLuong = newSalary.getLuongCoBan() + newSalary.getPhuCapKhac() + userRepo.findById(newSalary.getMaHD().getMaNV()).get().getChucVu().getPhuCap();
+                double tongLuong = newSalary.getLuongCoBan() + newSalary.getPhuCapKhac() + phuCapChucVu;
                 newSalary.setTongLuong(tongLuong);
                 return salaryRepo.save(newSalary);
             } else {
