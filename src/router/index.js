@@ -115,13 +115,19 @@ import MAddDiscipline from "../pages/Manager/RewardDiscipline/AddNewDiscipline";
 import MUpdateReward from "../pages/Manager/RewardDiscipline/UpdateReward";
 import MUpdateDiscipline from "../pages/Manager/RewardDiscipline/UpdateDiscipline";
 
+import MViewLeaveRequest from "../pages/Manager/LeaveRequest"
+
+//Employee
 import EmployeeHomepage from "../pages/Employee/HomePage";
+import ELeaveRequest from "../pages/Employee/LeaveRequest";
+
 import RegisterShifts from "../pages/User/RegisterShifts";
 import ViewTimekeeping from "../pages/User/TimeKeeping";
 import EViewContract from "../pages/User/ViewContract";
 import TimeKeeping from "../pages/User/TimeKeeping";
 import AddUser from "../pages/User/AddNewUser";
 import RegisterShift from "../pages/User/RegisterShift";
+
 
 export default function MainApp() {
   return (
@@ -247,6 +253,8 @@ export default function MainApp() {
         <Route exact path="/manager/updatereward/:rewardDisciplineId" element={<LayoutPrivateRoute><MUpdateReward /></LayoutPrivateRoute>} />
         <Route exact path="/manager/updatediscipline/:rewardDisciplineId"  element={<LayoutPrivateRoute><MUpdateDiscipline /></LayoutPrivateRoute>} />
 
+        <Route exact path="/manager/viewleaveRequest"  element={<LayoutPrivateRoute><MViewLeaveRequest /></LayoutPrivateRoute>} />
+
         <Route exact path="/manager/homepage" element={<ManagerHomePage />} />  
 
         {/* employee */}
@@ -257,6 +265,9 @@ export default function MainApp() {
         <Route exact path="/employee/viewtimekeeping"  element={<LayoutPrivateRoute><ViewTimekeeping /></LayoutPrivateRoute>} />
         <Route exact path="/employee/viewcontract/:maNv"  element={<LayoutPrivateRoute><EViewContract /></LayoutPrivateRoute>} />
         <Route exact path="/employee/timeKeeping"  element={<LayoutPrivateRoute><TimeKeeping /></LayoutPrivateRoute>} />
+
+        <Route exact path="/employee/leaveRequest"  element={<LayoutPrivateRoute><ELeaveRequest /></LayoutPrivateRoute>} />
+
       </Routes>
     </Router>
   );

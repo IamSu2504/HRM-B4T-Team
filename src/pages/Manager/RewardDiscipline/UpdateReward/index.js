@@ -45,11 +45,12 @@ export default function UpdateShift() {
         try {
             setSubmitError({ status: false, error: '' })
             const { phanLoaiID, lyDo, maNv } = rewardDisciplineDetail
+            
             if (!phanLoaiID.trim().length || !lyDo.trim().length || !maNv.trim().length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
                 setIsSubmit(true)
-                console.log(rewardDisciplineDetail)
+                
                 const updateRes = await ManagerRewardDisciplineAPI.updateRewardDiscipline({ id: rewardDisciplineId, ...rewardDisciplineDetail })
                 if (updateRes?.status === 200) {
                     toast.success(updateRes?.data)
