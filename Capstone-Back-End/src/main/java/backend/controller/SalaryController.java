@@ -62,6 +62,7 @@ public class SalaryController {
     public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody CreateUpdateSalaryRequest request) {
         try {
             int id = Integer.parseInt(pv);
+            request.setId(id);
             if (service.getById(id) == null) {
                 return new ResponseEntity<>("Lương không tồn tại", HttpStatus.NOT_FOUND);
             }

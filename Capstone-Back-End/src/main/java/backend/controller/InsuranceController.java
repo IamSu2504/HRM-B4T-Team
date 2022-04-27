@@ -62,6 +62,7 @@ public class InsuranceController {
     public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody CreateUpdateInsuranceRequest request) {
         try {
             int id = Integer.parseInt(pv);
+            request.setId(id);
             if (service.getById(id) == null) {
                 return new ResponseEntity<>("Mã bảo hiểm này không tồn tại", HttpStatus.NOT_FOUND);
             }

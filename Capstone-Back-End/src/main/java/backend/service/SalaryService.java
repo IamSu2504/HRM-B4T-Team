@@ -42,7 +42,7 @@ public class SalaryService {
         if (newSalary.getId() != null) {
             Salary oldSalary = salaryRepo.findById(newSalary.getId()).get();
             if ((newSalary.getMaHD()) == (oldSalary.getMaHD())) {
-                if (salaryRepo.getByMaHD(newSalary.getMaHD().getId()) == null) {
+                if (salaryRepo.getByMaHD(newSalary.getMaHD().getId()) != null) {
                     return salaryRepo.save(newSalary);
                 } else {
                     return null;
