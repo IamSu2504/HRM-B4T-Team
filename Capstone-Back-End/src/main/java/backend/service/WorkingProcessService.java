@@ -53,7 +53,7 @@ public class WorkingProcessService {
         }
         // add
         else{
-             DepartmentCategory departmentCategory = departmentCategoryRepository.findById(newWorkingProcess.getIdPhongBan().getId()).get();
+            DepartmentCategory departmentCategory = departmentCategoryRepository.findById(newWorkingProcess.getIdPhongBan().getId()).get();
             if(departmentCategory.getId() != null){
                 return repo.save(newWorkingProcess);
             }

@@ -1,10 +1,14 @@
 package backend.service;
 
+import backend.entity.CreateUpdateInsuranceRequest;
 import backend.entity.Insurance;
+import backend.entity.InsuranceCategory;
+import backend.repository.InsuranceCategoryRepository;
 import backend.repository.InsuranceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -12,6 +16,9 @@ public class InsuranceService {
 
     @Autowired
     private InsuranceRepository repo;
+
+    @Autowired
+    private InsuranceCategoryRepository insuranceCategoryRepository;
 
     public List<Insurance> getAll(){
         return repo.findAll();
@@ -27,8 +34,9 @@ public class InsuranceService {
         }
     }
 
-    public Insurance save(Insurance newInsurance)
+    public Insurance save(CreateUpdateInsuranceRequest request)
     {
+        Insurance newInsurance = getNewInsurance(request);
         // update
         if(newInsurance.getId()!=null){
             Insurance oldInsurance = repo.findById(newInsurance.getId()).get();
@@ -50,6 +58,21 @@ public class InsuranceService {
             else{
                 return null;
             }
+        }
+    }
+
+    public Insurance getNewInsurance(CreateUpdateInsuranceRequest request){
+        try {
+            Insurance i = new Insurance();
+            i.setId(request.getId());
+            i.setIdLoaiBH(insuranceCategoryRepository.findById(request.getIdLoaiBH()).get());
+            i.setMaSoBH(request.getMaSoBH());
+            i.setTienBH(request.getTienBH());
+            i.setMaNV(request.getMaNV());
+
+            return i;
+        } catch (Exception e){
+            return null;
         }
     }
 }

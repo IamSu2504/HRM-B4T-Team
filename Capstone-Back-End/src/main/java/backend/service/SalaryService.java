@@ -2,7 +2,6 @@ package backend.service;
 
 import backend.entity.CreateUpdateSalaryRequest;
 import backend.entity.Salary;
-import backend.entity.SalaryCategory;
 import backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,10 +75,11 @@ public class SalaryService {
             s.setLuongCoBan(request.getLuongCoBan());
             s.setPhuCapKhac(request.getPhuCapKhac());
             s.setTongLuong(request.getTongLuong());
+            if(request.getNgayHieuLuc() != null)
             s.setNgayHieuLuc(sdf.parse(request.getNgayHieuLuc()));
+            if(request.getNgayKetThuc() != null)
             s.setNgayKetThuc(sdf.parse(request.getNgayKetThuc()));
-            if (request.getTrangThai() != null)
-                s.setTrangThai(request.getTrangThai());
+            s.setTrangThai(request.getTrangThai());
             return s;
         } catch (Exception e){
             return null;

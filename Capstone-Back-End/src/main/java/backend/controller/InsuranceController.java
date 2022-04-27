@@ -1,5 +1,6 @@
 package backend.controller;
 
+import backend.entity.CreateUpdateInsuranceRequest;
 import backend.entity.Insurance;
 import backend.service.InsuranceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +46,9 @@ public class InsuranceController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> create(@RequestBody Insurance insurance) {
+    public ResponseEntity<?> create(@RequestBody CreateUpdateInsuranceRequest request) {
         try {
-            Insurance t = service.save(insurance);
+            Insurance t = service.save(request);
             if(t==null){
                 return new ResponseEntity<>("Mã số bảo hiểm đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
@@ -58,11 +59,13 @@ public class InsuranceController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody Insurance insurance) {
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody CreateUpdateInsuranceRequest request) {
         try {
             int id = Integer.parseInt(pv);
-            insurance.setId(id);
-            Insurance t = service.save(insurance);
+            if (service.getById(id) == null) {
+                return new ResponseEntity<>("Mã bảo hiểm này không tồn tại", HttpStatus.NOT_FOUND);
+            }
+            Insurance t = service.save(request);
             if(t==null){
                 return new ResponseEntity<>("Mã số bảo hiểm đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }

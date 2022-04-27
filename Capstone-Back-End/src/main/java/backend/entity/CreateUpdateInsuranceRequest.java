@@ -5,22 +5,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateUpdateWorkingProcess {
+public class CreateUpdateInsuranceRequest {
 
     private Integer id;
 
-    private int idPhongBan;
+    private Integer idLoaiBH;
 
-    private String ngayVao;
+    private String maSoBH;
 
-    private String ngayRa;
-
-    private Boolean trangThai;
+    private Double tienBH;
 
     private String maNV;
 }

@@ -2,6 +2,7 @@ package backend.controller;
 
 
 import backend.entity.Contract;
+import backend.entity.CreateUpdateContractRequest;
 import backend.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,9 +46,9 @@ public class ContractController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> create(@RequestBody Contract contract) {
+    public ResponseEntity<?> create(@RequestBody CreateUpdateContractRequest request) {
         try {
-            Contract t = service.save(contract);
+            Contract t = service.save(request);
             if(t==null){
                 return new ResponseEntity<>("Mã hợp đồng đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
@@ -58,10 +59,12 @@ public class ContractController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody Contract contract) {
+    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody CreateUpdateContractRequest request) {
         try {
-            contract.setMaHD(pv);
-            Contract t = service.save(contract);
+            if (service.getById(pv) == null) {
+                return new ResponseEntity<>("Mã bảo hiểm này không tồn tại", HttpStatus.NOT_FOUND);
+            }
+            Contract t = service.save(request);
             if(t==null){
                 return new ResponseEntity<>("Mã hợp đồng đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
