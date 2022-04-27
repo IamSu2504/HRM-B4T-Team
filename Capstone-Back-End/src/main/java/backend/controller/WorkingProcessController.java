@@ -65,6 +65,7 @@ public class WorkingProcessController {
             if (service.getById(id) == null) {
                 return new ResponseEntity<>("Quá trình công tác này không tồn tại", HttpStatus.NOT_FOUND);
             }
+            request.setId(id);
             WorkingProcess t = service.save(request);
             if(t==null){
                 return new ResponseEntity<>("Quá trình công tác này đã tồn tại", HttpStatus.EXPECTATION_FAILED);

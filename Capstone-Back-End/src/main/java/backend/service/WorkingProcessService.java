@@ -42,7 +42,7 @@ public class WorkingProcessService {
         if(newWorkingProcess.getId()!=null){
             WorkingProcess oldWorkingProcess = repo.findById(newWorkingProcess.getId()).get();
             if((newWorkingProcess.getIdPhongBan().getId()) == (oldWorkingProcess.getIdPhongBan().getId())){
-                if(repo.getByIdPhongBan(newWorkingProcess.getIdPhongBan().getId())==null){
+                if(repo.getByIdPhongBan(newWorkingProcess.getIdPhongBan().getId()).isEmpty()){
                     return repo.save(newWorkingProcess);
                 }
                 else{
