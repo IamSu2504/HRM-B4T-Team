@@ -1,10 +1,10 @@
 package backend.service;
 
-import backend.entity.CreateUpdateShiftRequest;
 import backend.entity.CreateUpdateWorkingProcess;
 import backend.entity.DepartmentCategory;
 import backend.entity.WorkingProcess;
 import backend.repository.DepartmentCategoryRepository;
+import backend.repository.PositionCategoryRepository;
 import backend.repository.WorkingProcessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,9 @@ public class WorkingProcessService {
 
     @Autowired
     private DepartmentCategoryRepository departmentCategoryRepository;
+
+    @Autowired
+    private PositionCategoryRepository positionCategoryRepository;
 
     public List<WorkingProcess> getAll(){
         return repo.findAll();
@@ -42,7 +45,7 @@ public class WorkingProcessService {
         if(newWorkingProcess.getId()!=null){
             WorkingProcess oldWorkingProcess = repo.findById(newWorkingProcess.getId()).get();
             if((newWorkingProcess.getIdPhongBan().getId()) == (oldWorkingProcess.getIdPhongBan().getId())){
-                if(repo.getByIdPhongBan(newWorkingProcess.getIdPhongBan().getId()).isEmpty()){
+                if(!repo.getByIdPhongBan(newWorkingProcess.getIdPhongBan().getId()).isEmpty()){
                     return repo.save(newWorkingProcess);
                 }
                 else{
@@ -70,6 +73,7 @@ public class WorkingProcessService {
             WorkingProcess s = new WorkingProcess();
             s.setId(request.getId());
             s.setIdPhongBan(departmentCategoryRepository.findById(request.getIdPhongBan()).get());
+            s.setIdChucVu(positionCategoryRepository.findById(request.getIdChucVu()).get());
             if(request.getNgayVao()!=null)
             s.setNgayVao(sdf.parse(request.getNgayVao()));
             if(request.getNgayRa()!=null)
