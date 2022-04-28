@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -100,10 +102,11 @@ public class AccountService {
         return accountRepo.getByMaNv(maNv);
     }
 
-    public Account getForgotAccount(String encryptedID) {
+    public Account getForgotAccount(String encryptedStr) {
         int lastID = accountRepo.getLastID();
+        String dateFormat = new SimpleDateFormat("dd/MM/yyyy HH").format(new Date());
         for (int i = 1; i < lastID; i++) {
-            if (getEncryptedString(i + "").equals(encryptedID)) {
+            if (getEncryptedString(i + dateFormat).equals(encryptedStr)) {
                 return accountRepo.findById(i).get();
             }
         }

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -130,10 +131,11 @@ public class AccountController {
             final String fromEmailPassword = "Speakless2000";
 //          final String fromEmail = "speaklxss2001@gmail.com";
 //          final String fromEmailPassword = "Speakless2000";
-            String encryptedAccountID = accountService.getEncryptedString(forgotAccount.getId() + "");
-            final String url = "http://localhost:3000/account/" + encryptedAccountID + "/forgot";
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH");
+            String encryptedStr = accountService.getEncryptedString(forgotAccount.getId()+sdf.format(new Date()));
+            final String url = "http://localhost:3000/account/" + encryptedStr + "/forgot";
             final String subject = "Yêu cầu đổi mật khẩu";
-            final String body = "Nhấn vào đường dẫn sau để đổi mật khẩu: " + url;
+            final String body = "Nhấn vào đường dẫn sau để đổi mật khẩu: " + url + ". Lưu ý, đường dẫn chỉ có hiệu lực trong giờ hiện tại";
 
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
@@ -171,9 +173,9 @@ public class AccountController {
     }
 
     @GetMapping(value = "/{id}/forgot")
-    public ResponseEntity<?> getForgotAccount(@PathVariable("id") String encryptedID) {
+    public ResponseEntity<?> getForgotAccount(@PathVariable("id") String encryptedStr) {
         try {
-            Account forgotAccount = accountService.getForgotAccount(encryptedID);
+            Account forgotAccount = accountService.getForgotAccount(encryptedStr);
             if (forgotAccount == null) {
                 return new ResponseEntity("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
             } else {
