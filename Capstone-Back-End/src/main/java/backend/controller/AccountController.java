@@ -164,7 +164,6 @@ public class AccountController {
             msg.setSentDate(new Date());
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail[0], false));
             Transport.send(msg);
-
             String successMess = "Yêu cầu đổi mật khẩu đã được gửi. Vui lòng kiểm tra email " + toEmail[0];
             return new ResponseEntity<>(successMess, HttpStatus.OK);
         } catch (Exception e) {

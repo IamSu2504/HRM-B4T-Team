@@ -103,9 +103,9 @@ public class AccountService {
     }
 
     public Account getForgotAccount(String encryptedStr) {
-        int lastID = accountRepo.getLastID();
+        int lastAccountID = accountRepo.getLastID();
         String dateFormat = new SimpleDateFormat("dd/MM/yyyy HH").format(new Date());
-        for (int i = 1; i < lastID; i++) {
+        for (int i = 1; i < lastAccountID; i++) {
             if (getEncryptedString(i + dateFormat).equals(encryptedStr)) {
                 return accountRepo.findById(i).get();
             }
