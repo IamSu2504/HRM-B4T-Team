@@ -45,9 +45,8 @@ export default function UpdateShift() {
         try {
             setSubmitError({ status: false, error: '' })
             const { phanLoaiID, lyDo, maNv } = rewardDisciplineDetail
-            console.log(phanLoaiID)
-            console.log(lyDo)
-            console.log(maNv)
+            
+
             if (!phanLoaiID.trim().length || !lyDo.trim().length || !maNv.trim().length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {

@@ -17,7 +17,10 @@ export default function AddManagerInsurance() {
         try {
             setSubmitError({ status: false, error: '' })
             const { idLoaiBH, maSoBH, tienBH, maNV } = managerInsuranceDetail
-
+            console.log(idLoaiBH)
+            console.log(maSoBH)
+            console.log(tienBH)
+            console.log(maNV)
             if (!idLoaiBH.trim().length || !maSoBH.trim().length || !tienBH.trim().length || !maNV.trim().length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
@@ -72,7 +75,7 @@ export default function AddManagerInsurance() {
                         title="Loại Bảo Hiểm"
                         option={listInsurance.map((insuranceItem) => {
                             return (
-                                { label: insuranceItem.tenBH, value: insuranceItem }
+                                { label: insuranceItem.tenBH, value: insuranceItem.id }
                             )
                         })}
                         require={true}

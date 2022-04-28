@@ -25,7 +25,7 @@ const RewardDisciplineAPI = {
     },
 
     addNewRewardDiscipline({phanLoaiID, lyDo, maNv}) {
-        const url = `/category/shift`;
+        const url = `/rewardDiscipline`;
         return AxiosClient.post(url, { phanLoaiID, lyDo, maNv});
     },
 

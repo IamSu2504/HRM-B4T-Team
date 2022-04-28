@@ -152,9 +152,9 @@ export default function MainApp() {
         <Route exact path="/admin/updatetax/:taxId" element={<LayoutPrivateRoute><UpdateTax /></LayoutPrivateRoute>} />
         <Route exact path="/admin/addtax" element={<LayoutPrivateRoute><AddTax /></LayoutPrivateRoute>} />
 
-        <Route exact path="/admin/viewshift" element={<LayoutPrivateRoute><ViewShift /></LayoutPrivateRoute>} />
+        {/* <Route exact path="/admin/viewshift" element={<LayoutPrivateRoute><ViewShift /></LayoutPrivateRoute>} />
         <Route exact path="/admin/updateshift/:shiftId" element={<LayoutPrivateRoute><UpdateShift /></LayoutPrivateRoute>} />
-        <Route exact path="/admin/addshift" element={<LayoutPrivateRoute><AddShift /></LayoutPrivateRoute>} />
+        <Route exact path="/admin/addshift" element={<LayoutPrivateRoute><AddShift /></LayoutPrivateRoute>} /> */}
 
         <Route exact path="/admin/viewposition" element={<LayoutPrivateRoute><ViewPosition /></LayoutPrivateRoute>} />
         <Route exact path="/admin/updateposition/:positionId" element={<LayoutPrivateRoute><UpdatePosition /></LayoutPrivateRoute>} />

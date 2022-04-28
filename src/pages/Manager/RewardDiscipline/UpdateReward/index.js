@@ -45,7 +45,9 @@ export default function UpdateShift() {
         try {
             setSubmitError({ status: false, error: '' })
             const { phanLoaiID, lyDo, maNv } = rewardDisciplineDetail
-            
+            console.log(phanLoaiID)
+            console.log(lyDo)
+            console.log(maNv)
             if (!phanLoaiID.trim().length || !lyDo.trim().length || !maNv.trim().length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
@@ -100,7 +102,7 @@ export default function UpdateShift() {
                         title="Mã Số Nhân Viên *:"
                         value={rewardDisciplineDetail?.user?.id || ''}
                         type="text"
-              
+
                         handleChange={(event) => {
                             setRewardDisciplineDetail({ ...rewardDisciplineDetail, maNv: rewardDisciplineDetail?.user?.id })
                         }}
