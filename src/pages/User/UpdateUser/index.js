@@ -156,10 +156,10 @@ export default function UpdateUser() {
 
       <div className="row avatar-row">
         <div>
-          {/* {userImage?.length ?
-            <img src={`data:image/png;base64, ${userImage}`} alt="avatar" width={220} height={180} /> : */}
-            <img src="/image-placeholder.png" alt="avatar" />
-          {/* } */}
+          {userImage?.length ?
+            <img src={`data:image/png;base64, ${userImage}`} alt="avatar" width={220} height={180} /> : 
+            <img src={`http://localhost:8080/user/${maNv}/image`} alt="avatar" />
+          }
         </div>
 
         <div>
@@ -185,7 +185,7 @@ export default function UpdateUser() {
 
       <div className="row fied-data-row">
         <div>
-          {/* <CustomInputField
+          <CustomInputField
             title="Ảnh 3*4"
             type="file"
             disabled={false}
@@ -200,7 +200,7 @@ export default function UpdateUser() {
                 console.log('Error: ', error);
               };
             }}
-          /> */}
+          />
           <CustomSelectBox
             title="Giới Tính :"
             option={[{ label: "Nam", value: true }, { label: "Nữ", value: false }]}

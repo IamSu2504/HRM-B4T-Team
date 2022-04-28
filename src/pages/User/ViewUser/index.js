@@ -19,10 +19,10 @@ export default function ViewUser() {
     ngayBatDauLam: '', ngayNghiViec: '', lyDoNghi: '', image: ''
   })
   const navigate = useNavigate();
-  const {maNv} = useParams();
+  const { maNv } = useParams();
   const getUserDetail = async () => {
     if (maNv) {
-     
+
       const userRes = await UserAPI.getUserById(maNv)
       if (userRes?.status === 200) {
         setUserDetail(userRes?.data)
@@ -44,7 +44,7 @@ export default function ViewUser() {
 
       <div className="row avatar-row">
         <div>
-          <img className="img" src="/home/anhdaidien.png" alt="avatar" />
+          <img src={`http://localhost:8080/user/${userDetail?.id}/image`} alt="avatar" width={220} height={300} />
         </div>
 
         <div>
@@ -74,16 +74,16 @@ export default function ViewUser() {
         </div>
       </div>
       <div onClick={() => {
-        if (localStorage.getItem('role') === 'Admin'){
+        if (localStorage.getItem('role') === 'Admin') {
           navigate(`/admin/updateuser/${maNv}`)
-        } 
+        }
         else
-        if (localStorage.getItem('role') === 'Manager'){
-          navigate(`/manager/updateuser/${maNv}`)
-        }
-        else{
-          navigate(`/employee/updateuser/${maNv}`)
-        }
+          if (localStorage.getItem('role') === 'Manager') {
+            navigate(`/manager/updateuser/${maNv}`)
+          }
+          else {
+            navigate(`/employee/updateuser/${maNv}`)
+          }
       }}>
         <button className="save-button">
           <span class="image">
@@ -92,6 +92,15 @@ export default function ViewUser() {
           <span class="text">Sửa Thông Tin</span>
         </button>
       </div>
+      <div>
+        <button className="save-button">
+          <span class="image">
+            <img src="/home/save-icon.svg" />
+          </span>
+          <span class="text">Quá Trình Công Tác</span>
+        </button>
+      </div>
     </div>
+
   );
 }

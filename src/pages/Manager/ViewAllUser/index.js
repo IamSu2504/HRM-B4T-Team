@@ -88,7 +88,7 @@ export default function ViewAllUser() {
                   <td>{userItem?.id}</td>
                   <td>
                   
-                      <img src={`http://localhost:8080/user/${userItem?.id}/image`} alt="avatar" width={220} height={180} /> :
+                      <img src={`http://localhost:8080/user/${userItem?.id}/image`} alt="avatar" width={220} height={180} /> 
                       
                
                    
