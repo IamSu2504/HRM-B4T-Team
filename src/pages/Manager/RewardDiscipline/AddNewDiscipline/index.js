@@ -32,7 +32,7 @@ export default function AddDiscipline() {
             setSubmitError({ status: false, error: '' })
             const { phanLoaiID, lyDo, maNv } = rewardDisciplineDetail
 
-            if (!phanLoaiID.trim().length || !lyDo.trim().length || !maNv.trim().length) {
+            if (!phanLoaiID.toString()?.trim()?.length || !lyDo.toString()?.trim()?.length || !maNv.toString()?.trim()?.length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
                 setIsSubmit(true)

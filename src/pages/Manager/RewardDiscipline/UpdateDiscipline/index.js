@@ -8,8 +8,12 @@ import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function UpdateShift() {
+export default function UpdateDiscipline() {
     const [listDiscipline, setListDiscipline] = useState([])
+    const [rewardDisciplineDetail, setRewardDisciplineDetail] = useState({ phanLoaiID: '', lyDo: '', maNv: '' })
+    const [submitError, setSubmitError] = useState({ status: false, error: '' })
+    const [isSubmit, setIsSubmit] = useState(false)
+    const { rewardDisciplineId } = useParams()
 
     const getAllDiscipline = async () => {
         const disciplineRes = await RewardDisciplineAPI.getAllDiscipline()
@@ -22,17 +26,11 @@ export default function UpdateShift() {
         getAllDiscipline()
     }, [])
 
-
-    const [rewardDisciplineDetail, setRewardDisciplineDetail] = useState({ phanLoaiID: '', lyDo: '', maNv: '' })
-    const [submitError, setSubmitError] = useState({ status: false, error: '' })
-    const [isSubmit, setIsSubmit] = useState(false)
-    const { rewardDisciplineId } = useParams()
-
     const getDisciplineDetail = async () => {
         if (rewardDisciplineId) {
             const rewardRes = await ManagerRewardDisciplineAPI.getDisciplineById(rewardDisciplineId)
             if (rewardRes?.status === 200) {
-                setRewardDisciplineDetail(rewardRes?.data)
+                setRewardDisciplineDetail({ phanLoaiID: rewardRes?.data?.phanLoai?.id, lyDo: rewardRes?.data?.lyDo || '', maNv: rewardRes?.data?.user?.id })
             }
         }
     }
@@ -45,9 +43,7 @@ export default function UpdateShift() {
         try {
             setSubmitError({ status: false, error: '' })
             const { phanLoaiID, lyDo, maNv } = rewardDisciplineDetail
-            
-
-            if (!phanLoaiID.trim().length || !lyDo.trim().length || !maNv.trim().length) {
+            if (!phanLoaiID.toString()?.trim()?.length || !lyDo.toString()?.trim()?.length || !maNv.toString()?.trim()?.length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
                 setIsSubmit(true)
@@ -61,11 +57,11 @@ export default function UpdateShift() {
             if (error.response) {
                 setSubmitError({ status: true, error: error.response.data })
             }
-        } finally {
+        } 
+        finally {
             setIsSubmit(false)
         }
     }
-
     return (
         <div className="update-account-page">
             <div className="row">
@@ -79,6 +75,7 @@ export default function UpdateShift() {
                 <div>
                     <CustomSelectBox
                         title="Phân Loại"
+                        value={rewardDisciplineDetail?.phanLoaiID}
                         option={listDiscipline.map((disciplineItem) => {
                             return (
                                 { label: disciplineItem.danhMuc, value: disciplineItem.id }
@@ -99,7 +96,7 @@ export default function UpdateShift() {
                     />
                     <CustomInputField
                         title="Mã Số Nhân Viên *:"
-                        value={rewardDisciplineDetail?.user?.id || ''}
+                        value={rewardDisciplineDetail?.maNv || ''}
                         type="text"
                         handleChange={(event) => {
                             setRewardDisciplineDetail({ ...rewardDisciplineDetail, maNv: event.target.value })

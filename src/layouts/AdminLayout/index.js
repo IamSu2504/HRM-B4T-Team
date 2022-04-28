@@ -53,7 +53,8 @@ export default function AdminLayout(props) {
                     }}
                   >
                     <div className="user-avatar">
-                      <img src="/menu/user.svg" alt="user-avatar" />
+                      {/* <img src="/menu/user.svg" alt="user-avatar" /> */}
+                      <img src={`http://localhost:8080/user/${localStorage.getItem('maNv')}/image`} alt="avatar" />
                     </div>
                     <div className="user-name">{localStorage.getItem('name')}</div>
                   </div>
@@ -70,7 +71,7 @@ export default function AdminLayout(props) {
             <div className="navbar-dark bg-dark position-fixed h-100 w-sidebar left-bar">
               <div className="user-info">
                 <div className="left">
-                  <img src="/menu/user.svg" alt="user-avatar" />
+                  <img src={`http://localhost:8080/user/${localStorage.getItem('maNv')}/image`} alt="avatar" />
                 </div>
                 <div className="right">
                   <div className="name">{localStorage.getItem('name')}</div>

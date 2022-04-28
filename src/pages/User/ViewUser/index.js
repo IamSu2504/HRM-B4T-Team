@@ -44,7 +44,7 @@ export default function ViewUser() {
 
       <div className="row avatar-row">
         <div>
-          <img className="img" src="/home/anhdaidien.png" alt="avatar" />
+          <img src={`http://localhost:8080/user/${userDetail?.id}/image`} alt="avatar" width={220} height={300} />
         </div>
 
         <div>
@@ -97,7 +97,7 @@ export default function ViewUser() {
           <span class="image">
             <img src="/home/save-icon.svg" />
           </span>
-          <span class="text">Quá Trình Làm Việc</span>
+          <span class="text">Quá Trình Công Tác</span>
         </button>
       </div>
     </div>
