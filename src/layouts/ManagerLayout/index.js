@@ -248,7 +248,7 @@ export default function ManagerLayout(props) {
                   <div
                     id="collapseTwo"
                     className="collapse"
-                    data-parent="#accordion2"
+                    data-parent="#accordion1"
                   >
                     <div className="card-body">
                       <div onClick={() => navigate('/manager/viewallreward')}>

@@ -54,7 +54,8 @@
 .update-account-page .save-button {
   background: #34AACF;
   border-radius: 8px;
-  width: 170px;
+  margin-top: 10px;
+  width: fit-content;
   height: 46px;
   border: unset;
 }
