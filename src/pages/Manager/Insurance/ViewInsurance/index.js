@@ -5,6 +5,7 @@ import CustomPopover from "../../../../components/CustomPopover";
 import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ReactHtmlTableToExcel from "react-html-table-to-excel";
 
 export default function ViewInsurance() {
     const [listInsurance, setListInsurance] = useState([])
@@ -28,7 +29,7 @@ export default function ViewInsurance() {
         <div className="homepage">
             <div className="title">Danh sách bảo Hiểm</div>
             <div className="table-frame">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="insurancetable">
                     <thead>
                         <tr className="head">
                             <th scope="col">STT</th>
@@ -81,6 +82,13 @@ export default function ViewInsurance() {
 
                     </tbody>
                 </table>
+                <ReactHtmlTableToExcel
+                    className="btn btn-info"
+                    table="insurancetable"
+                    filename="Insurance Excel file"
+                    sheet="Sheet"
+                    buttonText="Export to Excel"
+                />
             </div>
             <div className="pagination-frame">
                 <nav aria-label="Page navigation example">

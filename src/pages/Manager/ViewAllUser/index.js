@@ -6,6 +6,8 @@ import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TablePagination from '@mui/material/TablePagination';
+import ReactHtmlTableToExcel from "react-html-table-to-excel";
+
 
 export default function ViewAllUser() {
   const [listUser, setListUser] = useState([])
@@ -65,7 +67,7 @@ export default function ViewAllUser() {
     <div className="homepage">
       <div className="title">Danh sách nhân viên</div>
       <div className="table-frame">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="userTable">
           <thead>
             <tr className="head">
               <th scope="col">STT</th>
@@ -87,11 +89,11 @@ export default function ViewAllUser() {
                   <th scope="row">{userIndex + 1}</th>
                   <td>{userItem?.id}</td>
                   <td>
-                  
-                      <img src={`http://localhost:8080/user/${userItem?.id}/image`} alt="avatar" width={220} height={180} /> 
-                      
-               
-                   
+
+                    <img src={`http://localhost:8080/user/${userItem?.id}/image`} alt="avatar" width={220} height={180} />
+
+
+
                   </td>
                   <td>{userItem?.tenNv}</td>
                   <td>{userItem?.gioiTinh ? 'Nam' : 'Nữ'}</td>
@@ -116,6 +118,13 @@ export default function ViewAllUser() {
 
           </tbody>
         </table>
+        <ReactHtmlTableToExcel
+          className="btn btn-info"
+          table="userTable"
+          filename="User Excel file"
+          sheet="Sheet"
+          buttonText="Export to Excel"
+        />
       </div>
 
       <TablePagination
