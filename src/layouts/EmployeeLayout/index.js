@@ -77,18 +77,17 @@ export default function EmployeeLayout(props) {
                                 <div className="right">
                                     <div className="name">{localStorage.getItem('name')}</div>
                                     <div className="active">
-                                        <img src="/menu/active.svg" />
-                                        Nhân Viên
+                                        <img src="/menu/active.svg" /> Nhân Viên
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="search-input">
+                            {/* <div className="search-input">
                                 <div className="input-icon">
                                     <img src="/home/search-icon.png" alt="login-img" />
                                 </div>
                                 <input placeholder="Tìm kiếm" />
-                            </div>
+                            </div> */}
 
                             <hr className="user-info-hr" />
                             <div className="text-sub">Quản lí thông tin</div>
@@ -116,8 +115,8 @@ export default function EmployeeLayout(props) {
                                     </div>
                                     <div
                                         id="collapseOne"
-                                        className="collapse show"
-                                        data-parent="#accordion"
+                                        className="collapse"
+                                        data-parent="#accordion1"
                                     >
                                         <div className="card-body">
                                             <div onClick={() => navigate(`/employee/viewcontract/${localStorage.getItem('maNv')}`)}>
@@ -150,8 +149,8 @@ export default function EmployeeLayout(props) {
                                     </div>
                                     <div
                                         id="collapseTwo"
-                                        className="collapse show"
-                                        data-parent="#accordion"
+                                        className="collapse"
+                                        data-parent="#accordion2"
                                     >
                                         <div className="card-body">
                                             <div onClick={() => navigate('/employee/timeKeeping')}>

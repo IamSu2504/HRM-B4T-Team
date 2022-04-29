@@ -78,8 +78,7 @@ export default function ManagerLayout(props) {
                 <div className="right">
                   <div className="name">{localStorage.getItem('name')}</div>
                   <div className="active">
-                    <img src="/menu/active.svg" />
-                    Quản Lý
+                    <img src="/menu/active.svg" /> Quản Lý
                   </div>
                 </div>
               </div>
@@ -109,8 +108,8 @@ export default function ManagerLayout(props) {
                   </div>
                   <div
                     id="collapseOne"
-                    className="collapse show"
-                    data-parent="#accordion"
+                    className="collapse"
+                    data-parent="#accordion1"
                   >
                     <div className="card-body">
                       <div onClick={() => navigate(`/manager/viewallUser`)}>
@@ -248,8 +247,8 @@ export default function ManagerLayout(props) {
                   </div>
                   <div
                     id="collapseTwo"
-                    className="collapse show"
-                    data-parent="#accordion"
+                    className="collapse"
+                    data-parent="#accordion2"
                   >
                     <div className="card-body">
                       <div onClick={() => navigate('/manager/viewallreward')}>
