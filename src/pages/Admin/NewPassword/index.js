@@ -72,6 +72,7 @@ export default function NewPassword() {
             <div className='user-input' >
 
               <input placeholder='Nhập Mật Khẩu Mới'
+                type="password"
                 value={newpassword}
                 onChange={(event) => setNewPassword(event.target.value)} />
 
@@ -79,6 +80,7 @@ export default function NewPassword() {
             <div className='user-input' >
 
               <input placeholder='Nhập Lại Mật Khẩu Mới'
+                type="password"
                 value={repassword}
                 onChange={(event) => setRePassword(event.target.value)} />
             </div>

@@ -157,11 +157,10 @@ export default function UpdateUser() {
       <div className="row avatar-row">
         <div>
           {userImage?.length ?
-            <img src={`data:image/png;base64, ${userImage}`} alt="avatar" width={220} height={180} /> : 
+            <img src={`data:image/png;base64, ${userImage}`} alt="avatar" width={220} height={180} /> :
             <img src={`http://localhost:8080/user/${maNv}/image`} alt="avatar" />
           }
         </div>
-
         <div>
           <CustomInputField
             title="Mã Số Nhân Viên"
@@ -201,164 +200,6 @@ export default function UpdateUser() {
               };
             }}
           />
-          <CustomSelectBox
-            title="Giới Tính :"
-            option={[{ label: "Nam", value: true }, { label: "Nữ", value: false }]}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, gioiTinh: event.currentTarget.value })
-            }}
-          />
-          <CustomInputField
-            title="Số điện thoại"
-            value={userDetail?.soDienThoai || ''}
-            type="text"
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, soDienThoai: event.target.value })
-            }}
-          />
-          <CustomInputField
-            title="Số điện thoại 2"
-            value={userDetail?.soDienThoai2 || ''}
-            type="text"
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, soDienThoai2: event.target.value })
-            }}
-          />
-          <CustomInputField
-            title="Email"
-            value={userDetail?.email || ''}
-            type="text"
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, email: event.target.value })
-            }}
-          />
-
-          <CustomInputField
-            title="Nơi cấp căn cước công dân"
-            type="text"
-            value={userDetail?.noiCapCccd || ''}
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, noiCapCccd: event.target.value })
-            }}
-          />
-          <CustomInputField
-            title="Hộ chiếu"
-            value={userDetail?.hoChieu || ''}
-            type="text"
-            disabled={false}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, hoChieu: event.target.value })
-            }}
-          />
-          <CustomInputField
-            title="Ngày cấp hộ chiếu"
-
-            type="date"
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-              const date = event.target.value.format('dd/mm/yyyy')
-              setUserDetail({ ...userDetail, ngayCapHoChieu: date })
-            }}
-          />
-          <CustomInputField
-            title="Nơi Sinh"
-            value={userDetail?.noiSinh || ''}
-            type="text"
-            require={true}
-            disabled={false}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, noiSinh: event.target.value })
-            }}
-          />
-          <CustomInputField
-            title="Địa chỉ thường trú"
-            value={userDetail?.diaChiThuongTru || ''}
-            type="text"
-            require={true}
-            disabled={false}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, diaChiThuongTru: event.target.value })
-            }}
-          />
-          <CustomSelectBox
-            title="Chức Vụ"
-            option={listPosition.map((positionItem) => {
-              return (
-                { label: positionItem.tenChucVu, value: positionItem.id }
-              )
-            })}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, chucVuID: event.currentTarget.value })
-            }}
-          />
-          <CustomInputField
-            title="Ngày Bắt Đầu Làm: "
-            type="date"
-            disabled={false}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, ngayBatDauLam: event.target.value })
-            }}
-          />
-          <CustomInputField
-            title="Số ATM"
-            value={userDetail?.soAtm || ''}
-            type="text"
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, soAtm: event.target.value })
-            }}
-          />
-
-          <CustomSelectBox
-            title="Tính Chất Hợp Đồng"
-            option={listContractNature.map((contractNatureItem) => {
-              return (
-                { label: contractNatureItem.tinhChatHopDong, value: contractNatureItem.id }
-              )
-            })}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, tinhChatHopDongID: event.currentTarget.value })
-            }}
-          />
-        </div>
-
-        <div>
-          <CustomInputField
-            title="Ngày sinh"
-
-            type="date"
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-              const date = event.target.value.format('dd/mm/yyyy')
-              setUserDetail({ ...userDetail, ngaySinh: date })
-            }}
-          />
-          <CustomSelectBox
-            title="Quốc Tịch"
-            option={listNation.map((nationItem) => {
-              return (
-                { label: nationItem.quocTich, value: nationItem.id }
-              )
-            })}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, quocTichID: event.currentTarget.value })
-            }}
-          />
           <CustomInputField
             title="Căn cước công dân"
             value={userDetail?.cccd || ''}
@@ -367,6 +208,16 @@ export default function UpdateUser() {
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, cccd: event.target.value })
+            }}
+          />
+          <CustomInputField
+            title="Nơi cấp căn cước công dân"
+            type="text"
+            value={userDetail?.noiCapCccd || ''}
+            disabled={false}
+            require={true}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, noiCapCccd: event.target.value })
             }}
           />
           <CustomInputField
@@ -389,6 +240,15 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
+            title="Hộ chiếu"
+            value={userDetail?.hoChieu || ''}
+            type="text"
+            disabled={false}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, hoChieu: event.target.value })
+            }}
+          />
+          <CustomInputField
             title="Nơi cấp hộ chiếu"
             value={userDetail?.noiCapHoChieu || ''}
             type="text"
@@ -396,6 +256,17 @@ export default function UpdateUser() {
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, noiCapHoChieu: event.target.value })
+            }}
+          />
+          <CustomInputField
+            title="Ngày cấp hộ chiếu"
+
+            type="date"
+            disabled={false}
+            require={true}
+            handleChange={(event) => {
+              const date = event.target.value.format('dd/mm/yyyy')
+              setUserDetail({ ...userDetail, ngayCapHoChieu: date })
             }}
           />
           <CustomInputField
@@ -409,6 +280,90 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
+            title="ATM ngân hàng"
+            value={userDetail?.atmNganHang || ''}
+            type="text"
+            disabled={false}
+            require={true}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, atmNganHang: event.target.value })
+            }}
+          />
+          <CustomInputField
+            title="Số ATM"
+            value={userDetail?.soAtm || ''}
+            type="text"
+            disabled={false}
+            require={true}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, soAtm: event.target.value })
+            }}
+          />
+          <CustomInputField
+            title="Ngày Bắt Đầu Làm: "
+            type="date"
+            disabled={false}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, ngayBatDauLam: event.target.value })
+            }}
+          />
+          <CustomSelectBox
+            title="Tính Chất Hợp Đồng"
+            option={listContractNature.map((contractNatureItem) => {
+              return (
+                { label: contractNatureItem.tinhChatHopDong, value: contractNatureItem.id }
+              )
+            })}
+            require={true}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, tinhChatHopDongID: event.currentTarget.value })
+            }}
+          />
+          <CustomSelectBox
+            title="Chức Vụ"
+            option={listPosition.map((positionItem) => {
+              return (
+                { label: positionItem.tenChucVu, value: positionItem.id }
+              )
+            })}
+            require={true}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, chucVuID: event.currentTarget.value })
+            }}
+          />
+        </div>
+
+        <div>
+          <CustomSelectBox
+            title="Giới Tính :"
+            option={[{ label: "Nam", value: true }, { label: "Nữ", value: false }]}
+            require={true}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, gioiTinh: event.currentTarget.value })
+            }}
+          />
+          <CustomInputField
+            title="Ngày sinh"
+
+            type="date"
+            disabled={false}
+            require={true}
+            handleChange={(event) => {
+              const date = event.target.value.format('dd/mm/yyyy')
+              setUserDetail({ ...userDetail, ngaySinh: date })
+            }}
+          />
+          <CustomInputField
+            title="Nơi Sinh"
+            value={userDetail?.noiSinh || ''}
+            type="text"
+            require={true}
+            disabled={false}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, noiSinh: event.target.value })
+            }}
+          />
+          <CustomInputField
             title="Quê Quán"
             value={userDetail?.queQuan || ''}
             type="text"
@@ -416,6 +371,28 @@ export default function UpdateUser() {
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, queQuan: event.target.value })
+            }}
+          />
+          <CustomSelectBox
+            title="Quốc Tịch"
+            option={listNation.map((nationItem) => {
+              return (
+                { label: nationItem.quocTich, value: nationItem.id }
+              )
+            })}
+            require={true}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, quocTichID: event.currentTarget.value })
+            }}
+          />
+          <CustomInputField
+            title="Địa chỉ thường trú"
+            value={userDetail?.diaChiThuongTru || ''}
+            type="text"
+            require={true}
+            disabled={false}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, diaChiThuongTru: event.target.value })
             }}
           />
           <CustomInputField
@@ -429,13 +406,45 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="ATM ngân hàng"
-            value={userDetail?.atmNganHang || ''}
+            title="Số điện thoại"
+            value={userDetail?.soDienThoai || ''}
             type="text"
             disabled={false}
             require={true}
             handleChange={(event) => {
-              setUserDetail({ ...userDetail, atmNganHang: event.target.value })
+              setUserDetail({ ...userDetail, soDienThoai: event.target.value })
+            }}
+          />
+          <CustomInputField
+            title="Số điện thoại 2"
+            value={userDetail?.soDienThoai2 || ''}
+            type="text"
+            disabled={false}
+            require={false}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, soDienThoai2: event.target.value })
+            }}
+          />
+          <CustomInputField
+            title="Email"
+            value={userDetail?.email || ''}
+            type="text"
+            disabled={false}
+            require={true}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, email: event.target.value })
+            }}
+          />
+          <CustomSelectBox
+            title="Tình Trạng Hôn Nhân"
+            option={listMarriage.map((marriageItem) => {
+              return (
+                { label: marriageItem.tinhTrang, value: marriageItem.id }
+              )
+            })}
+            require={true}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, tinhTrangHonNhanID: event.currentTarget.value })
             }}
           />
           <CustomSelectBox
@@ -463,19 +472,6 @@ export default function UpdateUser() {
             handleChange={(event) => {
               setUserDetail({ ...userDetail, lyDoNghi: event.target.value })
             }}
-          />
-          <CustomSelectBox
-            title="Tình Trạng Hôn Nhân"
-            option={listMarriage.map((marriageItem) => {
-              return (
-                { label: marriageItem.tinhTrang, value: marriageItem.id }
-              )
-            })}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, tinhTrangHonNhanID: event.currentTarget.value })
-            }}
-
           />
         </div>
       </div>
