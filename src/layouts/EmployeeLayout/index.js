@@ -150,7 +150,7 @@ export default function EmployeeLayout(props) {
                                     <div
                                         id="collapseTwo"
                                         className="collapse"
-                                        data-parent="#accordion2"
+                                        data-parent="#accordion"
                                     >
                                         <div className="card-body">
                                             <div onClick={() => navigate('/employee/timeKeeping')}>
