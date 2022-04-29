@@ -22,9 +22,9 @@ export default function Forgot() {
        
         const forgotRes = await ForgotAPI.forgot(gmail2)
         if (forgotRes?.status === 200) {
-          toast(`Mời Vào Email ${gmail} Nhập Mật Khẩu Mới`)
+          toast(forgotRes?.data)
         } else {
-          toast.error('Lấy Mật Khẩu không thành công')
+          toast.error(forgotRes?.data)
         }
       }
     } catch (error) {

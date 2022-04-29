@@ -170,12 +170,12 @@ export default function ManagerLayout(props) {
                       data-toggle="collapse"
                     // href="#collapseOne"
                     >
-                      <div className="card-head-content">
+                      <div className="card-head-content" onClick={() => navigate(`/manager/viewallworkingProcess`)}>
                         <div className="left">
                           <div className="content1">
                             <img src="/menu/lichlamviec.svg" />
                           </div>
-                          <div className="content2">Lịch làm việc</div>
+                          <div className="content2">Quá Trình Công Tác</div>
                         </div>
                         <div className="content3">
                           <img src="/menu/down-arrow.svg" />

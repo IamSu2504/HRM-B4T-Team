@@ -40,7 +40,7 @@ export default function ViewPosition() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh Sách Phụ Cấp</div>
+            <div className="title">Danh Sách Chức Vụ</div>
             <div className="table-frame">
                 <table class="table table-bordered">
                     <thead>

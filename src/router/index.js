@@ -117,6 +117,10 @@ import MUpdateDiscipline from "../pages/Manager/RewardDiscipline/UpdateDisciplin
 
 import MViewLeaveRequest from "../pages/Manager/LeaveRequest"
 
+import MViewWorkingProcess from "../pages/Manager/WorkingProcess/ViewWorkingProcess";
+import MAddWorkingProcess from "../pages/Manager/WorkingProcess/AddNewWorkingProcess";
+import MUpdateWorkingProcess from "../pages/Manager/WorkingProcess/UpdateWorkingProcess";
+
 //Employee
 import EmployeeHomepage from "../pages/Employee/HomePage";
 import ELeaveRequest from "../pages/Employee/LeaveRequest";
@@ -252,6 +256,10 @@ export default function MainApp() {
         <Route exact path="/manager/adddiscipline"  element={<LayoutPrivateRoute><MAddDiscipline /></LayoutPrivateRoute>} />
         <Route exact path="/manager/updatereward/:rewardDisciplineId" element={<LayoutPrivateRoute><MUpdateReward /></LayoutPrivateRoute>} />
         <Route exact path="/manager/updatediscipline/:rewardDisciplineId"  element={<LayoutPrivateRoute><MUpdateDiscipline /></LayoutPrivateRoute>} />
+
+        <Route exact path="/manager/viewallworkingProcess" element={<LayoutPrivateRoute><MViewWorkingProcess /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/addworkingProcess" element={<LayoutPrivateRoute><MAddWorkingProcess /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/updateworkingProcess/:workingProcessId" element={<LayoutPrivateRoute><MUpdateWorkingProcess /></LayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewleaveRequest"  element={<LayoutPrivateRoute><MViewLeaveRequest /></LayoutPrivateRoute>} />
 
