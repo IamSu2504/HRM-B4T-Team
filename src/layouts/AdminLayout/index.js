@@ -76,18 +76,17 @@ export default function AdminLayout(props) {
                 <div className="right">
                   <div className="name">{localStorage.getItem('name')}</div>
                   <div className="active">
-                    <img src="/menu/active.svg" />
-                    Admin
+                    <img src="/menu/active.svg" /> Admin
                   </div>
                 </div>
               </div>
 
-              <div className="search-input">
+              {/* <div className="search-input">
                 <div className="input-icon">
                   <img src="/home/search-icon.png" alt="login-img" />
                 </div>
                 <input placeholder="Tìm kiếm" />
-              </div>
+              </div> */}
 
               <hr className="user-info-hr" />
               <div className="text-sub">Quản lí tài khoản</div>
@@ -115,7 +114,7 @@ export default function AdminLayout(props) {
                   </div>
                   <div
                     id="collapseOne"
-                    className="collapse show"
+                    className="collapse"
                     data-parent="#accordion"
                   >
                     <div className="card-body">
@@ -152,7 +151,7 @@ export default function AdminLayout(props) {
                   </div>
                   <div
                     id="collapseTwo"
-                    className="collapse show"
+                    className="collapse"
                     data-parent="#accordion"
                   >
                     <div className="card-body">
@@ -266,8 +265,8 @@ export default function AdminLayout(props) {
                   </div>
                   <div
                     id="collapseaThree"
-                    className="collapse show"
-                    data-parent="#accordion"
+                    className="collapse"
+                    data-parent="#accordion1"
                   >
                     <div className="card-body">
                       <div>
@@ -299,7 +298,7 @@ export default function AdminLayout(props) {
                   </div>
                   <div
                     id="collapseaFour"
-                    className="collapse show"
+                    className="collapse"
                     data-parent="#accordion"
                   >
                     <div className="card-body">
