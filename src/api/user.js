@@ -11,49 +11,41 @@ const UserAPI = {
         return AxiosClient.get(url);
     },
 
-    updateUser({ id, tinhChatHopDongID, tinhTrangHonNhanID, chucVuID,
-        quocTichID, tenNv, ngaySinh, gioiTinh,
-        soDienThoai, soDienThoai2, email,
-        cccd, noiCapCccd, ngayCapCccd,
-        ngayHetHanCccd, hoChieu, noiCapHoChieu,
-        ngayCapHoChieu, ngayHetHanHoChieu, noiSinh,
-        queQuan, diaChiThuongTru, diaChiTamTru,
-        atmNganHang, soAtm, trangThaiLaoDong,
-        ngayBatDauLam, ngayNghiViec, lyDoNghi, image }) {
+    updateUser({ id, tinhChatHopDongID, tinhTrangHonNhanID,
+        quocTichID, tenNv, ngaySinh,
+        gioiTinh, soDienThoai, soDienThoai2,
+        email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
+        hoChieu, noiCapHoChieu, ngayCapHoChieu, ngayHetHanHoChieu,
+        noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
+        soAtm, trangThaiLaoDong, ngayBatDauLam, ngayNghiViec, lyDoNghi }) {
         const url = `/user/${id}`;
         return AxiosClient.put(url, {
-            tinhChatHopDongID, tinhTrangHonNhanID, chucVuID,
-            quocTichID, tenNv, ngaySinh, gioiTinh,
-            soDienThoai, soDienThoai2, email,
-            cccd, noiCapCccd, ngayCapCccd,
-            ngayHetHanCccd, hoChieu, noiCapHoChieu,
-            ngayCapHoChieu, ngayHetHanHoChieu, noiSinh,
-            queQuan, diaChiThuongTru, diaChiTamTru,
-            atmNganHang, soAtm, trangThaiLaoDong,
-            ngayBatDauLam, ngayNghiViec, lyDoNghi, image
+            tinhChatHopDongID, tinhTrangHonNhanID,
+        quocTichID, tenNv, ngaySinh,
+        gioiTinh, soDienThoai, soDienThoai2,
+        email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
+        hoChieu, noiCapHoChieu, ngayCapHoChieu, ngayHetHanHoChieu,
+        noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
+        soAtm, trangThaiLaoDong, ngayBatDauLam, ngayNghiViec, lyDoNghi
         });
     },
 
-    addNewUser({ tinhChatHopDongID, tinhTrangHonNhanID, chucVuID,
-        quocTichID, tenNv, ngaySinh, gioiTinh,
-        soDienThoai, soDienThoai2, email,
-        cccd, noiCapCccd, ngayCapCccd,
-        ngayHetHanCccd, hoChieu, noiCapHoChieu,
-        ngayCapHoChieu, ngayHetHanHoChieu, noiSinh,
-        queQuan, diaChiThuongTru, diaChiTamTru,
-        atmNganHang, soAtm, trangThaiLaoDong,
-        ngayBatDauLam, ngayNghiViec, lyDoNghi, image }) {
+    addNewUser({ tinhChatHopDongID, tinhTrangHonNhanID,
+        quocTichID, tenNv, ngaySinh,
+        gioiTinh, soDienThoai, soDienThoai2,
+        email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
+        hoChieu, noiCapHoChieu, ngayCapHoChieu, ngayHetHanHoChieu,
+        noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
+        soAtm, trangThaiLaoDong, ngayBatDauLam, ngayNghiViec, lyDoNghi }) {
         const url = `/user`;
         return AxiosClient.post(url, {
-            tinhChatHopDongID, tinhTrangHonNhanID, chucVuID,
-            quocTichID, tenNv, ngaySinh, gioiTinh,
-            soDienThoai, soDienThoai2, email,
-            cccd, noiCapCccd, ngayCapCccd,
-            ngayHetHanCccd, hoChieu, noiCapHoChieu,
-            ngayCapHoChieu, ngayHetHanHoChieu, noiSinh,
-            queQuan, diaChiThuongTru, diaChiTamTru,
-            atmNganHang, soAtm, trangThaiLaoDong,
-            ngayBatDauLam, ngayNghiViec, lyDoNghi, image
+            tinhChatHopDongID, tinhTrangHonNhanID,
+        quocTichID, tenNv, ngaySinh,
+        gioiTinh, soDienThoai, soDienThoai2,
+        email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
+        hoChieu, noiCapHoChieu, ngayCapHoChieu, ngayHetHanHoChieu,
+        noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
+        soAtm, trangThaiLaoDong, ngayBatDauLam, ngayNghiViec, lyDoNghi
         });
     },
 
@@ -62,10 +54,15 @@ const UserAPI = {
         return AxiosClient.delete(url);
     },
 
-    getUserImage(userId) {
-        const url = `user/${userId}/image`;
+    getUserImage(maNv) {
+        const url = `/user/${maNv}/image`;
         return AxiosClient.get(url);
+    },
+    updateUserImage(maNV, image){
+        const url = `/user/${maNV}/image`;
+        return AxiosClient.put(url, image);
     }
+  
 }
 
 export default UserAPI;

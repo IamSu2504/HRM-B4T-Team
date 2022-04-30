@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import UserAPI from "../../../api/user";
 import PositionAPI from "../../../api/position";
@@ -10,6 +11,7 @@ import CustomSelectBox from "../../../components/customSelectbox";
 import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 export default function UpdateUser() {
   const [listPosition, setListPosition] = useState([])
@@ -17,7 +19,7 @@ export default function UpdateUser() {
   const [listNation, setListNation] = useState([])
   const [listMarriage, setListMarriage] = useState([])
   const [userDetail, setUserDetail] = useState({
-    tinhChatHopDongID: '', tinhTrangHonNhanID: '', chucVuID: '',
+    tinhChatHopDongID: '', tinhTrangHonNhanID: '',
     quocTichID: '', tenNv: '', ngaySinh: '', gioiTinh: '',
     soDienThoai: '', soDienThoai2: '', email: '',
     cccd: '', noiCapCccd: '', ngayCapCccd: '',
@@ -25,13 +27,14 @@ export default function UpdateUser() {
     ngayCapHoChieu: '', ngayHetHanHoChieu: '', noiSinh: '',
     queQuan: '', diaChiThuongTru: '', diaChiTamTru: '',
     atmNganHang: '', soAtm: '', trangThaiLaoDong: '',
-    ngayBatDauLam: '', ngayNghiViec: '', lyDoNghi: '', image: ''
+    ngayBatDauLam: '', ngayNghiViec: '', lyDoNghi: ''
+
   })
   const [submitError, setSubmitError] = useState({ status: false, error: '' })
   const [isSubmit, setIsSubmit] = useState(false)
   const [userImage, setUserImage] = useState('')
   const { maNv } = useParams()
-
+  const navigate = useNavigate()
   const getAllPosition = async () => {
     const positionRes = await PositionAPI.getAll()
     if (positionRes?.status === 200) {
@@ -80,7 +83,17 @@ export default function UpdateUser() {
     if (maNv) {
       const userRes = await UserAPI.getUserById(maNv)
       if (userRes?.status === 200) {
-        setUserDetail(userRes?.data)
+        setUserDetail({
+          tinhChatHopDongID: userRes?.data?.tinhChatHopDong?.id, tinhTrangHonNhanID: userRes?.data?.tinhTrangHonNhan?.id,
+          quocTichID: userRes?.data?.quocTich?.id, tenNv: userRes?.data?.tenNv, ngaySinh: userRes?.data?.ngaySinh, gioiTinh: userRes?.data?.gioiTinh,
+          soDienThoai: userRes?.data?.soDienThoai, soDienThoai2: userRes?.data?.soDienThoai2, email: userRes?.data?.email,
+          cccd: userRes?.data?.cccd, noiCapCccd: userRes?.data?.noiCapCccd, ngayCapCccd: userRes?.data?.ngayCapCccd,
+          ngayHetHanCccd: userRes?.data?.ngayHetHanCccd, hoChieu: userRes?.data?.hoChieu, noiCapHoChieu: userRes?.data?.noiCapHoChieu,
+          ngayCapHoChieu: userRes?.data?.ngayCapHoChieu, ngayHetHanHoChieu: userRes?.data?.ngayHetHanHoChieu, noiSinh: userRes?.data?.noiSinh,
+          queQuan: userRes?.data?.queQuan, diaChiThuongTru: userRes?.data?.diaChiThuongTru, diaChiTamTru: userRes?.data?.diaChiTamTru,
+          atmNganHang: userRes?.data?.atmNganHang, soAtm: userRes?.data?.soAtm, trangThaiLaoDong: userRes?.data?.trangThaiLaoDong,
+          ngayBatDauLam: userRes?.data?.ngayBatDauLam, ngayNghiViec: userRes?.data?.ngayNghiViec, lyDoNghi: userRes?.data?.lyDoNghi, image: userRes?.data?.image
+        })
       }
     }
   }
@@ -94,7 +107,8 @@ export default function UpdateUser() {
       if (maNv) {
         const userRes = await UserAPI.getUserImage(maNv)
         if (userRes?.status === 200) {
-          if (userRes?.data?.length) setUserImage(userRes?.data)
+          if (userRes?.data?.length)
+            setUserImage(userRes?.data)
         }
       }
     } catch (error) {
@@ -109,38 +123,54 @@ export default function UpdateUser() {
   const handleUpdate = async () => {
     try {
       setSubmitError({ status: false, error: '' })
-      const { tinhChatHopDongID, tinhTrangHonNhanID, chucVuID,
+      const { tinhChatHopDongID, tinhTrangHonNhanID,
         quocTichID, tenNv, ngaySinh,
         gioiTinh, soDienThoai, soDienThoai2,
         email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
         hoChieu, noiCapHoChieu, ngayCapHoChieu, ngayHetHanHoChieu,
         noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
         soAtm, trangThaiLaoDong, ngayBatDauLam, ngayNghiViec, lyDoNghi
-      } = userDetail
-      if (!tinhChatHopDongID.trim().length || !tinhTrangHonNhanID.trim().length || !chucVuID.trim().length
-        || !quocTichID.trim().length || !tenNv.trim().length || !ngaySinh.trim().length
-        || !gioiTinh.trim().length || !soDienThoai.trim().length || !soDienThoai2.trim().length
-        || !email.trim().length || !cccd.trim().length || !noiCapCccd.trim().length
-        || !ngayCapCccd.trim().length || !ngayHetHanCccd.trim().length || !hoChieu.trim().length
-        || !noiCapHoChieu.trim().length || !ngayCapHoChieu.trim().length || !ngayHetHanHoChieu.trim().length
-        || !noiSinh.trim().length || !queQuan.trim().length || !diaChiThuongTru.trim().length
-        || !diaChiTamTru.trim().length || !atmNganHang.trim().length || !soAtm.trim().length
-        || !trangThaiLaoDong.trim().length || !ngayBatDauLam.trim().length || !ngayNghiViec.trim().length || !lyDoNghi.trim().length
-      ) {
+      } = userDetail;
+
+
+      // if (!tinhChatHopDongID.toString()?.trim()?.length || !tinhTrangHonNhanID.toString()?.trim()?.length
+      //   || !quocTichID.trim().toString()?.trim()?.length || !tenNv.toString()?.trim()?.length || !ngaySinh.toString()?.trim()?.length
+      //   || !gioiTinh.toString()?.trim()?.length || !soDienThoai.toString()?.trim()?.length || !soDienThoai2.toString()?.trim()?.length
+      //   || !email.toString()?.trim()?.length || !cccd.toString()?.trim()?.length || !noiCapCccd.toString()?.trim()?.length
+      //   || !ngayCapCccd.toString()?.trim()?.length || !ngayHetHanCccd.toString()?.trim()?.length || !hoChieu.toString()?.trim()?.length
+      //   || !noiCapHoChieu.toString()?.trim()?.length || !ngayCapHoChieu.toString()?.trim()?.length || !ngayHetHanHoChieu.toString()?.trim()?.length
+      //   || !noiSinh.toString()?.trim()?.length || !queQuan.toString()?.trim()?.length || !diaChiThuongTru.toString()?.trim()?.length
+      //   || !diaChiTamTru.toString()?.trim()?.length || !atmNganHang.toString()?.trim()?.length || !soAtm.toString()?.trim()?.length
+      //   || !trangThaiLaoDong.toString()?.trim()?.length || !ngayBatDauLam.toString()?.trim()?.length || !ngayNghiViec.toString()?.trim()?.length 
+      //   || !lyDoNghi.toString()?.trim()?.length)
+      if (tinhChatHopDongID == null || tinhTrangHonNhanID == null
+        || quocTichID == null || tenNv == null || ngaySinh == null
+        || gioiTinh == null || soDienThoai == null || soDienThoai2 == null
+        || email == null || cccd == null || noiCapCccd == null
+        || ngayCapCccd == null || ngayHetHanCccd == null || hoChieu == null
+        || noiCapHoChieu == null || ngayCapHoChieu == null || ngayHetHanHoChieu == null
+        || noiSinh == null || queQuan == null || diaChiThuongTru == null
+        || diaChiTamTru == null || atmNganHang == null || soAtm == null
+        || trangThaiLaoDong == null || ngayBatDauLam == null || ngayNghiViec == null
+        || lyDoNghi == null) {
+        console.log("da vao day 1")
         setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
       } else {
         setIsSubmit(true)
-        console.log(userDetail)
+        console.log("da vao day 2")
+        // const updateImg = await UserAPI.updateUserImage(maNv, ...userImage)
         const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail })
         if (updateRes?.status === 200) {
-          toast.success('Cập nhật thông tin thành công')
+          toast.success(updateRes?.data)
         }
       }
     } catch (error) {
       if (error.response) {
+        console.log(error)
         setSubmitError({ status: true, error: error.response.data })
       }
     } finally {
+      console.log("da vao day 4")
       setIsSubmit(false)
     }
   }
@@ -156,9 +186,9 @@ export default function UpdateUser() {
 
       <div className="row avatar-row">
         <div>
-          {userImage?.length ?
-            <img src={`data:image/png;base64, ${userImage}`} alt="avatar" width={220} height={180} /> :
-            <img src={`http://localhost:8080/user/${maNv}/image`} alt="avatar" />
+          {
+            // <img src={`data:image/jpeg;base64,${userImage}`} alt="avatar" width={220} height={180} />
+            <img src={`http://localhost:8080/user/${maNv}/image`} alt="avatar" width={220} height={180} />
           }
         </div>
         <div>
@@ -189,15 +219,30 @@ export default function UpdateUser() {
             type="file"
             disabled={false}
             require={true}
-            handleChange={(event) => {
-              let reader = new FileReader();
-              reader.readAsDataURL(event.target.files[0]);
-              reader.onload = function () {
-                setUserImage(reader.result.replace(/^data:[a-z]+\/[a-z\-]+;base64,/, ""))
-              };
-              reader.onerror = function (error) {
-                console.log('Error: ', error);
-              };
+            handleChange={(e) => {
+              e.preventDefault();
+              // this.setState({
+              //   selectedFile: e.target.files[0]
+              // });
+              const formData = new FormData();
+              formData.append('file', e.target.files[0]);
+              //Append the rest data then send
+              axios({
+                method: 'put',
+                url: `http://localhost:8080/user/${maNv}/image`,
+                data: formData,
+                headers: { 'Content-Type': 'multipart/form-data' }
+              })
+                .then(function (response) {
+                  //handle success
+                  alert('them anh thanh cong')
+                  // const userRes =  UserAPI.getUserById(maNv)
+                  // setUserDetail({ ...userDetail, image:  userRes?.data?.image})
+                  // navigate(`/manager/updateuser/${maNv}`)
+                },
+                  function (error) {
+                    // handle error 
+                  });
             }}
           />
           <CustomInputField
@@ -226,7 +271,9 @@ export default function UpdateUser() {
             disabled={false}
             require={true}
             handleChange={(event) => {
-              setUserDetail({ ...userDetail, ngayCapCccd: event.target.value })
+              const parts = event.target.value.split('-');
+              const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
+              setUserDetail({ ...userDetail, ngayCapCccd: mydate })
             }}
 
           />
@@ -236,7 +283,9 @@ export default function UpdateUser() {
             disabled={false}
             require={true}
             handleChange={(event) => {
-              setUserDetail({ ...userDetail, ngayHetHanCccd: event.target.value })
+              const parts = event.target.value.split('-');
+              const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
+              setUserDetail({ ...userDetail, ngayHetHanCccd: mydate })
             }}
           />
           <CustomInputField
@@ -253,7 +302,6 @@ export default function UpdateUser() {
             value={userDetail?.noiCapHoChieu || ''}
             type="text"
             disabled={false}
-            require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, noiCapHoChieu: event.target.value })
             }}
@@ -265,8 +313,9 @@ export default function UpdateUser() {
             disabled={false}
             require={true}
             handleChange={(event) => {
-              const date = event.target.value.format('dd/mm/yyyy')
-              setUserDetail({ ...userDetail, ngayCapHoChieu: date })
+              const parts = event.target.value.split('-');
+              const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
+              setUserDetail({ ...userDetail, ngayCapHoChieu: mydate })
             }}
           />
           <CustomInputField
@@ -276,7 +325,9 @@ export default function UpdateUser() {
             disabled={false}
             require={true}
             handleChange={(event) => {
-              setUserDetail({ ...userDetail, ngayHetHanHoChieu: event.target.value })
+              const parts = event.target.value.split('-');
+              const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
+              setUserDetail({ ...userDetail, ngayHetHanHoChieu: mydate })
             }}
           />
           <CustomInputField
@@ -304,11 +355,14 @@ export default function UpdateUser() {
             type="date"
             disabled={false}
             handleChange={(event) => {
-              setUserDetail({ ...userDetail, ngayBatDauLam: event.target.value })
+              const parts = event.target.value.split('-');
+              const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
+              setUserDetail({ ...userDetail, ngayBatDauLam: mydate })
             }}
           />
           <CustomSelectBox
             title="Tính Chất Hợp Đồng"
+            value={userDetail?.tinhChatHopDongID}
             option={listContractNature.map((contractNatureItem) => {
               return (
                 { label: contractNatureItem.tinhChatHopDong, value: contractNatureItem.id }
@@ -319,23 +373,12 @@ export default function UpdateUser() {
               setUserDetail({ ...userDetail, tinhChatHopDongID: event.currentTarget.value })
             }}
           />
-          <CustomSelectBox
-            title="Chức Vụ"
-            option={listPosition.map((positionItem) => {
-              return (
-                { label: positionItem.tenChucVu, value: positionItem.id }
-              )
-            })}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, chucVuID: event.currentTarget.value })
-            }}
-          />
         </div>
 
         <div>
           <CustomSelectBox
             title="Giới Tính :"
+            value={userDetail?.gioiTinh}
             option={[{ label: "Nam", value: true }, { label: "Nữ", value: false }]}
             require={true}
             handleChange={(event) => {
@@ -349,8 +392,9 @@ export default function UpdateUser() {
             disabled={false}
             require={true}
             handleChange={(event) => {
-              const date = event.target.value.format('dd/mm/yyyy')
-              setUserDetail({ ...userDetail, ngaySinh: date })
+              const parts = event.target.value.split('-');
+              const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
+              setUserDetail({ ...userDetail, ngaySinh: mydate })
             }}
           />
           <CustomInputField
@@ -375,6 +419,7 @@ export default function UpdateUser() {
           />
           <CustomSelectBox
             title="Quốc Tịch"
+            value={userDetail?.quocTichID}
             option={listNation.map((nationItem) => {
               return (
                 { label: nationItem.quocTich, value: nationItem.id }
@@ -437,6 +482,7 @@ export default function UpdateUser() {
           />
           <CustomSelectBox
             title="Tình Trạng Hôn Nhân"
+            value={userDetail?.tinhTrangHonNhanID}
             option={listMarriage.map((marriageItem) => {
               return (
                 { label: marriageItem.tinhTrang, value: marriageItem.id }
@@ -449,6 +495,7 @@ export default function UpdateUser() {
           />
           <CustomSelectBox
             title="Trạng Thái Lao Động"
+            value={userDetail?.trangThaiLaoDong}
             option={[{ label: "Đang Hoạt Động", value: true }, { label: "Không Hoạt Động", value: false }]}
             require={true}
             handleChange={(event) => {
@@ -460,7 +507,9 @@ export default function UpdateUser() {
             type="date"
             disabled={false}
             handleChange={(event) => {
-              setUserDetail({ ...userDetail, ngayNghiViec: event.target.value })
+              const parts = event.target.value.split('-');
+              const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
+              setUserDetail({ ...userDetail, ngayNghiViec: mydate })
             }}
           />
           <CustomInputField

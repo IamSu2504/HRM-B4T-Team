@@ -89,11 +89,7 @@ export default function ViewAllUser() {
                   <th scope="row">{userIndex + 1}</th>
                   <td>{userItem?.id}</td>
                   <td>
-
                     <img src={`http://localhost:8080/user/${userItem?.id}/image`} alt="avatar" width={220} height={180} />
-
-
-
                   </td>
                   <td>{userItem?.tenNv}</td>
                   <td>{userItem?.gioiTinh ? 'Nam' : 'Nữ'}</td>
