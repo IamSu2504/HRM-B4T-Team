@@ -20,6 +20,4 @@ public interface PositionCategoryRepository extends JpaRepository<PositionCatego
             "and ct.trang_thai = true and n.ma_nv = ?", nativeQuery = true)
     PositionCategory getByMaNv(String maNV);
 
-
-
 }

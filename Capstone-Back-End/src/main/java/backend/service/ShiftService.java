@@ -22,6 +22,9 @@ public class ShiftService {
     private EmployeeRepository empRepo;
 
     @Autowired
+    private PositionCategoryRepository positionRepo;
+
+    @Autowired
     private ShiftCategoryRepository shiftCategoryRepo;
 
     @Autowired
@@ -42,7 +45,7 @@ public class ShiftService {
         try {
             String mess = null;
             Shift newShift = getNewShift(request);
-            String chucVu = empRepo.getChucVu(newShift.getUser().getId());
+            String chucVu = positionRepo.getByMaNv(newShift.getEmployee().getId()).getTenChucVu();
 
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
@@ -73,7 +76,7 @@ public class ShiftService {
                 }
 
                 //---------- validate day total -------------------
-                Integer dayTotal = shiftRepo.getDayTotal(sdf1.format(newShift.getDate()), newShift.getUser().getId());
+                Integer dayTotal = shiftRepo.getDayTotal(sdf1.format(newShift.getDate()), newShift.getEmployee().getId());
                 if (dayTotal != null) {
                     if (dayTotal >= 10) {
                         return "Thời gian đăng kí tối đa trong 1 ngày là 10 tiếng";
@@ -92,7 +95,7 @@ public class ShiftService {
                 Date sunDay = cal.getTime();
 
                 // get totalWeek
-                Integer totalWeek = shiftRepo.getWeekTotal(sdf1.format(monDay), sdf1.format(sunDay));
+                Integer totalWeek = shiftRepo.getWeekTotal(sdf1.format(monDay), sdf1.format(sunDay), newShift.getEmployee().getId());
 
                 // update min + max total in week
                 List<HolidayCategory> holidaysInWeek = holidayRepo.getNgayLeTrongKhoang(sdf1.format(monDay), sdf1.format(sunDay));
@@ -112,11 +115,11 @@ public class ShiftService {
                 //------------- check dublicate shift -------------
                 Shift dublicateShift = shiftRepo.getByShiftDateRoom(newShift.getShiftCategory().getId(), sdf1.format(newShift.getDate()), newShift.getRoom().getId());
                 if (dublicateShift != null) {
-                    if (dublicateShift.getUser().getId().equalsIgnoreCase(newShift.getUser().getId())) {
+                    if (dublicateShift.getEmployee().getId().equalsIgnoreCase(newShift.getEmployee().getId())) {
                         return "Bạn đã đăng kí ca làm này";
                     } else {
-                        if (!newShift.getUser().getId().equalsIgnoreCase(dublicateShift.getUser().getId())) {
-                            return "Giáo viên " + newShift.getUser().getTenNv() + "(" + newShift.getUser().getId() + ") đã đăng kí cùng ca làm tại " + newShift.getRoom().getTenPhongHoc() + " vào ngày " + request.getDate();
+                        if (!newShift.getEmployee().getId().equalsIgnoreCase(dublicateShift.getEmployee().getId())) {
+                            return "Giáo viên " + newShift.getEmployee().getTenNv() + "(" + newShift.getEmployee().getId() + ") đã đăng kí cùng ca làm tại " + newShift.getRoom().getTenPhongHoc() + " vào ngày " + request.getDate();
                         }
                     }
                 }
@@ -136,7 +139,7 @@ public class ShiftService {
                 }
 
                 if (chucVu.toLowerCase().contains("nhân viên")) {
-                    Integer dayTotal = shiftRepo.getDayTotal(sdf1.format(newShift.getDate()), newShift.getUser().getId());
+                    Integer dayTotal = shiftRepo.getDayTotal(sdf1.format(newShift.getDate()), newShift.getEmployee().getId());
 
                     //----------- validate day total --------------------
                     if (dayTotal != null) {
@@ -156,7 +159,7 @@ public class ShiftService {
                     Date sunDay = cal.getTime();
 
                     // get totalWeek
-                    Integer totalWeek = shiftRepo.getWeekTotal(sdf1.format(monDay), sdf1.format(sunDay));
+                    Integer totalWeek = shiftRepo.getWeekTotal(sdf1.format(monDay), sdf1.format(sunDay), newShift.getEmployee().getId());
 
                     // update min + max total in week
                     List<HolidayCategory> holidaysInWeek = holidayRepo.getNgayLeTrongKhoang(sdf1.format(monDay), sdf1.format(sunDay));
@@ -190,7 +193,7 @@ public class ShiftService {
 //                    return "Bạn chỉ được đăng kí ca 8,9,10,11";
 //                }
 
-                Shift dublicateShift = shiftRepo.getDublicateShift(newShift.getUser().getId(), newShift.getShiftCategory().getId(), sdf1.format(newShift.getDate()), newShift.getRoom().getId());
+                Shift dublicateShift = shiftRepo.getDublicateShift(newShift.getEmployee().getId(), newShift.getShiftCategory().getId(), sdf1.format(newShift.getDate()), newShift.getRoom().getId());
                 if (dublicateShift != null) {
                     return "Bạn đã đăng kí cùng ca làm tại " + newShift.getRoom().getTenPhongHoc() + " vào ngày " + request.getDate();
                 }
@@ -223,7 +226,7 @@ public class ShiftService {
 
             Shift s = new Shift();
             s.setId(request.getId());
-            s.setUser(empRepo.findById(request.getUserID()).get());
+            s.setEmployee(empRepo.findById(request.getUserID()).get());
             s.setDate(sdf.parse(request.getDate()));
             s.setShiftCategory(shiftCategoryRepo.findById(request.getShiftCategoryID()).get());
             s.setNote(request.getNote());

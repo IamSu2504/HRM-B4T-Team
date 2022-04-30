@@ -3,6 +3,7 @@ package backend.service;
 import backend.entity.LeaveRequest;
 import backend.repository.EmployeeRepository;
 import backend.repository.LeaveRequestRepository;
+import backend.repository.PositionCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ public class LeaveRequestService {
     @Autowired
     private EmployeeRepository empRepo;
 
+    @Autowired
+    PositionCategoryRepository positionRepo;
+
     public List<LeaveRequest> getAll(){
         return leaveRequestRepository.findAll();
     }
@@ -26,7 +30,7 @@ public class LeaveRequestService {
         try {
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String chucVu = empRepo.getChucVu(leaveRequest.getUser().getId());
+            String chucVu = positionRepo.getByMaNv(leaveRequest.getUser().getId()).getTenChucVu();
 
             String leaveRequestName = leaveRequest.getShiftCategory().getTenCa();
 
