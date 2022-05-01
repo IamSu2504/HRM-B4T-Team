@@ -12,12 +12,9 @@ public interface PositionCategoryRepository extends JpaRepository<PositionCatego
     @Query(value = "select * from phanloai_chucvu where upper(ma_chuc_vu) = upper(?)", nativeQuery = true)
     PositionCategory getByMaChucVu(String maChucVu);
 
-    @Query(value = "select * from phanloai_chucvu where upper(ten_chuc_vu) = upper(?)", nativeQuery = true)
-    PositionCategory getByTenChucVu(String maChucVu);
-
-    @Query(value = "select cv.* from nhanvien n, quatrinhcongtac ct, phanloai_chucvu cv\n" +
-            "where n.ma_nv = ct.ma_nv and ct.id_chuc_vu = cv.id\n" +
-            "and ct.trang_thai = true and n.ma_nv = ?", nativeQuery = true)
+    @Query(value = "select cv.* from quatrinhcongtac ct, phanloai_chucvu cv\n" +
+            "where ct.id_chuc_vu = cv.id\n" +
+            "and ct.trang_thai = true and ct.ma_nv = ?", nativeQuery = true)
     PositionCategory getByMaNv(String maNV);
 
 }

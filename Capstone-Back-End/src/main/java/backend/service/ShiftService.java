@@ -1,18 +1,12 @@
 package backend.service;
 
-import backend.entity.CreateUpdateShiftRequest;
-import backend.entity.HolidayCategory;
-import backend.entity.Shift;
-import backend.entity.ShiftTableRequest;
+import backend.entity.*;
 import backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ShiftService {
@@ -35,18 +29,14 @@ public class ShiftService {
     @Autowired
     private HolidayCategoryRepository holidayRepo;
 
-    public List<Shift> getAll() {
-        return shiftRepo.getAll();
-    }
-
-    public String getCreateMessage(CreateUpdateShiftRequest request) {
-        return null;
-    }
-
     public String getSaveShiftMessage(CreateUpdateShiftRequest request) {
         try {
             String mess = null;
             Shift newShift = getNewShift(request);
+
+            if(positionRepo.getByMaNv(newShift.getEmployee().getId())==null){
+                return "Không thể đăng kí do mã nhân viên " + request.getId() + " hiện chưa có chức vụ. Vui lòng thêm quá trình công tác cho nhân viên này";
+            }
             String chucVu = positionRepo.getByMaNv(newShift.getEmployee().getId()).getTenChucVu();
 
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -55,25 +45,15 @@ public class ShiftService {
             String shiftName = newShift.getShiftCategory().getTenCa();
 
             //------------ check if user is a teacher -------------------
-            if (chucVu.equalsIgnoreCase("giáo viên")) {
+            if (chucVu.toLowerCase().contains("giáo viên")) {
 
-                // check invalid shift
-                List<Integer> listInvalidTeacherShifts = shiftRepo.getSpecialShifts();
-                for (Integer invalidShiftID : listInvalidTeacherShifts) {
-                    if (newShift.getShiftCategory().getId() == invalidShiftID) {
-                        return "Giáo viên chỉ được đăng kí những ca có thời gian 2 tiếng";
-                    }
-                }
-
-//                if (shiftName.equalsIgnoreCase("Ca 8") || shiftName.equalsIgnoreCase("Ca 9") || shiftName.equalsIgnoreCase("Ca 10") || shiftName.equalsIgnoreCase("Ca 11")) {
-//                    return "Không thể đăng kí ca 8,9,10,11";
-//                }
+                Employee gv = empRepo.getById(request.getUserID());
 
                 //----------- check holiday ----------------------
                 List<HolidayCategory> holidays = holidayRepo.findAll();
                 for (HolidayCategory h : holidays) {
                     if (newShift.getDate() == h.getNgay()) {
-                        return "Không được đăng kí ngày " + h.getTenNgayLe() + " " + sdf2.format(newShift.getDate());
+                        return "Không thể đăng kí ngày " + sdf2.format(newShift.getDate()) + "("+h.getTenNgayLe()+")";
                     }
                 }
 
@@ -81,7 +61,7 @@ public class ShiftService {
                 Integer dayTotal = shiftRepo.getDayTotal(sdf1.format(newShift.getDate()), newShift.getEmployee().getId());
                 if (dayTotal != null) {
                     if (dayTotal >= 10) {
-                        return "Thời gian đăng kí tối đa trong 1 ngày là 10 tiếng";
+                        return "Giáo viên "+gv.getTenNv() + "("+gv.getId()+ ")"+" đã đăng kí tối đa trong 1 ngày là 10 tiếng. Không thể đăng kí thêm";
                     }
                 }
 
@@ -107,15 +87,15 @@ public class ShiftService {
                 // check if no shift signed up in week
                 if (totalWeek != null) {
                     if (totalWeek == maxTotalInWeek) {
-                        return "Thời gian đăng kí tối đa trong tuần từ " + sdf2.format(monDay) + " đến " + sdf2.format(sunDay) + " là " + maxTotalInWeek;
+                        return "Thời gian đăng kí tối đa trong tuần của giáo viên "+gv.getTenNv()+"("+gv.getId()+")"+" từ " + sdf2.format(monDay) + " đến " + sdf2.format(sunDay) + " đã đạt đến tối đa là " + maxTotalInWeek + " giờ";
                     }
                     if (totalWeek < minTotalInWeek) {
-                        mess = "Vui lòng đăng kí thêm ca, tổng thời gian đăng kí tối thiểu trong tuần từ " + sdf2.format(monDay) + " đến " + sdf2.format(sunDay) + " là " + minTotalInWeek;
+                        mess = "Vui lòng đăng kí thêm ca, tổng thời gian đăng kí tối thiểu của giáo viên "+gv.getTenNv()+"("+gv.getId()+")"+" trong tuần từ " + sdf2.format(monDay) + " đến " + sdf2.format(sunDay) + " là " + minTotalInWeek;
                     }
                 }
 
                 //------------- check dublicate shift -------------
-                Shift dublicateShift = shiftRepo.getByShiftDateRoom(newShift.getShiftCategory().getId(), sdf1.format(newShift.getDate()), newShift.getRoom().getId());
+                Shift dublicateShift = shiftRepo.getDublicateShift(newShift.getShiftCategory().getId(), sdf1.format(newShift.getDate()), newShift.getRoom().getId());
                 if (dublicateShift != null) {
                     if (dublicateShift.getEmployee().getId().equalsIgnoreCase(newShift.getEmployee().getId())) {
                         return "Bạn đã đăng kí ca làm này";
@@ -126,98 +106,13 @@ public class ShiftService {
                     }
                 }
 
+                shiftRepo.save(newShift);
+                return mess;
                 // check not teacher
             } else {
-
-                if (chucVu.toLowerCase().contains("giám đốc") || chucVu.toLowerCase().contains("phó giám đốc")) {
-                    return "Chức vụ giám đốc hoặc phó giám đốc không phải đăng kí ca làm";
-                }
-
-                List<HolidayCategory> holidays = holidayRepo.findAll();
-                for (HolidayCategory h : holidays) {
-                    if (newShift.getDate() == h.getNgay()) {
-                        return "Không được đăng kí ngày " + sdf2.format(newShift.getDate() + " " + h.getTenNgayLe());
-                    }
-                }
-
-                if (chucVu.toLowerCase().contains("nhân viên")) {
-                    Integer dayTotal = shiftRepo.getDayTotal(sdf1.format(newShift.getDate()), newShift.getEmployee().getId());
-
-                    //----------- validate day total --------------------
-                    if (dayTotal != null) {
-                        if (dayTotal >= 8) {
-                            return "Thời gian đăng kí tối đa trong 1 ngày là 8 tiếng";
-                        }
-                    }
-
-                    //----------- validate week total ------------------
-                    int totalInWeek = 40;
-
-                    // get monday + sunday
-                    Calendar cal = Calendar.getInstance();
-                    cal.add(Calendar.DATE, (newShift.getDate().getDay() - 2) * (-1));
-                    Date monDay = cal.getTime();
-                    cal.add(Calendar.DATE, (10 - newShift.getDate().getDay()));
-                    Date sunDay = cal.getTime();
-
-                    // get totalWeek
-                    Integer totalWeek = shiftRepo.getWeekTotal(sdf1.format(monDay), sdf1.format(sunDay), newShift.getEmployee().getId());
-
-                    // update min + max total in week
-                    List<HolidayCategory> holidaysInWeek = holidayRepo.getNgayLeTrongKhoang(sdf1.format(monDay), sdf1.format(sunDay));
-                    totalInWeek -= holidaysInWeek.size() * 8;
-
-                    // check if no shift signed up in week
-                    if (totalWeek != null) {
-                        if (totalWeek < totalInWeek) {
-                            mess = "Vui lòng đăng kí thêm ca, tổng thời gian đăng kí tối thiểu trong tuần từ " + sdf2.format(monDay) + " đến " + sdf2.format(sunDay) + " là " + totalInWeek;
-                        }
-                        if (totalWeek == totalInWeek) {
-                            return "Tổng thời gian đăng kí tối đa trong tuần từ " + sdf2.format(monDay) + " đến " + sdf2.format(sunDay) + " là " + totalInWeek;
-                        }
-                    }
-                }
-
-                //--------- check invalid shift ------------
-                boolean checkValidShift = false;
-                List<Integer> listValidShifts = shiftRepo.getSpecialShifts();
-                for (Integer validShiftID : listValidShifts) {
-                    if (newShift.getShiftCategory().getId() == validShiftID) {
-                        checkValidShift = true;
-                        break;
-                    }
-                }
-                if (!checkValidShift) {
-                    return "Bạn chỉ được đăng kí những ca có thời gian hơn 2 tiếng";
-                }
-
-//                if (!shiftName.equalsIgnoreCase("Ca 8") && !shiftName.equalsIgnoreCase("Ca 9") && !shiftName.equalsIgnoreCase("Ca 10") && !shiftName.equalsIgnoreCase("Ca 11")) {
-//                    return "Bạn chỉ được đăng kí ca 8,9,10,11";
-//                }
-
-                Shift dublicateShift = shiftRepo.getDublicateShift(newShift.getEmployee().getId(), newShift.getShiftCategory().getId(), sdf1.format(newShift.getDate()), newShift.getRoom().getId());
-                if (dublicateShift != null) {
-                    return "Bạn đã đăng kí cùng ca làm tại " + newShift.getRoom().getTenPhongHoc() + " vào ngày " + request.getDate();
-                }
+                return "Chỉ giáo viên được đăng kí ca làm";
             }
-
-//            String tenCa = shift.getShiftCategory().getTenCa();
-//            if (shift.getUser().getChucVu().getTenChucVu().equalsIgnoreCase("teacher")) {
-//                if (tenCa.equalsIgnoreCase("shift 1") || tenCa.equalsIgnoreCase("shift 2") || tenCa.equalsIgnoreCase("shift 3") || tenCa.equalsIgnoreCase("shift 4") || tenCa.equalsIgnoreCase("shift 5") || tenCa.equalsIgnoreCase("shift 6") || tenCa.equalsIgnoreCase("shift 7") || tenCa.equalsIgnoreCase("shift 8")) {
-//                    String empID = shift.getUser().getId();
-//                    String date = sdf1.format(shift.getDate());
-//                    if (repo.getConflictShifts(empID, date, "shift 1", "shift 5").size() == 2 || repo.getConflictShifts(empID, date, "shift 2", "shift 6").size() == 2 || repo.getConflictShifts(empID, date, "shift 3", "shift 7").size() == 2 || repo.getConflictShifts(empID, date, "shift 4", "shift 8").size() == 2) {
-//                        return "Signing up these couples of shifts in a day is not permitted: shift 1 + shift 5, shift 2 + shift 6, shift 3 + shift 7, shift 4 + shift 8";
-//                    }
-//                }
-//            }
-//            else if(shift.getUser().getChucVu().getTenChucVu().equalsIgnoreCase("teacher manager")){
-//
-//            }
-
-            shiftRepo.save(newShift);
-            return mess;
-        } catch (Exception e) {
+            }catch (Exception e) {
             return "Lỗi nội bộ";
         }
     }
@@ -248,27 +143,6 @@ public class ShiftService {
     }
 
     public List<Shift> getTable(ShiftTableRequest request) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        List<Shift> shifts = new ArrayList<>();
-        Calendar c = Calendar.getInstance();
-
-        int totalShiftCategory = shiftCategoryRepo.findAll().size();
-        if (totalShiftCategory == 0)
-            return null;
-
-        Shift s = new Shift();
-        for (int i = 1; i <= totalShiftCategory; i++) {
-            c.setTime(request.getNgayTu());
-            for (int j = 1; j <= 7; j++) {
-                c.add(Calendar.DAY_OF_WEEK, 1);
-                s = shiftRepo.getShift(i, request.getIdPhong(), sdf.format(c.getTime()));
-                shifts.add(s);
-            }
-        }
-        return shifts;
-    }
-
-    public List<Shift> getSelfTable(ShiftTableRequest request) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         List<Shift> shifts = new ArrayList<>();
         Calendar c = Calendar.getInstance();

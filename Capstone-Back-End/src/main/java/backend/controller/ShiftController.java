@@ -19,19 +19,6 @@ public class ShiftController {
     @Autowired
     private ShiftService service;
 
-    @GetMapping(value = "")
-    public ResponseEntity<?> getAll() {
-        try {
-            List<Shift> list = service.getAll();
-            if (list.isEmpty()) {
-                return new ResponseEntity<>("Chưa có quyền tài khoản được tạo", HttpStatus.NOT_FOUND);
-            }
-            return new ResponseEntity<>(list, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     @PostMapping(value = "/table")
     public ResponseEntity<?> getTable(@RequestBody ShiftTableRequest request) {
         try {
