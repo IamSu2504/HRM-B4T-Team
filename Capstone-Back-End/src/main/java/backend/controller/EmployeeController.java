@@ -108,7 +108,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}/image")
-    public ResponseEntity<?> getProfileImage(@PathVariable String id){
+    public ResponseEntity<?> getProfileImage(@PathVariable("id") String id){
         try {
             Employee user = service.getById(id);
             if (user == null) {
@@ -128,7 +128,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}/image/base64")
-    public ResponseEntity<?> getProfileImageBased64(@PathVariable String id){
+    public ResponseEntity<?> getProfileImageBased64(@PathVariable("id") String id){
         try {
             Employee user = service.getById(id);
             if (user == null) {
