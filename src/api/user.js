@@ -61,6 +61,10 @@ const UserAPI = {
     updateUserImage(maNV, image){
         const url = `/user/${maNV}/image`;
         return AxiosClient.put(url, image);
+    },
+    getUserImageBase64(maNv) {
+        const url = `/user/${maNv}/image/base64`;
+        return AxiosClient.get(url);
     }
   
 }

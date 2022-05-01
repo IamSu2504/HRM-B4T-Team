@@ -121,16 +121,18 @@ import MViewWorkingProcess from "../pages/Manager/WorkingProcess/ViewWorkingProc
 import MAddWorkingProcess from "../pages/Manager/WorkingProcess/AddNewWorkingProcess";
 import MUpdateWorkingProcess from "../pages/Manager/WorkingProcess/UpdateWorkingProcess";
 
+import RegisterShifts from "../pages/Manager/RegisterShift";
+
 //Employee
 import EmployeeHomepage from "../pages/Employee/HomePage";
 import ELeaveRequest from "../pages/Employee/LeaveRequest";
 
-import RegisterShifts from "../pages/User/RegisterShifts";
+
 import ViewTimekeeping from "../pages/User/TimeKeeping";
 import EViewContract from "../pages/User/ViewContract";
 import TimeKeeping from "../pages/User/TimeKeeping";
 import AddUser from "../pages/User/AddNewUser";
-import RegisterShift from "../pages/User/RegisterShift";
+import RegisterShift from "../pages/Manager/RegisterShift";
 
 
 export default function MainApp() {
@@ -262,6 +264,7 @@ export default function MainApp() {
         <Route exact path="/manager/updateworkingProcess/:workingProcessId" element={<LayoutPrivateRoute><MUpdateWorkingProcess /></LayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewleaveRequest"  element={<LayoutPrivateRoute><MViewLeaveRequest /></LayoutPrivateRoute>} />
+         <Route exact path="/manager/registershifts"  element={<LayoutPrivateRoute><RegisterShifts /></LayoutPrivateRoute>} />
 
         <Route exact path="/manager/homepage" element={<ManagerHomePage />} />  
 
@@ -269,7 +272,7 @@ export default function MainApp() {
         <Route exact path="/employee/homepage" element={<EmployeeHomepage />} />
         <Route exact path="/employee/viewuser/:maNv"  element={<LayoutPrivateRoute><ViewUser /></LayoutPrivateRoute>} />
         <Route exact path="/employee/updateuser/:maNv"  element={<LayoutPrivateRoute><UpdateUser /></LayoutPrivateRoute>} />
-        <Route exact path="/employee/registershifts"  element={<LayoutPrivateRoute><RegisterShifts /></LayoutPrivateRoute>} />
+       
         <Route exact path="/employee/viewtimekeeping"  element={<LayoutPrivateRoute><ViewTimekeeping /></LayoutPrivateRoute>} />
         <Route exact path="/employee/viewcontract/:maNv"  element={<LayoutPrivateRoute><EViewContract /></LayoutPrivateRoute>} />
         <Route exact path="/employee/timeKeeping"  element={<LayoutPrivateRoute><TimeKeeping /></LayoutPrivateRoute>} />

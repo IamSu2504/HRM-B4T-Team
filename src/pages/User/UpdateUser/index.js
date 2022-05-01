@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import UserAPI from "../../../api/user";
@@ -17,6 +17,7 @@ export default function UpdateUser() {
   const [listPosition, setListPosition] = useState([])
   const [listContractNature, setListContractNature] = useState([])
   const [listNation, setListNation] = useState([])
+  const [mount, setMount] = useState(false)
   const [listMarriage, setListMarriage] = useState([])
   const [userDetail, setUserDetail] = useState({
     tinhChatHopDongID: '', tinhTrangHonNhanID: '',
@@ -32,7 +33,7 @@ export default function UpdateUser() {
   })
   const [submitError, setSubmitError] = useState({ status: false, error: '' })
   const [isSubmit, setIsSubmit] = useState(false)
-  const [userImage, setUserImage] = useState('')
+  const [userImage, setUserImage] = useState()
   const { maNv } = useParams()
   const navigate = useNavigate()
   const getAllPosition = async () => {
@@ -102,23 +103,24 @@ export default function UpdateUser() {
     getUserDetail()
   }, [])
 
-  const getUserImage = async () => {
-    try {
-      if (maNv) {
-        const userRes = await UserAPI.getUserImage(maNv)
-        if (userRes?.status === 200) {
-          if (userRes?.data?.length)
-            setUserImage(userRes?.data)
-        }
-      }
-    } catch (error) {
-      console.log('get user image error >>>>> ', error)
-    }
-  }
+  // const getUserImage = async () => {
+  //   try {
+  //     if (maNv) {
+  //       const userRes = await UserAPI.getUserImage(maNv)
+  //       if (userRes?.status === 200) {
+  //         if (userRes?.data?.length)
+  //           setUserImage(userRes?.data)
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log('get user image error >>>>> ', error)
+  //   }
+  // }
 
-  useEffect(() => {
-    getUserImage()
-  }, [])
+  // useEffect(() => {
+  //   getUserImage()
+  // }, [])
+
 
   const handleUpdate = async () => {
     try {
@@ -162,6 +164,21 @@ export default function UpdateUser() {
         const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail })
         if (updateRes?.status === 200) {
           toast.success(updateRes?.data)
+
+          const formData = new FormData();
+          formData.append("file", userImage);
+          try {
+            let urlStr = 'http://localhost:8080/user/'+maNv+'/image'
+            const response = await axios({
+              method: "put",
+              url: urlStr,
+              data: formData,
+              headers: { "Content-Type": "multipart/form-data" },
+            });
+          } catch (error) {
+            
+          }
+
         }
       }
     } catch (error) {
@@ -175,6 +192,7 @@ export default function UpdateUser() {
     }
   }
 
+
   return (
     <div className="update-account-page">
       <div className="row">
@@ -187,8 +205,9 @@ export default function UpdateUser() {
       <div className="row avatar-row">
         <div>
           {
-            // <img src={`data:image/jpeg;base64,${userImage}`} alt="avatar" width={220} height={180} />
-            <img src={`http://localhost:8080/user/${maNv}/image`} alt="avatar" width={220} height={180} />
+            mount ?
+              <img src={URL.createObjectURL(userImage)} alt="avatar" width={220} height={180} /> :
+              <img src={`http://localhost:8080/user/${maNv}/image`} alt="avatar" width={220} height={180} />
           }
         </div>
         <div>
@@ -220,29 +239,8 @@ export default function UpdateUser() {
             disabled={false}
             require={true}
             handleChange={(e) => {
-              e.preventDefault();
-              // this.setState({
-              //   selectedFile: e.target.files[0]
-              // });
-              const formData = new FormData();
-              formData.append('file', e.target.files[0]);
-              //Append the rest data then send
-              axios({
-                method: 'put',
-                url: `http://localhost:8080/user/${maNv}/image`,
-                data: formData,
-                headers: { 'Content-Type': 'multipart/form-data' }
-              })
-                .then(function (response) {
-                  //handle success
-                  alert('them anh thanh cong')
-                  // const userRes =  UserAPI.getUserById(maNv)
-                  // setUserDetail({ ...userDetail, image:  userRes?.data?.image})
-                  // navigate(`/manager/updateuser/${maNv}`)
-                },
-                  function (error) {
-                    // handle error 
-                  });
+              setUserImage(e.target.files[0]);
+              setMount(true);
             }}
           />
           <CustomInputField
