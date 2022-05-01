@@ -39,10 +39,6 @@ public class Shift {
     @JsonFormat(pattern="dd/MM/yyyy")
     private Date date;
 
-    @Column(name = "xet_duyet")
-    private Boolean accepted;
 
-    @Column(name = "ly_do_kh_duoc_duyet")
-    private String note;
 
 }

@@ -3,11 +3,13 @@ package backend.service;
 import backend.entity.CreateUpdateShiftRequest;
 import backend.entity.HolidayCategory;
 import backend.entity.Shift;
+import backend.entity.ShiftTableRequest;
 import backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -229,11 +231,7 @@ public class ShiftService {
             s.setEmployee(empRepo.findById(request.getUserID()).get());
             s.setDate(sdf.parse(request.getDate()));
             s.setShiftCategory(shiftCategoryRepo.findById(request.getShiftCategoryID()).get());
-            s.setNote(request.getNote());
             s.setRoom(roomRepo.findById(request.getRoomID()).get());
-
-            if (request.getAccepted() != null)
-                s.setAccepted(request.getAccepted());
 
             return s;
         } catch (Exception e) {
@@ -241,13 +239,63 @@ public class ShiftService {
         }
     }
 
-    public Shift getById(int id){
-        if(shiftRepo.findById(id).isPresent()){
+    public Shift getById(int id) {
+        if (shiftRepo.findById(id).isPresent()) {
             return shiftRepo.findById(id).get();
-        }
-        else{
+        } else {
             return null;
         }
+    }
+
+    public List<Shift> getTable(ShiftTableRequest request) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        List<Shift> shifts = new ArrayList<>();
+        Calendar c = Calendar.getInstance();
+
+        int totalShiftCategory = shiftCategoryRepo.findAll().size();
+        if (totalShiftCategory == 0)
+            return null;
+
+        Shift s = new Shift();
+        for (int i = 1; i <= totalShiftCategory; i++) {
+            c.setTime(request.getNgayTu());
+            for (int j = 1; j <= 7; j++) {
+                c.add(Calendar.DAY_OF_WEEK, 1);
+                s = shiftRepo.getShift(i, request.getIdPhong(), sdf.format(c.getTime()));
+                shifts.add(s);
+            }
+        }
+        return shifts;
+    }
+
+    public List<Shift> getSelfTable(ShiftTableRequest request) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        List<Shift> shifts = new ArrayList<>();
+        Calendar c = Calendar.getInstance();
+
+        int totalShiftCategory = shiftCategoryRepo.findAll().size();
+        if (totalShiftCategory == 0)
+            return null;
+
+        Shift s = new Shift();
+        for (int i = 1; i <= totalShiftCategory; i++) {
+            c.setTime(request.getNgayTu());
+            if(request.getMaNv()==null) {
+                for (int j = 1; j <= 7; j++) {
+                    c.add(Calendar.DAY_OF_WEEK, 1);
+                    s = shiftRepo.getShift(i, request.getIdPhong(), sdf.format(c.getTime()));
+                    shifts.add(s);
+                }
+            }
+            else{
+                for (int j = 1; j <= 7; j++) {
+                    c.add(Calendar.DAY_OF_WEEK, 1);
+                    s = shiftRepo.getShift(i, request.getIdPhong(), sdf.format(c.getTime()), request.getMaNv());
+                    shifts.add(s);
+                }
+            }
+        }
+        return shifts;
     }
 
 }
