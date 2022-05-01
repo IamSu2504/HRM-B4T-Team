@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -125,4 +126,26 @@ public class EmployeeController {
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/{id}/image/base64")
+    public ResponseEntity<?> getProfileImageBased64(@PathVariable String id){
+        try {
+            Employee user = service.getById(id);
+            if (user == null) {
+                return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.EXPECTATION_FAILED);
+            }
+            String path = new File("./src/main/resources/avatar").getCanonicalPath() + "\\" + user.getImage();
+            File imageFile = new File(path);
+            BufferedImage bImage = ImageIO.read(imageFile);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(bImage, "jpg", bos);
+            byte[] data = bos.toByteArray();
+            byte[] base64encodedData = Base64.getEncoder().encode(data);
+
+            return ResponseEntity.ok().body(base64encodedData);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
