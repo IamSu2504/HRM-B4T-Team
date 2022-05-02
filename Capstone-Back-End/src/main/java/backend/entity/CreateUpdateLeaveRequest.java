@@ -21,7 +21,7 @@ public class CreateUpdateLeaveRequest {
 
     private String nguoiDuyet;
 
-    private Integer shiftCategory;
+    private Integer shiftID;
 
     private String date;
 

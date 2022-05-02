@@ -1,8 +1,10 @@
 package backend.service;
 
+import backend.entity.CreateUpdateLeaveRequest;
+import backend.entity.HolidayCategory;
 import backend.entity.LeaveRequest;
-import backend.repository.EmployeeRepository;
-import backend.repository.LeaveRequestRepository;
+import backend.entity.Shift;
+import backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,34 +20,113 @@ public class LeaveRequestService {
     @Autowired
     private EmployeeRepository empRepo;
 
+    @Autowired
+    private DayOffCategoryRepository dayOffRepository;
+
+    @Autowired
+    private ShiftCategoryRepository shiftCategoryRepository;
+
+    @Autowired
+    private HolidayCategoryRepository holidayCategoryRepository;
+
+    @Autowired
+    private WorkingProcessRepository workingProcessRepository;
+
     public List<LeaveRequest> getAll(){
         return leaveRequestRepository.findAll();
     }
 
-    public String createLeaveRequest(LeaveRequest leaveRequest) {
+    public String createLeaveRequest(CreateUpdateLeaveRequest request) {
         try {
-
+            String mess = null;
+            LeaveRequest newLeave = getNewLeaveRequest(request);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String chucVu = empRepo.getChucVu(leaveRequest.getUser().getId());
+            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+            String chucVu = workingProcessRepository.getChucVu(newLeave.getUser().getId());
 
-            String leaveRequestName = leaveRequest.getShiftCategory().getTenCa();
+            String shiftName = newLeave.getShiftID().getTenCa();
 
             // check teacher
-            if (chucVu.equalsIgnoreCase("giáo viên")) {
+            if (chucVu.toLowerCase().contains("giáo viên")) {
 
-                if (leaveRequestName.equalsIgnoreCase("Ca08") || leaveRequestName.equalsIgnoreCase("Ca09") || leaveRequestName.equalsIgnoreCase("Ca10") || leaveRequestName.equalsIgnoreCase("Ca11")) {
+                // check ca lam co dung khong
+                if (shiftName.equalsIgnoreCase("Ca 7") || shiftName.equalsIgnoreCase("Ca 6")) {
                     return "Không phải ca làm của bạn, không thể đăng ký nghỉ";
+                }
+
+                // check dang ky nghi vao ngay nghi le
+                List<HolidayCategory> holidays = holidayCategoryRepository.findAll();
+                    for (HolidayCategory h : holidays) {
+                        if (newLeave.getDate() == h.getNgay()) {
+                            return "Không được đăng kí ngày " + h.getTenNgayLe() + " " + sdf2.format(newLeave.getDate());
+                        }
+                    }
+
+                // check ngay nghi da dang ky
+                LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
+                if (dublicateShift != null) {
+                    return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa() + "rồi.";
                 }
                 // check not teacher
             } else {
-                if (!leaveRequestName.equalsIgnoreCase("Ca08") && !leaveRequestName.equalsIgnoreCase("Ca09") && !leaveRequestName.equalsIgnoreCase("Ca10") && !leaveRequestName.equalsIgnoreCase("Ca11")) {
-                    return "Bạn chỉ được đăng kí ca 8,9,10,11";
+
+                //check chuc vu
+                if (chucVu.toLowerCase().contains("giám đốc") || chucVu.toLowerCase().contains("phó giám đốc")) {
+                    return "Chức vụ giám đốc hoặc phó giám đốc không cần đăng ký nghỉ.";
+                }
+
+                // check ca lam co dung khong
+                if (!shiftName.equalsIgnoreCase("Ca 6") && !shiftName.equalsIgnoreCase("Ca 7")) {
+                    return "Không phải ca làm của bạn, không thể đăng ký nghỉ";
+                }
+
+                // check dang ky nghi vao ngay nghi le
+                List<HolidayCategory> holidays = holidayCategoryRepository.findAll();
+                for (HolidayCategory h : holidays) {
+                    if (newLeave.getDate() == h.getNgay()) {
+                        return "Không được đăng kí ngày " + h.getTenNgayLe() + " " + sdf2.format(newLeave.getDate());
+                    }
+                }
+
+                // check ngay nghi da dang ky
+                LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
+                if (dublicateShift != null) {
+                    return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa() + "rồi.";
                 }
             }
-            leaveRequestRepository.save(leaveRequest);
-            return "Đăng ký nghỉ thành công";
+            leaveRequestRepository.save(newLeave);
+            return mess;
         } catch (Exception e){
             return "Lỗi nội bộ";
+        }
+    }
+
+    public LeaveRequest getNewLeaveRequest(CreateUpdateLeaveRequest request) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+            LeaveRequest s = new LeaveRequest();
+            s.setId(request.getId());
+            s.setUser(workingProcessRepository.findById(request.getUser()).get());
+            s.setIdNghi(dayOffRepository.findById(request.getIdNghi()).get());
+            if(request.getDate() != null)
+            s.setDate(sdf.parse(request.getDate()));
+            s.setShiftID(shiftCategoryRepository.findById(request.getShiftID()).get());
+            s.setLyDo(request.getLyDo());
+            s.setNguoiDuyet(request.getNguoiDuyet());
+            s.setStatus(request.getStatus());
+            return s;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public LeaveRequest getById(int id){
+        if(leaveRequestRepository.findById(id).isPresent()){
+            return leaveRequestRepository.findById(id).get();
+        }
+        else{
+            return null;
         }
     }
 }

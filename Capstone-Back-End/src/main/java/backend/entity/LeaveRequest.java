@@ -20,7 +20,7 @@ public class LeaveRequest {
 
     @ManyToOne
     @JoinColumn(name = "ma_nv")
-    private Employee user;
+    private WorkingProcess user;
 
     @ManyToOne
     @JoinColumn(name = "id_loai_nghi")
@@ -34,7 +34,7 @@ public class LeaveRequest {
 
     @ManyToOne
     @JoinColumn(name = "id_ca")
-    private ShiftCategory shiftCategory;
+    private ShiftCategory shiftID;
 
     @Column(name = "ngay")
     @Temporal(TemporalType.DATE)
