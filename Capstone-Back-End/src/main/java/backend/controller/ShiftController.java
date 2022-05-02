@@ -53,13 +53,16 @@ public class ShiftController {
     public ResponseEntity<?> create(@RequestBody CreateUpdateShiftRequest request) {
         try {
             String mess = service.getSaveShiftMessage(request);
-            if(mess==null){
-                return new ResponseEntity<>("Đăng kí ca làm thành công", HttpStatus.INTERNAL_SERVER_ERROR);
-            }
             if (mess.contains("thành công")) {
                 return new ResponseEntity<>(mess, HttpStatus.OK);
             }
-            return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
+            else {
+                if (mess.equals("")) {
+                    return new ResponseEntity<>("Đăng kí ca làm thành công", HttpStatus.INTERNAL_SERVER_ERROR);
+                } else {
+                    return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
         } catch (Exception e) {
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
