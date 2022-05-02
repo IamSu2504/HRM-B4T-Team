@@ -130,19 +130,53 @@ export default function ManagerLayout(props) {
               <div id="accordion1" className="menu-accordion menu-accordion2">
                 <div className="card">
                   <div className="card-header">
-                    <a className="card-link" data-toggle="collapse">
+                    <a
+                      className="card-link"
+                      data-toggle="collapse"
+                      href="#collapseTwo"
+                    >
                       <div className="card-head-content">
                         <div className="left">
                           <div className="content1">
-                            <img src="/menu/baocao.svg" />
+                            <img src="/menu/employer.svg" />
                           </div>
-                          <div className="content2">Báo cáo</div>
+                          <div className="content2">Báo Cáo</div>
                         </div>
                         <div className="content3">
                           <img src="/menu/down-arrow.svg" />
                         </div>
                       </div>
                     </a>
+                  </div>
+                  <div
+                    id="collapseTwo"
+                    className="collapse"
+                    data-parent="#accordion1"
+                  >
+                    <div className="card-body">
+                      <div>
+                        <a href="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection2e579c81c5bd288a8287">
+                          <img src="/menu/list-icon.svg" />
+                          <span style={{ marginLeft: '15px' }}>
+                            Tổng Quan
+                          </span>
+                        </a>  
+                      </div>
+                      <div>
+                        <a href="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection63438c805d4b6ea33c12">
+                          <img src="/menu/list-icon.svg" />
+                          <span style={{ marginLeft: '15px' }}>Giáo Viên
+                          </span>
+                        </a>
+                      </div>
+                      <div >
+                        <a href="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection227818c02b928ad9c8fa">
+                          <img src="/menu/list-icon.svg" />
+                          <span style={{ marginLeft: '15px' }}>Lương Nhân Viên
+                          </span>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="card">

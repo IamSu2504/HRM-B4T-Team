@@ -279,6 +279,9 @@ export default function MainApp() {
 
         <Route exact path="/employee/leaveRequest"  element={<LayoutPrivateRoute><ELeaveRequest /></LayoutPrivateRoute>} />
 
+        {/* <Route exact path="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection2e579c81c5bd288a8287"/>
+        <Route exact path="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection63438c805d4b6ea33c12"/>
+        <Route exact path="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection227818c02b928ad9c8fa"/> */}
       </Routes>
     </Router>
   );
