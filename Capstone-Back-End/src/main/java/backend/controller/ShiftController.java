@@ -3,6 +3,7 @@ package backend.controller;
 import backend.entity.CreateUpdateShiftRequest;
 import backend.entity.Shift;
 import backend.entity.ShiftTableRequest;
+import backend.service.EmployeeService;
 import backend.service.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,22 @@ public class ShiftController {
 
     @Autowired
     private ShiftService service;
+
+    @Autowired
+    private EmployeeService employeeService;
+
+    @PostMapping(value = "/employee/{id}")
+    public ResponseEntity<?> getEmployeeTotalShift(@RequestBody int month, @PathVariable("id") String id) {
+        try {
+            if(employeeService.getById(id)==null){
+                return new ResponseEntity<>("Mã nhân viên không tồn tại", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            int totalShiftInMonth = service.getEmployeeTotalShiftInMonth(id,month);
+            return new ResponseEntity<>(totalShiftInMonth, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PostMapping(value = "/table")
     public ResponseEntity<?> getTable(@RequestBody ShiftTableRequest request) {

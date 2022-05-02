@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.time.YearMonth;
 import java.util.*;
 
 @Service
@@ -31,7 +32,7 @@ public class ShiftService {
 
     public String getSaveShiftMessage(CreateUpdateShiftRequest request) {
         try {
-            String mess = null;
+            String mess = "";
             Shift newShift = getNewShift(request);
 
             if(positionRepo.getByMaNv(newShift.getEmployee().getId())==null){
@@ -107,7 +108,7 @@ public class ShiftService {
                 }
 
                 shiftRepo.save(newShift);
-                return mess;
+                return "Đăng kí thành công. " + mess;
                 // check not teacher
             } else {
                 return "Chỉ giáo viên được đăng kí ca làm";
@@ -172,5 +173,22 @@ public class ShiftService {
         return shifts;
     }
 
+    public int getEmployeeTotalShiftInMonth(String empID,int month){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dddd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(YearMonth.now().getYear(), month-1,1);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        String firstOfMonth = sdf.format(calendar.getTime());
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        String lastOfMonth = sdf.format(calendar.getTime());
+
+        Integer total = shiftRepo.getTotalShiftInRange(firstOfMonth,lastOfMonth,empID);
+        if(total==null){
+            return 0;
+        }
+        else{
+            return total;
+        }
+    }
 }
 
