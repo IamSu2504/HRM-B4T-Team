@@ -31,7 +31,20 @@ public class EmployeeController {
         try {
             List<Employee> list = service.getAll();
             if (list.isEmpty()) {
-                return new ResponseEntity<>("Chưa có người dùng được tạo", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Danh sách nhân viên trống", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/search/{text}")
+    public ResponseEntity<?> getSearched(@PathVariable("text") String text) {
+        try {
+            List<Employee> list = service.getSearched(text.trim());
+            if (list.isEmpty()) {
+                return new ResponseEntity<>("Danh sách tìm kiếm trống", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
@@ -44,7 +57,7 @@ public class EmployeeController {
         try {
             Employee u = service.getById(id);
             if (u == null) {
-                return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Nhân viên không tồn tại", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(u, HttpStatus.OK);
         } catch (Exception e) {
@@ -84,7 +97,7 @@ public class EmployeeController {
         try {
             Employee user = service.getById(id);
             if (user == null) {
-                return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Nhân viên không tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
 
             String fileName = user.getId() + ".jpg";
@@ -112,7 +125,7 @@ public class EmployeeController {
         try {
             Employee user = service.getById(id);
             if (user == null) {
-                return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Nhân viên không tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
             String path = new File("./src/main/resources/avatar").getCanonicalPath() + "\\" + user.getImage();
             File imageFile = new File(path);
@@ -132,7 +145,7 @@ public class EmployeeController {
         try {
             Employee user = service.getById(id);
             if (user == null) {
-                return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Nhân viên không tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
             String path = new File("./src/main/resources/avatar").getCanonicalPath() + "\\" + user.getImage();
             File imageFile = new File(path);
