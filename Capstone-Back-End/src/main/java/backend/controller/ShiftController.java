@@ -2,6 +2,7 @@ package backend.controller;
 
 import backend.entity.CreateUpdateShiftRequest;
 import backend.entity.Shift;
+import backend.entity.ShiftTableRequest;
 import backend.service.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,14 +19,14 @@ public class ShiftController {
     @Autowired
     private ShiftService service;
 
-    @GetMapping(value = "")
-    public ResponseEntity<?> getAll() {
+    @PostMapping(value = "/table")
+    public ResponseEntity<?> getTable(@RequestBody ShiftTableRequest request) {
         try {
-            List<Shift> list = service.getAll();
-            if (list.isEmpty()) {
-                return new ResponseEntity<>("Chưa có quyền tài khoản được tạo", HttpStatus.NOT_FOUND);
+            List<Shift> shifts = service.getTable(request);
+            if(shifts==null){
+                return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            return new ResponseEntity<>(list, HttpStatus.OK);
+            return new ResponseEntity<>(shifts, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }

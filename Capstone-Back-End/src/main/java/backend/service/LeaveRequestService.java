@@ -1,10 +1,8 @@
 package backend.service;
 
-import backend.entity.CreateUpdateLeaveRequest;
-import backend.entity.HolidayCategory;
-import backend.entity.LeaveRequest;
-import backend.entity.Shift;
+import backend.entity.*;
 import backend.repository.*;
+import backend.repository.PositionCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +30,9 @@ public class LeaveRequestService {
     @Autowired
     private WorkingProcessRepository workingProcessRepository;
 
+    @Autowired
+    private PositionCategoryRepository positionRepo;
+
     public List<LeaveRequest> getAll(){
         return leaveRequestRepository.findAll();
     }
@@ -41,8 +42,13 @@ public class LeaveRequestService {
             String mess = null;
             LeaveRequest newLeave = getNewLeaveRequest(request);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
-            String chucVu = workingProcessRepository.getChucVu(newLeave.getUser().getId());
+         SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+
+
+         if(positionRepo.getByMaNv(newLeave.getUser().getId())==null){
+             return "Nhân viên chưa được lưu quá trình công tác";
+         }
+         String chucVu = positionRepo.getByMaNv(newLeave.getUser().getId()).getTenChucVu();
 
             String shiftName = newLeave.getShiftID().getTenCa();
 
@@ -67,6 +73,10 @@ public class LeaveRequestService {
                 if (dublicateShift != null) {
                     return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa() + "rồi.";
                 }
+
+                // check 12 ngay nghi phep
+                DayOffCategory 
+
                 // check not teacher
             } else {
 
@@ -107,7 +117,7 @@ public class LeaveRequestService {
 
             LeaveRequest s = new LeaveRequest();
             s.setId(request.getId());
-            s.setUser(workingProcessRepository.findById(request.getUser()).get());
+            s.setUser(empRepo.findById(request.getUser()).get());
             s.setIdNghi(dayOffRepository.findById(request.getIdNghi()).get());
             if(request.getDate() != null)
             s.setDate(sdf.parse(request.getDate()));

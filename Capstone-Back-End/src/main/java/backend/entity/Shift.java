@@ -24,7 +24,7 @@ public class Shift {
 
     @ManyToOne
     @JoinColumn(name = "ma_nv")
-    private Employee user;
+    private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "id_calam")
@@ -39,10 +39,6 @@ public class Shift {
     @JsonFormat(pattern="dd/MM/yyyy")
     private Date date;
 
-    @Column(name = "xet_duyet")
-    private Boolean accepted;
 
-    @Column(name = "ly_do_kh_duoc_duyet")
-    private String note;
 
 }
