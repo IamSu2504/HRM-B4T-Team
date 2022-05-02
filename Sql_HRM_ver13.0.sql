@@ -496,7 +496,7 @@ CREATE TABLE `phanloai_calam` (
 
 LOCK TABLES `phanloai_calam` WRITE;
 /*!40000 ALTER TABLE `phanloai_calam` DISABLE KEYS */;
-INSERT INTO `phanloai_calam` VALUES (1,'Ca 1','08:00:00','10:00:00'),(2,'Ca 2','10:00:00','12:00:00'),(3,'Ca 3','13:00:00','15:00:00'),(4,'Ca 4','15:00:00','17:00:00'),(5,'Ca 5','19:00:00','21:00:00');
+INSERT INTO `phanloai_calam` VALUES (1,'Ca 1','08:00:00','10:00:00'),(2,'Ca 2','10:00:00','12:00:00'),(3,'Ca 3','13:00:00','15:00:00'),(4,'Ca 4','15:00:00','17:00:00'),(5,'Ca 5','19:00:00','21:00:00'),(6,'Ca 6','08:00:00','12:00:00'),(7,'Ca 7','13:00:00','17:00:00');
 /*!40000 ALTER TABLE `phanloai_calam` ENABLE KEYS */;
 UNLOCK TABLES;
 
