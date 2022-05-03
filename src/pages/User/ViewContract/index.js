@@ -7,10 +7,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function ViewContract() {
-    const [userContractDetail, setUserContractDetail] = useState(0)
+    const [userContractDetail, setUserContractDetail] = useState([])
 
     const {maNv} = useParams()
-    console.log(maNv)
+    console.log(">>>>>",maNv)
     const getUserContractDetail = async() => {
         if(maNv){
             const employeeContractRes = await employeeContractAndSalaryAPI.getContract(maNv)
@@ -38,8 +38,8 @@ export default function ViewContract() {
                     <div data-toggle="collapse" href="#collapse1" aria-expanded="true">
                         <div aria-expanded="true" class="title-list">
                             <h5>Hợp đồng mã</h5>
-                            <p>{userContractDetail?.id || ''}</p>
-                            {console.log(userContractDetail)}
+                            <p>{userContractDetail[0]?.id || ''}</p>
+                            {console.log("id",userContractDetail[0]?.id)}
                         </div>
                     </div>
                     <div id="collapse1" data-parent="#contract1" class="collapse">
@@ -49,27 +49,27 @@ export default function ViewContract() {
                                 <table>
                                     <tr>
                                         <th>Mã nhân viên:</th>
-                                        <td>{userContractDetail?.maNV || ''}</td>
+                                        <td>{userContractDetail[0]?.maNV || ''}</td>
                                     </tr>
                                     <tr>
                                         <th>Mã hợp đồng:</th>
-                                        <td>{userContractDetail?.loaiHopDong?.maLoaiHopDong || ''}</td>
+                                        <td>{userContractDetail[0]?.loaiHopDong?.maLoaiHopDong || ''}</td>
                                     </tr>
                                     <tr>
                                         <th>Tên hợp đồng:</th>
-                                        <td>{userContractDetail?.loaiHopDong?.tenLoaiHopDong || ''}</td>
+                                        <td>{userContractDetail[0]?.loaiHopDong?.tenLoaiHopDong || ''}</td>
                                     </tr>
                                     <tr>
                                         <th>Ngày hiệu lực:</th>
-                                        <td>{userContractDetail?.ngayHieuLuc || ''}</td>
+                                        <td>{userContractDetail[0]?.ngayHieuLuc || ''}</td>
                                     </tr>
                                     <tr>
                                         <th>Ngày hết hạn:</th>
-                                        <td>{userContractDetail?.ngayHetHan || ''}</td>
+                                        <td>{userContractDetail[0]?.ngayHetHan || ''}</td>
                                     </tr>
                                     <tr>
                                         <th>Trạng thái:</th>
-                                        <td>{userContractDetail?.trangThai ? 'Đang Hoạt Động' : 'Đã Nghỉ Việc'}</td>
+                                        <td>{userContractDetail[0]?.trangThai ? 'Đang Hoạt Động' : 'Đã Nghỉ Việc'}</td>
                                     </tr>
                                 </table>
                             </div>

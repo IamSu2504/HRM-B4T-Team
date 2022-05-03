@@ -180,7 +180,7 @@ export default function ManagerLayout(props) {
                   </div>
                 </div>
                 <div className="card">
-                  <div className="card-header">
+                  <div className="card-header" onClick={() => navigate(`/manager/viewallcontract`)}>
                     <a className="card-link" data-toggle="collapse">
                       <div className="card-head-content">
                         <div className="left">

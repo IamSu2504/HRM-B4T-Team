@@ -108,6 +108,10 @@ import MViewInsurance from "../pages/Manager/Insurance/ViewInsurance";
 import MAddInsurance from "../pages/Manager/Insurance/AddNewInsurance";
 import MUpdateInsurance from "../pages/Manager/Insurance/UpdateInsurance";
 
+import MViewContract from "../pages/Manager/Contract/ViewContract";
+import MAddContract from "../pages/Manager/Contract/AddNewContract";
+import MUpdateContract from "../pages/Manager/Contract/UpdateContract";
+
 import MViewReward from "../pages/Manager/RewardDiscipline/ViewReward";
 import MViewDiscipline from "../pages/Manager/RewardDiscipline/ViewDiscipline";
 import MAddReward from "../pages/Manager/RewardDiscipline/AddNewReward";
@@ -246,6 +250,10 @@ export default function MainApp() {
         <Route exact path="/manager/viewallInsurance" element={<LayoutPrivateRoute><MViewInsurance /></LayoutPrivateRoute>} />
         <Route exact path="/manager/addInsurance" element={<LayoutPrivateRoute><MAddInsurance /></LayoutPrivateRoute>} />
         <Route exact path="/manager/updateInsurance/:managerInsuranceId" element={<LayoutPrivateRoute><MUpdateInsurance /></LayoutPrivateRoute>} />
+
+        <Route exact path="/manager/viewallcontract" element={<LayoutPrivateRoute><MViewContract /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/addcontract" element={<LayoutPrivateRoute><MAddContract /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/updatecontract/:contractId" element={<LayoutPrivateRoute><MUpdateContract /></LayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewallUser" element={<LayoutPrivateRoute><ViewAllUser /></LayoutPrivateRoute>} />
         <Route exact path="/manager/viewuser/:maNv" element={<LayoutPrivateRoute><ViewUser /></LayoutPrivateRoute>} />
