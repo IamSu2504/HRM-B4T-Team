@@ -1101,3 +1101,7 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-05-03 15:40:40
+UPDATE `hrm_b4t`.`luongnhanvien` SET `ngay_ket_thuc` = '2022-01-01' WHERE (`id` = '5');
+UPDATE `hrm_b4t`.`luongnhanvien` SET `ngay_ket_thuc` = '2022-01-01' WHERE (`id` = '8');
+UPDATE `hrm_b4t`.`luongnhanvien` SET `ngay_ket_thuc` = '2021-05-01' WHERE (`id` = '36');
+UPDATE `hrm_b4t`.`luongnhanvien` SET `ngay_ket_thuc` = '2022-08-01' WHERE (`id` = '40');
