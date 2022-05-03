@@ -12,6 +12,7 @@ import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import { dateTimeConverter } from "../../../utils/util";
 
 export default function UpdateUser() {
   const [listPosition, setListPosition] = useState([])
@@ -80,20 +81,40 @@ export default function UpdateUser() {
     getAllMarriage()
   }, [])
 
+  console.log( dateTimeConverter(userDetail?.ngaySinh))
+
   const getUserDetail = async () => {
     if (maNv) {
       const userRes = await UserAPI.getUserById(maNv)
       if (userRes?.status === 200) {
         setUserDetail({
-          tinhChatHopDongID: userRes?.data?.tinhChatHopDong?.id, tinhTrangHonNhanID: userRes?.data?.tinhTrangHonNhan?.id,
-          quocTichID: userRes?.data?.quocTich?.id, tenNv: userRes?.data?.tenNv, ngaySinh: userRes?.data?.ngaySinh, gioiTinh: userRes?.data?.gioiTinh,
-          soDienThoai: userRes?.data?.soDienThoai, soDienThoai2: userRes?.data?.soDienThoai2, email: userRes?.data?.email,
-          cccd: userRes?.data?.cccd, noiCapCccd: userRes?.data?.noiCapCccd, ngayCapCccd: userRes?.data?.ngayCapCccd,
-          ngayHetHanCccd: userRes?.data?.ngayHetHanCccd, hoChieu: userRes?.data?.hoChieu, noiCapHoChieu: userRes?.data?.noiCapHoChieu,
-          ngayCapHoChieu: userRes?.data?.ngayCapHoChieu, ngayHetHanHoChieu: userRes?.data?.ngayHetHanHoChieu, noiSinh: userRes?.data?.noiSinh,
-          queQuan: userRes?.data?.queQuan, diaChiThuongTru: userRes?.data?.diaChiThuongTru, diaChiTamTru: userRes?.data?.diaChiTamTru,
-          atmNganHang: userRes?.data?.atmNganHang, soAtm: userRes?.data?.soAtm, trangThaiLaoDong: userRes?.data?.trangThaiLaoDong,
-          ngayBatDauLam: userRes?.data?.ngayBatDauLam, ngayNghiViec: userRes?.data?.ngayNghiViec, lyDoNghi: userRes?.data?.lyDoNghi, image: userRes?.data?.image
+          tinhChatHopDongID: userRes?.data?.tinhChatHopDong?.id,
+          tinhTrangHonNhanID: userRes?.data?.tinhTrangHonNhan?.id,
+          quocTichID: userRes?.data?.quocTich?.id,
+          tenNv: userRes?.data?.tenNv,
+          ngaySinh: dateTimeConverter(userRes?.data?.ngaySinh),
+          gioiTinh: userRes?.data?.gioiTinh,
+          soDienThoai: userRes?.data?.soDienThoai,
+          soDienThoai2: userRes?.data?.soDienThoai2,
+          email: userRes?.data?.email,
+          cccd: userRes?.data?.cccd,
+          noiCapCccd: userRes?.data?.noiCapCccd,
+          ngayCapCccd: userRes?.data?.ngayCapCccd,
+          ngayHetHanCccd: userRes?.data?.ngayHetHanCccd, 
+          hoChieu: userRes?.data?.hoChieu, 
+          noiCapHoChieu: userRes?.data?.noiCapHoChieu,
+          ngayCapHoChieu: userRes?.data?.ngayCapHoChieu, 
+          ngayHetHanHoChieu: userRes?.data?.ngayHetHanHoChieu, 
+          noiSinh: userRes?.data?.noiSinh,
+          queQuan: userRes?.data?.queQuan, 
+          diaChiThuongTru: userRes?.data?.diaChiThuongTru, 
+          diaChiTamTru: userRes?.data?.diaChiTamTru,
+          atmNganHang: userRes?.data?.atmNganHang, 
+          soAtm: userRes?.data?.soAtm, 
+          trangThaiLaoDong: userRes?.data?.trangThaiLaoDong,
+          ngayBatDauLam: userRes?.data?.ngayBatDauLam, 
+          ngayNghiViec: userRes?.data?.ngayNghiViec, 
+          lyDoNghi: userRes?.data?.lyDoNghi, image: userRes?.data?.image
         })
       }
     }
@@ -134,7 +155,7 @@ export default function UpdateUser() {
         soAtm, trangThaiLaoDong, ngayBatDauLam, ngayNghiViec, lyDoNghi
       } = userDetail;
 
-
+      console.log('test user',userDetail)
       // if (!tinhChatHopDongID.toString()?.trim()?.length || !tinhTrangHonNhanID.toString()?.trim()?.length
       //   || !quocTichID.trim().toString()?.trim()?.length || !tenNv.toString()?.trim()?.length || !ngaySinh.toString()?.trim()?.length
       //   || !gioiTinh.toString()?.trim()?.length || !soDienThoai.toString()?.trim()?.length || !soDienThoai2.toString()?.trim()?.length
@@ -160,15 +181,18 @@ export default function UpdateUser() {
       } else {
         setIsSubmit(true)
         console.log("da vao day 2")
+        const ngaySinhMoi = ngaySinh.split('-');
+        const ngaySinhCN = ngaySinhMoi[2] + '/' + ngaySinhMoi[1] + '/' + ngaySinhMoi[0]
+        
         // const updateImg = await UserAPI.updateUserImage(maNv, ...userImage)
-        const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail })
+        const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail, ngaySinh: ngaySinhCN })
         if (updateRes?.status === 200) {
           toast.success(updateRes?.data)
 
           const formData = new FormData();
           formData.append("file", userImage);
           try {
-            let urlStr = 'http://localhost:8080/user/'+maNv+'/image'
+            let urlStr = 'http://localhost:8080/user/' + maNv + '/image'
             const response = await axios({
               method: "put",
               url: urlStr,
@@ -176,7 +200,7 @@ export default function UpdateUser() {
               headers: { "Content-Type": "multipart/form-data" },
             });
           } catch (error) {
-            
+
           }
 
         }
@@ -385,14 +409,12 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="Ngày sinh"
-
+            value={userDetail?.ngaySinh}
             type="date"
-            disabled={false}
+            disabled={false} //yyyy-mm-dd
             require={true}
             handleChange={(event) => {
-              const parts = event.target.value.split('-');
-              const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-              setUserDetail({ ...userDetail, ngaySinh: mydate })
+              setUserDetail({ ...userDetail, ngaySinh: event.target.value })
             }}
           />
           <CustomInputField
