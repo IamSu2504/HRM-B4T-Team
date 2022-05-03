@@ -75,7 +75,6 @@ public class LeaveRequestService {
                 }
 
                 // check 12 ngay nghi phep
-                DayOffCategory 
 
                 // check not teacher
             } else {
