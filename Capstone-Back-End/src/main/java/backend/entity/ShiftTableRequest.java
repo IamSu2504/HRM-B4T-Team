@@ -15,8 +15,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class ShiftTableRequest {
 
-    private Integer idDanhMuc;
-
     private Integer idPhong;
 
     @Temporal(TemporalType.DATE)

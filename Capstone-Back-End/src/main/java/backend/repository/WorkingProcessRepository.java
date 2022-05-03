@@ -13,7 +13,7 @@ public interface WorkingProcessRepository extends JpaRepository<WorkingProcess, 
     @Query(value = "SELECT * FROM hrm_b4t.quatrinhcongtac where id_phong_ban = ?", nativeQuery = true)
     List<WorkingProcess> getByIdPhongBan(int idPhongBan);
 
-    @Query(value = "select cv.ten_chuc_vu from quatrinhcongtac ct, phanloai_chucvu cv \n" +
-            "where ct.id_chuc_vu = cv.id and ct.trang_thai = true and ct.ma_nv = ?", nativeQuery = true)
-    String getChucVu(String maNV);
+    @Query(value = "SELECT * FROM hrm_b4t.quatrinhcongtac where ma_nv = ?", nativeQuery = true)
+    List<WorkingProcess> getByMaNV(String maNV);
+
 }
