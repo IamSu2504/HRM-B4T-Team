@@ -10,7 +10,10 @@ const RegisterShiftAPI = {
         const url = `/shift`;
         return AxiosClient.post(url, {userID, shiftCategoryID, roomID, date});
     },
-
+    getRegisterShiftByMaNv({ idPhong, ngayTu, ngayDen, maNv}){
+        const url = `/shift/table`;
+        return AxiosClient.post(url, { idPhong, ngayTu, ngayDen, maNv});
+    },
 
 }
 

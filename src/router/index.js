@@ -133,7 +133,7 @@ import EViewContract from "../pages/User/ViewContract";
 import TimeKeeping from "../pages/User/TimeKeeping";
 import AddUser from "../pages/User/AddNewUser";
 import RegisterShift from "../pages/Manager/RegisterShift";
-
+import ViewRegisterShift from "../pages/User/ViewRegisterShift";
 
 export default function MainApp() {
   return (
@@ -240,7 +240,7 @@ export default function MainApp() {
 
         {/* RegisterShift */}
         <Route exact path="/admin/registerShift" element={<LayoutPrivateRoute><RegisterShift /></LayoutPrivateRoute>} />
-
+        <Route exact path="/admin/viewshift/:maNv"  element={<LayoutPrivateRoute><ViewRegisterShift /></LayoutPrivateRoute>} />
         <Route exact path="/admin/homepage" element={<HomePagePrivateRoute />} />
         {/* manager */}
         <Route exact path="/manager/viewallInsurance" element={<LayoutPrivateRoute><MViewInsurance /></LayoutPrivateRoute>} />
@@ -264,8 +264,8 @@ export default function MainApp() {
         <Route exact path="/manager/updateworkingProcess/:workingProcessId" element={<LayoutPrivateRoute><MUpdateWorkingProcess /></LayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewleaveRequest"  element={<LayoutPrivateRoute><MViewLeaveRequest /></LayoutPrivateRoute>} />
-         <Route exact path="/manager/registershifts"  element={<LayoutPrivateRoute><RegisterShifts /></LayoutPrivateRoute>} />
-
+        <Route exact path="/manager/registershifts"  element={<LayoutPrivateRoute><RegisterShifts /></LayoutPrivateRoute>} />
+        <Route exact path="/manager/viewshift/:maNv"  element={<LayoutPrivateRoute><ViewRegisterShift /></LayoutPrivateRoute>} />
         <Route exact path="/manager/homepage" element={<ManagerHomePage />} />  
 
         {/* employee */}
@@ -278,7 +278,7 @@ export default function MainApp() {
         <Route exact path="/employee/timeKeeping"  element={<LayoutPrivateRoute><TimeKeeping /></LayoutPrivateRoute>} />
 
         <Route exact path="/employee/leaveRequest"  element={<LayoutPrivateRoute><ELeaveRequest /></LayoutPrivateRoute>} />
-
+        <Route exact path="/employee/viewshift/:maNv"  element={<LayoutPrivateRoute><ViewRegisterShift /></LayoutPrivateRoute>} />
         {/* <Route exact path="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection2e579c81c5bd288a8287"/>
         <Route exact path="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection63438c805d4b6ea33c12"/>
         <Route exact path="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection227818c02b928ad9c8fa"/> */}

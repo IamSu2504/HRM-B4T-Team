@@ -92,12 +92,23 @@ export default function ViewUser() {
           <span class="text">Sửa Thông Tin</span>
         </button>
       </div>
-      <div>
+      <div onClick={() => {
+        if (localStorage.getItem('role') === 'Admin') {
+          navigate(`/admin/viewshift/${maNv}`)
+        }
+        else
+          if (localStorage.getItem('role') === 'Manager') {
+            navigate(`/manager/viewshift/${maNv}`)
+          }
+          else {
+            navigate(`/employee/viewshift/${maNv}`)
+          }
+      }}>
         <button className="save-button">
           <span class="image">
             <img src="/home/save-icon.svg" />
           </span>
-          <span class="text">Quá Trình Công Tác</span>
+          <span class="text">Xem Ca Làm</span>
         </button>
       </div>
     </div>

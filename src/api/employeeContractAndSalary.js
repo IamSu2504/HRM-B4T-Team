@@ -4,7 +4,7 @@ const employeeContractAndSalaryAPI = {
 
 
     getContract(id) {
-        const url = `/contract/user/${id}`;
+        const url = `/employee/contract/user/${id}`;
         return AxiosClient.get(url);
     },
 
