@@ -46,7 +46,7 @@ public class ShiftService {
             String monthEnd = sdf1.format(calendar.getTime());
 
             // check emp existed
-            if(empRepo.findById(newShift.getEmployee().getId()).isPresent()){
+            if(!empRepo.findById(newShift.getEmployee().getId()).isPresent()){
                 return "Mã nhân viên " + newShift.getEmployee().getId() + " không tồn tại";
             }
 

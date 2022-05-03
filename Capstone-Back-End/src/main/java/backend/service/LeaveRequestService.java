@@ -55,7 +55,7 @@ public class LeaveRequestService {
             String monthEnd = sdf.format(calendar.getTime());
 
             // check emp existed
-            if(empRepo.findById(request.getUser()).isPresent()){
+            if(!empRepo.findById(request.getUser()).isPresent()){
                 return "Mã nhân viên " + request.getUser() + " không tồn tại";
             }
 
