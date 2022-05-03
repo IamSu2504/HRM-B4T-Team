@@ -50,7 +50,7 @@ public class ReportService {
 
             List<Salary> salaries = salaryRepo.getAllLuongThang(formattedMonthEnd, formattedMonthStart);
             for (Salary s : salaries) {
-                Employee e = empRepo.findById(s.getMaHD().getMaNV()).get();
+                Employee e = empRepo.findById(s.getHopDong().getMaNV()).get();
                 if(e.getNgayNghiViec()==null){
                     sr = new SalaryReport();
                     sr.setMaNv(e.getId());

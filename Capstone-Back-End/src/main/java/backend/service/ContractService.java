@@ -36,6 +36,7 @@ public class ContractService {
 
     public Contract save(CreateUpdateContractRequest request) {
         Contract newContract = getNewContract(request);
+        newContract.setTrangThai(true);
         if (newContract.getMaHD() != null) {
             List<Contract> listContracts = repo.findAll();
             List<String> maHDs = new ArrayList<>();

@@ -24,7 +24,7 @@ public class Salary {
 
     @ManyToOne
     @JoinColumn(name = "ma_hop_dong")
-    private ContractEmployee maHD;
+    private Contract hopDong;
 
     @ManyToOne
     @JoinColumn(name = "id_bac_luong")

@@ -14,7 +14,7 @@ public interface PositionCategoryRepository extends JpaRepository<PositionCatego
 
     @Query(value = "select cv.* from quatrinhcongtac ct, phanloai_chucvu cv\n" +
             "where ct.id_chuc_vu = cv.id\n" +
-            "and ct.ma_nv = ? and ct.ngay_ra >= ? and ct.ngay_vao <= ?", nativeQuery = true)
+            "and ct.ma_nv = ? and (ct.ngay_ra >= ? or ct.ngay_ra is nulll) and ct.ngay_vao <= ?", nativeQuery = true)
     PositionCategory getByMaNvInRange(String maNV,String start, String end);
 
 }

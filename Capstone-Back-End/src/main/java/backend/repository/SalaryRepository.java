@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -24,8 +25,11 @@ public interface SalaryRepository extends JpaRepository<Salary, Integer> {
     @Query(value = "SELECT * from luongnhanvien l where l.ngay_hieu_luc <= ? and ( l.ngay_ket_thuc >= ? or l.ngay_ket_thuc is null)" , nativeQuery = true)
     List<Salary> getLuongThangByPhongBan(String ngayCuoiThang, String ngayDauThang);
 
-    @Query(value = "SELECT * from luongnhanvien l where l.ngay_hieu_luc <= ? and ( l.ngay_ket_thuc >= ? or l.ngay_ket_thuc is null)" , nativeQuery = true)
-    List<Salary> getLuongTruoc(String ngayCuoiThang, String ngayDauThang);
+    @Query(value = "select * from luongnhanvien where ma_hop_dong = ? and ngay_hieu_luc = ?" , nativeQuery = true)
+    Salary getLuongTruoc(String maHopDong, String maxNgayHieuLuc);
+
+    @Query(value = "select max(ngay_hieu_luc) from luongnhanvien where ma_hop_dong = ?" , nativeQuery = true)
+    Date getDateLuongTruoc(String maHopDong);
 
 
 }

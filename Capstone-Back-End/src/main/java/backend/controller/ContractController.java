@@ -62,7 +62,7 @@ public class ContractController {
     public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody CreateUpdateContractRequest request) {
         try {
             if (service.getById(pv) == null) {
-                return new ResponseEntity<>("Mã bảo hiểm này không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Mã hợp đồng không tồn tại", HttpStatus.NOT_FOUND);
             }
             Contract t = service.save(request);
             if(t==null){

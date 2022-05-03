@@ -24,13 +24,9 @@ public class CreateUpdateSalaryRequest {
 
     private Double phuCapKhac;
 
-    private Double tongLuong;
-
     private String ngayHieuLuc;
 
     private String ngayKetThuc;
 
     private String ghiChu;
-
-    private Boolean trangThai;
 }
