@@ -19,4 +19,6 @@ public class CertificateCategory {
     @Column(name = "loai_chung_chi")
     private String loaiChungChi;
 
+
+
 }

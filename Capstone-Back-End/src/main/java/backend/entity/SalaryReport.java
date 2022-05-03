@@ -13,8 +13,6 @@ public class SalaryReport {
 
     String maNv;
     String tenNV;
-    double luongCoBan;
-    double phuCapKhac;
     double tong;
 
 }

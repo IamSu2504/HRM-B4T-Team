@@ -83,4 +83,17 @@ public class ContractCategoryController {
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value = "/search/{text}")
+    public ResponseEntity<?> getSearched(@PathVariable("text") String text) {
+        try {
+            List<ContractCategory> listContractCategory = service.getSearched(text);
+            if(listContractCategory.isEmpty()){
+                return new ResponseEntity<>("Danh sách tìm kiếm trống", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(listContractCategory, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

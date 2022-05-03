@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.time.YearMonth;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -33,7 +35,7 @@ public class LeaveRequestService {
     @Autowired
     private PositionCategoryRepository positionRepo;
 
-    public List<LeaveRequest> getAll(){
+    public List<LeaveRequest> getAll() {
         return leaveRequestRepository.findAll();
     }
 
@@ -42,14 +44,32 @@ public class LeaveRequestService {
             String mess = null;
             LeaveRequest newLeave = getNewLeaveRequest(request);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-         SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
 
+            // get first+last of current month
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(YearMonth.now().getYear(), sdf2.parse(request.getDate()).getMonth()-1,1);
+            calendar.set(Calendar.DAY_OF_MONTH, 1);
+            String monthFirst = sdf.format(calendar.getTime());
+            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+            String monthEnd = sdf.format(calendar.getTime());
 
-         if(positionRepo.getByMaNv(newLeave.getUser().getId())==null){
-             return "Nhân viên chưa được lưu quá trình công tác";
-         }
-         String chucVu = positionRepo.getByMaNv(newLeave.getUser().getId()).getTenChucVu();
+            // check emp existed
+            if(empRepo.findById(request.getUser()).isPresent()){
+                return "Mã nhân viên " + request.getUser() + " không tồn tại";
+            }
 
+            // check leaved
+            Employee e = empRepo.findById(request.getUser()).get();
+            if(e.getNgayNghiViec()!=null && e.getNgayNghiViec().compareTo(sdf2.parse(request.getDate()))<=0){
+                return "Nhân viên mã " + request.getUser() + " đã nghỉ việc";
+            }
+
+            // check chuc vu
+            if (positionRepo.getByMaNvInRange(monthFirst,monthEnd,newLeave.getUser().getId()) == null) {
+                return "Nhân viên mã " + request.getId() + " hiện chưa có chức vụ trong tháng từ "+monthFirst+" đến "+monthEnd+". Vui lòng bổ sung trong quá trình công tác của nhân viên này";
+            }
+            String chucVu = positionRepo.getByMaNvInRange(monthFirst,monthEnd,newLeave.getUser().getId()).getTenChucVu();
             String shiftName = newLeave.getShiftID().getTenCa();
 
             // check teacher
@@ -62,11 +82,11 @@ public class LeaveRequestService {
 
                 // check dang ky nghi vao ngay nghi le
                 List<HolidayCategory> holidays = holidayCategoryRepository.findAll();
-                    for (HolidayCategory h : holidays) {
-                        if (newLeave.getDate() == h.getNgay()) {
-                            return "Không được đăng kí ngày " + h.getTenNgayLe() + " " + sdf2.format(newLeave.getDate());
-                        }
+                for (HolidayCategory h : holidays) {
+                    if (newLeave.getDate() == h.getNgay()) {
+                        return "Không được đăng kí ngày " + h.getTenNgayLe() + " " + sdf2.format(newLeave.getDate());
                     }
+                }
 
                 // check ngay nghi da dang ky
                 LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
@@ -105,7 +125,7 @@ public class LeaveRequestService {
             }
             leaveRequestRepository.save(newLeave);
             return mess;
-        } catch (Exception e){
+        } catch (Exception e) {
             return "Lỗi nội bộ";
         }
     }
@@ -118,8 +138,8 @@ public class LeaveRequestService {
             s.setId(request.getId());
             s.setUser(empRepo.findById(request.getUser()).get());
             s.setIdNghi(dayOffRepository.findById(request.getIdNghi()).get());
-            if(request.getDate() != null)
-            s.setDate(sdf.parse(request.getDate()));
+            if (request.getDate() != null)
+                s.setDate(sdf.parse(request.getDate()));
             s.setShiftID(shiftCategoryRepository.findById(request.getShiftID()).get());
             s.setLyDo(request.getLyDo());
             s.setNguoiDuyet(request.getNguoiDuyet());
@@ -130,11 +150,10 @@ public class LeaveRequestService {
         }
     }
 
-    public LeaveRequest getById(int id){
-        if(leaveRequestRepository.findById(id).isPresent()){
+    public LeaveRequest getById(int id) {
+        if (leaveRequestRepository.findById(id).isPresent()) {
             return leaveRequestRepository.findById(id).get();
-        }
-        else{
+        } else {
             return null;
         }
     }

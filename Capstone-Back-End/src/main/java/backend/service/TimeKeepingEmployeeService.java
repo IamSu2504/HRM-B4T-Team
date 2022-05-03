@@ -17,6 +17,11 @@ public class TimeKeepingEmployeeService {
         return repo.findAll();
     }
 
+    public List<TimeKeepingEmployee> getSearched(String text)
+    {
+        return repo.getSearched(text);
+    }
+
     public TimeKeepingEmployee getById(int id)
     {
         if(repo.findById(id).isPresent()){

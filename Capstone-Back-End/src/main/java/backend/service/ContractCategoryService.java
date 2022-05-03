@@ -54,4 +54,8 @@ public class ContractCategoryService {
     public void delete(int id){
         repo.deleteById(id);
     };
+
+    public List<ContractCategory> getSearched(String text){
+        return repo.getSearched(text);
+    }
 }

@@ -16,9 +16,6 @@ public class ReportService {
     private ShiftRepository shiftRepo;
 
     @Autowired
-    private PositionCategoryRepository positionRepo;
-
-    @Autowired
     private SalaryRepository salaryRepo;
 
     @Autowired
@@ -44,9 +41,11 @@ public class ReportService {
             Calendar gc = new GregorianCalendar();
             gc.set(Calendar.MONTH, new Date().getMonth());
             gc.set(Calendar.DAY_OF_MONTH, 1);
+            Date monthStart = gc.getTime();
             String formattedMonthStart = sdf.format(gc.getTime());
             gc.add(Calendar.MONTH, 1);
             gc.add(Calendar.DAY_OF_MONTH, -1);
+            Date monthEnd = gc.getTime();
             String formattedMonthEnd = sdf.format(gc.getTime());
 
             List<Salary> salaries = salaryRepo.getAllLuongThang(formattedMonthEnd, formattedMonthStart);
@@ -56,10 +55,27 @@ public class ReportService {
                     sr = new SalaryReport();
                     sr.setMaNv(e.getId());
                     sr.setTenNV(e.getTenNv());
-                    sr.setLuongCoBan(s.getLuongCoBan());
-                    sr.setPhuCapKhac(s.getPhuCapKhac());
                     sr.setTong(s.getTongLuong());
                     reports.add(sr);
+                }
+                else{
+                    if(e.getNgayNghiViec().compareTo(monthStart)>0 && e.getNgayNghiViec().compareTo(monthEnd)<=0){
+                        double contractTotal = s.getTongLuong();
+                        double eachShiftSalary = contractTotal/80;
+                        double total = shiftRepo.getTotalShiftInRange(formattedMonthEnd,formattedMonthStart,e.getId())*eachShiftSalary;
+                        sr = new SalaryReport();
+                        sr.setMaNv(e.getId());
+                        sr.setTenNV(e.getTenNv());
+                        sr.setTong(total);
+                        reports.add(sr);
+                    }
+                    else if(e.getNgayNghiViec().compareTo(monthEnd)>0){
+                        sr = new SalaryReport();
+                        sr.setMaNv(e.getId());
+                        sr.setTenNV(e.getTenNv());
+                        sr.setTong(s.getTongLuong());
+                        reports.add(sr);
+                    }
                 }
             }
             return reports;

@@ -12,7 +12,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value = "/category/classRoom")
-public class ClassRoomCategoryController {
+public class RoomCategoryController {
 
     @Autowired
     private RoomCategoryService service;
