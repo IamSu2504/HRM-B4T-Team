@@ -66,10 +66,10 @@ public class LeaveRequestService {
             }
 
             // check chuc vu
-            if (positionRepo.getByMaNvInRange(monthFirst,monthEnd,newLeave.getUser().getId()) == null) {
-                return "Nhân viên mã " + request.getId() + " hiện chưa có chức vụ trong tháng từ "+monthFirst+" đến "+monthEnd+". Vui lòng bổ sung trong quá trình công tác của nhân viên này";
+            if (positionRepo.getByMaNvInRange(newLeave.getUser().getId(),monthFirst,monthEnd) == null) {
+                return "Nhân viên mã " + request.getUser() + " hiện chưa có chức vụ trong tháng từ "+monthFirst+" đến "+monthEnd+". Vui lòng bổ sung trong quá trình công tác của nhân viên này";
             }
-            String chucVu = positionRepo.getByMaNvInRange(monthFirst,monthEnd,newLeave.getUser().getId()).getTenChucVu();
+            String chucVu = positionRepo.getByMaNvInRange(newLeave.getUser().getId(),monthFirst,monthEnd).getTenChucVu();
             String shiftName = newLeave.getShiftID().getTenCa();
 
             // check teacher
