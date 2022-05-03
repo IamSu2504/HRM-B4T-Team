@@ -37,7 +37,7 @@ public class SalaryController {
             int id = Integer.parseInt(pv);
             Salary c = service.getById(id);
             if(c==null){
-                return new ResponseEntity<>("Không tìm thấy lương", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Lương không tồn tại", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
@@ -45,34 +45,34 @@ public class SalaryController {
         }
     }
 
-    @PostMapping(value = "")
-    public ResponseEntity<?> create(@RequestBody CreateUpdateSalaryRequest request) {
-        try {
-            Salary t = service.save(request);
-            if(t==null){
-                return new ResponseEntity<>("Lương cho mã hợp đồng này đã tồn tại", HttpStatus.EXPECTATION_FAILED);
-            }
-            return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody CreateUpdateSalaryRequest request) {
-        try {
-            int id = Integer.parseInt(pv);
-            request.setId(id);
-            if (service.getById(id) == null) {
-                return new ResponseEntity<>("Lương không tồn tại", HttpStatus.NOT_FOUND);
-            }
-            Salary t = service.save(request);
-            if(t==null){
-                return new ResponseEntity<>("Lương cho mã hợp đồng này đã tồn tại", HttpStatus.EXPECTATION_FAILED);
-            }
-            return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @PostMapping(value = "")
+//    public ResponseEntity<?> create(@RequestBody CreateUpdateSalaryRequest request) {
+//        try {
+//            Salary t = service.save(request);
+//            if(t==null){
+//                return new ResponseEntity<>("Lương cho mã hợp đồng này đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+//            }
+//            return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
+//        }catch(Exception e){
+//            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+//
+//    @PutMapping(value = "/{id}")
+//    public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody CreateUpdateSalaryRequest request) {
+//        try {
+//            int id = Integer.parseInt(pv);
+//            request.setId(id);
+//            if (service.getById(id) == null) {
+//                return new ResponseEntity<>("Lương không tồn tại", HttpStatus.NOT_FOUND);
+//            }
+//            Salary t = service.save(request);
+//            if(t==null){
+//                return new ResponseEntity<>("Lương cho mã hợp đồng này đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+//            }
+//            return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
+//        }catch(Exception e){
+//            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 }

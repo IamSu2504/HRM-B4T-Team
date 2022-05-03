@@ -11,11 +11,9 @@ import java.util.List;
 
 @Service
 public class SalaryService {
-    @Autowired
-    private SalaryRepository salaryRepo;
 
     @Autowired
-    private EmployeeRepository userRepo;
+    private SalaryRepository salaryRepo;
 
     @Autowired
     private PositionCategoryRepository positionRepo;
@@ -38,30 +36,32 @@ public class SalaryService {
         }
     }
 
-    public Salary save(CreateUpdateSalaryRequest request) {
+    public String getSaveMessage(CreateUpdateSalaryRequest request) {
         Salary newSalary = getNewSalary(request);
-        double phuCapChucVu = positionRepo.getByMaNv(newSalary.getMaHD().getMaNV()).getPhuCap();
 
         // update
         if (newSalary.getId() != null) {
             Salary oldSalary = salaryRepo.findById(newSalary.getId()).get();
             if ((newSalary.getMaHD()) == (oldSalary.getMaHD())) {
                 if (salaryRepo.getByMaHD(newSalary.getMaHD().getId()) != null) {
-                    return salaryRepo.save(newSalary);
-                } else {
+                    salaryRepo.save(newSalary);
                     return null;
+                } else {
+                    return "Mã hợp đồng không tồn tại";
                 }
             }
-            double tongLuong = newSalary.getLuongCoBan() + newSalary.getPhuCapKhac() + phuCapChucVu;
+            double tongLuong = newSalary.getLuongCoBan() + newSalary.getPhuCapKhac();
             newSalary.setTongLuong(tongLuong);
-            return salaryRepo.save(newSalary);
+            salaryRepo.save(newSalary);
+            return null;
         }
         // add
         else {
             if (salaryRepo.getByMaHD(newSalary.getMaHD().getId()) == null) {
-                double tongLuong = newSalary.getLuongCoBan() + newSalary.getPhuCapKhac() + phuCapChucVu;
+                double tongLuong = newSalary.getLuongCoBan() + newSalary.getPhuCapKhac();
                 newSalary.setTongLuong(tongLuong);
-                return salaryRepo.save(newSalary);
+                salaryRepo.save(newSalary);
+                return null;
             } else {
                 return null;
             }
@@ -83,7 +83,6 @@ public class SalaryService {
             s.setNgayHieuLuc(sdf.parse(request.getNgayHieuLuc()));
             if(request.getNgayKetThuc() != null)
             s.setNgayKetThuc(sdf.parse(request.getNgayKetThuc()));
-            s.setTrangThai(request.getTrangThai());
             return s;
         } catch (Exception e){
             return null;

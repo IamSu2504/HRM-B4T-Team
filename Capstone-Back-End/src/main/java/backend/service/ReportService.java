@@ -30,57 +30,37 @@ public class ReportService {
     @Autowired
     private ContractRepository contractRepo;
 
+    @Autowired
+    private WorkingProcessRepository workingProcessRepo;
+
     public List<SalaryReport> getListSalaryReport() {
 
         try {
             List<SalaryReport> reports = new ArrayList<>();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             SalaryReport sr = new SalaryReport();
-            String position = "";
-            double totalSalary = 0;
-            double subtractedSalary = 0;
-            Integer acctedHours = 0;
-            double salaryPerHour = 0;
 
-            // cal hour in month
+            // get first + last of current month
             Calendar gc = new GregorianCalendar();
             gc.set(Calendar.MONTH, new Date().getMonth());
             gc.set(Calendar.DAY_OF_MONTH, 1);
-            Date monthStart = gc.getTime();
-            String formattedMonthStart = sdf.format(monthStart);
+            String formattedMonthStart = sdf.format(gc.getTime());
             gc.add(Calendar.MONTH, 1);
             gc.add(Calendar.DAY_OF_MONTH, -1);
-            Date monthEnd = gc.getTime();
-            String formattedMonthEnd = sdf.format(monthEnd);
-            List<HolidayCategory> holidaysInMonth = holidayRepo.getNgayLeTrongKhoang(formattedMonthStart, formattedMonthEnd);
-            int minHoursInMonth = 40 - holidaysInMonth.size();
+            String formattedMonthEnd = sdf.format(gc.getTime());
 
             List<Salary> salaries = salaryRepo.getAllLuongThang(formattedMonthEnd, formattedMonthStart);
             for (Salary s : salaries) {
-                sr.setMaNv(s.getMaHD().getMaNV());
-                sr.setLuongCoBan(s.getLuongCoBan());
-                if (positionRepo.getByMaNv(sr.getMaNv()) == null) {
-                    return null;
+                Employee e = empRepo.findById(s.getMaHD().getMaNV()).get();
+                if(e.getNgayNghiViec()==null){
+                    sr = new SalaryReport();
+                    sr.setMaNv(e.getId());
+                    sr.setTenNV(e.getTenNv());
+                    sr.setLuongCoBan(s.getLuongCoBan());
+                    sr.setPhuCapKhac(s.getPhuCapKhac());
+                    sr.setTong(s.getTongLuong());
+                    reports.add(sr);
                 }
-                sr.setPhuCapChucVu(positionRepo.getByMaNv(sr.getMaNv()).getPhuCap());
-                sr.setPhuCapKhac(s.getPhuCapKhac());
-                sr.setSoGioToiThieu(minHoursInMonth);
-
-                // get total worked time
-                acctedHours = shiftRepo.getAcceptedHourInRange(formattedMonthStart,formattedMonthEnd,sr.getMaNv());
-                if(acctedHours==null)
-                    acctedHours = 0;
-                sr.setSoGioLam(acctedHours);
-
-                // cal total salary
-                salaryPerHour = s.getTongLuong()/(minHoursInMonth);
-                if(acctedHours > minHoursInMonth){
-                    sr.setTong(s.getTongLuong() + salaryPerHour*1.5*(acctedHours-minHoursInMonth));
-                }
-                else{
-                    sr.setTong(s.getTongLuong() - salaryPerHour*(acctedHours-minHoursInMonth));
-                }
-                reports.add(sr);
             }
             return reports;
         } catch (Exception e) {
@@ -112,6 +92,7 @@ public class ReportService {
         for(Contract contract : contracts){
             e = empRepo.findById(contract.getMaNV()).get();
             er.setMaNv(e.getId());
+            er.setTenNv(e.getTenNv());
             er.setEmail(e.getEmail());
             er.setCccd(e.getCccd());
             er.setImage(e.getImage());
@@ -121,6 +102,15 @@ public class ReportService {
             reports.add(er);
         }
         return reports;
+    }
+
+    public List<WorkingProcess> getEmployeeWorkingProcessReportMess(String empID){
+        if(empRepo.findById(empID).isPresent()){
+            return workingProcessRepo.getByMaNV(empID);
+        }
+        else{
+            return null;
+        }
     }
 
 
