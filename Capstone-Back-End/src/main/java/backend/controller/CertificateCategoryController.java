@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -78,6 +79,23 @@ public class CertificateCategoryController {
             int id = Integer.parseInt(pv);
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/search/{text}")
+    public ResponseEntity<?> getSearched(@PathVariable("text") String text) {
+        try {
+            List<CertificateCategory> listCertificateCategory;
+            if(text.equals("")){
+                listCertificateCategory = service.getAll();
+            }
+            listCertificateCategory = service.getSearched(text);
+            if(listCertificateCategory.isEmpty()){
+                return new ResponseEntity<>("Không thể tìm kiếm", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(listCertificateCategory, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }

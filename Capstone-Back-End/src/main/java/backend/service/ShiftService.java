@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.time.YearMonth;
 import java.util.*;
 
 @Service
@@ -31,18 +32,35 @@ public class ShiftService {
 
     public String getSaveShiftMessage(CreateUpdateShiftRequest request) {
         try {
-            String mess = null;
-            Shift newShift = getNewShift(request);
-
-            if(positionRepo.getByMaNv(newShift.getEmployee().getId())==null){
-                return "Không thể đăng kí do mã nhân viên " + request.getId() + " hiện chưa có chức vụ. Vui lòng thêm quá trình công tác cho nhân viên này";
-            }
-            String chucVu = positionRepo.getByMaNv(newShift.getEmployee().getId()).getTenChucVu();
-
+            String mess = "";
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+            Shift newShift = getNewShift(request);
 
-            String shiftName = newShift.getShiftCategory().getTenCa();
+            // get first+last of current month
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(YearMonth.now().getYear(), newShift.getDate().getMonth()-1,1);
+            calendar.set(Calendar.DAY_OF_MONTH, 1);
+            String monthFirst = sdf1.format(calendar.getTime());
+            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+            String monthEnd = sdf1.format(calendar.getTime());
+
+            // check emp existed
+            if(!empRepo.findById(newShift.getEmployee().getId()).isPresent()){
+                return "Mã nhân viên " + newShift.getEmployee().getId() + " không tồn tại";
+            }
+
+            // check leaved
+            Employee e = empRepo.findById(newShift.getEmployee().getId()).get();
+            if(e.getNgayNghiViec()!=null && e.getNgayNghiViec().compareTo(newShift.getDate())<=0){
+                return "Nhân viên mã " + newShift.getEmployee().getId() + " đã nghỉ việc";
+            }
+
+            if(positionRepo.getByMaNvInRange(newShift.getEmployee().getId(),monthFirst,monthEnd)==null){
+                e = empRepo.findById(newShift.getEmployee().getId()).get();
+                return "Nhân viên mã " + request.getId() + " hiện chưa có chức vụ trong tháng từ "+monthFirst+" đến "+monthEnd+". Vui lòng bổ sung trong quá trình công tác của nhân viên này";
+            }
+            String chucVu = positionRepo.getByMaNvInRange(newShift.getEmployee().getId(),monthFirst,monthEnd).getTenChucVu();
 
             //------------ check if user is a teacher -------------------
             if (chucVu.toLowerCase().contains("giáo viên")) {
@@ -66,8 +84,8 @@ public class ShiftService {
                 }
 
                 //----------- validate week total ------------------
-                int maxTotalInWeek = 50;
-                int minTotalInWeek = 40;
+                int maxTotalInWeek = 25;
+                int minTotalInWeek = 20;
 
                 // get monday + sunday
                 Calendar cal = Calendar.getInstance();
@@ -77,20 +95,20 @@ public class ShiftService {
                 Date sunDay = cal.getTime();
 
                 // get totalWeek
-                Integer totalWeek = shiftRepo.getWeekTotal(sdf1.format(monDay), sdf1.format(sunDay), newShift.getEmployee().getId());
+                Integer totalInWeek = shiftRepo.getTotalShiftInRange(sdf1.format(monDay), sdf1.format(sunDay), newShift.getEmployee().getId());
 
                 // update min + max total in week
                 List<HolidayCategory> holidaysInWeek = holidayRepo.getNgayLeTrongKhoang(sdf1.format(monDay), sdf1.format(sunDay));
-                maxTotalInWeek -= holidaysInWeek.size() * 8;
-                minTotalInWeek -= holidaysInWeek.size() * 8;
+                maxTotalInWeek -= holidaysInWeek.size() * 4;
+                minTotalInWeek -= holidaysInWeek.size() * 4;
 
                 // check if no shift signed up in week
-                if (totalWeek != null) {
-                    if (totalWeek == maxTotalInWeek) {
-                        return "Thời gian đăng kí tối đa trong tuần của giáo viên "+gv.getTenNv()+"("+gv.getId()+")"+" từ " + sdf2.format(monDay) + " đến " + sdf2.format(sunDay) + " đã đạt đến tối đa là " + maxTotalInWeek + " giờ";
+                if (totalInWeek != null) {
+                    if (totalInWeek == maxTotalInWeek) {
+                        return "Số ca tối đa trong tuần của giáo viên "+gv.getTenNv()+"("+gv.getId()+")"+" từ " + sdf2.format(monDay) + " đến " + sdf2.format(sunDay) + " đã đạt đến tối đa là " + maxTotalInWeek + " ca. Không thể đăng kí thêm";
                     }
-                    if (totalWeek < minTotalInWeek) {
-                        mess = "Vui lòng đăng kí thêm ca, tổng thời gian đăng kí tối thiểu của giáo viên "+gv.getTenNv()+"("+gv.getId()+")"+" trong tuần từ " + sdf2.format(monDay) + " đến " + sdf2.format(sunDay) + " là " + minTotalInWeek;
+                    if (totalInWeek < minTotalInWeek) {
+                        mess = "Vui lòng đăng kí thêm ca, tổng số ca tối thiểu của giáo viên "+gv.getTenNv()+"("+gv.getId()+")"+" trong tuần từ " + sdf2.format(monDay) + " đến " + sdf2.format(sunDay) + " là " + minTotalInWeek;
                     }
                 }
 
@@ -107,7 +125,7 @@ public class ShiftService {
                 }
 
                 shiftRepo.save(newShift);
-                return mess;
+                return "Đăng kí thành công. " + mess;
                 // check not teacher
             } else {
                 return "Chỉ giáo viên được đăng kí ca làm";
@@ -172,5 +190,22 @@ public class ShiftService {
         return shifts;
     }
 
+    public int getEmployeeTotalShiftInMonth(String empID,int month){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dddd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(YearMonth.now().getYear(), month-1,1);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        String firstOfMonth = sdf.format(calendar.getTime());
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        String lastOfMonth = sdf.format(calendar.getTime());
+
+        Integer total = shiftRepo.getTotalShiftInRange(firstOfMonth,lastOfMonth,empID);
+        if(total==null){
+            return 0;
+        }
+        else{
+            return total;
+        }
+    }
 }
 

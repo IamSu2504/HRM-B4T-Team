@@ -103,9 +103,6 @@ public class Employee {
     @Column(name = "so_atm")
     private String soAtm;
 
-    @Column(name = "trang_thai_lao_dong")
-    private boolean trangThaiLaoDong;
-
     @Column(name = "ngay_bat_dau_lam")
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern="dd/MM/yyyy")

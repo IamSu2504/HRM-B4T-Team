@@ -1,5 +1,6 @@
 package backend.controller;
 
+import backend.entity.Employee;
 import backend.entity.TimeKeepingEmployee;
 import backend.service.TimeKeepingEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,19 @@ public class TimeKeepingEmployeeController {
             }
             return new ResponseEntity<>(listTimeKeeping, HttpStatus.OK);
         }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/search/{text}")
+    public ResponseEntity<?> getSearched(@PathVariable("text") String text) {
+        try {
+            List<TimeKeepingEmployee> list = service.getSearched(text.trim());
+            if (list.isEmpty()) {
+                return new ResponseEntity<>("Chưa có người dùng được tạo", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

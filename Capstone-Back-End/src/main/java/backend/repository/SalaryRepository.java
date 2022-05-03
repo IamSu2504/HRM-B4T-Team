@@ -24,5 +24,8 @@ public interface SalaryRepository extends JpaRepository<Salary, Integer> {
     @Query(value = "SELECT * from luongnhanvien l where l.ngay_hieu_luc <= ? and ( l.ngay_ket_thuc >= ? or l.ngay_ket_thuc is null)" , nativeQuery = true)
     List<Salary> getLuongThangByPhongBan(String ngayCuoiThang, String ngayDauThang);
 
+    @Query(value = "SELECT * from luongnhanvien l where l.ngay_hieu_luc <= ? and ( l.ngay_ket_thuc >= ? or l.ngay_ket_thuc is null)" , nativeQuery = true)
+    List<Salary> getLuongTruoc(String ngayCuoiThang, String ngayDauThang);
+
 
 }

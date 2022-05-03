@@ -12,12 +12,7 @@ import lombok.Setter;
 public class SalaryReport {
 
     String maNv;
-    int soGioToiThieu;
-    int soGioLam;
-    double luongCoBan;
-    double phuCapKhac;
-    double phuCapChucVu;
-    double luongTru;
+    String tenNV;
     double tong;
 
 }

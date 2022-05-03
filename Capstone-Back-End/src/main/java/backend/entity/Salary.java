@@ -36,9 +36,6 @@ public class Salary {
     @Column(name = "phu_cap_khac")
     private Double phuCapKhac;
 
-    @Column(name = "tong_luong")
-    private Double tongLuong;
-
     @Column(name = "ngay_hieu_luc")
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern="dd/MM/yyyy")
@@ -52,7 +49,11 @@ public class Salary {
     @Column(name = "ghi_chu")
     private String ghiChu;
 
-    @Column(name = "trang_thai")
-    private boolean trangThai;
+    @Transient
+    private double tongLuong;
+
+    public double getTongLuong(){
+        return luongCoBan + phuCapKhac;
+    }
 
 }

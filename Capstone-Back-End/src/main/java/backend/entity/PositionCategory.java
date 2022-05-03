@@ -19,7 +19,4 @@ public class PositionCategory {
 
     @Column(name = "ten_chuc_vu")
     private String tenChucVu;
-
-    @Column(name = "phu_cap")
-    private double phuCap;
 }

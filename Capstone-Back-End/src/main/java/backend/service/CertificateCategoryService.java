@@ -55,4 +55,8 @@ public class CertificateCategoryService {
     public void delete(int id){
         repo.deleteById(id);
     };
+
+    public List<CertificateCategory> getSearched(String text){
+        return repo.getSearched(text);
+    }
 }
