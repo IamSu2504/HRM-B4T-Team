@@ -24,7 +24,7 @@ export default function ViewDiscipline() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Khen Kỉ Luật</div>
+            <div className="title">Danh sách Kỉ Luật</div>
             <div className="table-frame">
                 <table class="table table-bordered">
                     <thead>

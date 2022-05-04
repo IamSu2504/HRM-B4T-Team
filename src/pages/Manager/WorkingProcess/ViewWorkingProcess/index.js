@@ -26,7 +26,7 @@ export default function ViewWorkingProcess() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Qúa Trình Làm Việc</div>
+            <div className="title">Danh sách Quá Trình Làm Việc</div>
             <div className="table-frame">
                 <table class="table table-bordered">
                     <thead>

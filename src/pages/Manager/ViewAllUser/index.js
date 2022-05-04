@@ -112,8 +112,8 @@ export default function ViewAllUser() {
                   <td>{userItem?.gioiTinh ? 'Nam' : 'Nữ'}</td>
                   <td>{userItem?.ngaySinh}</td>
                   <td>{userItem?.soDienThoai}</td>
-                  <td className="active-status">
-                    <div className={userItem?.trangThaiLaoDong ? "active" : "deactive"}>{userItem?.trangThaiLaoDong ? 'Đang Hoạt Động' : 'Đã Nghỉ Việc'}</div>
+                  <td>
+                    <div>{userItem?.trangThaiLaoDong ? <a className="jobactive">Đang Hoạt Động</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
                   </td>
                   <td>
                     <div onClick={() => navigate(`/manager/viewuser/${userItem.id}`)}>

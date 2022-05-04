@@ -27,7 +27,7 @@ export default function ViewInsurance() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách bảo Hiểm</div>
+            <div className="title">Danh sách Bảo Hiểm</div>
             <div className="table-frame">
                 <table class="table table-bordered" id="insurancetable">
                     <thead>
