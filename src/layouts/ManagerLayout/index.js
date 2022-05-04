@@ -74,6 +74,7 @@ export default function ManagerLayout(props) {
               <div className="user-info">
                 <div className="left">
                   <img src={`http://localhost:8080/user/${localStorage.getItem('maNv')}/image`} alt="avatar" />
+                  
                 </div>
                 <div className="right">
                   <div className="name">{localStorage.getItem('name')}</div>
@@ -175,6 +176,10 @@ export default function ManagerLayout(props) {
                           <span style={{ marginLeft: '15px' }}>Lương Nhân Viên
                           </span>
                         </a>
+                      </div>
+                      <div onClick={() => navigate('/manager/outdated')}>
+                        <img src="/menu/list-icon.svg" />
+                        <span style={{ marginLeft: '15px' }}>Nhân Viên Sắp Hết Hạn</span>
                       </div>
                     </div>
                   </div>

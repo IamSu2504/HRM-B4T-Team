@@ -121,6 +121,8 @@ import MAddDiscipline from "../pages/Manager/RewardDiscipline/AddNewDiscipline";
 import MUpdateReward from "../pages/Manager/RewardDiscipline/UpdateReward";
 import MUpdateDiscipline from "../pages/Manager/RewardDiscipline/UpdateDiscipline";
 
+import MOutdated from "../pages/Manager/Report/Outdated";
+
 import MViewLeaveRequest from "../pages/Manager/LeaveRequest"
 
 import MViewWorkingProcess from "../pages/Manager/WorkingProcess/ViewWorkingProcess";
@@ -255,7 +257,7 @@ export default function MainApp() {
 
         <Route exact path="/manager/viewallcontract" element={<ManagerLayoutPrivateRoute><MViewContract /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/addcontract" element={<ManagerLayoutPrivateRoute><MAddContract /></ManagerLayoutPrivateRoute>} />
-        <Route exact path="/manager/updatecontract/:contractId" element={<ManagerLayoutPrivateRoute><MUpdateContract /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/updatecontract/:maHD" element={<ManagerLayoutPrivateRoute><MUpdateContract /></ManagerLayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewallUser" element={<ManagerLayoutPrivateRoute><ViewAllUser /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/viewuser/:maNv" element={<ManagerLayoutPrivateRoute><ViewUser /></ManagerLayoutPrivateRoute>} />
@@ -277,7 +279,8 @@ export default function MainApp() {
         <Route exact path="/manager/registershifts"  element={<ManagerLayoutPrivateRoute><RegisterShifts /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/viewshift/:maNv"  element={<ManagerLayoutPrivateRoute><ViewRegisterShift /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/homepage" element={<ManagerHomePagePrivateRoute />} />  
-
+        <Route exact path="/manager/outdated"  element={<ManagerLayoutPrivateRoute><MOutdated /></ManagerLayoutPrivateRoute>} />
+        
         {/* employee */}
         <Route exact path="/employee/homepage" element={<EmployeeHomePagePrivateRoute />} />
         <Route exact path="/employee/viewuser/:maNv"  element={<EmployeeLayoutPrivateRoute><ViewUser /></EmployeeLayoutPrivateRoute>} />

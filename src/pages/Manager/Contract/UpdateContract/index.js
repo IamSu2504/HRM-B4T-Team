@@ -10,17 +10,18 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function UpdateContract() {
-    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', trangThai: '', maNV: ''})
+    const [contractDetail, setContractDetail] = useState({maHD:'', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', trangThai: '', maNV: ''})
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
-    const { contractId } = useParams()
+    const { maHD } = useParams()
 
     const getContractDetail = async () => {
-        if (contractId) {
-            const contractRes = await ManagercontractAPI.getManagerContractById(contractId)
+        if (maHD) {
+            const contractRes = await ManagercontractAPI.getManagerContractById(maHD)
+            
             if (contractRes?.status === 200) {
                 setContractDetail({
-                    maHD: contractRes?.data?.maHD,
+                    
                     loaiHopDong: contractRes?.data?.loaiHopDong?.id,
                     ngayHieuLuc: contractRes?.data?.ngayHieuLuc,
                     ngayHetHan: contractRes?.data?.ngayHetHan,
@@ -52,17 +53,17 @@ export default function UpdateContract() {
     const handleUpdate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
-            const { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, trangThai, maNV } = contractDetail
-
-            if (!maHD.toString()?.trim()?.length || !loaiHopDong.toString()?.trim()?.length
-                || !ngayHieuLuc.toString()?.trim()?.length || !ngayHetHan.toString()?.trim()?.length || !ghiChu.toString()?.trim()?.length
-                || !trangThai.toString()?.trim()?.length || !maNV.toString()?.trim()?.length) {
+            // const { loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, trangThai, maNV } = contractDetail
+           
+            if ( !contractDetail?.loaiHopDong.toString()?.trim()?.length
+                || !contractDetail?.ngayHieuLuc.toString()?.trim()?.length || !contractDetail?.ngayHetHan.toString()?.trim()?.length || !contractDetail?.ghiChu.toString()?.trim()?.length
+                || !contractDetail?.trangThai.toString()?.trim()?.length || !contractDetail?.maNV.toString()?.trim()?.length) {
 
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
-                setIsSubmit(true)
-
-                const updateRes = await ManagercontractAPI.updateManagerContract({ id: contractId, ...contractDetail })
+                setIsSubmit(true)       
+                
+                const updateRes = await ManagercontractAPI.updateManagerContract({ maHD: maHD, ...contractDetail })
                 if (updateRes?.status === 200) {
                     toast.success(updateRes?.data)
                 }
@@ -91,12 +92,12 @@ export default function UpdateContract() {
                 <div>
                     <CustomInputField
                         title="Mã Hợp Đồng* :"
-                        value = {contractDetail?.maHD}
+                        value = {maHD}
+                        disabled = {true}
                         type="text"
-                        placeholder="VD: HD000xyz"
-                        handleChange={(event) => {
-                            setContractDetail({ ...contractDetail, maHD: event.target.value })
-                        }}
+                        // handleChange={(event) => {
+                        //     setContractDetail({ ...contractDetail, maHD: event.target.value })
+                        // }}
                     />
 
                     <CustomSelectBox
@@ -114,6 +115,7 @@ export default function UpdateContract() {
                     />
                     <CustomInputField
                         title="Ngày Hiệu Lực* :"
+                        value = {contractDetail?.ngayHieuLuc}
                         type="date"
                         handleChange={(event) => {
                             // const parts = event.target.value.split('-');
@@ -124,6 +126,7 @@ export default function UpdateContract() {
                     />
                     <CustomInputField
                         title="Ngày Hết Hạn* :"
+                        value = {contractDetail?.ngayHetHan}
                         type="date"
                         handleChange={(event) => {
                             // const parts = event.target.value.split('-');
@@ -153,6 +156,7 @@ export default function UpdateContract() {
                     />
                     <CustomInputField
                         title="Mã Nhân Viên* :"
+                        disabled = {true}
                         value = {contractDetail?.maNV}
                         type="text"
                         handleChange={(event) => {
