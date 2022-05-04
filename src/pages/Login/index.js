@@ -23,7 +23,7 @@ export default function Login() {
         setLoginError({ status: true, error: 'Tên đăng nhập hoặc mật khẩu không thể để trống' })
       } else {
         setLoginLoading(true)
-        const loginRes = await LoginAPI.login({ username: userName, password })
+        const loginRes = await LoginAPI.login({ username: userName, password : password })
         if (loginRes?.status === 200) {
           const loginData = loginRes?.data
           const roleName = loginData?.role?.tenRole
