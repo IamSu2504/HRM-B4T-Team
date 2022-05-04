@@ -35,10 +35,11 @@ public class CertificateManagerService {
     }
 
     public CertificateManager getById(int id){
-        if(repo.getById(id) != null){
-            return repo.getById(id);
-        }else{
-         return null;
+        if(repo.findById(id).isPresent()){
+            return repo.findById(id).get();
+        }
+        else{
+            return null;
         }
     }
 

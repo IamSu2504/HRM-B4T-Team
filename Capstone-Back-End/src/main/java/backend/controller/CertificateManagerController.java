@@ -2,6 +2,7 @@ package backend.controller;
 
 import backend.entity.CertificateManager;
 import backend.entity.CreateUpdateCertificateRequest;
+import backend.entity.WorkingProcess;
 import backend.service.CertificateManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,20 @@ public class CertificateManagerController {
     public ResponseEntity<?> getByMaNV(@PathVariable("id") String maNV) {
         try {
             return new ResponseEntity<>(service.getByMaNV(maNV), HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/id/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") String pv) {
+        try {
+            int id = Integer.parseInt(pv);
+            CertificateManager c = service.getById(id);
+            if(c==null){
+                return new ResponseEntity<>("Không tìm thấy chứng chỉ này", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
