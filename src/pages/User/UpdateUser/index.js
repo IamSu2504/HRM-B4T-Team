@@ -99,12 +99,12 @@ export default function UpdateUser() {
           email: userRes?.data?.email,
           cccd: userRes?.data?.cccd,
           noiCapCccd: userRes?.data?.noiCapCccd,
-          ngayCapCccd: userRes?.data?.ngayCapCccd,
-          ngayHetHanCccd: userRes?.data?.ngayHetHanCccd, 
+          ngayCapCccd: dateTimeConverter(userRes?.data?.ngayCapCccd),
+          ngayHetHanCccd: dateTimeConverter(userRes?.data?.ngayHetHanCccd), 
           hoChieu: userRes?.data?.hoChieu, 
           noiCapHoChieu: userRes?.data?.noiCapHoChieu,
-          ngayCapHoChieu: userRes?.data?.ngayCapHoChieu, 
-          ngayHetHanHoChieu: userRes?.data?.ngayHetHanHoChieu, 
+          ngayCapHoChieu: dateTimeConverter(userRes?.data?.ngayCapHoChieu), 
+          ngayHetHanHoChieu: dateTimeConverter(userRes?.data?.ngayHetHanHoChieu), 
           noiSinh: userRes?.data?.noiSinh,
           queQuan: userRes?.data?.queQuan, 
           diaChiThuongTru: userRes?.data?.diaChiThuongTru, 
@@ -112,8 +112,8 @@ export default function UpdateUser() {
           atmNganHang: userRes?.data?.atmNganHang, 
           soAtm: userRes?.data?.soAtm, 
           trangThaiLaoDong: userRes?.data?.trangThaiLaoDong,
-          ngayBatDauLam: userRes?.data?.ngayBatDauLam, 
-          ngayNghiViec: userRes?.data?.ngayNghiViec, 
+          ngayBatDauLam: dateTimeConverter(userRes?.data?.ngayBatDauLam), 
+          ngayNghiViec: dateTimeConverter(userRes?.data?.ngayNghiViec), 
           lyDoNghi: userRes?.data?.lyDoNghi, image: userRes?.data?.image
         })
       }
@@ -289,6 +289,7 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="Ngày cấp căn cước"
+            value={userDetail?.ngayCapCccd}
             type="date"
             disabled={false}
             require={true}
@@ -301,6 +302,7 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="Ngày hết hạn căn cước"
+            value={userDetail?.ngayHetHanCccd}
             type="date"
             disabled={false}
             require={true}
@@ -330,7 +332,7 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="Ngày cấp hộ chiếu"
-
+            value={userDetail?.ngayCapHoChieu}
             type="date"
             disabled={false}
             require={true}
@@ -342,7 +344,7 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="Ngày hết hạn hộ chiếu"
-
+            value={userDetail?.ngayHetHanHoChieu}
             type="date"
             disabled={false}
             require={true}
@@ -374,6 +376,7 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="Ngày Bắt Đầu Làm: "
+            value={userDetail?.ngayBatDauLam}
             type="date"
             disabled={false}
             handleChange={(event) => {
@@ -524,6 +527,7 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="Ngày nghỉ việc: "
+            value={userDetail?.ngayNghiViec}
             type="date"
             disabled={false}
             handleChange={(event) => {

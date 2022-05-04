@@ -1,123 +1,84 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import SalaryGradeAPI from "../../../../api/SalaryGrade";
 
 export default function ViewSalaryGrade() {
+    const [listSalaryGrade, setListSalaryGrade] = useState([])
+    const [popoverId, setPopoverId] = useState("");
+
+    const navigate = useNavigate()
+
+    const getAllSalaryGrade = async () => {
+        const salaryGradeRes = await SalaryGradeAPI.getAll()
+        if (salaryGradeRes?.status === 200) {
+            setListSalaryGrade(salaryGradeRes?.data)
+        }
+    }
+
+    useEffect(() => {
+        getAllSalaryGrade()
+    }, [])
     return (
         <div className="homepage">
-            <div className="title">Danh sách bậc lương</div>
+            <div className="title">Danh sách Nhóm Lương</div>
             <div className="table-frame">
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
                             <th scope="col">STT</th>
-                            <th scope="col">Nhóm Lương</th>
                             <th scope="col">Mã Bậc Lương</th>
                             <th scope="col">Tên Bậc Lương</th>
                             <th scope="col">Khoảng Lương Từ</th>
                             <th scope="col">Khoảng Lương Đến</th>
                             <th scope="col">Sửa</th>
-                            <th scope="col">Xoá</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>GV1</td>
-                            <td>GVK1</td>
-                            <td>Lương giáo viên khá loại 1</td>
-                            <td>7000000</td>
-                            <td>10000000</td>
-                            <td>
-                                <img src="/home/update-icon.svg" />
-                            </td>
-                            <td>
-                                <img src="/home/delete-icon.svg" />
-                            </td>
-                        </tr>
+                        {listSalaryGrade.map((salaryGradeItem, salaryGradeIndex) => {
+                            return (
+                                <tr key={`tax-item-${salaryGradeIndex}`}>
+                                    <th scope="row">{salaryGradeIndex + 1}</th>
+                                    <td>{salaryGradeItem?.maBacLuong}</td>
+                                    <td>{salaryGradeItem?.tenBacLuong}</td>
+                                    <td>{salaryGradeItem?.khoangLuongTu}</td>
+                                    <td>{salaryGradeItem?.khoangLuongDen}</td>
+                                    <td>
+                                        <div onClick={()=>navigate(`/admin/updatesalarygrade/${salaryGradeItem?.id}`)}>
+                                            <img src="/home/update-icon.svg" />
+                                        </div>
+                                    </td>
+                                    {/* <td>                
+                                        <CustomPopover
+                                            open={popoverId === salaryGroupItem?.id}
+                                            onClose={() => setPopoverId("")}
+                                            handleSubmit={() => {
+                                                deleteSalaryGroup(salaryGroupItem?.id)
+                                            }}
+                                        >          
+                                            <div 
+                                                onClick={() => {
+                                                    if (popoverId !== salaryGroupItem?.id) {
+                                                        setPopoverId(salaryGroupItem?.id);
+                                                    } else {
+                                                        setPopoverId("");
+                                                    }
+                                                }}
+                                            >
+                                                <img src="/home/delete-icon.svg" />
+                                            </div>
+                                        </CustomPopover>
+                                    </td> */}
+                                </tr>
+                            )
+                        })}
 
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>GV1</td>
-                            <td>GVK1</td>
-                            <td>Lương giáo viên khá loại 1</td>
-                            <td>7000000</td>
-                            <td>10000000</td>
-
-                            <td>
-                                <img src="/home/update-icon.svg" />
-                            </td>
-                            <td>
-                                <img src="/home/delete-icon.svg" />
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>GV1</td>
-                            <td>GVK1</td>
-                            <td>Lương giáo viên khá loại 1</td>
-                            <td>7000000</td>
-                            <td>10000000</td>
-
-                            <td>
-                                <img src="/home/update-icon.svg" />
-                            </td>
-                            <td>
-                                <img src="/home/delete-icon.svg" />
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>GV1</td>
-                            <td>GVK1</td>
-                            <td>Lương giáo viên khá loại 1</td>
-                            <td>7000000</td>
-                            <td>10000000</td>
-
-                            <td>
-                                <img src="/home/update-icon.svg" />
-                            </td>
-                            <td>
-                                <img src="/home/delete-icon.svg" />
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>GV1</td>
-                            <td>GVK1</td>
-                            <td>Lương giáo viên khá loại 1</td>
-                            <td>7000000</td>
-                            <td>10000000</td>
-
-                            <td>
-                                <img src="/home/update-icon.svg" />
-                            </td>
-                            <td>
-                                <img src="/home/delete-icon.svg" />
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">6</th>
-                            <td>GV1</td>
-                            <td>GVK1</td>
-                            <td>Lương giáo viên khá loại 1</td>
-                            <td>7000000</td>
-                            <td>10000000</td>
-
-                            <td>
-                                <img src="/home/update-icon.svg" />
-                            </td>
-                            <td>
-                                <img src="/home/delete-icon.svg" />
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
-            <div className="pagination-frame">
+            {/* <div className="pagination-frame">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         <li class="page-item">
@@ -149,16 +110,17 @@ export default function ViewSalaryGrade() {
                         </li>
                     </ul>
                 </nav>
-            </div>
+            </div> */}
 
             <div>
-                <button className="save-button">
+                <button className="save-button" onClick={()=>navigate(`/admin/addsalarygrade`)}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">Thêm Mới</span>
                 </button>
             </div>
+            <ToastContainer />
         </div>
     );
 }

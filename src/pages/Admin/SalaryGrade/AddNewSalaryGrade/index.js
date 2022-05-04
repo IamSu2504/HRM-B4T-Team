@@ -1,14 +1,48 @@
-import React from "react";
+import React, {useState} from "react";
 import CustomInputField from "../../../../components/customInputField";
 import CustomSelectBox from "../../../../components/customSelectbox";
 import "./style.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import SalaryGradeAPI from "../../../../api/SalaryGrade";
 
 export default function AddSalaryGrade() {
+    const [salaryGradeDetail, setSalaryGradeDetail] = useState({ maBacLuong: '', tenBacLuong: '', khoangLuongTu: '', khoangLuongDen: '' })
+    const [submitError, setSubmitError] = useState({ status: false, error: '' })
+    const [isSubmit, setIsSubmit] = useState(false)
+
+    const handleCreate = async () => {
+        try {
+            setSubmitError({ status: false, error: '' })
+            const { maBacLuong, tenBacLuong, khoangLuongTu, khoangLuongDen } = salaryGradeDetail
+
+            if (!maBacLuong.trim().length || !tenBacLuong.trim().length || !khoangLuongTu.trim().length || !khoangLuongDen.trim().length) {
+                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+            } else {
+                setIsSubmit(true)
+                console.log('da vao day 1')
+                const updateRes = await SalaryGradeAPI.addNewSalaryGrade({ ...salaryGradeDetail })
+                if (updateRes?.status === 200) {
+                    console.log('da vao day 2')
+                    toast.success(updateRes?.data)
+                }
+                else{
+                    toast.error('aaaa')
+                }
+            }
+        } catch (error) {
+            if (error.response) {
+                setSubmitError({ status: true, error: error.response.data })
+            }
+        } finally {
+            setIsSubmit(false)
+        }
+    }
     return (
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Bậc Lương</div>
+                    <div className="title">Thêm Thông Tin Bậc Lương</div>
                     <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
@@ -16,58 +50,52 @@ export default function AddSalaryGrade() {
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="ID"
-                        value="1"
+                        title="Mã Bậc Lương *:"
                         type="text"
-                        disabled={true}
-                        require={true}
+                        handleChange={(event) => {
+                            setSalaryGradeDetail({ ...salaryGradeDetail, maBacLuong: event.target.value })
+                        }}
                     />
 
-                    <CustomSelectBox
-                        title="Nhóm Lương"
-                        option={["GV1", "GV2", "GV3", "NV1", "NV2", "NV3", "QL"]}
-                        require={true}
+                    <CustomInputField
+                        title="Tên Bậc Lương *:"
+                        type="text"
+                        handleChange={(event) => {
+                            setSalaryGradeDetail({ ...salaryGradeDetail, tenBacLuong: event.target.value })
+                        }}
                     />
 
-                    <CustomSelectBox
-                        title="Nhóm Lương"
-                        option={["GVK1", "GVK2", "GVK3", "GVT1", "GVT2", "GVT3", "GVG1", "GVG2", "GVG3", "NVL1", "NVL2", "NVL3", "NVP1", "NVP2", "NVT1", "NVT2", "PGD", "GD"]}
-                        require={true}
-                    />
                     <CustomInputField
-                        title="Tên Bậc Lương"
-                        value=""
+                        title="Khoảng Lương Từ *:"
                         type="text"
-                        disabled={false}
-                        require={true}
+                        handleChange={(event) => {
+                            setSalaryGradeDetail({ ...salaryGradeDetail, khoangLuongTu: event.target.value })
+                        }}
                     />
+
                     <CustomInputField
-                        title="Khoảng Lương Từ"
-                        value=""
+                        title="Khoảng Lương Đến *:"
                         type="text"
-                        disabled={false}
-                        require={true}
+                        handleChange={(event) => {
+                            setSalaryGradeDetail({ ...salaryGradeDetail, khoangLuongDen: event.target.value })
+                        }}
                     />
-        
-                    <CustomInputField
-                        title="Khoảng Lương Đến"
-                        type="text"
-                        value=""
-                        disabled={false}
-                        require={true}
-                    />
-                    
+
                 </div>
 
             </div>
             <div>
-                <button className="save-button">
+                {submitError.status && <div className="tax-update-error">{submitError.error}</div>}
+            </div>
+            <div>
+                <button className="save-button" disabled={isSubmit} onClick={()=>handleCreate()}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">Thêm</span>
                 </button>
             </div>
+            <ToastContainer />
         </div>
     );
 }

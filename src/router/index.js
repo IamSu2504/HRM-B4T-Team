@@ -157,7 +157,7 @@ export default function MainApp() {
         {/* admin category */}
 
         <Route exact path="/admin/viewsalarygrade" element={<AdminLayoutPrivateRoute><ViewSalaryGrade /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/updatesalarygrade" element={<AdminLayoutPrivateRoute><UpdateSalaryGrade /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/updatesalarygrade/:salaryGradeId" element={<AdminLayoutPrivateRoute><UpdateSalaryGrade /></AdminLayoutPrivateRoute>} />
         <Route exact path="/admin/addsalarygrade" element={<AdminLayoutPrivateRoute><AddSalaryGrade /></AdminLayoutPrivateRoute>} />
 
         <Route exact path="/admin/viewtax" element={<AdminLayoutPrivateRoute><ViewTax /></AdminLayoutPrivateRoute>} />
@@ -289,9 +289,6 @@ export default function MainApp() {
 
         <Route exact path="/employee/leaveRequest"  element={<EmployeeLayoutPrivateRoute><ELeaveRequest /></EmployeeLayoutPrivateRoute>} />
         <Route exact path="/employee/viewshift/:maNv"  element={<EmployeeLayoutPrivateRoute><ViewRegisterShift /></EmployeeLayoutPrivateRoute>} />
-        {/* <Route exact path="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection2e579c81c5bd288a8287"/>
-        <Route exact path="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection63438c805d4b6ea33c12"/>
-        <Route exact path="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection227818c02b928ad9c8fa"/> */}
       </Routes>
     </Router>
   );
