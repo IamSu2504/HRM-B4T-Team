@@ -66,6 +66,25 @@ export default function ViewAllUser() {
   return (
     <div className="homepage">
       <div className="title">Danh sách nhân viên</div>
+
+{/* search */}
+      <div class="input-group mb-3 mt-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Bộ lọc</span>
+          <select class="input-group-text" id="sel1" name="sellist1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </div>
+        <input type="text" class="form-control" placeholder="Tìm kiếm" />
+        <div class="input-group-append">
+          <button class="btn btn-success" type="submit">Go</button>
+        </div>
+      </div>
+{/* ******** */}
+
       <div className="table-frame">
         <table class="table table-bordered" id="userTable">
           <thead>

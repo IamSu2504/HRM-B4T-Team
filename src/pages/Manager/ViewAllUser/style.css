@@ -48,3 +48,26 @@
   position: absolute;
   right: 50px;
 }
+.homepage .search-input{
+  width: 100%;
+  position: relative;
+  margin-top: 20px;
+}
+.homepage .input-group{
+  width: 30%;
+}
+.homepage .input-group input {
+  height: 45px;
+  border-radius: 15px;
+  background: #ffffff;
+  border: transparent;
+  padding-left: 10px;
+  padding-right: 15px;
+  outline: none;
+  border: 1px solid #ccc;
+}
+.homepage .input-group .input-icon{
+  position : absolute;
+  top: 6px;
+  right: 30px
+}
