@@ -1,9 +1,6 @@
 package backend.service;
 
-import backend.entity.Contract;
-import backend.entity.ContractCategory;
-import backend.entity.CreateUpdateContractRequest;
-import backend.entity.CreateUpdateSalaryRequest;
+import backend.entity.*;
 import backend.repository.ContractCategoryRepository;
 import backend.repository.ContractRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +56,6 @@ public class ContractService {
             }
         }
         else {
-            //set loi ko de trong ma HD
             return null;
         }
     }

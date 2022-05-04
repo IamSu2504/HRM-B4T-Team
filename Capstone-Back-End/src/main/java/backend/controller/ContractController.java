@@ -64,6 +64,7 @@ public class ContractController {
             if (service.getById(pv) == null) {
                 return new ResponseEntity<>("Mã hợp đồng không tồn tại", HttpStatus.NOT_FOUND);
             }
+            request.setMaHD(pv);
             Contract t = service.save(request);
             if(t==null){
                 return new ResponseEntity<>("Mã hợp đồng đã tồn tại", HttpStatus.EXPECTATION_FAILED);
