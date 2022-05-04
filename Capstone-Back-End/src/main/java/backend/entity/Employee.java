@@ -61,12 +61,12 @@ public class Employee {
 
     @Column(name = "ngay_cap_cccd")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayCapCccd;
 
     @Column(name = "ngay_het_han_cccd")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayHetHanCccd;
 
     @Column(name = "ho_chieu")
@@ -77,12 +77,12 @@ public class Employee {
 
     @Column(name = "ngay_cap_ho_chieu")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayCapHoChieu;
 
     @Column(name = "ngay_het_han_ho_chieu")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayHetHanHoChieu;
 
     @Column(name = "noi_sinh")
@@ -105,12 +105,12 @@ public class Employee {
 
     @Column(name = "ngay_bat_dau_lam")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayBatDauLam;
 
     @Column(name = "ngay_nghi_viec")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayNghiViec;
 
     @Column(name = "ly_do_nghi")

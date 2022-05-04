@@ -41,7 +41,7 @@ public class EmployeeService {
 
     public String getUpdateUserMessage(Employee newUser) {
         if (!employeeRepo.findById(newUser.getId().toUpperCase()).isPresent()) {
-            return "Người dùng không tồn tại";
+            return "Nhân viên không tồn tại";
         }
         Employee oldUser = employeeRepo.findById(newUser.getId().toUpperCase()).get();
 
@@ -66,10 +66,15 @@ public class EmployeeService {
 
     public String getUpdateUserMessage(CreateUpdateUserRequest request) {
         if (!employeeRepo.findById(request.getId().toUpperCase()).isPresent()) {
-            return "Người dùng không tồn tại";
+            return "Nhân viên không tồn tại";
         }
+
         Employee oldUser = employeeRepo.findById(request.getId().toUpperCase()).get();
         Employee newUser = getNewUser(request);
+
+        if(newUser.getNgayNghiViec()!=null){
+
+        }
 
         if (newUser == null)
             return "Sai định dạng ngày tháng (dd/MM/yyyy). Vui lòng nhập lại";
@@ -119,7 +124,7 @@ public class EmployeeService {
 
     public Employee getNewUser(CreateUpdateUserRequest request) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Employee newUser = new Employee();
             String upperCaseID = request.getId().toUpperCase();
 
