@@ -17,8 +17,8 @@ export default function AddContract() {
         try {
             setSubmitError({ status: false, error: '' })
             const { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, trangThai, maNV } = contractDetail
-
-            if (!maHD.trim().length || !loaiHopDong.trim().length || !ngayHieuLuc.trim().length || !ngayHetHan.trim().length || !ghiChu.trim().length || !trangThai.trim().length || !maNV.trim().length) {
+            console.log(contractDetail)
+            if (!maHD.trim().length || !loaiHopDong.trim().length || !ngayHieuLuc.trim().length || !ngayHetHan.trim().length || !ghiChu.trim().length|| !maNV.trim().length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
                 setIsSubmit(true)
@@ -109,16 +109,7 @@ export default function AddContract() {
                             setContractDetail({ ...contractDetail, ghiChu: event.target.value })
                         }}
                     />
-                    <CustomSelectBox
-                        title="Trạng Thái* :"
-                        option={
-                            [{ label: "Đang Hiệu Lực", value: true }, { label: "Đã Hết Hiệu Lực", value: false }]
-                        }
-                        require={true}
-                        handleChange={(event) => {
-                            setContractDetail({ ...contractDetail, trangThai: event.currentTarget.value })
-                        }}
-                    />
+                    
                     <CustomInputField
                         title="Mã Nhân Viên* :"
                         type="text"

@@ -62,7 +62,8 @@ export default function UpdateContract() {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
                 setIsSubmit(true)       
-                
+                console.log("maHD",maHD)
+                console.log("user",contractDetail)
                 const updateRes = await ManagercontractAPI.updateManagerContract({ maHD: maHD, ...contractDetail })
                 if (updateRes?.status === 200) {
                     toast.success(updateRes?.data)
