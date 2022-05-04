@@ -168,5 +168,24 @@ public class Employee {
         return c.getTime();
     }
 
+    public Date getNgayBatDauLam(){
+        if(ngayBatDauLam==null){
+            return null;
+        }
+        Calendar c = Calendar.getInstance();
+        c.setTime(ngayBatDauLam);
+        c.add(Calendar.DAY_OF_MONTH, 1);
+        return c.getTime();
+    }
+
+    public Date getNgayNghiViec(){
+        if(ngayNghiViec==null){
+            return null;
+        }
+        Calendar c = Calendar.getInstance();
+        c.setTime(ngayNghiViec);
+        c.add(Calendar.DAY_OF_MONTH, 1);
+        return c.getTime();
+    }
 
 }
