@@ -11,9 +11,9 @@ const ManagerContractAPI = {
         return AxiosClient.get(url);
     },
 
-    updateManagerContract({id, maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, trangThai, maNV}) {
-        const url = `/contract/${id}`;
-        return AxiosClient.put(url, { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, trangThai, maNV});
+    updateManagerContract({maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, trangThai, maNV}) {
+        const url = `/contract/${maHD}`;
+        return AxiosClient.put(url, { loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, trangThai, maNV});
     },
 
     addNewManagercontract({maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, trangThai, maNV}) {

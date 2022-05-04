@@ -171,7 +171,7 @@ export default function UpdateUser() {
       console.log('>>>>>',tinhChatHopDongID.toString().trim()?.length)
       if (!tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
         || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
-        || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length || !soDienThoai2.toString().trim()?.length
+        || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length
         || !email.toString().trim()?.length || !cccd.toString().trim()?.length || !noiCapCccd.toString().trim()?.length
         || !ngayCapCccd.toString().trim()?.length || !ngayHetHanCccd.toString().trim()?.length || !hoChieu.toString().trim()?.length
         || !noiCapHoChieu.toString().trim()?.length || !ngayCapHoChieu.toString().trim()?.length || !ngayHetHanHoChieu.toString().trim()?.length

@@ -50,7 +50,7 @@ export default function ViewUser() {
         <div>
           <p>Mã Số Nhân Viên: {userDetail?.id || ''}</p>
           <p>Họ Và Tên: {userDetail?.tenNv || ''}</p>
-          <p>Giới Tính: {userDetail?.gioiTinh || ''}</p>
+          <p>Giới Tính: {userDetail?.gioiTinh? "Nam" : "Nữ"}</p>
           <p>Ngày Sinh: {userDetail?.ngaySinh || ''}</p>
           <p>Nơi Sinh: {userDetail?.noiSinh || ''}</p>
           <p>Địa chỉ thường trú: {userDetail?.diaChiThuongTru || ''}</p>
