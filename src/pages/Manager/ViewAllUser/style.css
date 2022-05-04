@@ -23,8 +23,7 @@
   white-space: nowrap;
 }
 
-.homepage .table-frame .active-status .active, .homepage .table-frame .active-status  .deactive {
-  background: rgba(32, 207, 70, 0.74);
+.homepage .table-frame .active-status {
   border-radius: 20px;
   font-style: normal;
   font-weight: 700;
@@ -35,27 +34,37 @@
   text-align: center;
 }
 
+.homepage .table-frame .active-status .active {
+  background: rgba(32, 207, 70, 0.74);
+}
+
 .homepage .table-frame .active-status .deactive {
   background: rgba(225, 0, 0, 0.63);
 }
+
+/* .homepage .table-frame .active-status .deactive {
+} */
 
 .homepage .pagination-frame {
   position: relative;
   height: 50px;
 }
 
-.homepage .pagination-frame .pagination{
+.homepage .pagination-frame .pagination {
   position: absolute;
   right: 50px;
 }
-.homepage .search-input{
+
+.homepage .search-input {
   width: 100%;
   position: relative;
   margin-top: 20px;
 }
-.homepage .input-group{
+
+.homepage .input-group {
   width: 30%;
 }
+
 .homepage .input-group input {
   height: 45px;
   border-radius: 15px;
@@ -66,16 +75,19 @@
   outline: none;
   border: 1px solid #ccc;
 }
-.homepage .input-group select{
+
+.homepage .input-group select {
   /* position : absolute;
   top: 15px;
   right: 30px; */
   width: 150px;
   text-align: left;
 }
+
 .css-levciy-MuiTablePagination-displayedRows {
   margin: auto;
 }
+
 .css-pdct74-MuiTablePagination-selectLabel {
   margin: auto;
 }
