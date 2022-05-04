@@ -66,7 +66,6 @@ const UserAPI = {
         const url = `/user/${maNv}/image/base64`;
         return AxiosClient.get(url);
     }
-  
 }
 
 export default UserAPI;
