@@ -62,7 +62,7 @@ public class ContractService {
 
     public Contract getNewContract(CreateUpdateContractRequest request){
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
             Contract s = new Contract();
             s.setMaHD(request.getMaHD());

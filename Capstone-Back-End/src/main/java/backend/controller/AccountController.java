@@ -34,16 +34,16 @@ public class AccountController {
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         try {
             if (!accountService.checkUsernameExisted(request.getUsername())) {
-                return new ResponseEntity<>("Username not existed", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Tên đăng nhập không tồn tại", HttpStatus.NOT_FOUND);
             }
             Account account = accountService.getLoginAccount(request);
             if (account != null) {
                 return new ResponseEntity<>(account, HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("Wrong username or password", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Sai tên đăng nhập hoặc mật khẩu", HttpStatus.EXPECTATION_FAILED);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -52,11 +52,11 @@ public class AccountController {
         try {
             List<Account> list = accountService.getAll();
             if (list.isEmpty()) {
-                return new ResponseEntity<>("No account was created", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Chưa có tài khoản được tạo", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -66,11 +66,11 @@ public class AccountController {
             int id = Integer.parseInt(pv);
             Account a = accountService.getById(id);
             if (a == null) {
-                return new ResponseEntity<>("Account not existed", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Tài khoản không tồn tại", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(a, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -79,12 +79,12 @@ public class AccountController {
         try {
             String message = accountService.getSaveMessage(request);
             if (message == null) {
-                return new ResponseEntity("Account created successfully", HttpStatus.OK);
+                return new ResponseEntity("Tài khoản được tạo thành công", HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -95,12 +95,12 @@ public class AccountController {
             request.setId(id);
             String message = accountService.getSaveMessage(request);
             if (message == null) {
-                return new ResponseEntity("Account updated successfully", HttpStatus.OK);
+                return new ResponseEntity("Cập nhật thành công", HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -125,6 +125,9 @@ public class AccountController {
             Employee u = userService.getByEmail(toEmail[0]);
             if (u == null) {
                 return new ResponseEntity<>("Email này chưa được đăng kí", HttpStatus.NOT_FOUND);
+            }
+            if(accountService.getByMaNv(u.getId())==null){
+                return new ResponseEntity<>("Chưa có tài khoản được tạo với email này", HttpStatus.NOT_FOUND);
             }
             Account forgotAccount = accountService.getByMaNv(u.getId());
             final String fromEmail = "speaklxss2001@gmail.com";

@@ -26,6 +26,7 @@ public class EmployeeService {
     private NationCategoryRepository nationRepo;
 
     public List<Employee> getAll() {
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         return employeeRepo.findAll();
     }
 
@@ -73,12 +74,17 @@ public class EmployeeService {
         Employee oldUser = employeeRepo.findById(request.getId().toUpperCase()).get();
         Employee newUser = getNewUser(request);
 
-        if(newUser.getNgayNghiViec()!=null){
-
+        if(oldUser.getNgayNghiViec()!=null){
+          return "Nhân viên mã " + oldUser.getId() + " đã nghỉ việc. Không thể cập nhật thông tin";
+        }
+        else if(newUser.getNgayNghiViec()!=null){
+            if(newUser.getNgayNghiViec().getDay()!=1){
+                return "Ngày nghỉ việc bắt buộc phải là ngày đầu tháng và trong thời hạn hợp đồng";
+            }
         }
 
         if (newUser == null)
-            return "Sai định dạng ngày tháng (dd/MM/yyyy). Vui lòng nhập lại";
+            return "Lỗi lấy thông tin nhân viên";
         if (!oldUser.getId().equalsIgnoreCase(newUser.getId()) && employeeRepo.findById(newUser.getId()).isPresent()) {
             return "Mã nhân viên đã tồn tại";
         } else if (!oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && employeeRepo.getBySdt(newUser.getSoDienThoai()) != null) {

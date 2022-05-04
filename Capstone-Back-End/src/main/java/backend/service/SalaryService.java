@@ -42,6 +42,7 @@ public class SalaryService {
     }
 
     public String getSaveMessage(CreateUpdateSalaryRequest request) {
+        Calendar calendar = Calendar.getInstance();
         Salary newSalary = getNewSalary(request);
         if (newSalary == null) {
             return "Lỗi lấy thông tin lương mới";
@@ -89,7 +90,9 @@ public class SalaryService {
 
             // no salary saved before
             if (previousSalary == null) {
-                if (newSalary.getNgayHieuLuc().compareTo(c.getNgayHieuLuc()) != 0) {
+                calendar.setTime(c.getNgayHieuLuc());
+                calendar.add(Calendar.DAY_OF_MONTH,-1);
+                if (newSalary.getNgayHieuLuc().compareTo(calendar.getTime()) != 0) {
                     return "Ngày hiệu lực bắt buộc là ngày hiệu lực của hợp đồng: " + sdf.format(c.getNgayHieuLuc());
                 }
                 newSalary.setNgayKetThuc(c.getNgayHetHan());
@@ -100,7 +103,6 @@ public class SalaryService {
                     return "Ngày hiệu lực của lương mới bắt buộc là ngày đầu tháng: " + sdf.format(c.getNgayHieuLuc());
                 }
                 if (newSalary.getNgayHieuLuc().compareTo(previousSalary.getNgayHieuLuc()) <= 0 || newSalary.getNgayHieuLuc().compareTo(previousSalary.getNgayKetThuc()) > 0) {
-                    Calendar calendar = Calendar.getInstance();
                     calendar.setTime(previousSalary.getNgayHieuLuc());
                     calendar.add(Calendar.DATE, 1);
                     String start = sdf.format(calendar.getTime());
@@ -108,7 +110,6 @@ public class SalaryService {
                 }
 
                 // update previous salary
-                Calendar calendar = Calendar.getInstance();
                 calendar.setTime(newSalary.getNgayHieuLuc());
                 calendar.add(Calendar.DATE, -1);
                 previousSalary.setNgayKetThuc(calendar.getTime());

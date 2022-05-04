@@ -120,72 +120,72 @@ public class Employee {
     @Column(name = "image")
     private String image;
 
-    public Date getNgaySinh(){
-        Calendar c = Calendar.getInstance();
-        c.setTime(ngaySinh);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
-    }
-
-    public Date getNgayCapCccd(){
-        if(ngayCapCccd!=null){
-            Calendar c = Calendar.getInstance();
-            c.setTime(ngayCapCccd);
-            c.add(Calendar.DAY_OF_MONTH, 1);
-            return c.getTime();
-        }
-        else
-            return null;
-    }
-
-    public Date getNgayHetHanCccd(){
-        if(ngayHetHanCccd==null){
-          return null;
-        }
-        Calendar c = Calendar.getInstance();
-        c.setTime(ngayHetHanCccd);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
-    }
-
-    public Date getNgayCapHoChieu(){
-        if(ngayCapHoChieu==null){
-            return null;
-        }
-        Calendar c = Calendar.getInstance();
-        c.setTime(ngayCapHoChieu);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
-    }
-
-    public Date getNgayHetHanHoChieu(){
-        if(ngayHetHanHoChieu==null){
-            return null;
-        }
-        Calendar c = Calendar.getInstance();
-        c.setTime(ngayHetHanHoChieu);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
-    }
-
-    public Date getNgayBatDauLam(){
-        if(ngayBatDauLam==null){
-            return null;
-        }
-        Calendar c = Calendar.getInstance();
-        c.setTime(ngayBatDauLam);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
-    }
-
-    public Date getNgayNghiViec(){
-        if(ngayNghiViec==null){
-            return null;
-        }
-        Calendar c = Calendar.getInstance();
-        c.setTime(ngayNghiViec);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
-    }
+//    public Date getNgaySinh(){
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(ngaySinh);
+//        c.add(Calendar.DAY_OF_MONTH, 1);
+//        return c.getTime();
+//    }
+//
+//    public Date getNgayCapCccd(){
+//        if(ngayCapCccd!=null){
+//            Calendar c = Calendar.getInstance();
+//            c.setTime(ngayCapCccd);
+//            c.add(Calendar.DAY_OF_MONTH, 1);
+//            return c.getTime();
+//        }
+//        else
+//            return null;
+//    }
+//
+//    public Date getNgayHetHanCccd(){
+//        if(ngayHetHanCccd==null){
+//          return null;
+//        }
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(ngayHetHanCccd);
+//        c.add(Calendar.DAY_OF_MONTH, 1);
+//        return c.getTime();
+//    }
+//
+//    public Date getNgayCapHoChieu(){
+//        if(ngayCapHoChieu==null){
+//            return null;
+//        }
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(ngayCapHoChieu);
+//        c.add(Calendar.DAY_OF_MONTH, 1);
+//        return c.getTime();
+//    }
+//
+//    public Date getNgayHetHanHoChieu(){
+//        if(ngayHetHanHoChieu==null){
+//            return null;
+//        }
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(ngayHetHanHoChieu);
+//        c.add(Calendar.DAY_OF_MONTH, 1);
+//        return c.getTime();
+//    }
+//
+//    public Date getNgayBatDauLam(){
+//        if(ngayBatDauLam==null){
+//            return null;
+//        }
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(ngayBatDauLam);
+//        c.add(Calendar.DAY_OF_MONTH, 1);
+//        return c.getTime();
+//    }
+//
+//    public Date getNgayNghiViec(){
+//        if(ngayNghiViec==null){
+//            return null;
+//        }
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(ngayNghiViec);
+//        c.add(Calendar.DAY_OF_MONTH, 1);
+//        return c.getTime();
+//    }
 
 }
