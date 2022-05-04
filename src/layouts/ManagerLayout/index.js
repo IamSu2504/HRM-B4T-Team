@@ -155,7 +155,7 @@ export default function ManagerLayout(props) {
                   >
                     <div className="card-body">
                       <div>
-                        <a href="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection2e579c81c5bd288a8287">
+                        <a href="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection2e579c81c5bd288a8287" style={{color: 'unset', textDecoration: 'unset'}} target='_blank'>
                           <img src="/menu/list-icon.svg" />
                           <span style={{ marginLeft: '15px' }}>
                             Tổng Quan
@@ -163,14 +163,14 @@ export default function ManagerLayout(props) {
                         </a>  
                       </div>
                       <div>
-                        <a href="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection63438c805d4b6ea33c12">
+                        <a href="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection63438c805d4b6ea33c12" style={{color: 'unset', textDecoration: 'unset'}} target='_blank'>
                           <img src="/menu/list-icon.svg" />
                           <span style={{ marginLeft: '15px' }}>Giáo Viên
                           </span>
                         </a>
                       </div>
                       <div >
-                        <a href="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection227818c02b928ad9c8fa">
+                        <a href="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection227818c02b928ad9c8fa" style={{color: 'unset', textDecoration: 'unset'}} target='_blank'>
                           <img src="/menu/list-icon.svg" />
                           <span style={{ marginLeft: '15px' }}>Lương Nhân Viên
                           </span>
@@ -180,7 +180,7 @@ export default function ManagerLayout(props) {
                   </div>
                 </div>
                 <div className="card">
-                  <div className="card-header">
+                  <div className="card-header" onClick={() => navigate(`/manager/viewallcontract`)}>
                     <a className="card-link" data-toggle="collapse">
                       <div className="card-head-content">
                         <div className="left">
@@ -303,12 +303,12 @@ export default function ManagerLayout(props) {
                       data-toggle="collapse"
                     // href="#collapseOne"
                     >
-                      <div className="card-head-content">
+                      <div className="card-head-content" onClick={() => navigate(`/manager/registershifts`)}>
                         <div className="left">
                           <div className="content1">
                             <img src="/menu/chamcong.svg" />
                           </div>
-                          <div className="content2">Chấm công</div>
+                          <div className="content2">Đăng Kí Ca Làm</div>
                         </div>
                         <div className="content3">
                           <img src="/menu/down-arrow.svg" />

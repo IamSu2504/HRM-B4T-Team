@@ -11,7 +11,6 @@ import UserAPI from "../../../api/user";
 import ReactHtmlTableToExcel from "react-html-table-to-excel";
 
 
-
 export default function RegisterShift() {
     const [registerShiftDetail, setRegisterShiftDetail] = useState({ userID: '', shiftCategoryID: '', roomID: '', date: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
@@ -85,6 +84,10 @@ export default function RegisterShift() {
         const departmentRes = await DepartmentAPI.getAll()
         if (departmentRes?.status === 200) {
             setListDepartment(departmentRes?.data)
+            if ( departmentRes?.data?.length ){
+                setRegisterShiftDetail({...registerShiftDetail, roomID: departmentRes?.data[0]?.id})
+                setIdPhong(departmentRes?.data[0]?.id)
+            }
             // setRegisterShiftDetail({ ...registerShiftDetail, room: departmentRes?.data?.length ? departmentRes?.data[0] : {} })
             // registerShiftRef.current = { ...registerShiftRef.current, room: departmentRes?.data?.length ? departmentRes?.data[0] : {} }
         }
@@ -115,16 +118,18 @@ export default function RegisterShift() {
         //    console.log(idPhong)
         getlistviewShift()
     }, [idPhong]);
+
     useEffect(() => {
         //    console.log(idPhong)
         getlistviewShift()
     }, [ngayTu]);
+
     useEffect(() => {
         //    console.log(idPhong)
         getlistviewShift()
     }, [ngayDen]);
-    useEffect(() => {
-          
+
+    useEffect(() => {        
         setRegisterShiftDetail({...registerShiftDetail, date: i})
         console.log(registerShiftDetail?.date)
     }, [i]);
@@ -144,10 +149,10 @@ export default function RegisterShift() {
                         title="Phòng Làm Việc *:"
                         option={listDepartment.map((departmentItem) => {
                             return (
-                                { label: `${departmentItem.tenPhongBan}-${departmentItem.maPhongBan}`, value: departmentItem.id }
+                                { label: `${departmentItem.tenPhongBan}-${departmentItem.maPhongBan}`, value: departmentItem?.id }
                             )
                         })}
-
+                        value={idPhong}
                         require={true}
                         handleChange={(event) => {
                             const id = event.currentTarget.value
