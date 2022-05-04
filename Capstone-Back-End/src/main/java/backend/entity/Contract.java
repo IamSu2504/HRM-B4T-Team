@@ -39,17 +39,25 @@ public class Contract {
     private String maNV;
 
     public Date getNgayHieuLuc(){
-        Calendar c = Calendar.getInstance();
-        c.setTime(ngayHieuLuc);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
+        if(ngayHieuLuc!=null){
+            Calendar c = Calendar.getInstance();
+            c.setTime(ngayHieuLuc);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            return c.getTime();
+        }
+        else
+            return null;
     }
 
     public Date getNgayHetHan(){
-        Calendar c = Calendar.getInstance();
-        c.setTime(ngayHetHan);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
+        if(ngayHetHan!=null){
+            Calendar c = Calendar.getInstance();
+            c.setTime(ngayHetHan);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            return c.getTime();
+        }
+        else
+            return null;
     }
 
 }

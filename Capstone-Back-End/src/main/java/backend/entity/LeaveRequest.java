@@ -46,10 +46,14 @@ public class LeaveRequest {
     private String status;
 
     public Date getDate(){
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
+        if(date!=null){
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            return c.getTime();
+        }
+        else
+            return null;
     }
 
 

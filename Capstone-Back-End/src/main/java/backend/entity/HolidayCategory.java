@@ -26,10 +26,14 @@ public class HolidayCategory {
     private String tenNgayLe;
 
     public Date getNgay(){
-        Calendar c = Calendar.getInstance();
-        c.setTime(ngay);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
+        if(ngay!=null){
+            Calendar c = Calendar.getInstance();
+            c.setTime(ngay);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            return c.getTime();
+        }
+        else
+            return null;
     }
 
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 
 @Data
@@ -21,7 +22,7 @@ public class CertificateManager {
 
     @Column(name = "ngay_cap")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayCap;
 
     @Column(name = "noi_cap")
@@ -33,4 +34,15 @@ public class CertificateManager {
 
     @Column(name = "diem_so")
     private Double diemSo;
+
+    public Date getNgayCap(){
+        if(ngayCap!=null){
+            Calendar c = Calendar.getInstance();
+            c.setTime(ngayCap);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            return c.getTime();
+        }
+        else
+            return null;
+    }
 }

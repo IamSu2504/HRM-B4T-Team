@@ -56,4 +56,6 @@ public class Salary {
         return luongCoBan + phuCapKhac;
     }
 
+
+
 }

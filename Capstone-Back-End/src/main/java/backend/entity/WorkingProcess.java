@@ -47,16 +47,24 @@ public class WorkingProcess {
     private String maNV;
 
     public Date getNgayVao(){
-        Calendar c = Calendar.getInstance();
-        c.setTime(ngayVao);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
+        if(ngayVao!=null){
+            Calendar c = Calendar.getInstance();
+            c.setTime(ngayVao);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            return c.getTime();
+        }
+        else
+            return null;
     }
 
     public Date getNgayRa(){
-        Calendar c = Calendar.getInstance();
-        c.setTime(ngayRa);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
+        if(ngayRa!=null){
+            Calendar c = Calendar.getInstance();
+            c.setTime(ngayRa);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            return c.getTime();
+        }
+        else
+            return null;
     }
 }
