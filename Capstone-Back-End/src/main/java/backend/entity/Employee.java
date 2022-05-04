@@ -38,7 +38,7 @@ public class Employee {
 
     @Column(name = "ngay_sinh")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngaySinh;
 
     @Column(name = "gioi_tinh")
