@@ -151,7 +151,7 @@ export default function AdminLayout(props) {
                   </div>
                   <div
                     id="collapseTwo"
-                    className="collapse"
+                    className="collapse show"
                     data-parent="#accordion"
                   >
                     <div className="card-body">

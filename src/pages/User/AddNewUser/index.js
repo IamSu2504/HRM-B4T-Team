@@ -70,7 +70,7 @@ export default function AddNewUser() {
     ngayCapHoChieu: '', ngayHetHanHoChieu: '', noiSinh: '',
     queQuan: '', diaChiThuongTru: '', diaChiTamTru: '',
     atmNganHang: '', soAtm: '', trangThaiLaoDong: '',
-    ngayBatDauLam: '', ngayNghiViec: '', lyDoNghi: '', image: ''
+    ngayBatDauLam: '', ngayNghiViec: '', lyDoNghi: ''
   })
   const [submitError, setSubmitError] = useState({ status: false, error: '' })
   const [isSubmit, setIsSubmit] = useState(false)
@@ -87,7 +87,7 @@ export default function AddNewUser() {
         ngayCapHoChieu, ngayHetHanHoChieu, noiSinh,
         queQuan, diaChiThuongTru, diaChiTamTru,
         atmNganHang, soAtm, trangThaiLaoDong,
-        ngayBatDauLam, ngayNghiViec, lyDoNghi, image
+        ngayBatDauLam, ngayNghiViec, lyDoNghi
       } = userDetail
 
       if (!tinhChatHopDongID.trim().length || !tinhTrangHonNhanID.trim().length || !chucVuID.trim().length
@@ -98,7 +98,7 @@ export default function AddNewUser() {
         || !ngayCapHoChieu.trim().length || !ngayHetHanHoChieu.trim().length || !noiSinh.trim().length
         || !queQuan.trim().length || !diaChiThuongTru.trim().length || !diaChiTamTru.trim().length
         || !atmNganHang.trim().length || !soAtm.trim().length || !trangThaiLaoDong.trim().length
-        || !ngayBatDauLam.trim().length || !ngayNghiViec.trim().length || !lyDoNghi.trim().length || !image.trim().length) {
+        || !ngayBatDauLam.trim().length || !ngayNghiViec.trim().length || !lyDoNghi.trim().length ) {
         setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
       } else {
         setIsSubmit(true)
@@ -152,15 +152,7 @@ export default function AddNewUser() {
 
       <div className="row fied-data-row">
         <div>
-          <CustomInputField
-            title="Ảnh 3*4"
-            type="file"
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, image: event.target.value })
-            }}
-          />
+
           <CustomSelectBox
             title="Giới Tính :"
             option={[{ label: "Nam", value: true }, { label: "Nữ", value: false }]}
