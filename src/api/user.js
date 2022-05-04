@@ -30,7 +30,7 @@ const UserAPI = {
         });
     },
 
-    addNewUser({ tinhChatHopDongID, tinhTrangHonNhanID,
+    addNewUser({id, tinhChatHopDongID, tinhTrangHonNhanID,
         quocTichID, tenNv, ngaySinh,
         gioiTinh, soDienThoai, soDienThoai2,
         email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
@@ -38,7 +38,7 @@ const UserAPI = {
         noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
         soAtm, trangThaiLaoDong, ngayBatDauLam, ngayNghiViec, lyDoNghi }) {
         const url = `/user`;
-        return AxiosClient.post(url, {
+        return AxiosClient.post(url, {id,
             tinhChatHopDongID, tinhTrangHonNhanID,
         quocTichID, tenNv, ngaySinh,
         gioiTinh, soDienThoai, soDienThoai2,

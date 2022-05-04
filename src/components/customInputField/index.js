@@ -2,7 +2,7 @@ import React from 'react'
 import './style.css';
 
 export default function CustomInputField(props){
-  const {title, type, value, require, disabled, handleChange} = props
+  const {title, type, value, require, disabled, handleChange, placeholder} = props
   return (
     <div className='custom-input-frame'>
       <label className='input-title'>{
@@ -11,6 +11,7 @@ export default function CustomInputField(props){
       <input 
         type={type} 
         value={value} 
+        placeholder = {placeholder}
         disabled={disabled}
         onChange={(event) => handleChange(event)}
       />
