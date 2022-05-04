@@ -38,7 +38,7 @@ export default function EmployeeLayout(props) {
                                     content={
                                         <div className="header-popover-content">
                                             <div onClick={() => {
-                                                navigate(`/admin/viewuser/${localStorage.getItem('maNv')}`);
+                                                navigate(`/employee/viewuser/${localStorage.getItem('maNv')}`);
                                             }}>Thông tin tài khoản</div>
                                             <hr />
                                             <div onClick={() => {

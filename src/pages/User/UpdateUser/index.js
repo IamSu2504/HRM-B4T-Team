@@ -178,7 +178,7 @@ export default function UpdateUser() {
         || !noiSinh.toString().trim()?.length || !queQuan.toString().trim()?.length || !diaChiThuongTru.toString().trim()?.length
         || !diaChiTamTru.toString().trim()?.length || !atmNganHang.toString().trim()?.length || !soAtm.toString().trim()?.length
        || !ngayBatDauLam.toString().trim()?.length
-        || !lyDoNghi.toString().trim()?.length) {
+        ) {
         console.log("da vao day 1")
         setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
       } else {
