@@ -48,7 +48,7 @@ export default function ViewPosition() {
                             <th scope="col">STT</th>
                             <th scope="col">Mã Chức Vụ</th>
                             <th scope="col">Tên Chức Vụ</th>
-                            <th scope="col">Phụ Cấp</th>
+                            
                             <th scope="col">Sửa</th>
                             <th scope="col">Xoá</th>
                         </tr>
@@ -60,7 +60,7 @@ export default function ViewPosition() {
                                     <th scope="row">{positionIndex + 1}</th>
                                     <td>{positionItem?.maChucVu}</td>
                                     <td>{positionItem?.tenChucVu}</td>
-                                    <td>{positionItem?.phuCap}</td>
+                                    
                                     <td>
                                         <div onClick={()=>navigate(`/admin/updateposition/${positionItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />

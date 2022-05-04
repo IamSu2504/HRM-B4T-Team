@@ -11,14 +11,14 @@ const PositionAPI = {
         return AxiosClient.get(url);
     },
 
-    updatePosition({id, maChucVu, tenChucVu, phuCap}) {
+    updatePosition({id, maChucVu, tenChucVu}) {
         const url = `/category/position/${id}`;
-        return AxiosClient.put(url, { maChucVu, tenChucVu, phuCap});
+        return AxiosClient.put(url, { maChucVu, tenChucVu});
     },
 
-    addNewPosition({maChucVu, tenChucVu, phuCap}) {
+    addNewPosition({maChucVu, tenChucVu}) {
         const url = `/category/position`;
-        return AxiosClient.post(url, { maChucVu, tenChucVu, phuCap});
+        return AxiosClient.post(url, { maChucVu, tenChucVu});
     },
 
     deletePosition(id) {

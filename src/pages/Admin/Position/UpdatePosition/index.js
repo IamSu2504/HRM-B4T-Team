@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function UpdatePosition() {
-    const [positionDetail, setPositionDetail] = useState({ maChucVu: '', tenChucVu: '', phuCap: '' })
+    const [positionDetail, setPositionDetail] = useState({ maChucVu: '', tenChucVu: ''})
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const { positionId } = useParams()
@@ -29,9 +29,9 @@ export default function UpdatePosition() {
     const handleUpdate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
-            const { maChucVu, tenChucVu, phuCap } = positionDetail
+            const { maChucVu, tenChucVu } = positionDetail
 
-            if (!maChucVu.trim().length || !tenChucVu.trim().length || !phuCap.trim().length) {
+            if (!maChucVu.trim().length || !tenChucVu.trim().length ) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
                 setIsSubmit(true)
@@ -82,14 +82,6 @@ export default function UpdatePosition() {
                         type="text"
                         handleChange={(event) => {
                             setPositionDetail({ ...positionDetail, tenChucVu: event.target.value })
-                        }}
-                    />
-                    <CustomInputField
-                        title="Phụ Cấp *:"
-                        value={positionDetail?.phuCap || ''}
-                        type="text"
-                        handleChange={(event) => {
-                            setPositionDetail({ ...positionDetail, phuCap: event.target.value })
                         }}
                     />
 
