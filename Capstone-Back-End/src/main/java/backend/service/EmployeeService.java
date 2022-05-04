@@ -174,6 +174,7 @@ public class EmployeeService {
             if (request.getNgayNghiViec() != null)
                 newUser.setNgayNghiViec(sdf.parse(request.getNgayNghiViec()));
             return newUser;
+
         } catch (Exception e) {
             return null;
         }
