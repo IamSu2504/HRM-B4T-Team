@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import PositionAPI from "../../../../api/position";
 
 export default function AddPosition() {
-    const [positionDetail, setPositionDetail] = useState({maChucVu: '', tenChucVu: '', phuCap: ''})
+    const [positionDetail, setPositionDetail] = useState({maChucVu: '', tenChucVu: ''})
     const [submitError, setSubmitError] = useState({status: false, error: ''})
     const [isSubmit, setIsSubmit] = useState(false)
 
@@ -16,7 +16,7 @@ export default function AddPosition() {
             setSubmitError({status: false, error: ''})
             const {maChucVu, tenChucVu, phuCap} = positionDetail
     
-            if ( !maChucVu.trim().length ||  !tenChucVu.trim().length ||  !phuCap.trim().length){
+            if ( !maChucVu.trim().length ||  !tenChucVu.trim().length ){
                 setSubmitError({status: true, error: 'Thông tin không được bỏ trống'})
             }else{
                 setIsSubmit(true)
@@ -62,14 +62,7 @@ export default function AddPosition() {
                             setPositionDetail({...positionDetail, tenChucVu: event.target.value})
                         }}
                     />
-                    <CustomInputField
-                        title="Phụ Cấp *:"
-                        value={positionDetail?.phuCap || ''}
-                        type="text"
-                        handleChange={(event) => {
-                            setPositionDetail({...positionDetail, phuCap: event.target.value})
-                        }}
-                    />
+                    
                 </div>
             </div>
             <div>
