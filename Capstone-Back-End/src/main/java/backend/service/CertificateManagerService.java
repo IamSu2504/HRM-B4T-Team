@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,13 +30,15 @@ public class CertificateManagerService {
         return repo.findAll();
     }
 
-    public CertificateManager getById(int id)
-    {
-        if(repo.findById(id).isPresent()){
-            return repo.findById(id).get();
-        }
-        else{
-            return null;
+    public List<CertificateManager> getByMaNV(String maNV){
+            return repo.getByMaNV(maNV);
+    }
+
+    public CertificateManager getById(int id){
+        if(repo.getById(id) != null){
+            return repo.getById(id);
+        }else{
+         return null;
         }
     }
 

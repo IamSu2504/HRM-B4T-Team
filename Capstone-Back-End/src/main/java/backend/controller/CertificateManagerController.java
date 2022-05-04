@@ -31,14 +31,9 @@ public class CertificateManagerController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> getById(@PathVariable("id") String pv) {
+    public ResponseEntity<?> getByMaNV(@PathVariable("id") String maNV) {
         try {
-            int id = Integer.parseInt(pv);
-            CertificateManager c = service.getById(id);
-            if(c==null){
-                return new ResponseEntity<>("Không tìm thấy chứng chỉ.", HttpStatus.NOT_FOUND);
-            }
-            return new ResponseEntity<>(c, HttpStatus.OK);
+            return new ResponseEntity<>(service.getByMaNV(maNV), HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
