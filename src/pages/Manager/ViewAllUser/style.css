@@ -66,8 +66,16 @@
   outline: none;
   border: 1px solid #ccc;
 }
-.homepage .input-group .input-icon{
-  position : absolute;
-  top: 6px;
-  right: 30px
+.homepage .input-group select{
+  /* position : absolute;
+  top: 15px;
+  right: 30px; */
+  width: 150px;
+  text-align: left;
+}
+.css-levciy-MuiTablePagination-displayedRows {
+  margin: auto;
+}
+.css-pdct74-MuiTablePagination-selectLabel {
+  margin: auto;
 }

@@ -269,7 +269,7 @@ export default function ManagerLayout(props) {
                     <a
                       className="card-link"
                       data-toggle="collapse"
-                      href="#collapseTwo"
+                      href="#collapseThree"
                     >
                       <div className="card-head-content">
                         <div className="left">
@@ -285,7 +285,7 @@ export default function ManagerLayout(props) {
                     </a>
                   </div>
                   <div
-                    id="collapseTwo"
+                    id="collapseThree"
                     className="collapse"
                     data-parent="#accordion1"
                   >

@@ -72,10 +72,8 @@ export default function ViewAllUser() {
         <div class="input-group-prepend">
         <span class="input-group-text">Bộ lọc</span>
           <select class="input-group-text" id="sel1" name="sellist1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+            <option>Mã nhân viên</option>
+            <option>Tên nhân viên</option>
           </select>
         </div>
         <input type="text" class="form-control" placeholder="Tìm kiếm" />

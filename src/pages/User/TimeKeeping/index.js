@@ -6,7 +6,7 @@ export default function ViewTimekeeping() {
         <div className="view-timekeeping-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Hợp đồng</div>
+                    <div className="title">Chấm công</div>
                 </div>
             </div>
             <div className="row fied-data-row">
