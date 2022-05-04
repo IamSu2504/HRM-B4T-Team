@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -31,12 +32,12 @@ public class WorkingProcess {
 
     @Column(name = "ngay_vao")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayVao;
 
     @Column(name = "ngay_ra")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayRa;
 
     @Column(name = "trang_thai")
@@ -44,4 +45,18 @@ public class WorkingProcess {
 
     @Column(name = "ma_nv")
     private String maNV;
+
+    public Date getNgayVao(){
+        Calendar c = Calendar.getInstance();
+        c.setTime(ngayVao);
+        c.add(Calendar.DAY_OF_MONTH, 1);
+        return c.getTime();
+    }
+
+    public Date getNgayRa(){
+        Calendar c = Calendar.getInstance();
+        c.setTime(ngayRa);
+        c.add(Calendar.DAY_OF_MONTH, 1);
+        return c.getTime();
+    }
 }

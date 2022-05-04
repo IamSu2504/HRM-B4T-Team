@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Data
@@ -18,10 +19,17 @@ public class HolidayCategory {
 
     @Column(name = "ngay")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngay;
 
     @Column(name = "ten_ngay_le")
     private String tenNgayLe;
+
+    public Date getNgay(){
+        Calendar c = Calendar.getInstance();
+        c.setTime(ngay);
+        c.add(Calendar.DAY_OF_MONTH, 1);
+        return c.getTime();
+    }
 
 }
