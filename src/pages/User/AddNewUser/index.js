@@ -137,7 +137,13 @@ export default function AddNewUser() {
               setUserDetail({ ...userDetail, id: event.target.value })
             }}
           />
-          <CustomInputField
+          
+        </div>
+      </div>
+
+      <div className="row fied-data-row">
+        <div>
+        <CustomInputField
             title="Họ và tên"
             
             type="text"
@@ -147,12 +153,6 @@ export default function AddNewUser() {
               setUserDetail({ ...userDetail, tenNv: event.target.value })
             }}
           />
-        </div>
-      </div>
-
-      <div className="row fied-data-row">
-        <div>
-          
           <CustomInputField
             title="Căn cước công dân"
             

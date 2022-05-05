@@ -26,7 +26,7 @@ export default function ViewAccount() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Account</div>
+            <div className="title">Danh sách tài khoản</div>
             <div className="table-frame">
                 <table class="table table-bordered">
                     <thead>

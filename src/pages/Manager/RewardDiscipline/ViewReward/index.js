@@ -32,7 +32,6 @@ export default function ViewReward() {
                             <th scope="col">STT</th>
                             <th scope="col">Mã Nhân Viên</th>
                             <th scope="col">Tên Nhân Viên</th>
-                            <th scope="col">Chức Vụ</th>
                             <th scope="col">Phân Loại</th>
                             <th scope="col">Lý Do</th>
                             <th scope="col">Sửa</th>
@@ -45,7 +44,6 @@ export default function ViewReward() {
                                     <th scope="row">{RewardIndex + 1}</th>
                                     <td>{rewardItem?.user?.id}</td>
                                     <td>{rewardItem?.user?.tenNv}</td>
-                                    <td>{rewardItem?.user?.chucVu?.tenChucVu}</td>
                                     <td>{rewardItem?.phanLoai?.danhMuc}</td>
                                     <td>{rewardItem?.lyDo}</td>
                                     <td>

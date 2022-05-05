@@ -55,7 +55,7 @@ export default function AddContract() {
                         }}
                     />
                     <CustomInputField
-                        title="Tên Loại Thuế *:"
+                        title="Tên Loại Hợp đồng *:"
                         value={contractDetail?.tenLoaiHopDong || ''}
                         type="text"
                         handleChange={(event) => {

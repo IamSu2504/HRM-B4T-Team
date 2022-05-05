@@ -47,7 +47,7 @@ export default function AddDegree() {
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Quốc Tịch *:"
+                        title="Loại bằng cấp *:"
                         value={degreeDetail?.loaiBangCap || ''}
                         type="text"
                         handleChange={(event) => {

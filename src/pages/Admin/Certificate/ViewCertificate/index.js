@@ -40,7 +40,7 @@ export default function ViewCertificate() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Thuế</div>
+            <div className="title">Danh sách Chứng chỉ</div>
             <div className="table-frame">
                 <table class="table table-bordered">
                     <thead>

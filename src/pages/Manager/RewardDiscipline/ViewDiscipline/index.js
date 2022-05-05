@@ -32,7 +32,6 @@ export default function ViewDiscipline() {
                             <th scope="col">STT</th>
                             <th scope="col">Mã Nhân Viên</th>
                             <th scope="col">Tên Nhân Viên</th>
-                            <th scope="col">Chức Vụ</th>
                             <th scope="col">Phân Loại</th>
                             <th scope="col">Lý Do</th>
                             <th scope="col">Sửa</th>
@@ -45,7 +44,6 @@ export default function ViewDiscipline() {
                                     <th scope="row">{DisciplineIndex + 1}</th>
                                     <td>{disciplineItem?.user?.id}</td>
                                     <td>{disciplineItem?.user?.tenNv}</td>
-                                    <td>{disciplineItem?.user?.chucVu?.tenChucVu}</td>
                                     <td>{disciplineItem?.phanLoai?.danhMuc}</td>
                                     <td>{disciplineItem?.lyDo}</td>
                                     <td>

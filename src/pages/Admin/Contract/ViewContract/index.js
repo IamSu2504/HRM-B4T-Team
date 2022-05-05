@@ -40,7 +40,7 @@ export default function ViewContract() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Hợp Đồng</div>
+            <div className="title">Danh sách Loại Hợp Đồng</div>
             <div className="table-frame">
                 <table class="table table-bordered">
                     <thead>

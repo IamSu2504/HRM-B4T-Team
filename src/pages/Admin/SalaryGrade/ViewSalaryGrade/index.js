@@ -23,7 +23,7 @@ export default function ViewSalaryGrade() {
     }, [])
     return (
         <div className="homepage">
-            <div className="title">Danh sách Nhóm Lương</div>
+            <div className="title">Danh sách Bậc Lương</div>
             <div className="table-frame">
                 <table class="table table-bordered">
                     <thead>
