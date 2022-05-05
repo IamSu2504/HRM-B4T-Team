@@ -17,4 +17,5 @@ public interface PositionCategoryRepository extends JpaRepository<PositionCatego
             "and ct.ma_nv = ? and ct.ngay_vao <= ? and (ct.ngay_ra >= ? or ct.ngay_ra is null)", nativeQuery = true)
     PositionCategory getByMaNvInRange(String maNV,String start, String end);
 
+
 }
