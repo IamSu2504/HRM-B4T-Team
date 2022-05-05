@@ -46,25 +46,25 @@ public class WorkingProcess {
     @Column(name = "ma_nv")
     private String maNV;
 
-    public Date getNgayVao(){
-        if(ngayVao!=null){
-            Calendar c = Calendar.getInstance();
-            c.setTime(ngayVao);
-            c.add(Calendar.DAY_OF_MONTH, 1);
-            return c.getTime();
-        }
-        else
-            return null;
-    }
-
-    public Date getNgayRa(){
-        if(ngayRa!=null){
-            Calendar c = Calendar.getInstance();
-            c.setTime(ngayRa);
-            c.add(Calendar.DAY_OF_MONTH, 1);
-            return c.getTime();
-        }
-        else
-            return null;
-    }
+//    public Date getNgayVao(){
+//        if(ngayVao!=null){
+//            Calendar c = Calendar.getInstance();
+//            c.setTime(ngayVao);
+//            c.add(Calendar.DAY_OF_MONTH, 1);
+//            return c.getTime();
+//        }
+//        else
+//            return null;
+//    }
+//
+//    public Date getNgayRa(){
+//        if(ngayRa!=null){
+//            Calendar c = Calendar.getInstance();
+//            c.setTime(ngayRa);
+//            c.add(Calendar.DAY_OF_MONTH, 1);
+//            return c.getTime();
+//        }
+//        else
+//            return null;
+//    }
 }

@@ -28,25 +28,25 @@ public class ShiftTableRequest {
 
     private String maNv;
 
-    public Date getNgayTu(){
-        if(ngayTu!=null){
-            Calendar c = Calendar.getInstance();
-            c.setTime(ngayTu);
-            c.add(Calendar.DAY_OF_MONTH, 1);
-            return c.getTime();
-        }
-        else
-            return null;
-    }
-
-    public Date getNgayDen(){
-        if(ngayDen!=null){
-            Calendar c = Calendar.getInstance();
-            c.setTime(ngayDen);
-            c.add(Calendar.DAY_OF_MONTH, 1);
-            return c.getTime();
-        }
-        else
-            return null;
-    }
+//    public Date getNgayTu(){
+//        if(ngayTu!=null){
+//            Calendar c = Calendar.getInstance();
+//            c.setTime(ngayTu);
+//            c.add(Calendar.DAY_OF_MONTH, 1);
+//            return c.getTime();
+//        }
+//        else
+//            return null;
+//    }
+//
+//    public Date getNgayDen(){
+//        if(ngayDen!=null){
+//            Calendar c = Calendar.getInstance();
+//            c.setTime(ngayDen);
+//            c.add(Calendar.DAY_OF_MONTH, 1);
+//            return c.getTime();
+//        }
+//        else
+//            return null;
+//    }
 }
