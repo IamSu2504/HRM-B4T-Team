@@ -73,7 +73,7 @@ public class EmployeeService {
         Employee oldUser = employeeRepo.findById(request.getId().toUpperCase()).get();
         Employee newUser = getNewUser(request);
 
-        if(oldUser.getNgayNghiViec().before(newUser.getNgayNghiViec())){
+        if(oldUser.getNgayNghiViec()!=null && newUser.getNgayNghiViec()!=null && oldUser.getNgayNghiViec().before(newUser.getNgayNghiViec())){
           return "Nhân viên mã " + oldUser.getId() + " đã nghỉ việc. Không thể cập nhật thông tin";
         }
 
