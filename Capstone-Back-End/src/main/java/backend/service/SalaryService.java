@@ -38,17 +38,18 @@ public class SalaryService {
     }
 
     public Salary getByContractID(String contractID) {
-       return salaryRepo.getByMaHD(contractID);
+        return salaryRepo.getByMaHD(contractID);
     }
 
     public String getSaveMessage(CreateUpdateSalaryRequest request) {
-        Calendar calendar = Calendar.getInstance();
         Salary newSalary = getNewSalary(request);
+
         if (newSalary == null) {
             return "Lỗi lấy thông tin lương mới";
         }
         Contract c = newSalary.getHopDong();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
 
         double minSalary = newSalary.getIdBacLuong().getKhoangLuongTu();
         double maxSalary = newSalary.getIdBacLuong().getKhoangLuongDen();
@@ -56,80 +57,40 @@ public class SalaryService {
         if (newSalary.getLuongCoBan() < minSalary || newSalary.getLuongCoBan() > maxSalary) {
             return "Lương cơ bản bắt buộc trong khoảng " + minSalary + " đến " + maxSalary;
         }
-
-        // update
-        if (newSalary.getId() != null) {
-            Salary oldSalary = salaryRepo.findById(newSalary.getId()).get();
-            newSalary.setNgayHieuLuc(oldSalary.getNgayHieuLuc());
-            newSalary.setNgayKetThuc(oldSalary.getNgayKetThuc());
-            salaryRepo.save(newSalary);
-            return null;
-//            if ((newSalary.getHopDong()) == (oldSalary.getHopDong())) {
-//                if (salaryRepo.getByMaHD(newSalary.getHopDong().getMaHD()) != null) {
-//                    salaryRepo.save(newSalary);
-//                    return null;
-//                } else {
-//                    return "Mã hợp đồng không tồn tại";
-//                }
-//            }
-//            double tongLuong = newSalary.getLuongCoBan() + newSalary.getPhuCapKhac();
-//            newSalary.setTongLuong(tongLuong);
-//            salaryRepo.save(newSalary);
-//            return null;
+        if (newSalary.getNgayHieuLuc().compareTo(newSalary.getNgayKetThuc()) >= 0) {
+            return "Ngày hiệu lực phải trước ngày kết thúc";
         }
 
+        String start = sdf.format(newSalary.getNgayHieuLuc());
+        String end = sdf.format(newSalary.getNgayKetThuc());
+        // update
+        if (newSalary.getId() != null) {
+
+            if (salaryRepo.getLuongStartInRange2(c.getMaHD(), start, end, newSalary.getId()) != null || salaryRepo.getLuongEndInRange2(c.getMaHD(), start, end, newSalary.getId()) != null) {
+                return "Đã tồn tại lương trong hợp đồng mã " + c.getMaHD() + " có hiệu lực trong khoảng thời gian từ " + start + " đến " + end;
+            }
+            salaryRepo.save(newSalary);
+            return null;
+        }
         // add
         else {
-            Date maxDateHieuLuc = salaryRepo.getDateLuongTruoc(newSalary.getHopDong().getMaHD());
-            Salary previousSalary;
-            if (maxDateHieuLuc != null) {
-                previousSalary = salaryRepo.getLuongTruoc(newSalary.getHopDong().getMaHD(), sdf.format(maxDateHieuLuc));
-            } else {
-                previousSalary = null;
+            if (newSalary.getNgayHieuLuc().compareTo(c.getNgayHieuLuc()) != 0) {
+                return "Ngày hiệu lực của lương bắt buộc là ngày hiệu lực của hợp đồng: " + sdf2.format(c.getNgayHieuLuc());
             }
-
-            // no salary saved before
-            if (previousSalary == null) {
-                calendar.setTime(c.getNgayHieuLuc());
-                calendar.add(Calendar.DAY_OF_MONTH,-1);
-                if (newSalary.getNgayHieuLuc().compareTo(calendar.getTime()) != 0) {
-                    return "Ngày hiệu lực bắt buộc là ngày hiệu lực của hợp đồng: " + sdf.format(c.getNgayHieuLuc());
-                }
-                newSalary.setNgayKetThuc(c.getNgayHetHan());
-                salaryRepo.save(newSalary);
-                return null;
-            } else {
-                if (newSalary.getNgayHieuLuc().getDay() != 1) {
-                    return "Ngày hiệu lực của lương mới bắt buộc là ngày đầu tháng: " + sdf.format(c.getNgayHieuLuc());
-                }
-                if (newSalary.getNgayHieuLuc().compareTo(previousSalary.getNgayHieuLuc()) <= 0 || newSalary.getNgayHieuLuc().compareTo(previousSalary.getNgayKetThuc()) > 0) {
-                    calendar.setTime(previousSalary.getNgayHieuLuc());
-                    calendar.add(Calendar.DATE, 1);
-                    String start = sdf.format(calendar.getTime());
-                    return "Ngày hiệu lực của lương mới bắt buộc là ngày đầu tháng trong khoảng thời gian từ " + start + " đến " + sdf.format(previousSalary.getNgayHieuLuc());
-                }
-
-                // update previous salary
-                calendar.setTime(newSalary.getNgayHieuLuc());
-                calendar.add(Calendar.DATE, -1);
-                previousSalary.setNgayKetThuc(calendar.getTime());
-                if (salaryRepo.save(previousSalary) == null) {
-                    return "Lỗi nội bộ";
-                }
-
-                // update new salary
-                newSalary.setNgayKetThuc(c.getNgayHetHan());
-                if (salaryRepo.save(newSalary) == null) {
-                    return "Lỗi nội bộ";
-                }
-                return null;
+            if (newSalary.getNgayKetThuc().compareTo(c.getNgayHetHan()) > 0) {
+                return "Ngày kết thúc bắt buộc không được sau ngày hết hạn của hợp đồng: " + sdf2.format(c.getNgayHetHan());
             }
+            if (salaryRepo.getLuongStartInRange(c.getMaHD(), start, end) != null || salaryRepo.getLuongEndInRange(c.getMaHD(), start, end) != null) {
+                return "Đã tồn tại lương trong hợp đồng mã " + c.getMaHD() + " có hiệu lực trong khoảng thời gian từ " + start + " đến " + end;
+            }
+            salaryRepo.save(newSalary);
+            return null;
         }
     }
 
     public Salary getNewSalary(CreateUpdateSalaryRequest request) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
             Salary s = new Salary();
             s.setId(request.getId());

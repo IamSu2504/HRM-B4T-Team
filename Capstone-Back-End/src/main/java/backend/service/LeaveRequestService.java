@@ -51,7 +51,7 @@ public class LeaveRequestService {
 
             // get first+last of current month
             Calendar calendar = Calendar.getInstance();
-            calendar.set(YearMonth.now().getYear(), sdf2.parse(request.getDate()).getMonth()-1,1);
+            calendar.set(YearMonth.now().getYear(), sdf.parse(request.getDate()).getMonth()-1,1);
             calendar.set(Calendar.DAY_OF_MONTH, 1);
             String monthFirst = sdf.format(calendar.getTime());
             calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
@@ -64,7 +64,7 @@ public class LeaveRequestService {
 
             // check leaved
             Employee e = empRepo.findById(request.getUser()).get();
-            if(e.getNgayNghiViec()!=null && e.getNgayNghiViec().compareTo(sdf2.parse(request.getDate()))<=0){
+            if(e.getNgayNghiViec()!=null && e.getNgayNghiViec().compareTo(sdf.parse(request.getDate()))<=0){
                 return "Nhân viên mã " + request.getUser() + " đã nghỉ việc";
             }
 
@@ -95,7 +95,7 @@ public class LeaveRequestService {
                 List<HolidayCategory> holidays = holidayCategoryRepository.findAll();
                 for (HolidayCategory h : holidays) {
                     if (newLeave.getDate() == h.getNgay()) {
-                        return "Không được đăng kí ngày " + h.getTenNgayLe() + " " + sdf2.format(newLeave.getDate());
+                        return "Không được đăng kí ngày " + h.getTenNgayLe() + " " + sdf2.format((newLeave.getDate()));
                     }
                 }
 
