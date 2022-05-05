@@ -62,8 +62,8 @@ export default function AddNewUser() {
   }, [])
 
   const [userDetail, setUserDetail] = useState({id:'',
-    tinhChatHopDongID: '', tinhTrangHonNhanID: '',
-    quocTichID: '', tenNv: '', ngaySinh: '', gioiTinh: '',
+    tinhChatHopDongID: '1', tinhTrangHonNhanID: '1',
+    quocTichID: '1', tenNv: '', ngaySinh: '', gioiTinh: true,
     soDienThoai: '', soDienThoai2: '', email: '',
     cccd: '', noiCapCccd: '', ngayCapCccd: '',
     ngayHetHanCccd: '', hoChieu: '', noiCapHoChieu: '',
@@ -269,7 +269,7 @@ export default function AddNewUser() {
           />
           <CustomSelectBox
             title="Tính Chất Hợp Đồng"
-            
+            value = {userDetail?.tinhChatHopDongID || 1}
             option={listContractNature.map((contractNatureItem) => {
               return (
                 { label: contractNatureItem.tinhChatHopDong, value: contractNatureItem.id }
@@ -285,7 +285,7 @@ export default function AddNewUser() {
         <div>
           <CustomSelectBox
             title="Giới Tính :"
-            
+            value = {userDetail?.gioiTinh || true}
             option={[{ label: "Nam", value: true }, { label: "Nữ", value: false }]}
             require={true}
             handleChange={(event) => {
@@ -324,7 +324,7 @@ export default function AddNewUser() {
           />
           <CustomSelectBox
             title="Quốc Tịch"
-            
+            value = {userDetail?.quocTichID || 1}
             option={listNation.map((nationItem) => {
               return (
                 { label: nationItem.quocTich, value: nationItem.id }
@@ -387,7 +387,7 @@ export default function AddNewUser() {
           />
           <CustomSelectBox
             title="Tình Trạng Hôn Nhân"
-            
+            value = {userDetail?.tinhTrangHonNhanID || 1}
             option={listMarriage.map((marriageItem) => {
               return (
                 { label: marriageItem.tinhTrang, value: marriageItem.id }

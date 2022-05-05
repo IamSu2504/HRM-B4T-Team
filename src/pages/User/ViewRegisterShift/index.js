@@ -7,16 +7,19 @@ import 'react-toastify/dist/ReactToastify.css';
 import RegisterShiftAPI from '../../../api/registerShift'
 import ShiftAPI from "../../../api/shift";
 import DepartmentAPI from "../../../api/department";
+import ClassRoomAPI from "../../../api/classRoom";
+
 import UserAPI from "../../../api/user";
 import ReactHtmlTableToExcel from "react-html-table-to-excel";
 import { useParams } from "react-router-dom";
 
 
 export default function RegisterShift() {
-    const [registerShiftDetail, setRegisterShiftDetail] = useState({ userID: '', shiftCategoryID: '', roomID: '', date: '' })
+    const [registerShiftDetail, setRegisterShiftDetail] = useState({ userID: '', shiftCategoryID: '', roomID: '1', date: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [shiftDetail, setListShift] = useState([])
     const [listDepartment, setListDepartment] = useState([])
+    const [listClassRoom, setListClassRoom] = useState([])
 
     const [listviewShift, setlistviewShift] = useState([]);
     const [idPhong, setIdPhong] = useState()
@@ -37,11 +40,19 @@ export default function RegisterShift() {
         }
     }
 
-    const getAllDepartment = async () => {
-        const departmentRes = await DepartmentAPI.getAll()
-        if (departmentRes?.status === 200) {
-            setListDepartment(departmentRes?.data)
+    // const getAllDepartment = async () => {
+    //     const departmentRes = await DepartmentAPI.getAll()
+    //     if (departmentRes?.status === 200) {
+    //         setListDepartment(departmentRes?.data)
            
+    //     }
+    // }
+
+    const getAllClassRoom = async () => {
+        const classRoomRes = await ClassRoomAPI.getAll()
+        if (classRoomRes?.status === 200) {
+            setListClassRoom(classRoomRes?.data)
+            setIdPhong(classRoomRes?.data[0]?.id)
         }
     }
 
@@ -57,7 +68,7 @@ export default function RegisterShift() {
 
     useEffect(() => {
         getAllShift()
-        getAllDepartment()
+        getAllClassRoom()
         getlistviewShift()
     }, [])
 
@@ -92,12 +103,12 @@ export default function RegisterShift() {
                 <div>
                     <CustomSelectBox
                         title="Phòng Làm Việc *:"
-                        option={listDepartment.map((departmentItem) => {
+                        option={listClassRoom.map((classRoomItem) => {
                             return (
-                                { label: `${departmentItem.tenPhongBan}-${departmentItem.maPhongBan}`, value: departmentItem.id }
+                                { label: `${classRoomItem.maPhongHoc}-${classRoomItem.tenPhongHoc}`, value: classRoomItem?.id  }
                             )
                         })}
-
+                        value={idPhong}
                         require={true}
                         handleChange={(event) => {
                             const id = event.currentTarget.value
@@ -138,13 +149,14 @@ export default function RegisterShift() {
                             <thead>
                                 <tr className="head">
                                     <th scope="col"></th>
+                                    <th scope="col">Chủ Nhật</th>
                                     <th scope="col">Thứ 2</th>
                                     <th scope="col">Thứ 3</th>
                                     <th scope="col">Thứ 4</th>
                                     <th scope="col">Thứ 5</th>
                                     <th scope="col">Thứ 6</th>
                                     <th scope="col">Thứ 7</th>
-                                    <th scope="col">Chủ Nhật</th>
+                                    
                                 </tr>
                             </thead>
                             {
