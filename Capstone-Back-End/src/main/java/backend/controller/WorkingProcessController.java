@@ -33,6 +33,15 @@ public class WorkingProcessController {
     }
 
     @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getByMaNV(@PathVariable("id") String maNV) {
+        try {
+            return new ResponseEntity<>(service.getByMaNV(maNV), HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/id/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") String pv) {
         try {
             int id = Integer.parseInt(pv);
