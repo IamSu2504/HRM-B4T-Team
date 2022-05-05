@@ -120,6 +120,21 @@ public class Employee {
     @Column(name = "image")
     private String image;
 
+    @Transient
+    private String trangThai;
+
+    public String getTrangThai(){
+        if(ngayNghiViec==null){
+            return "Đang làm việc";
+        }
+        else {
+            if(ngayNghiViec.before(new Date())) {
+                return "Đã nghỉ việc";
+            }
+            return "Đang làm việc";
+        }
+    }
+
 //    public Date getNgaySinh(){
 //        Calendar c = Calendar.getInstance();
 //        c.setTime(ngaySinh);

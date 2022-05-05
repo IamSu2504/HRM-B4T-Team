@@ -26,7 +26,6 @@ public class EmployeeService {
     private NationCategoryRepository nationRepo;
 
     public List<Employee> getAll() {
-        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         return employeeRepo.findAll();
     }
 
