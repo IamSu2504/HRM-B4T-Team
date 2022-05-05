@@ -73,13 +73,8 @@ public class EmployeeService {
         Employee oldUser = employeeRepo.findById(request.getId().toUpperCase()).get();
         Employee newUser = getNewUser(request);
 
-        if(oldUser.getNgayNghiViec()!=null){
+        if(oldUser.getNgayNghiViec().before(newUser.getNgayNghiViec())){
           return "Nhân viên mã " + oldUser.getId() + " đã nghỉ việc. Không thể cập nhật thông tin";
-        }
-        else if(newUser.getNgayNghiViec()!=null){
-            if(newUser.getNgayNghiViec().getDay()!=1){
-                return "Ngày nghỉ việc bắt buộc phải là ngày đầu tháng và trong thời hạn hợp đồng";
-            }
         }
 
         if (newUser == null)
@@ -107,6 +102,7 @@ public class EmployeeService {
 
         Employee newUser = getNewUser(request);
         newUser.setNgayNghiViec(null);
+        newUser.setLyDoNghi(null);
         newUser.setId(newUser.getId().toUpperCase());
 
         if (employeeRepo.findById(newUser.getId()).isPresent()) {
