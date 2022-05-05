@@ -1,5 +1,6 @@
 package backend.service;
 
+import backend.entity.CertificateManager;
 import backend.entity.CreateUpdateWorkingProcess;
 import backend.entity.DepartmentCategory;
 import backend.entity.WorkingProcess;
@@ -36,6 +37,10 @@ public class WorkingProcessService {
         else{
             return null;
         }
+    }
+
+    public List<WorkingProcess> getByMaNV(String maNV){
+        return repo.getByMaNV(maNV);
     }
 
     public WorkingProcess save(CreateUpdateWorkingProcess request)
