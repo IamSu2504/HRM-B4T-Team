@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Integer> {
 
-    @Query(value = "SELECT * FROM dangkicalam d, phanloai_calam p\n" +
-            "where d.id_calam = p.id and d.id_calam = ? and  d.ngay = ?", nativeQuery = true)
+    @Query(value = "SELECT * FROM dangkinghi d, phanloai_calam p\n" +
+            "where d.id_ca = p.id and d.id_ca = ? and  d.ngay = ?", nativeQuery = true)
     LeaveRequest getByShiftDate(Integer shiftID, String date);
 
     @Query(value = "SELECT * FROM dangkinghi d, phanloai_calam p, phanloai_ngaynghi n \n" +

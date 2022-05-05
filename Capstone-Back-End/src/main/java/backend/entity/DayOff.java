@@ -17,11 +17,11 @@ public class DayOff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "ma_nv")
     private String maNV;
 
     @Column(name = "so_buoi_nghi")
-    private int soBuoiNghi;
+    private Integer soBuoiNghi;
 }
