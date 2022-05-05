@@ -56,90 +56,178 @@ public class LeaveRequestService {
             String monthFirst = sdf.format(calendar.getTime());
             calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
             String monthEnd = sdf.format(calendar.getTime());
-
-            // check emp existed
-            if(!empRepo.findById(request.getUser()).isPresent()){
-                return "Mã nhân viên " + request.getUser() + " không tồn tại";
-            }
-
-            // check leaved
-            Employee e = empRepo.findById(request.getUser()).get();
-            if(e.getNgayNghiViec()!=null && e.getNgayNghiViec().compareTo(sdf2.parse(request.getDate()))<=0){
-                return "Nhân viên mã " + request.getUser() + " đã nghỉ việc";
-            }
-
-            // check chuc vu
-            if (positionRepo.getByMaNvInRange(newLeave.getUser().getId(),monthFirst,monthEnd) == null) {
-                return "Nhân viên mã " + request.getUser() + " hiện chưa có chức vụ trong tháng từ "+monthFirst+" đến "+monthEnd+". Vui lòng bổ sung trong quá trình công tác của nhân viên này";
-            }
-            String chucVu = positionRepo.getByMaNvInRange(newLeave.getUser().getId(),monthFirst,monthEnd).getTenChucVu();
-            String shiftName = newLeave.getShiftID().getTenCa();
-
-            // check teacher
-            if (chucVu.toLowerCase().contains("giáo viên")) {
-
-                // check ca lam co dung khong
-                if (shiftName.equalsIgnoreCase("Ca 7") || shiftName.equalsIgnoreCase("Ca 6")) {
-                    return "Không phải ca làm của bạn, không thể đăng ký nghỉ";
+            //update
+            if(newLeave.getId() != null) {
+                // check emp existed
+                if (!empRepo.findById(request.getUser()).isPresent()) {
+                    return "Mã nhân viên " + request.getUser() + " không tồn tại";
                 }
 
-                // check ngay nghi da dang ky
-                LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
-                if (dublicateShift != null) {
-                    if(dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
-                        return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa() + "rồi.";
+                // check leaved
+                Employee e = empRepo.findById(request.getUser()).get();
+                if (e.getNgayNghiViec() != null && e.getNgayNghiViec().compareTo(sdf2.parse(request.getDate())) <= 0) {
+                    return "Nhân viên mã " + request.getUser() + " đã nghỉ việc";
+                }
+
+                // check chuc vu
+                if (positionRepo.getByMaNvInRange(newLeave.getUser().getId(), monthFirst, monthEnd) == null) {
+                    return "Nhân viên mã " + request.getUser() + " hiện chưa có chức vụ trong tháng từ " + monthFirst + " đến " + monthEnd + ". Vui lòng bổ sung trong quá trình công tác của nhân viên này";
+                }
+                String chucVu = positionRepo.getByMaNvInRange(newLeave.getUser().getId(), monthFirst, monthEnd).getTenChucVu();
+                String shiftName = newLeave.getShiftID().getTenCa();
+
+                // check teacher
+                if (chucVu.toLowerCase().contains("giáo viên")) {
+
+                    // check ca lam co dung khong
+                    if (shiftName.equalsIgnoreCase("Ca 7") || shiftName.equalsIgnoreCase("Ca 6")) {
+                        return "Không phải ca làm của bạn, không thể đăng ký nghỉ";
                     }
-                }
 
-                // check dang ky nghi vao ngay nghi le
-                List<HolidayCategory> holidays = holidayCategoryRepository.findAll();
-                for (HolidayCategory h : holidays) {
-                    if (newLeave.getDate() == h.getNgay()) {
-                        return "Không được đăng kí ngày " + h.getTenNgayLe() + " " + sdf2.format(newLeave.getDate());
+                    // check ngay nghi da dang ky
+                    LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
+                    if (dublicateShift != null) {
+                        if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
+                            return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa() + " rồi.";
+                        }
                     }
-                }
 
-                // check 12 ngay nghi phep
-                Integer soBuoiNghi = dORepo.getByMaNV(newLeave.getUser().getId()).getSoBuoiNghi();
-                if(soBuoiNghi >12){
+                    // check dang ky nghi vao ngay nghi le
+                    List<HolidayCategory> holidays = holidayCategoryRepository.findAll();
+                    for (HolidayCategory h : holidays) {
+                        if (newLeave.getDate() == h.getNgay()) {
+                            return "Không được đăng kí ngày " + h.getTenNgayLe() + " " + sdf2.format(newLeave.getDate());
+                        }
+                    }
+
+                    // check 12 ngay nghi phep
+                    Integer soBuoiNghi = dORepo.getByMaNV(newLeave.getUser().getId()).getSoBuoiNghi();
+                    if (soBuoiNghi > 12) {
                         return "Bạn đã nghỉ quá số buổi quy định, không thể đăng ký nghỉ thêm.";
-                }
-                // check not teacher
-            } else {
+                    }
+                    // check not teacher
+                } else {
 
-                //check chuc vu
-                if (chucVu.toLowerCase().contains("giám đốc") || chucVu.toLowerCase().contains("phó giám đốc")) {
-                    return "Chức vụ giám đốc hoặc phó giám đốc không cần đăng ký nghỉ.";
-                }
+                    //check chuc vu
+                    if (chucVu.toLowerCase().contains("giám đốc") || chucVu.toLowerCase().contains("phó giám đốc")) {
+                        return "Chức vụ giám đốc hoặc phó giám đốc không cần đăng ký nghỉ.";
+                    }
 
-                // check ca lam co dung khong
-                if (!shiftName.equalsIgnoreCase("Ca 6") && !shiftName.equalsIgnoreCase("Ca 7")) {
-                    return "Không phải ca làm của bạn, không thể đăng ký nghỉ";
-                }
+                    // check ca lam co dung khong
+                    if (!shiftName.equalsIgnoreCase("Ca 6") && !shiftName.equalsIgnoreCase("Ca 7")) {
+                        return "Không phải ca làm của bạn, không thể đăng ký nghỉ";
+                    }
 
-                Integer soBuoiNghi = dORepo.getByMaNV(newLeave.getUser().getId()).getSoBuoiNghi();
-                if(soBuoiNghi >=12){
-                    return "Bạn đã nghỉ quá số buổi quy định, không thể đăng ký nghỉ thêm.";
-                }
+                    Integer soBuoiNghi = dORepo.getByMaNV(newLeave.getUser().getId()).getSoBuoiNghi();
+                    if (soBuoiNghi >= 12) {
+                        return "Bạn đã nghỉ quá số buổi quy định, không thể đăng ký nghỉ thêm.";
+                    }
 
-                // check ngay nghi da dang ky
-                LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
-                if (dublicateShift != null) {
-                    if(dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
-                        return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa() + "rồi.";
+                    // check ngay nghi da dang ky
+                    LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
+                    if (dublicateShift != null) {
+                        if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
+                            return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa() + "rồi.";
+                        }
+                    }
+
+                    // check dang ky nghi vao ngay nghi le
+                    List<HolidayCategory> holidays = holidayCategoryRepository.findAll();
+                    for (HolidayCategory h : holidays) {
+                        if (newLeave.getDate() == h.getNgay()) {
+                            return "Không được đăng kí ngày " + h.getTenNgayLe() + " " + sdf2.format(newLeave.getDate());
+                        }
                     }
                 }
-
-                // check dang ky nghi vao ngay nghi le
-                List<HolidayCategory> holidays = holidayCategoryRepository.findAll();
-                for (HolidayCategory h : holidays) {
-                    if (newLeave.getDate() == h.getNgay()) {
-                        return "Không được đăng kí ngày " + h.getTenNgayLe() + " " + sdf2.format(newLeave.getDate());
-                    }
-                }
+                leaveRequestRepository.save(newLeave);
+                return mess;
             }
-            leaveRequestRepository.save(newLeave);
-            return mess;
+            //add
+            else{
+                // check emp existed
+                if (!empRepo.findById(request.getUser()).isPresent()) {
+                    return "Mã nhân viên " + request.getUser() + " không tồn tại";
+                }
+
+                // check leaved
+                Employee e = empRepo.findById(request.getUser()).get();
+                if (e.getNgayNghiViec() != null && e.getNgayNghiViec().compareTo(sdf2.parse(request.getDate())) <= 0) {
+                    return "Nhân viên mã " + request.getUser() + " đã nghỉ việc";
+                }
+
+                // check chuc vu
+                if (positionRepo.getByMaNvInRange(newLeave.getUser().getId(), monthFirst, monthEnd) == null) {
+                    return "Nhân viên mã " + request.getUser() + " hiện chưa có chức vụ trong tháng từ " + monthFirst + " đến " + monthEnd + ". Vui lòng bổ sung trong quá trình công tác của nhân viên này";
+                }
+                String chucVu = positionRepo.getByMaNvInRange(newLeave.getUser().getId(), monthFirst, monthEnd).getTenChucVu();
+                String shiftName = newLeave.getShiftID().getTenCa();
+
+                // check teacher
+                if (chucVu.toLowerCase().contains("giáo viên")) {
+
+                    // check ca lam co dung khong
+                    if (shiftName.equalsIgnoreCase("Ca 7") || shiftName.equalsIgnoreCase("Ca 6")) {
+                        return "Không phải ca làm của bạn, không thể đăng ký nghỉ";
+                    }
+
+                    // check ngay nghi da dang ky
+                    LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
+                    if (dublicateShift != null) {
+                        if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
+                            return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa() + "rồi.";
+                        }
+                    }
+
+                    // check dang ky nghi vao ngay nghi le
+                    List<HolidayCategory> holidays = holidayCategoryRepository.findAll();
+                    for (HolidayCategory h : holidays) {
+                        if (newLeave.getDate() == h.getNgay()) {
+                            return "Không được đăng kí ngày " + h.getTenNgayLe() + " " + sdf2.format(newLeave.getDate());
+                        }
+                    }
+
+                    // check 12 ngay nghi phep
+                    Integer soBuoiNghi = dORepo.getByMaNV(newLeave.getUser().getId()).getSoBuoiNghi();
+                    if (soBuoiNghi > 12) {
+                        return "Bạn đã nghỉ quá số buổi quy định, không thể đăng ký nghỉ thêm.";
+                    }
+                    // check not teacher
+                } else {
+
+                    //check chuc vu
+                    if (chucVu.toLowerCase().contains("giám đốc") || chucVu.toLowerCase().contains("phó giám đốc")) {
+                        return "Chức vụ giám đốc hoặc phó giám đốc không cần đăng ký nghỉ.";
+                    }
+
+                    // check ca lam co dung khong
+                    if (!shiftName.equalsIgnoreCase("Ca 6") && !shiftName.equalsIgnoreCase("Ca 7")) {
+                        return "Không phải ca làm của bạn, không thể đăng ký nghỉ";
+                    }
+
+                    Integer soBuoiNghi = dORepo.getByMaNV(newLeave.getUser().getId()).getSoBuoiNghi();
+                    if (soBuoiNghi >= 12) {
+                        return "Bạn đã nghỉ quá số buổi quy định, không thể đăng ký nghỉ thêm.";
+                    }
+
+                    // check ngay nghi da dang ky
+                    LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
+                    if (dublicateShift != null) {
+                        if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
+                            return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa() + "rồi.";
+                        }
+                    }
+
+                    // check dang ky nghi vao ngay nghi le
+                    List<HolidayCategory> holidays = holidayCategoryRepository.findAll();
+                    for (HolidayCategory h : holidays) {
+                        if (newLeave.getDate() == h.getNgay()) {
+                            return "Không được đăng kí ngày " + h.getTenNgayLe() + " " + sdf2.format(newLeave.getDate());
+                        }
+                    }
+                }
+                leaveRequestRepository.save(newLeave);
+                return mess;
+            }
         } catch (Exception e) {
             return "Lỗi nội bộ";
         }

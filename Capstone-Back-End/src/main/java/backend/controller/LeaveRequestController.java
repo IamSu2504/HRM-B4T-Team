@@ -69,6 +69,7 @@ public class LeaveRequestController {
             if (service.getById(id) == null) {
                 return new ResponseEntity<>("Đơn đăng ký nghỉ không tồn tại", HttpStatus.NOT_FOUND);
             }
+            request.setId(id);
             String mess = service.createLeaveRequest(request);
             if (mess == null) {
                 return new ResponseEntity<>("Duyệt đơn thành công", HttpStatus.OK);
