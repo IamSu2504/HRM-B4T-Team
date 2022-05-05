@@ -34,15 +34,15 @@ public class CertificateManager {
 
     @Column(name = "diem_so")
     private Double diemSo;
-
-    public Date getNgayCap(){
-        if(ngayCap!=null){
-            Calendar c = Calendar.getInstance();
-            c.setTime(ngayCap);
-            c.add(Calendar.DAY_OF_MONTH, 1);
-            return c.getTime();
-        }
-        else
-            return null;
-    }
+//
+//    public Date getNgayCap(){
+//        if(ngayCap!=null){
+//            Calendar c = Calendar.getInstance();
+//            c.setTime(ngayCap);
+//            c.add(Calendar.DAY_OF_MONTH, 1);
+//            return c.getTime();
+//        }
+//        else
+//            return null;
+//    }
 }

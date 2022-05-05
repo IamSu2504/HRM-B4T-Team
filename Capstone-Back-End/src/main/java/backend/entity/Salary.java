@@ -59,24 +59,24 @@ public class Salary {
 
 
 
-    public Date getNgayHieuLuc(){
-        if(ngayHieuLuc==null){
-            return null;
-        }
-        Calendar c = Calendar.getInstance();
-        c.setTime(ngayHieuLuc);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
-    }
-
-    public Date getNgayKetThuc(){
-        if(ngayKetThuc==null){
-            return null;
-        }
-        Calendar c = Calendar.getInstance();
-        c.setTime(ngayKetThuc);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        return c.getTime();
-    }
+//    public Date getNgayHieuLuc(){
+//        if(ngayHieuLuc==null){
+//            return null;
+//        }
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(ngayHieuLuc);
+//        c.add(Calendar.DAY_OF_MONTH, 1);
+//        return c.getTime();
+//    }
+//
+//    public Date getNgayKetThuc(){
+//        if(ngayKetThuc==null){
+//            return null;
+//        }
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(ngayKetThuc);
+//        c.add(Calendar.DAY_OF_MONTH, 1);
+//        return c.getTime();
+//    }
 
 }

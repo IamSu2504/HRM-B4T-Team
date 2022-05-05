@@ -40,15 +40,15 @@ public class Shift {
     @JsonFormat(pattern="dd/MM/yyyy")
     private Date date;
 
-    public Date getDate(){
-        if(date!=null){
-            Calendar c = Calendar.getInstance();
-            c.setTime(date);
-            c.add(Calendar.DAY_OF_MONTH, 1);
-            return c.getTime();
-        }
-        else
-            return null;
-    }
+//    public Date getDate(){
+//        if(date!=null){
+//            Calendar c = Calendar.getInstance();
+//            c.setTime(date);
+//            c.add(Calendar.DAY_OF_MONTH, 1);
+//            return c.getTime();
+//        }
+//        else
+//            return null;
+//    }
 
 }
