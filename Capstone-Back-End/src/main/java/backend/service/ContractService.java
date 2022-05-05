@@ -44,10 +44,10 @@ public class ContractService {
         // add
         if(!repo.findById(newContract.getMaHD()).isPresent()){
             String start = sdf.format(newContract.getNgayHieuLuc());
-            String end = sdf.format(newContract.getNgayHieuLuc());
+            String end = sdf.format(newContract.getNgayHetHan());
 
-            if(repo.getContractStartInRange(start,end)!=null || repo.getContractEndInRange(start,end)!=null){
-                return "Nhân viên mã " + newContract.getMaNV() + " đang có hợp đồng còn hiệu lực trong thời gian từ " + sdf2.format(newContract.getNgayHieuLuc()) + " đến " + sdf2.format(newContract.getNgayHetHan());
+            if(repo.getContractStartInRange(start,end,newContract.getMaNV())!=null || repo.getContractEndInRange(start,end,newContract.getMaNV())!=null){
+                return "Nhân viên mã " + newContract.getMaNV() + " đã có hợp đồng còn hiệu lực trong thời gian từ " + sdf2.format(newContract.getNgayHieuLuc()) + " đến " + sdf2.format(newContract.getNgayHetHan());
             }
             newContract.setTrangThai(true);
             repo.save(newContract);
@@ -56,22 +56,7 @@ public class ContractService {
         else{
             return "Mã hợp đồng đã tồn tại";
         }
-//        // update
-//        else{
-//            Contract oldContract = repo.findById(newContract.getMaHD()).get();
-//            newContract.setNgayHetHan(oldContract.getNgayHetHan());
-//            newContract.setNgayHieuLuc(oldContract.getNgayHieuLuc());
-//
-//            if(newContract.getTrangThai()==false){
-//              newContract.setNgayHetHan(new Date());
-//            }
-//            repo.save(newContract);
-//        }
-
     }
-
-
-
 
     public String getUpdateMessage(CreateUpdateContractRequest request) {
         Contract newContract = getNewContract(request);
@@ -87,26 +72,14 @@ public class ContractService {
             String start = sdf.format(newContract.getNgayHieuLuc());
             String end = sdf.format(newContract.getNgayHieuLuc());
 
-            if(repo.getContractStartInRange(start,end)!=null || repo.getContractEndInRange(start,end)!=null){
+            if(repo.getContractStartInRange(start,end, newContract.getMaNV())!=null || repo.getContractEndInRange(start,end, newContract.getMaNV())!=null){
                 return "Nhân viên mã " + newContract.getMaNV() + " đang có hợp đồng còn hiệu lực trong thời gian từ " + sdf2.format(newContract.getNgayHieuLuc()) + " đến " + sdf2.format(newContract.getNgayHetHan());
             }
             newContract.setTrangThai(true);
             repo.save(newContract);
             return null;
         }
-        return null;
-//        // update
-//        else{
-//            Contract oldContract = repo.findById(newContract.getMaHD()).get();
-//            newContract.setNgayHetHan(oldContract.getNgayHetHan());
-//            newContract.setNgayHieuLuc(oldContract.getNgayHieuLuc());
-//
-//            if(newContract.getTrangThai()==false){
-//              newContract.setNgayHetHan(new Date());
-//            }
-//            repo.save(newContract);
-//        }
-
+        return "Mã hợp đồng không tồn tại, không thể cập nhật";
     }
 
     public Contract getNewContract(CreateUpdateContractRequest request){

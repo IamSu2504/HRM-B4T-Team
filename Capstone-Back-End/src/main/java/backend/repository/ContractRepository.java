@@ -17,17 +17,17 @@ public interface ContractRepository extends JpaRepository<Contract, String> {
     @Query(value = "SELECT * FROM hopdong where ngay_het_han >= ? and ngay_het_han <= ? and trang_thai = true", nativeQuery = true)
     List<Contract> getListReportContract(String start,String end);
 
-    @Query(value = "SELECT * FROM hopdong where ngay_het_han between ? and ? and trang_thai = true", nativeQuery = true)
-    List<Contract> getContractStartInRange(String start,String end);
+    @Query(value = "SELECT * FROM hopdong where ngay_hieu_luc between ? and ? and ma_nv=?", nativeQuery = true)
+    Contract getContractStartInRange(String start,String end,String maNV);
 
-    @Query(value = "SELECT * FROM hopdong where ngay_het_han between ? and ? and trang_thai = true", nativeQuery = true)
-    List<Contract> getContractEndInRange(String start,String end);
+    @Query(value = "SELECT * FROM hopdong where ngay_het_han between ? and ? and ma_nv=?", nativeQuery = true)
+    Contract getContractEndInRange(String start,String end,String maNV);
 
     @Query(value = "SELECT * FROM hopdong where ngay_het_han >= ? and trang_thai = true", nativeQuery = true)
     Contract getContractExisted(String toDay);
 
     @Query(value = "SELECT * FROM hopdong where ma_nv = ? and ngay_hieu_luc = ? and trang_thai = true", nativeQuery = true)
-    List<Contract> getEmployeeLastestContract(String empID,String maxStart);
+    Contract getEmployeeLastestContract(String empID,String maxStart);
 
     @Query(value = "select max(ngay_hieu_luc) from hopdong where ma_nv = ? ", nativeQuery = true)
     Date getEmployeeMaxStart(String empID);
