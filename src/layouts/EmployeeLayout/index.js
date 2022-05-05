@@ -103,7 +103,7 @@ export default function EmployeeLayout(props) {
                                             <div className="card-head-content">
                                                 <div className="left">
                                                     <div className="content1">
-                                                        <img src="/menu/employer.svg" />
+                                                        <img src="/menu/hopdong.svg" />
                                                     </div>
                                                     <div className="content2">Thông tin hợp đồng</div>
                                                 </div>

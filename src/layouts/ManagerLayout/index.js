@@ -139,7 +139,7 @@ export default function ManagerLayout(props) {
                       <div className="card-head-content">
                         <div className="left">
                           <div className="content1">
-                            <img src="/menu/employer.svg" />
+                            <img src="/menu/report.svg" />
                           </div>
                           <div className="content2">Báo Cáo</div>
                         </div>
@@ -274,7 +274,7 @@ export default function ManagerLayout(props) {
                       <div className="card-head-content">
                         <div className="left">
                           <div className="content1">
-                            <img src="/menu/employer.svg" />
+                            <img src="/menu/reward.svg" />
                           </div>
                           <div className="content2">Khen Thưởng Kỉ Luật</div>
                         </div>

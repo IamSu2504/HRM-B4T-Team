@@ -102,7 +102,7 @@ export default function AdminLayout(props) {
                       <div className="card-head-content">
                         <div className="left">
                           <div className="content1">
-                            <img src="/menu/employer.svg" />
+                            <img src="/menu/account.svg" />
                           </div>
                           <div className="content2">Tài khoản</div>
                         </div>
@@ -139,7 +139,7 @@ export default function AdminLayout(props) {
                       <div className="card-head-content">
                         <div className="left">
                           <div className="content1">
-                            <img src="/menu/employer.svg" />
+                            <img src="/menu/list.svg" />
                           </div>
                           <div className="content2">Danh mục</div>
                         </div>
@@ -253,7 +253,7 @@ export default function AdminLayout(props) {
                       <div className="card-head-content">
                         <div className="left">
                           <div className="content1">
-                            <img src="/menu/employer.svg" />
+                            <img src="/menu/hopdong.svg" />
                           </div>
                           <div className="content2">Thông tin hợp đồng</div>
                         </div>
