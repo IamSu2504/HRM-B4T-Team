@@ -51,7 +51,7 @@ public class LeaveRequestService {
 
             // get first+last of current month
             Calendar calendar = Calendar.getInstance();
-            calendar.set(YearMonth.now().getYear(), sdf.parse(request.getDate()).getMonth()-1,1);
+            calendar.set(YearMonth.now().getYear(), sdf2.parse(request.getDate()).getMonth()-1,1);
             calendar.set(Calendar.DAY_OF_MONTH, 1);
             String monthFirst = sdf.format(calendar.getTime());
             calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
@@ -87,7 +87,7 @@ public class LeaveRequestService {
                     LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
                     if (dublicateShift != null) {
                         if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
-                            return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa() + " rồi.";
+                            return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa();
                         }
                     }
 
@@ -125,7 +125,7 @@ public class LeaveRequestService {
                     LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
                     if (dublicateShift != null) {
                         if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
-                            return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa() + "rồi.";
+                            return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa();
                         }
                     }
 
@@ -172,7 +172,7 @@ public class LeaveRequestService {
                     LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
                     if (dublicateShift != null) {
                         if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
-                            return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa() + "rồi.";
+                            return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa();
                         }
                     }
 
@@ -211,7 +211,7 @@ public class LeaveRequestService {
                     LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
                     if (dublicateShift != null) {
                         if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
-                            return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa() + "rồi.";
+                            return "Bạn đã đăng kí nghỉ " + newLeave.getShiftID().getTenCa();
                         }
                     }
 
