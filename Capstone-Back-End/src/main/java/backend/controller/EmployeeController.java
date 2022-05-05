@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
+//@CrossOrigin(origins = "http://192.168.1.7/")
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value = "/user")

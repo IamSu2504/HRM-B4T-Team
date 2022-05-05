@@ -51,7 +51,7 @@ public class LeaveRequestService {
 
             // get first+last of current month
             Calendar calendar = Calendar.getInstance();
-            calendar.set(YearMonth.now().getYear(), sdf2.parse(request.getDate()).getMonth()-1,1);
+            calendar.set(YearMonth.now().getYear(), sdf.parse(request.getDate()).getMonth()-1,1);
             calendar.set(Calendar.DAY_OF_MONTH, 1);
             String monthFirst = sdf.format(calendar.getTime());
             calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
@@ -69,13 +69,12 @@ public class LeaveRequestService {
                     return "Nhân viên mã " + request.getUser() + " đã nghỉ việc";
                 }
 
-                // check chuc vu
+// check chuc vu
                 if (positionRepo.getByMaNvInRange(newLeave.getUser().getId(), monthFirst, monthEnd) == null) {
                     return "Nhân viên mã " + request.getUser() + " hiện chưa có chức vụ trong tháng từ " + monthFirst + " đến " + monthEnd + ". Vui lòng bổ sung trong quá trình công tác của nhân viên này";
                 }
                 String chucVu = positionRepo.getByMaNvInRange(newLeave.getUser().getId(), monthFirst, monthEnd).getTenChucVu();
                 String shiftName = newLeave.getShiftID().getTenCa();
-
                 // check teacher
                 if (chucVu.toLowerCase().contains("giáo viên")) {
 
@@ -100,11 +99,10 @@ public class LeaveRequestService {
                         }
                     }
 
-                    // check 12 ngay nghi phep
+// check 12 ngay nghi phep
                     Integer soBuoiNghi = dORepo.getByMaNV(newLeave.getUser().getId()).getSoBuoiNghi();
                     if (soBuoiNghi > 12) {
-                        return "Bạn đã nghỉ quá số buổi quy định, không thể đăng ký nghỉ thêm.";
-                    }
+                        return "Bạn đã nghỉ quá số buổi quy định, không thể đăng ký nghỉ thêm.";                    }
                     // check not teacher
                 } else {
 

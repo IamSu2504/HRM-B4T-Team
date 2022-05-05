@@ -70,9 +70,9 @@ public class ContractService {
         // update
         if(repo.findById(newContract.getMaHD()).isPresent()){
             String start = sdf.format(newContract.getNgayHieuLuc());
-            String end = sdf.format(newContract.getNgayHieuLuc());
+            String end = sdf.format(newContract.getNgayHetHan());
 
-            if(repo.getContractStartInRange(start,end, newContract.getMaNV())!=null || repo.getContractEndInRange(start,end, newContract.getMaNV())!=null){
+            if(repo.getContractStartInRange2(start,end,newContract.getMaNV(),newContract.getMaHD())!=null || repo.getContractEndInRange2(start,end, newContract.getMaNV(),newContract.getMaHD())!=null){
                 return "Nhân viên mã " + newContract.getMaNV() + " đang có hợp đồng còn hiệu lực trong thời gian từ " + sdf2.format(newContract.getNgayHieuLuc()) + " đến " + sdf2.format(newContract.getNgayHetHan());
             }
             newContract.setTrangThai(true);

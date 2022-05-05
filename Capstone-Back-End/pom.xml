@@ -16,6 +16,7 @@
     <description>Capstone-Back-End</description>
     <properties>
         <java.version>1.8</java.version>
+        <start-class>backend.CapstoneBackEndApplication</start-class>
     </properties>
     <dependencies>
         <dependency>

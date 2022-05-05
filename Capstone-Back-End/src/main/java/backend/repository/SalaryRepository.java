@@ -14,22 +14,20 @@ public interface SalaryRepository extends JpaRepository<Salary, Integer> {
     @Query(value = "SELECT * FROM hrm_b4t.luongnhanvien where Upper(ma_hop_dong) =  UPPER(?)", nativeQuery = true)
     Salary getByMaHD(String maHopDong);
 
-    @Query(value = "select lnv.* from luongnhanvien lnv, hopdong hd\n" +
-            "where lnv.ma_hop_dong = hd.ma_hop_dong\n" +
-            "and hd.ma_nv = ? and lnv.ngay_ket_thuc >= ? and lnv.ngay_hieu_luc <= ? and lnv.trang_thai = 1" , nativeQuery = true)
-    Salary getLuongThangTheoNvien(String maNv, String ngayDauThang, String ngayCuoiThang);
-
     @Query(value = "SELECT * from luongnhanvien l where l.ngay_hieu_luc <= ? and ( l.ngay_ket_thuc >= ? or l.ngay_ket_thuc is null)" , nativeQuery = true)
     List<Salary> getAllLuongThang(String ngayCuoiThang, String ngayDauThang);
 
-    @Query(value = "SELECT * from luongnhanvien l where l.ngay_hieu_luc <= ? and ( l.ngay_ket_thuc >= ? or l.ngay_ket_thuc is null)" , nativeQuery = true)
-    List<Salary> getLuongThangByPhongBan(String ngayCuoiThang, String ngayDauThang);
+    @Query(value = "select * from luongnhanvien where ma_hop_dong = ? and ngay_hieu_luc between ? and ?" , nativeQuery = true)
+    Salary getLuongStartInRange(String maHopDong, String start, String end);
 
-    @Query(value = "select * from luongnhanvien where ma_hop_dong = ? and ngay_hieu_luc = ?" , nativeQuery = true)
-    Salary getLuongTruoc(String maHopDong, String maxNgayHieuLuc);
+    @Query(value = "select * from luongnhanvien where ma_hop_dong = ? and ngay_ket_thuc between ? and ?" , nativeQuery = true)
+    Salary getLuongEndInRange(String maHopDong, String start, String end);
 
-    @Query(value = "select max(ngay_hieu_luc) from luongnhanvien where ma_hop_dong = ?" , nativeQuery = true)
-    Date getDateLuongTruoc(String maHopDong);
+    @Query(value = "select * from luongnhanvien where ma_hop_dong = ? and ngay_hieu_luc between ? and ? and id != ?" , nativeQuery = true)
+    Salary getLuongStartInRange2(String maHopDong, String start, String end, int luongID);
+
+    @Query(value = "select * from luongnhanvien where ma_hop_dong = ? and ngay_ket_thuc between ? and ? and id != ?" , nativeQuery = true)
+    Salary getLuongEndInRange2(String maHopDong, String start, String end, int luongID);
 
 
 }
