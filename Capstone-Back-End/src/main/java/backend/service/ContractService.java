@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,33 +32,81 @@ public class ContractService {
         }
     }
 
-    public Contract save(CreateUpdateContractRequest request) {
+    public String getCreateMessage(CreateUpdateContractRequest request) {
         Contract newContract = getNewContract(request);
-        newContract.setTrangThai(true);
-        if (newContract.getMaHD() != null) {
-            List<Contract> listContracts = repo.findAll();
-            List<String> maHDs = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
 
-            for (Contract contract : listContracts) {
-                if (contract.getMaHD() != null) {
-                    maHDs.add(contract.getMaHD());
-                }
-            }
-            if (maHDs.contains(newContract.getMaHD())) {
-                return repo.save(newContract);
-            }
-            else {
-                ContractCategory contractCategory = contractCategoryRepository.findById(newContract.getLoaiHopDong().getId()).get();
-                if(contractCategory.getId() != null) {
-                    return repo.save(newContract);
-                } else {
-                    return null;
-                }
-            }
+        if(newContract.getNgayHetHan().compareTo(newContract.getNgayHieuLuc())<=0){
+            return "Ngày hết hạn phải sau ngày hiệu lực";
         }
-        else {
+
+        // add
+        if(!repo.findById(newContract.getMaHD()).isPresent()){
+            String start = sdf.format(newContract.getNgayHieuLuc());
+            String end = sdf.format(newContract.getNgayHieuLuc());
+
+            if(repo.getContractStartInRange(start,end)!=null || repo.getContractEndInRange(start,end)!=null){
+                return "Nhân viên mã " + newContract.getMaNV() + " đang có hợp đồng còn hiệu lực trong thời gian từ " + sdf2.format(newContract.getNgayHieuLuc()) + " đến " + sdf2.format(newContract.getNgayHetHan());
+            }
+            newContract.setTrangThai(true);
+            repo.save(newContract);
             return null;
         }
+        else{
+            return "Mã hợp đồng đã tồn tại";
+        }
+//        // update
+//        else{
+//            Contract oldContract = repo.findById(newContract.getMaHD()).get();
+//            newContract.setNgayHetHan(oldContract.getNgayHetHan());
+//            newContract.setNgayHieuLuc(oldContract.getNgayHieuLuc());
+//
+//            if(newContract.getTrangThai()==false){
+//              newContract.setNgayHetHan(new Date());
+//            }
+//            repo.save(newContract);
+//        }
+
+    }
+
+
+
+
+    public String getUpdateMessage(CreateUpdateContractRequest request) {
+        Contract newContract = getNewContract(request);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+
+        if(newContract.getNgayHetHan().compareTo(newContract.getNgayHieuLuc())<=0){
+            return "Ngày hết hạn phải sau ngày hiệu lực";
+        }
+
+        // update
+        if(repo.findById(newContract.getMaHD()).isPresent()){
+            String start = sdf.format(newContract.getNgayHieuLuc());
+            String end = sdf.format(newContract.getNgayHieuLuc());
+
+            if(repo.getContractStartInRange(start,end)!=null || repo.getContractEndInRange(start,end)!=null){
+                return "Nhân viên mã " + newContract.getMaNV() + " đang có hợp đồng còn hiệu lực trong thời gian từ " + sdf2.format(newContract.getNgayHieuLuc()) + " đến " + sdf2.format(newContract.getNgayHetHan());
+            }
+            newContract.setTrangThai(true);
+            repo.save(newContract);
+            return null;
+        }
+        return null;
+//        // update
+//        else{
+//            Contract oldContract = repo.findById(newContract.getMaHD()).get();
+//            newContract.setNgayHetHan(oldContract.getNgayHetHan());
+//            newContract.setNgayHieuLuc(oldContract.getNgayHieuLuc());
+//
+//            if(newContract.getTrangThai()==false){
+//              newContract.setNgayHetHan(new Date());
+//            }
+//            repo.save(newContract);
+//        }
+
     }
 
     public Contract getNewContract(CreateUpdateContractRequest request){

@@ -48,9 +48,9 @@ public class ContractController {
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody CreateUpdateContractRequest request) {
         try {
-            Contract t = service.save(request);
-            if(t==null){
-                return new ResponseEntity<>("Mã hợp đồng đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            String mess = service.getCreateMessage(request);
+            if(mess!=null){
+                return new ResponseEntity<>(mess, HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
@@ -65,9 +65,9 @@ public class ContractController {
                 return new ResponseEntity<>("Mã hợp đồng không tồn tại", HttpStatus.NOT_FOUND);
             }
             request.setMaHD(pv);
-            Contract t = service.save(request);
-            if(t==null){
-                return new ResponseEntity<>("Mã hợp đồng đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+            String mess = service.getUpdateMessage(request);
+            if(mess!=null){
+                return new ResponseEntity<>(mess, HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){

@@ -33,31 +33,31 @@ public class Contract {
     private String ghiChu;
 
     @Column(name = "trang_thai")
-    private boolean trangThai;
+    private Boolean trangThai;
 
     @Column(name = "ma_nv")
     private String maNV;
 
-    public Date getNgayHieuLuc(){
-        if(ngayHieuLuc!=null){
-            Calendar c = Calendar.getInstance();
-            c.setTime(ngayHieuLuc);
-            c.add(Calendar.DAY_OF_MONTH, 1);
-            return c.getTime();
-        }
-        else
-            return null;
-    }
-
-    public Date getNgayHetHan(){
-        if(ngayHetHan!=null){
-            Calendar c = Calendar.getInstance();
-            c.setTime(ngayHetHan);
-            c.add(Calendar.DAY_OF_MONTH, 1);
-            return c.getTime();
-        }
-        else
-            return null;
-    }
+//    public Date getNgayHieuLuc(){
+//        if(ngayHieuLuc!=null){
+//            Calendar c = Calendar.getInstance();
+//            c.setTime(ngayHieuLuc);
+//            c.add(Calendar.DAY_OF_MONTH, 1);
+//            return c.getTime();
+//        }
+//        else
+//            return null;
+//    }
+//
+//    public Date getNgayHetHan(){
+//        if(ngayHetHan!=null){
+//            Calendar c = Calendar.getInstance();
+//            c.setTime(ngayHetHan);
+//            c.add(Calendar.DAY_OF_MONTH, 1);
+//            return c.getTime();
+//        }
+//        else
+//            return null;
+//    }
 
 }
