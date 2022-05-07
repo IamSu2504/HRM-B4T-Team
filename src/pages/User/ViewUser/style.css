@@ -1,12 +1,11 @@
 .update-account-page {
-  background: #EFECEC;
   padding: 20px;
   margin-top: 10px;
   border: 1px solid black;
   background: #FFFFFF;
 }
 
-.update-account-page .title {
+/* .update-account-page .title {
   font-style: normal;
   font-weight: 300;
   font-size: 26px;
@@ -21,7 +20,7 @@
   line-height: 21px;
   color: #000000;
   margin-top: 9px;
-}
+} */
 
 
 @media screen and (max-width: 768px) {
@@ -30,19 +29,72 @@
   }
 }
 
-
+/* =======================  */
 .update-account-page .avatar-row {
-  margin-top: 30px;
-  justify-content: space-between;
-  font-size: 12px;
+  display: flex;
+  /* flex-wrap: wrap;
+  flex-direction: row; */
+  padding: 0px 100px 0 100px;
 }
 
-.update-account-page .avatar-row .img {
-  width: 300px;
-  height: 300px;
-  margin-left: 100px;
+.update-account-page .avatar-row img {
+  display: block;
+  max-width: 300px;
+  max-height: 250px;
+  width: auto;
+  height: auto;
+  margin: auto;
 }
 
+.update-account-page .avatar-row .img-contents {
+  margin: 0px 15px 0px 0px;
+  height: 30px;
+  width: 30px;
+  float: left;
+}
+
+.update-account-page .avatar-row>div {
+  margin-left: 10px;
+}
+
+.update-account-page .avatar-row .title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #3489cf;
+}
+
+.update-account-page .avatar-row .title:after {
+  content: '';
+  display: block;
+  width: 45%;
+  height: 4px;
+  background-image: -webkit-linear-gradient(left, #73D2F6, #08C 22%, #7FC400 36%, #FFD583 48%, #FFB21E 63%, #FF4D4D 76%, #503873);
+  background-image: linear-gradient(to right, #73D2F6, #08C 22%, #7FC400 36%, #FFD583 48%, #FFB21E 63%, #FF4D4D 76%, #503873);
+}
+
+.update-account-page .avatar-row .hoten {
+  color: #3489cf;
+  font-size: 34px;
+  font-weight: bold;
+}
+
+.update-account-page .avatar-row .manhanvien {
+  font-size: 25px;
+  font-weight: 500;
+  color: #34AACF;
+}
+
+.update-account-page .avatar-row .contents {
+  font-size: 21px;
+  font-weight: 500;
+  color: #34AACF;
+  text-align: left;
+  padding-left: 20px;
+}
+
+
+
+/*========================== */
 
 
 @media screen and (max-width: 768px) {

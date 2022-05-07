@@ -36,18 +36,46 @@ export default function ViewUser() {
   console.log(maNv)
   return (
     <div className="update-account-page">
-      <div className="row">
+      {/* <div className="row">
         <div className="col-12">
           <div className="title">Thông Tin Nhân Viên</div>
         </div>
-      </div>
+      </div> */}
 
       <div className="row avatar-row">
         <div>
-          <img src={`http://localhost:8080/user/${userDetail?.id}/image`} alt="avatar" width={220} height={300} />
+          <img src={`http://localhost:8080/user/${userDetail?.id}/image`} alt="avatar" />
+          <br></br><br></br>
+        </div>
+        <div>
+          <p className="hoten">Nguyễn Huy Bách</p>
+          <p className="manhanvien">ID: NV0001</p>
+          <p className="manhanvien">Giới tính: Nam</p>
         </div>
 
         <div>
+          <p className="title">Thông tin - Liên hệ</p>
+          <p className="contents"><img className="img-contents" src="/employee/birthday.svg" />01/01/1999</p>
+          <p className="contents"><img className="img-contents" src="/employee/mail.svg" />bachnh@b4t.com</p>
+          <p className="contents"><img className="img-contents" src="/employee/phone.svg" />0987654321 | 0123456789</p>
+          <p className="contents"><img className="img-contents" src="/employee/address.svg" />Hà Nội, Việt Nam</p>
+        </div>
+        <div>
+          <p className="title">Học vấn</p>
+          <p className="contents"><img className="img-contents" src="/employee/dot.svg" />Kỹ thuật phần mềm</p>
+          <p className="contents">Đại học FPT Hà Nội</p>
+        </div>
+        <div>
+          <p className="title">Các Kĩ năng</p>
+          <p className="contents"><img className="img-contents" src="/employee/dot.svg" />Kỹ thuật phần mềm</p>
+          <p className="contents">Đại học FPT Hà Nội</p>
+        </div>
+        <div>
+          <p className="title">Kinh nghiệm</p>
+          <p className="contents"><img className="img-contents" src="/employee/dot.svg" />Cty ABCXYZ</p>
+          <p className="contents">1 năm</p>
+        </div>
+        {/* <div>
           <p>Mã Số Nhân Viên: {userDetail?.id || ''}</p>
           <p>Họ Và Tên: {userDetail?.tenNv || ''}</p>
           <p>Giới Tính: {userDetail?.gioiTinh? "Nam" : "Nữ"}</p>
@@ -71,7 +99,7 @@ export default function ViewUser() {
           <p>Chức vụ hiện tại : {userDetail?.chucVu?.tenChucVu || ''}</p>
           <p>ATM ngân hàng: {userDetail?.atmNganHang || ''}</p>
           <p>Số ATM: {userDetail?.soAtm || ''}</p>
-        </div>
+        </div> */}
       </div>
       <div onClick={() => {
         if (localStorage.getItem('role') === 'Admin') {
