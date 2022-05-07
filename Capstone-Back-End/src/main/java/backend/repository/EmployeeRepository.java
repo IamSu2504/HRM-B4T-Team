@@ -11,6 +11,9 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,String> {
 
+    @Query(value = "SELECT ma_nv FROM nhanvien order by ma_nv desc LIMIT 1", nativeQuery = true)
+    String getLastID();
+
     @Query(value = "select * from nhanvien where ho_chieu = ?", nativeQuery = true)
     Employee getByHoChieu(String hoChieu);
 

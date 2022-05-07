@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Data
 @Entity
@@ -38,26 +41,32 @@ public class Contract {
     @Column(name = "ma_nv")
     private String maNV;
 
-//    public Date getNgayHieuLuc(){
-//        if(ngayHieuLuc!=null){
-//            Calendar c = Calendar.getInstance();
-//            c.setTime(ngayHieuLuc);
-//            c.add(Calendar.DAY_OF_MONTH, 1);
-//            return c.getTime();
-//        }
-//        else
-//            return null;
-//    }
-//
-//    public Date getNgayHetHan(){
-//        if(ngayHetHan!=null){
-//            Calendar c = Calendar.getInstance();
-//            c.setTime(ngayHetHan);
-//            c.add(Calendar.DAY_OF_MONTH, 1);
-//            return c.getTime();
-//        }
-//        else
-//            return null;
-//    }
+    public Date getNgayHieuLuc(){
+            if (ngayHieuLuc != null) {
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                    return sdf.parse(ngayHieuLuc.toString());
+                } catch (ParseException e) {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+    }
+
+    public Date getNgayHetHan(){
+        if (ngayHetHan != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(ngayHetHan.toString());
+            } catch (ParseException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
 
 }

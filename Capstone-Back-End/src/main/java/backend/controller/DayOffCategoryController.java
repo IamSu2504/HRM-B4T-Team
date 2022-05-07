@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@CrossOrigin(origins = "http://192.168.1.7/")
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value = "/category/dayOff")
 public class DayOffCategoryController {

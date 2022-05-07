@@ -6,8 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//@CrossOrigin(origins = "http://192.168.1.7/")
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value = "/employee/insurance")
 public class InsuranceEmployeeController {

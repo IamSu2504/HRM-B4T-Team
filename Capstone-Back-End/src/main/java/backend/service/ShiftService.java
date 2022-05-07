@@ -137,7 +137,7 @@ public class ShiftService {
 
     public Shift getNewShift(CreateUpdateShiftRequest request) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
             Shift s = new Shift();
             s.setId(request.getId());

@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Entity
 @Setter
@@ -44,5 +47,19 @@ public class LeaveRequest {
 
     @Column(name = "status")
     private String status;
+
+    public Date getDate(){
+        if (date != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(date.toString());
+            } catch (ParseException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
 
 }

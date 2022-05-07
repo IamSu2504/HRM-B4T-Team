@@ -6,8 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Entity
 @Table(name = "logtime")
@@ -31,10 +33,15 @@ public class TimeKeepingEmployee {
     @Column(name = "status")
     private String status;
 
-    private String getDateTime(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        if(sdf != null){
-            return sdf.format(dateTime);
+    private Date getDateTime() {
+        if (dateTime != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(dateTime.toString());
+            } catch (ParseException e) {
+                return null;
+            }
         } else {
             return null;
         }

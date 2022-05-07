@@ -7,8 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Entity
 @Table(name = "nhanvien")
@@ -135,72 +138,102 @@ public class Employee {
         }
     }
 
-//    public Date getNgaySinh(){
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(ngaySinh);
-//        c.add(Calendar.DAY_OF_MONTH, 1);
-//        return c.getTime();
-//    }
-//
-//    public Date getNgayCapCccd(){
-//        if(ngayCapCccd!=null){
-//            Calendar c = Calendar.getInstance();
-//            c.setTime(ngayCapCccd);
-//            c.add(Calendar.DAY_OF_MONTH, 1);
-//            return c.getTime();
-//        }
-//        else
-//            return null;
-//    }
-//
-//    public Date getNgayHetHanCccd(){
-//        if(ngayHetHanCccd==null){
-//          return null;
-//        }
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(ngayHetHanCccd);
-//        c.add(Calendar.DAY_OF_MONTH, 1);
-//        return c.getTime();
-//    }
-//
-//    public Date getNgayCapHoChieu(){
-//        if(ngayCapHoChieu==null){
-//            return null;
-//        }
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(ngayCapHoChieu);
-//        c.add(Calendar.DAY_OF_MONTH, 1);
-//        return c.getTime();
-//    }
-//
-//    public Date getNgayHetHanHoChieu(){
-//        if(ngayHetHanHoChieu==null){
-//            return null;
-//        }
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(ngayHetHanHoChieu);
-//        c.add(Calendar.DAY_OF_MONTH, 1);
-//        return c.getTime();
-//    }
-//
-//    public Date getNgayBatDauLam(){
-//        if(ngayBatDauLam==null){
-//            return null;
-//        }
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(ngayBatDauLam);
-//        c.add(Calendar.DAY_OF_MONTH, 1);
-//        return c.getTime();
-//    }
-//
-//    public Date getNgayNghiViec(){
-//        if(ngayNghiViec==null){
-//            return null;
-//        }
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(ngayNghiViec);
-//        c.add(Calendar.DAY_OF_MONTH, 1);
-//        return c.getTime();
-//    }
+    public Date getNgaySinh(){
+        if (ngaySinh != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(ngaySinh.toString());
+            } catch (ParseException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public Date getNgayCapCccd(){
+        if (ngayCapCccd != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(ngayCapCccd.toString());
+            } catch (ParseException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public Date getNgayHetHanCccd(){
+        if (ngayHetHanCccd != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(ngayHetHanCccd.toString());
+            } catch (ParseException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public Date getNgayCapHoChieu(){
+        if (ngayCapHoChieu != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(ngayCapHoChieu.toString());
+            } catch (ParseException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public Date getNgayHetHanHoChieu(){
+        if (ngayHetHanHoChieu != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(ngayHetHanHoChieu.toString());
+            } catch (ParseException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public Date getNgayBatDauLam(){
+        if (ngayBatDauLam != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(ngayBatDauLam.toString());
+            } catch (ParseException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public Date getNgayNghiViec(){
+        if (ngayNghiViec != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(ngayNghiViec.toString());
+            } catch (ParseException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
 
 }

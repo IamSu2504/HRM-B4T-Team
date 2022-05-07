@@ -7,8 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Entity
 @Table(name = "dangkicalam")
@@ -37,18 +40,21 @@ public class Shift {
 
     @Column(name = "ngay")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
 
-//    public Date getDate(){
-//        if(date!=null){
-//            Calendar c = Calendar.getInstance();
-//            c.setTime(date);
-//            c.add(Calendar.DAY_OF_MONTH, 1);
-//            return c.getTime();
-//        }
-//        else
-//            return null;
-//    }
+    public Date getDate() {
+        if (date != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(date.toString());
+            } catch (ParseException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
 
 }

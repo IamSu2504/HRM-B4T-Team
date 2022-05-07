@@ -1,6 +1,5 @@
 package backend.controller;
 
-
 import backend.entity.Contract;
 import backend.entity.CreateUpdateContractRequest;
 import backend.service.ContractService;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@CrossOrigin(origins = "http://192.168.1.7/")
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value = "/contract")
 public class ContractController {

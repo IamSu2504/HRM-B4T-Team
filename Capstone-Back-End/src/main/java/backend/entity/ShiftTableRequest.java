@@ -7,8 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Setter
 @Getter
@@ -28,25 +31,31 @@ public class ShiftTableRequest {
 
     private String maNv;
 
-//    public Date getNgayTu(){
-//        if(ngayTu!=null){
-//            Calendar c = Calendar.getInstance();
-//            c.setTime(ngayTu);
-//            c.add(Calendar.DAY_OF_MONTH, 1);
-//            return c.getTime();
-//        }
-//        else
-//            return null;
-//    }
-//
-//    public Date getNgayDen(){
-//        if(ngayDen!=null){
-//            Calendar c = Calendar.getInstance();
-//            c.setTime(ngayDen);
-//            c.add(Calendar.DAY_OF_MONTH, 1);
-//            return c.getTime();
-//        }
-//        else
-//            return null;
-//    }
+    public Date getNgayTu(){
+            if (ngayTu != null) {
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                    return sdf.parse(ngayTu.toString());
+                } catch (ParseException e) {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+    }
+
+    public Date getNgayDen(){
+        if (ngayDen != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(ngayDen.toString());
+            } catch (ParseException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
 }

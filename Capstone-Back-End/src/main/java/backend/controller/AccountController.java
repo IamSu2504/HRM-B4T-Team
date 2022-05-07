@@ -19,8 +19,6 @@ import javax.mail.internet.MimeMessage;
 import java.util.Date;
 import java.util.Properties;
 
-//@CrossOrigin(origins = "http://192.168.1.7/")
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value = "/account")
 public class AccountController {
@@ -131,8 +129,8 @@ public class AccountController {
                 return new ResponseEntity<>("Chưa có tài khoản được tạo với email này", HttpStatus.NOT_FOUND);
             }
             Account forgotAccount = accountService.getByMaNv(u.getId());
-            final String fromEmail = "speaklxss2001@gmail.com";
-            final String fromEmailPassword = "Speakless2000";
+            final String fromEmail = "tinlnhe130825@fpt.edu.vn";
+            final String fromEmailPassword = "ztewp626";
 //          final String fromEmail = "speaklxss2001@gmail.com";
 //          final String fromEmailPassword = "Speakless2000";
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH");

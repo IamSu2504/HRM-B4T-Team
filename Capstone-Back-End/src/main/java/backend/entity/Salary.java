@@ -7,8 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Entity
 @Table(name = "luongnhanvien")
@@ -39,12 +42,12 @@ public class Salary {
 
     @Column(name = "ngay_hieu_luc")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayHieuLuc;
 
     @Column(name = "ngay_ket_thuc")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayKetThuc;
 
     @Column(name = "ghi_chu")
@@ -59,24 +62,32 @@ public class Salary {
 
 
 
-//    public Date getNgayHieuLuc(){
-//        if(ngayHieuLuc==null){
-//            return null;
-//        }
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(ngayHieuLuc);
-//        c.add(Calendar.DAY_OF_MONTH, 1);
-//        return c.getTime();
-//    }
-//
-//    public Date getNgayKetThuc(){
-//        if(ngayKetThuc==null){
-//            return null;
-//        }
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(ngayKetThuc);
-//        c.add(Calendar.DAY_OF_MONTH, 1);
-//        return c.getTime();
-//    }
+    public Date getNgayHieuLuc(){
+            if (ngayHieuLuc != null) {
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                    return sdf.parse(ngayHieuLuc.toString());
+                } catch (ParseException e) {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+    }
+
+    public Date getNgayKetThuc(){
+        if (ngayKetThuc != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(ngayKetThuc.toString());
+            } catch (ParseException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
 
 }

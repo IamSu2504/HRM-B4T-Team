@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Data
 @Entity
@@ -25,15 +27,18 @@ public class HolidayCategory {
     @Column(name = "ten_ngay_le")
     private String tenNgayLe;
 
-//    public Date getNgay(){
-//        if(ngay!=null){
-//            Calendar c = Calendar.getInstance();
-//            c.setTime(ngay);
-//            c.add(Calendar.DAY_OF_MONTH, 1);
-//            return c.getTime();
-//        }
-//        else
-//            return null;
-//    }
+    public Date getNgay(){
+        if (ngay != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return sdf.parse(ngay.toString());
+            } catch (ParseException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
 
 }

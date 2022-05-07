@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
-//@CrossOrigin(origins = "http://192.168.1.7/")
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value = "/user")
 public class EmployeeController {
@@ -48,6 +46,15 @@ public class EmployeeController {
                 return new ResponseEntity<>("Danh sách tìm kiếm trống", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/newID")
+    public ResponseEntity<?> getNewID() {
+        try {
+            return new ResponseEntity<>(service.getNewID(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
         }

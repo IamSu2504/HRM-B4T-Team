@@ -29,6 +29,13 @@ public class EmployeeService {
         return employeeRepo.findAll();
     }
 
+    public String getNewID() {
+        String lastID = employeeRepo.getLastID();
+        String newID = "NV";
+        newID += String.valueOf(Integer.parseInt(lastID.substring(2,lastID.length()))+1);
+        return newID;
+    }
+
     public List<Employee> getSearched(String text) {
         return employeeRepo.getSearched(text);
     }
