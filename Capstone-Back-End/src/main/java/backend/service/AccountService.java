@@ -29,6 +29,10 @@ public class AccountService {
         return accountRepo.getLoginAccount(usernameInput, EncryptedPasswordInput);
     }
 
+    public List<String> getNotCreatedEmpIDs() {
+        return accountRepo.getNotCreatedEmpID();
+    }
+
     public Account getById(int id) {
         if (accountRepo.findById(id).isPresent())
             return accountRepo.findById(id).get();

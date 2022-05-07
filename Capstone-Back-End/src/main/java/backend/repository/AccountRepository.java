@@ -24,4 +24,7 @@ public interface AccountRepository extends JpaRepository<Account,Integer> {
 
     @Query(value = "select max(id) from account", nativeQuery = true)
     int getLastID();
+
+    @Query(value = "select distinct n.ma_nv from nhanvien n where (select a.ma_nv from account a where a.ma_nv = n.ma_nv) is null", nativeQuery = true)
+    List<String> getNotCreatedEmpID();
 }

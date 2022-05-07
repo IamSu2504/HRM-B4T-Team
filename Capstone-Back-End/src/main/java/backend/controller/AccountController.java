@@ -59,6 +59,19 @@ public class AccountController {
         }
     }
 
+    @GetMapping(value = "/empID-create")
+    public ResponseEntity<?> getNotCreatedEmpIDs() {
+        try {
+            List<String> list = accountService.getNotCreatedEmpIDs();
+            if (list.isEmpty()) {
+                return new ResponseEntity<>("Hiện tại chưa có nhân viên cần tạo tài khoản", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") String pv) {
         try {
