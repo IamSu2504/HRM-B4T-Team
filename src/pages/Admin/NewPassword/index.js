@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
+
+
 export default function NewPassword() {
   const [accountDetail, setAccountDetail] = useState(0)
   const [newpassword, setNewPassword] = useState('')
@@ -13,7 +15,7 @@ export default function NewPassword() {
   const [submitError, setSubmitError] = useState({ status: false, error: '' })
   const [isSubmit, setIsSubmit] = useState(false)
   const { forgotId } = useParams()
-
+  const navigate = useNavigate();
   const getAccountDetail = async () => {
     if (forgotId) {
       const accountIdRes = await ForgotAPI.getAccountById(forgotId)
@@ -84,10 +86,13 @@ export default function NewPassword() {
                 value={repassword}
                 onChange={(event) => setRePassword(event.target.value)} />
             </div>
+            
             <div>
               {submitError.status && <div className="forgot-error">{submitError.error}</div>}
             </div>
-
+            <div className='fogot-pw-txt' onClick={() => navigate('/')}>
+              <a>Login</a>
+            </div>
 
             <div className='forgot-button'>
               <button disabled={isSubmit} onClick={handleUpdate}>Cập Nhật Mật Khẩu Mới</button>

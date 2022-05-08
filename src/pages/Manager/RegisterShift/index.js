@@ -250,13 +250,14 @@ export default function RegisterShift() {
                             <thead>
                                 <tr className="head">
                                     <th scope="col"></th>
-                                    <th scope="col">Chủ Nhật</th>
+                                    
                                     <th scope="col">Thứ 2</th>
                                     <th scope="col">Thứ 3</th>
                                     <th scope="col">Thứ 4</th>
                                     <th scope="col">Thứ 5</th>
                                     <th scope="col">Thứ 6</th>
                                     <th scope="col">Thứ 7</th>
+                                    <th scope="col">Chủ Nhật</th>
                                     
                                 </tr>
                             </thead>

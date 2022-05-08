@@ -49,7 +49,7 @@ export default function ViewInsurance() {
                             <th scope="col">Mã Bảo Hiểm</th>
                             <th scope="col">Tên Bảo Hiểm</th>
                             <th scope="col">Sửa</th>
-                            <th scope="col">Xoá</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -64,7 +64,7 @@ export default function ViewInsurance() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-                                    <td>                
+                                    {/* <td>                
                                         <CustomPopover
                                             open={popoverId === insuranceItem?.id}
                                             onClose={() => setPopoverId("")}
@@ -84,7 +84,7 @@ export default function ViewInsurance() {
                                                 <img src="/home/delete-icon.svg" />
                                             </div>
                                         </CustomPopover>
-                                    </td>
+                                    </td> */}
                                 </tr>
                             )
                         })}
@@ -92,7 +92,7 @@ export default function ViewInsurance() {
                     </tbody>
                 </table>
             </div>
-            <div className="pagination-frame">
+            {/* <div className="pagination-frame">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         <li class="page-item">
@@ -124,7 +124,7 @@ export default function ViewInsurance() {
                         </li>
                     </ul>
                 </nav>
-            </div>
+            </div> */}
 
             <div>
                 <button className="save-button" onClick={()=>navigate(`/admin/addinsurance`)}>

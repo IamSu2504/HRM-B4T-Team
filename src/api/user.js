@@ -36,7 +36,7 @@ const UserAPI = {
         email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
         hoChieu, noiCapHoChieu, ngayCapHoChieu, ngayHetHanHoChieu,
         noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
-        soAtm, trangThaiLaoDong, ngayBatDauLam, ngayNghiViec, lyDoNghi }) {
+        soAtm, trangThaiLaoDong, ngayBatDauLam }) {
         const url = `/user`;
         return AxiosClient.post(url, {id,
             tinhChatHopDongID, tinhTrangHonNhanID,
@@ -45,7 +45,7 @@ const UserAPI = {
         email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
         hoChieu, noiCapHoChieu, ngayCapHoChieu, ngayHetHanHoChieu,
         noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
-        soAtm, trangThaiLaoDong, ngayBatDauLam, ngayNghiViec, lyDoNghi
+        soAtm, trangThaiLaoDong, ngayBatDauLam
         });
     },
 

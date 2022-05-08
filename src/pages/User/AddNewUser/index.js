@@ -70,7 +70,7 @@ export default function AddNewUser() {
     ngayCapHoChieu: '', ngayHetHanHoChieu: '', noiSinh: '',
     queQuan: '', diaChiThuongTru: '', diaChiTamTru: '',
     atmNganHang: '', soAtm: '',
-    ngayBatDauLam: '', ngayNghiViec: '', lyDoNghi: ''
+    ngayBatDauLam: ''
 
   })
   const [submitError, setSubmitError] = useState({ status: false, error: '' })
@@ -85,7 +85,7 @@ export default function AddNewUser() {
         email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
         hoChieu, noiCapHoChieu, ngayCapHoChieu, ngayHetHanHoChieu,
         noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
-        soAtm, ngayBatDauLam, ngayNghiViec, lyDoNghi
+        soAtm, ngayBatDauLam
       } = userDetail;
       console.log('test user: ',userDetail)
       if ( !id.toString().trim()?.length || !tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
@@ -407,7 +407,7 @@ export default function AddNewUser() {
               setUserDetail({ ...userDetail, trangThaiLaoDong: event.currentTarget.value })
             }}
           /> */}
-          <CustomInputField
+          {/* <CustomInputField
             title="Ngày Nghỉ Việc"
             
             type="date"
@@ -416,8 +416,8 @@ export default function AddNewUser() {
             handleChange={(event) => {
               setUserDetail({ ...userDetail, ngayNghiViec: event.target.value })
             }}
-          />
-          <CustomInputField
+          /> */}
+          {/* <CustomInputField
             title="Lý Do Nghỉ"
             
             type="text"
@@ -426,7 +426,7 @@ export default function AddNewUser() {
             handleChange={(event) => {
               setUserDetail({ ...userDetail, lyDoNghi: event.target.value })
             }}
-          />
+          /> */}
         </div>
       </div>
       <div>

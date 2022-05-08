@@ -9,14 +9,14 @@ import ContractAPI from "../../../../api/contract";
 
 
 export default function AddContract() {
-    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', trangThai: '', maNV : ''})
+    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', maNV : ''})
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
 
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
-            const { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, trangThai, maNV } = contractDetail
+            const { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, maNV } = contractDetail
             console.log(contractDetail)
             if (!maHD.trim().length || !loaiHopDong.trim().length || !ngayHieuLuc.trim().length || !ngayHetHan.trim().length || !ghiChu.trim().length|| !maNV.trim().length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })

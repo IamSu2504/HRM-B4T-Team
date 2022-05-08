@@ -183,10 +183,7 @@ export default function AdminLayout(props) {
                         <img src="/menu/list-icon.svg" />
                         <span style={{ marginLeft: '15px' }}>Quan Hệ</span>
                       </div>
-                      <div onClick={() => navigate('/admin/viewsalaryGroup')}>
-                        <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Nhóm Lương</span>
-                      </div>
+                      
                       <div onClick={() => navigate('/admin/viewnation')}>
                         <img src="/menu/list-icon.svg" />
                         <span style={{ marginLeft: '15px' }}>Quốc Tịch</span>

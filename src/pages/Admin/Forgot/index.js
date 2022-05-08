@@ -5,10 +5,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
+
 export default function Forgot() {
   const [gmail, setGmail] = useState('')
   const [forgotError, setForgotError] = useState({ status: false, error: '' })
-  
+  const navigate = useNavigate();
   async function forgot(event) {
     
     try {
@@ -59,7 +60,9 @@ export default function Forgot() {
             <div className='forgot-button'>
               <button  onClick={forgot}>Lấy Mật Khẩu Mới</button>
             </div>
-
+            <div className='fogot-pw-txt' onClick={() => navigate('/')}>
+              <a>Login</a>
+            </div>
           </div>
         </div>
       </div>

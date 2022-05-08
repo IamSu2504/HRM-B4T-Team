@@ -47,9 +47,9 @@ export default function ViewRewardDiscipline() {
                         <tr className="head">
                             <th scope="col">STT</th>
                             <th scope="col">Danh Mục</th>
-                            <th scope="col">Tiêu Đề</th>
+                     
                             <th scope="col">Sửa</th>
-                            <th scope="col">Xoá</th>
+                        
                         </tr>
                     </thead>
                     <tbody>
@@ -58,13 +58,13 @@ export default function ViewRewardDiscipline() {
                                 <tr key={`tax-item-${rewardDisciplineIndex}`}>
                                     <th scope="row">{rewardDisciplineIndex + 1}</th>
                                     <td>{rewardDisciplineItem?.danhMuc}</td>
-                                    <td>{rewardDisciplineItem?.tieuDe}</td>
+                                    {/* <td>{rewardDisciplineItem?.tieuDe}</td> */}
                                     <td>
                                         <div onClick={()=>navigate(`/admin/updaterewardDiscipline/${rewardDisciplineItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-                                    <td>                
+                                    {/* <td>                
                                         <CustomPopover
                                             open={popoverId === rewardDisciplineItem?.id}
                                             onClose={() => setPopoverId("")}
@@ -84,7 +84,7 @@ export default function ViewRewardDiscipline() {
                                                 <img src="/home/delete-icon.svg" />
                                             </div>
                                         </CustomPopover>
-                                    </td>
+                                    </td> */}
                                 </tr>
                             )
                         })}

@@ -16,8 +16,8 @@ export default function AddAccount() {
         try {
             setSubmitError({ status: false, error: '' })
             const { username, password, maNv, roleID } = accountDetail
-
-            if (!username.trim().length || !password.trim().length || !maNv.trim().length) {
+            console.log('>>>>>',accountDetail)
+            if (!username.trim().length || !password.trim().length || !maNv.trim().length || !roleID.trim().length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
                 setIsSubmit(true)

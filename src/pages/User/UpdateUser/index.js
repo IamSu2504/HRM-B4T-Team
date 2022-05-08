@@ -379,12 +379,13 @@ export default function UpdateUser() {
             title="Ngày Bắt Đầu Làm: "
             value={userDetail?.ngayBatDauLam}
             type="date"
-            disabled={false}
+            disabled={true}
             handleChange={(event) => {
               
               setUserDetail({ ...userDetail, ngayBatDauLam: event.target.value })
             }}
           />
+          
           <CustomSelectBox
             title="Tính Chất Hợp Đồng"
             value={userDetail?.tinhChatHopDongID}
@@ -497,7 +498,7 @@ export default function UpdateUser() {
             title="Email"
             value={userDetail?.email || ''}
             type="text"
-            disabled={false}
+            disabled={true}
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, email: event.target.value })
@@ -529,7 +530,7 @@ export default function UpdateUser() {
             title="Ngày Nghỉ Việc"
             value={userDetail?.ngayNghiViec}
             type="date"
-            disabled={false} //yyyy-mm-dd
+            disabled={true} //yyyy-mm-dd
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, ngayNghiViec: event.target.value })
@@ -539,7 +540,7 @@ export default function UpdateUser() {
             title="Lý Do Nghỉ"
             value={userDetail?.lyDoNghi || ''}
             type="text"
-            disabled={false}
+            disabled={true}
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, lyDoNghi: event.target.value })

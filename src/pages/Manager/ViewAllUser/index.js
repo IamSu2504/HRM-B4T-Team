@@ -67,8 +67,10 @@ export default function ViewAllUser() {
     <div className="homepage">
       <div className="title">Danh sách nhân viên</div>
 
+
 {/* search */}
-      <div class="input-group mb-3 mt-3">
+
+      {/* <div class="input-group mb-3 mt-3">
         <div class="input-group-prepend">
         <span class="input-group-text">Bộ lọc</span>
           <select class="input-group-text" id="sel1" name="sellist1">
@@ -80,11 +82,11 @@ export default function ViewAllUser() {
         <div class="input-group-append">
           <button class="btn btn-success" type="submit">Go</button>
         </div>
-      </div>
+      </div> */}
 {/* ******** */}
 
       <div className="table-frame">
-        <table class="table table-bordered" id="userTable">
+        <table class="table table-bordered" >
           <thead>
             <tr className="head">
               <th scope="col">STT</th>
@@ -113,7 +115,7 @@ export default function ViewAllUser() {
                   <td>{userItem?.ngaySinh}</td>
                   <td>{userItem?.soDienThoai}</td>
                   <td>
-                    <div>{userItem?.trangThaiLaoDong ? <a className="jobactive">Đang Hoạt Động</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
+                    <div>{userItem?.trangThai == 'Đang làm việc' ? <a className="jobactive">Đang làm việc</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
                   </td>
                   <td>
                     <div onClick={() => navigate(`/manager/viewuser/${userItem.id}`)}>
@@ -125,6 +127,55 @@ export default function ViewAllUser() {
                       <img src="/home/update-icon.svg" />
                     </div>
                   </td>
+                </tr>
+              )
+            })}
+
+          </tbody>
+        </table>
+        <table   class="table2" id="userTable" >
+          <thead>
+            <tr className="head">
+              <th scope="col">STT</th>
+              <th scope="col">Mã nhân viên</th>
+              <th scope="col">Ảnh</th>
+              <th scope="col">Tên nhân viên</th>
+              <th scope="col">Giới tính</th>
+              <th scope="col">Ngày sinh</th>
+              <th scope="col">Số điện thoại</th>
+              <th scope="col">Trang thái</th>
+       
+            </tr>
+          </thead>
+          <tbody>
+            {allUser.map((userItem, userIndex) => {
+              return (
+                <tr key={`user-item-${userIndex}`}>
+                  <th scope="row">{userIndex + 1}</th>
+                  <td>{userItem?.id}</td>
+                  <td>
+                    <img src={`http://localhost:8080/user/${userItem?.id}/image`} alt="avatar" width={220} height={180} />
+                  </td>
+                  <td>{userItem?.tenNv}</td>
+                  <td>{userItem?.gioiTinh ? 'Nam' : 'Nữ'}</td>
+                  <td>{userItem?.ngaySinh}</td>
+                  <td>{userItem?.soDienThoai}</td>
+                  <td>
+                    <div>{userItem?.trangThai == 'Đang làm việc' ? <a className="jobactive">Đang làm việc</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
+                  </td>
+                  {/* <td>
+                    <div>{userItem?.trangThaiLaoDong ? <a className="jobactive">Đang Hoạt Động</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
+                  </td>
+                  <td>
+                    <div onClick={() => navigate(`/manager/viewuser/${userItem.id}`)}>
+                      <img src="/home/watch-icon.svg" />
+                    </div>
+                  </td>
+                  <td>
+                    <div onClick={() => navigate(`/manager/updateuser/${userItem.id}`)}>
+                      <img src="/home/update-icon.svg" />
+                    </div>
+                  </td> */}
                 </tr>
               )
             })}
