@@ -54,15 +54,15 @@ export default function AddContract() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Thêm Thông Tin Hợp Đồng</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Add contract information</div>
+                    <div className="title-sub">Field with * cannot be left blank</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Mã Hợp Đồng* :"
+                        title="Contract code *"
                         type="text"
                         placeholder="VD: HD000xyz"
                         handleChange={(event) => {
@@ -71,7 +71,7 @@ export default function AddContract() {
                     />
 
                     <CustomSelectBox
-                        title="Loại Hợp Đồng :"
+                        title="Type of contract :"
                         option={listContract.map((contractItem) => {
                             return (
                                 { label: `${contractItem.maLoaiHopDong} - ${contractItem.tenLoaiHopDong}`, value: contractItem.id }
@@ -83,7 +83,7 @@ export default function AddContract() {
                         }}
                     />
                     <CustomInputField
-                        title="Ngày Hiệu Lực* :"
+                        title="Effective date *"
                         type="date"
                         handleChange={(event) => {
                             // const parts = event.target.value.split('-');

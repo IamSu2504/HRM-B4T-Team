@@ -54,8 +54,8 @@ export default function UpdateCertificate() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Chứng Chỉ</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Edit Certificate Information</div>
+                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
@@ -69,7 +69,8 @@ export default function UpdateCertificate() {
                     />
 
                     <CustomInputField
-                        title="Mã Chứng Chỉ *:"
+                        title="Certificate code"
+                        require={true}
                         value={certificateDetail?.maChungChi || ''}
                         type="text"
                         handleChange={(event) => {
@@ -77,7 +78,8 @@ export default function UpdateCertificate() {
                         }}
                     />
                     <CustomInputField
-                        title="Tên Chứng Chỉ *:"
+                        title="Certificate name"
+                        require={true}
                         value={certificateDetail?.loaiChungChi || ''}
                         type="text"
                         handleChange={(event) => {
@@ -95,7 +97,7 @@ export default function UpdateCertificate() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
                 </button>
             </div>
             <ToastContainer />

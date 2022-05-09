@@ -40,16 +40,28 @@ export default function ViewDepartment() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Phòng Ban</div>
+            <div className="title">List of Department</div>
             <div className="table-frame">
+
+
+
+
+                
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/adddepartment`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Add</span>
+                </button>
+            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
                             <th scope="col">STT</th>
-                            <th scope="col">Mã Phòng Ban</th>
-                            <th scope="col">Tên Phòng Ban</th>
-                            <th scope="col">Sửa</th>
-                            <th scope="col">Xoá</th>
+                            <th scope="col">Department code</th>
+                            <th scope="col">Department name</th>
+                            <th scope="col">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,27 +75,6 @@ export default function ViewDepartment() {
                                         <div onClick={()=>navigate(`/admin/updatedepartment/${departmentItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
-                                    </td>
-                                    <td>                
-                                        <CustomPopover
-                                            open={popoverId === departmentItem?.id}
-                                            onClose={() => setPopoverId("")}
-                                            handleSubmit={() => {
-                                                deleteDepartment(departmentItem?.id)
-                                            }}
-                                        >          
-                                            <div 
-                                                onClick={() => {
-                                                    if (popoverId !== departmentItem?.id) {
-                                                        setPopoverId(departmentItem?.id);
-                                                    } else {
-                                                        setPopoverId("");
-                                                    }
-                                                }}
-                                            >
-                                                <img src="/home/delete-icon.svg" />
-                                            </div>
-                                        </CustomPopover>
                                     </td>
                                 </tr>
                             )
@@ -126,14 +117,6 @@ export default function ViewDepartment() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/adddepartment`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
             <ToastContainer />
         </div>
     );

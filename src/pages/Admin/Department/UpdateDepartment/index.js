@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import DepartmentAPI from "../../../../api/department";
 import CustomInputField from "../../../../components/customInputField";
@@ -8,18 +8,18 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function UpdateTax() {
-    const [departmentDetail, setDepartmentDetail] = useState({maPhongBan: '', tenPhongBan: ''})
-    const [submitError, setSubmitError] = useState({status: false, error: ''})
+    const [departmentDetail, setDepartmentDetail] = useState({ maPhongBan: '', tenPhongBan: '' })
+    const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
-    const {departmentId} = useParams()
+    const { departmentId } = useParams()
 
-    const getDepartmentDetail = async() => {
-        if(departmentId){
+    const getDepartmentDetail = async () => {
+        if (departmentId) {
             const departmentRes = await DepartmentAPI.getDepartmentById(departmentId)
-            if ( departmentRes?.status === 200){
+            if (departmentRes?.status === 200) {
                 setDepartmentDetail(departmentRes?.data)
             }
-        }      
+        }
     }
 
     useEffect(() => {
@@ -27,35 +27,36 @@ export default function UpdateTax() {
     }, [])
 
     const handleUpdate = async () => {
-        try{
-            setSubmitError({status: false, error: ''})
-            const {maPhongBan, tenPhongBan} = departmentDetail
-    
-            if ( !maPhongBan.trim().length ||  !tenPhongBan.trim().length){
-                setSubmitError({status: true, error: 'Thông tin không được bỏ trống'})
-            }else{
+        try {
+            setSubmitError({ status: false, error: '' })
+            const { maPhongBan, tenPhongBan } = departmentDetail
+
+            if (!maPhongBan.trim().length || !tenPhongBan.trim().length) {
+                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+            } else {
                 setIsSubmit(true)
-    
-                const updateRes = await DepartmentAPI.updateDepartment({id: departmentId, ...departmentDetail})
-                if ( updateRes?.status === 200 ){
+
+                const updateRes = await DepartmentAPI.updateDepartment({ id: departmentId, ...departmentDetail })
+                if (updateRes?.status === 200) {
                     toast.success('Cập nhật thông tin thành công')
                 }
             }
-        }catch(error){
+        } catch (error) {
             if (error.response) {
-                setSubmitError({status: true, error: error.response.data})
+                setSubmitError({ status: true, error: error.response.data })
             }
-        }finally{
+        } finally {
             setIsSubmit(false)
-        }      
+        }
     }
 
     return (
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Phòng Ban</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Edit Information of Department</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
+
                 </div>
             </div>
 
@@ -69,33 +70,35 @@ export default function UpdateTax() {
                     />
 
                     <CustomInputField
-                        title="Mã Phòng Ban *:"
+                        title="Department code"
+                        require={true}
                         value={departmentDetail?.maPhongBan || ''}
                         type="text"
                         handleChange={(event) => {
-                            setDepartmentDetail({...departmentDetail, maPhongBan: event.target.value})
+                            setDepartmentDetail({ ...departmentDetail, maPhongBan: event.target.value })
                         }}
                     />
                     <CustomInputField
-                        title="Tên Phòng Ban *:"
+                        title="Department name"
+                        require={true}
                         value={departmentDetail?.tenPhongBan || ''}
                         type="text"
                         handleChange={(event) => {
-                            setDepartmentDetail({...departmentDetail, tenPhongBan: event.target.value})
+                            setDepartmentDetail({ ...departmentDetail, tenPhongBan: event.target.value })
                         }}
                     />
-                    
+
                 </div>
             </div>
             <div>
                 {submitError.status && <div className="tax-update-error">{submitError.error}</div>}
             </div>
             <div>
-                <button className="save-button" disabled={isSubmit} onClick={()=>handleUpdate()}>
+                <button className="save-button" disabled={isSubmit} onClick={() => handleUpdate()}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
                 </button>
             </div>
             <ToastContainer />

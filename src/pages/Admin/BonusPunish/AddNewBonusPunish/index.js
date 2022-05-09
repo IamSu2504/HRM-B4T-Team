@@ -8,8 +8,8 @@ export default function AddBonusPunish() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Thêm Thông Tin Thuế</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Add Contract Information</div>
+                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
@@ -24,14 +24,14 @@ export default function AddBonusPunish() {
                     />
 
                     <CustomInputField
-                        title="Danh Mục"
+                        title="Category"
                         value=""
                         type="text"
                         disabled={false}
                         require={true}
                     />
                     <CustomInputField
-                        title="Tiêu Đề"
+                        title="Title"
                         value=""
                         type="text"
                         disabled={false}
@@ -45,7 +45,7 @@ export default function AddBonusPunish() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Thêm</span>
+                    <span class="text">Add</span>
                 </button>
             </div>
         </div>
