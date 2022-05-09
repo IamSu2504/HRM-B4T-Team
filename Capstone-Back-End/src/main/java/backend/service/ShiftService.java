@@ -131,7 +131,7 @@ public class ShiftService {
                 return "Chỉ giáo viên được đăng kí ca làm";
             }
         } catch (Exception e) {
-            return "Lỗi nội bộ";
+            return "Internal server error";
         }
     }
 

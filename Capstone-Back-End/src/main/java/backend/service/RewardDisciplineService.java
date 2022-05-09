@@ -41,7 +41,7 @@ public class RewardDisciplineService {
     public String getSaveMessage(CreateUpdateRewardDisciplineRequest request) {
 
         if (!userRepo.findById(request.getMaNv()).isPresent()) {
-            return "Mã nhân viên không tồn tại";
+            return "Mã Employee not existed";
         }
 
         // Add

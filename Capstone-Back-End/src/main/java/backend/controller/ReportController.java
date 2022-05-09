@@ -25,7 +25,7 @@ public class ReportController {
             List<SalaryReport> list = service.getListSalaryReport();
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -35,7 +35,7 @@ public class ReportController {
             List<EmployeeReport> list = service.getAllContractEmployeeReport();
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -45,7 +45,7 @@ public class ReportController {
             List<Employee> list = service.getAllEmployeeReport();
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -54,11 +54,11 @@ public class ReportController {
         try {
             List<WorkingProcess> reports = service.getEmployeeWorkingProcessReportMess(employeeID);
             if(reports == null){
-                return new ResponseEntity<>("Mã nhân viên không tồn tại", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("Mã Employee not existed", HttpStatus.INTERNAL_SERVER_ERROR);
             }
             return new ResponseEntity<>(reports, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

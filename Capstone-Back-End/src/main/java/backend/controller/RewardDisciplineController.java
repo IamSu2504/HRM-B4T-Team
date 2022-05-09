@@ -26,7 +26,7 @@ public class RewardDisciplineController {
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -40,7 +40,7 @@ public class RewardDisciplineController {
             }
             return new ResponseEntity<>(rd, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -53,7 +53,7 @@ public class RewardDisciplineController {
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -67,7 +67,7 @@ public class RewardDisciplineController {
             }
             return new ResponseEntity<>(rd, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -80,7 +80,7 @@ public class RewardDisciplineController {
             }
             return new ResponseEntity<>(mess, HttpStatus.EXPECTATION_FAILED);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -95,7 +95,7 @@ public class RewardDisciplineController {
             }
             return new ResponseEntity<>(mess, HttpStatus.EXPECTATION_FAILED);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

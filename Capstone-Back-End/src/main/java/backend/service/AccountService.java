@@ -67,11 +67,11 @@ public class AccountService {
         // Add
         if (request.getId() == null) {
             if (accountRepo.getByUsername(request.getUsername()) != null) {
-                return "Tên đăng nhập đã được sử dụng";
+                return "Username existed";
             } else if (accountRepo.getByMaNv(request.getMaNv().toUpperCase()) != null) {
-                return "Mã nhân viên đã được sử dụng";
+                return "Employee ID existed";
             } else if (userRepo.findById(request.getMaNv().toUpperCase()) == null) {
-                return "Chưa có người dùng được tạo với mã nhân viên này";
+                return "No employee created with this email";
             } else {
                 accountRepo.save(newAccount);
                 return null;
@@ -81,11 +81,11 @@ public class AccountService {
         else {
             Account oldAccount = accountRepo.findById(request.getId()).get();
             if (!oldAccount.getUsername().equalsIgnoreCase(newAccount.getUsername()) && accountRepo.getByUsername(request.getUsername()) != null) {
-                return "Tên đăng nhập đã được sử dụng";
+                return "Username existed";
             } else if (!oldAccount.getMaNv().equalsIgnoreCase(newAccount.getMaNv()) && accountRepo.getByMaNv(request.getMaNv().toUpperCase()) != null) {
-                return "Mã nhân viên đã được sử dụng";
+                return "Employee ID existed";
             } else if (!userRepo.findById(request.getMaNv().toUpperCase()).isPresent()) {
-                return "Chưa có người dùng được tạo với mã nhân viên này";
+                return "No employee created with this email";
             } else {
                 accountRepo.save(newAccount);
                 return null;
@@ -111,7 +111,9 @@ public class AccountService {
         String dateFormat = new SimpleDateFormat("dd/MM/yyyy HH").format(new Date());
         for (int i = 1; i < lastAccountID; i++) {
             if (getEncryptedString(i + dateFormat).equals(encryptedStr)) {
-                return accountRepo.findById(i).get();
+                if(accountRepo.findById(i).isPresent()){
+                    return accountRepo.findById(i).get();
+                }
             }
         }
         return null;

@@ -26,7 +26,7 @@ public class ShiftCategoryController {
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -41,7 +41,7 @@ public class ShiftCategoryController {
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -55,7 +55,7 @@ public class ShiftCategoryController {
             }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -71,7 +71,7 @@ public class ShiftCategoryController {
             }
             return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -82,7 +82,7 @@ public class ShiftCategoryController {
             service.delete(id);
             return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

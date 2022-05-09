@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -49,22 +50,22 @@ public class EmployeeService {
 
     public String getUpdateUserMessage(Employee newUser) {
         if (!employeeRepo.findById(newUser.getId().toUpperCase()).isPresent()) {
-            return "Nhân viên không tồn tại";
+            return "Employee not existed";
         }
         Employee oldUser = employeeRepo.findById(newUser.getId().toUpperCase()).get();
 
-        if (!oldUser.getId().equalsIgnoreCase(newUser.getId()) && employeeRepo.findById(newUser.getId()).isPresent()) {
-            return "Mã nhân viên đã tồn tại";
-        } else if (!oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && employeeRepo.getBySdt(newUser.getSoDienThoai()) != null) {
-            return "Số điện thoại đã tồn tại";
-        } else if (!oldUser.getEmail().equalsIgnoreCase(newUser.getEmail()) && employeeRepo.getByEmail(newUser.getEmail()) != null) {
-            return "Email đã tồn tại";
-        } else if (!oldUser.getSoAtm().equalsIgnoreCase(newUser.getSoAtm()) && employeeRepo.getBySoAtm(newUser.getSoAtm()) != null) {
-            return "Số ATM đã tồn tại";
-        } else if (!oldUser.getCccd().equalsIgnoreCase(newUser.getCccd()) && employeeRepo.getByCccd(newUser.getCccd()) != null) {
-            return "Số căn cước công dân đã tồn tại";
-        } else if (!oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu()) && newUser.getHoChieu() != null && employeeRepo.getByHoChieu(newUser.getHoChieu()) != null) {
-            return "Số hộ chiếu đã tồn tại";
+        if (oldUser.getId().equalsIgnoreCase(newUser.getId()) && employeeRepo.findById(newUser.getId()).isPresent()) {
+            return "Employee ID existed";
+        } else if (oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && employeeRepo.getBySdt(newUser.getSoDienThoai()) != null) {
+            return "Phone number existed";
+        } else if (oldUser.getEmail().equalsIgnoreCase(newUser.getEmail()) && employeeRepo.getByEmail(newUser.getEmail()) != null) {
+            return "Email existed";
+        } else if (oldUser.getSoAtm().equalsIgnoreCase(newUser.getSoAtm()) && employeeRepo.getBySoAtm(newUser.getSoAtm()) != null) {
+            return "ATM number existed";
+        } else if (oldUser.getCccd().equalsIgnoreCase(newUser.getCccd()) && employeeRepo.getByCccd(newUser.getCccd()) != null) {
+            return "Citizen ID existed";
+        } else if (oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu()) && newUser.getHoChieu() != null && employeeRepo.getByHoChieu(newUser.getHoChieu()) != null) {
+            return "Passport number existed";
         }
 
         newUser.setImage(oldUser.getImage());
@@ -74,30 +75,30 @@ public class EmployeeService {
 
     public String getUpdateUserMessage(CreateUpdateUserRequest request) {
         if (!employeeRepo.findById(request.getId().toUpperCase()).isPresent()) {
-            return "Nhân viên không tồn tại";
+            return "Employee not existed";
         }
 
         Employee oldUser = employeeRepo.findById(request.getId().toUpperCase()).get();
         Employee newUser = getNewUser(request);
 
-        if(oldUser.getNgayNghiViec()!=null && newUser.getNgayNghiViec()!=null && oldUser.getNgayNghiViec().before(newUser.getNgayNghiViec())){
-          return "Nhân viên mã " + oldUser.getId() + " đã nghỉ việc. Không thể cập nhật thông tin";
+        if(oldUser.getNgayNghiViec()!=null && newUser.getNgayNghiViec()!=null && oldUser.getNgayNghiViec().before(new Date())){
+          return "Employee with ID " + oldUser.getId() + " leaved. Update fail";
         }
 
         if (newUser == null)
             return "Lỗi lấy thông tin nhân viên";
         if (!oldUser.getId().equalsIgnoreCase(newUser.getId()) && employeeRepo.findById(newUser.getId()).isPresent()) {
-            return "Mã nhân viên đã tồn tại";
+            return "Employee ID existed";
         } else if (!oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && employeeRepo.getBySdt(newUser.getSoDienThoai()) != null) {
-            return "Số điện thoại đã tồn tại";
+            return "Phone number existed";
         } else if (!oldUser.getEmail().equalsIgnoreCase(newUser.getEmail()) && employeeRepo.getByEmail(newUser.getEmail()) != null) {
-            return "Email đã tồn tại";
+            return "Email existed";
         } else if (!oldUser.getSoAtm().equalsIgnoreCase(newUser.getSoAtm()) && employeeRepo.getBySoAtm(newUser.getSoAtm()) != null) {
-            return "Số ATM đã tồn tại";
+            return "ATM number existed";
         } else if (!oldUser.getCccd().equalsIgnoreCase(newUser.getCccd()) && employeeRepo.getByCccd(newUser.getCccd()) != null) {
-            return "Số căn cước đã tồn tại";
+            return "Citizen ID existed";
         } else if (!oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu()) && newUser.getHoChieu() != null && employeeRepo.getByHoChieu(newUser.getHoChieu()) != null) {
-            return "Số hộ chiếu đã tồn tại";
+            return "Passport number existed";
         }
 
         newUser.setImage(oldUser.getImage());
@@ -113,17 +114,17 @@ public class EmployeeService {
         newUser.setId(newUser.getId().toUpperCase());
 
         if (employeeRepo.findById(newUser.getId()).isPresent()) {
-            return "Mã nhân viên đã tồn tại";
+            return "Employee ID existed";
         } else if (employeeRepo.getBySdt(newUser.getSoDienThoai()) != null) {
-            return "Số điện thoại đã tồn tại";
+            return "Phone number existed";
         } else if (employeeRepo.getByEmail(newUser.getEmail()) != null) {
-            return "Email đã tồn tại";
+            return "Email existed";
         } else if (employeeRepo.getBySoAtm(newUser.getSoAtm()) != null) {
-            return "Số ATM đã tồn tại";
+            return "ATM number existed";
         } else if (newUser.getCccd() != null && employeeRepo.getByCccd(newUser.getCccd()) != null) {
-            return "Số căn cước đã tồn tại";
+            return "Citizen ID existed";
         } else if (newUser.getHoChieu() != null && employeeRepo.getByHoChieu(newUser.getHoChieu()) != null) {
-            return "Số hộ chiếu đã tồn tại";
+            return "Passport number existed";
         }
 
         newUser.setImage("default.jpg");

@@ -25,7 +25,7 @@ public class TimeKeepingEmployeeController {
             }
             return new ResponseEntity<>(listTimeKeeping, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -38,7 +38,7 @@ public class TimeKeepingEmployeeController {
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -52,7 +52,7 @@ public class TimeKeepingEmployeeController {
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

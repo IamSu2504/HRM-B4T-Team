@@ -30,11 +30,11 @@ public class EmployeeController {
         try {
             List<Employee> list = service.getAll();
             if (list.isEmpty()) {
-                return new ResponseEntity<>("Danh sách nhân viên trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("No employee created", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -43,11 +43,11 @@ public class EmployeeController {
         try {
             List<Employee> list = service.getSearched(text.trim());
             if (list.isEmpty()) {
-                return new ResponseEntity<>("Danh sách tìm kiếm trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("No search result", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -56,7 +56,7 @@ public class EmployeeController {
         try {
             return new ResponseEntity<>(service.getNewID(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -65,11 +65,11 @@ public class EmployeeController {
         try {
             Employee u = service.getById(id);
             if (u == null) {
-                return new ResponseEntity<>("Nhân viên không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Employee not existed", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(u, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -78,11 +78,11 @@ public class EmployeeController {
         try {
             String mess = service.getCreateUserMessage(request);
             if (mess == null) {
-                return new ResponseEntity<>("Tạo thành công", HttpStatus.OK);
+                return new ResponseEntity<>("Add employee successfully", HttpStatus.OK);
             }
             return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -92,11 +92,11 @@ public class EmployeeController {
             request.setId(id);
             String mess = service.getUpdateUserMessage(request);
             if (mess == null) {
-                return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
+                return new ResponseEntity<>("Update employee successfully", HttpStatus.OK);
             }
             return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -105,7 +105,7 @@ public class EmployeeController {
         try {
             Employee user = service.getById(id);
             if (user == null) {
-                return new ResponseEntity<>("Nhân viên không tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Employee not existed", HttpStatus.EXPECTATION_FAILED);
             }
 
             String fileName = user.getId() + ".jpg";
@@ -121,10 +121,10 @@ public class EmployeeController {
             if (updateMess == null)
                 return new ResponseEntity<>(HttpStatus.OK);
             else
-                return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (IOException ioe) {
             //if something went bad, we need to inform client about it
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -133,7 +133,7 @@ public class EmployeeController {
         try {
             Employee user = service.getById(id);
             if (user == null) {
-                return new ResponseEntity<>("Nhân viên không tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Employee not existed", HttpStatus.EXPECTATION_FAILED);
             }
             String path = new File("./src/main/resources/avatar").getCanonicalPath() + "\\" + user.getImage();
             File imageFile = new File(path);
@@ -144,7 +144,7 @@ public class EmployeeController {
 
             return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(data);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -153,7 +153,7 @@ public class EmployeeController {
         try {
             Employee user = service.getById(id);
             if (user == null) {
-                return new ResponseEntity<>("Nhân viên không tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Employee not existed", HttpStatus.EXPECTATION_FAILED);
             }
             String path = new File("./src/main/resources/avatar").getCanonicalPath() + "\\" + user.getImage();
             File imageFile = new File(path);
@@ -165,7 +165,7 @@ public class EmployeeController {
 
             return ResponseEntity.ok().body(base64encodedData);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

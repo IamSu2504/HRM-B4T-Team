@@ -18,7 +18,7 @@ public class InsuranceEmployeeController {
         try {
             return new ResponseEntity<>(service.getInsurance(maNV), HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

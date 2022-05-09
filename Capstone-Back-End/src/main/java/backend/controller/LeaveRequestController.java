@@ -27,7 +27,7 @@ public class LeaveRequestController {
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -41,7 +41,7 @@ public class LeaveRequestController {
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -57,7 +57,7 @@ public class LeaveRequestController {
             }
             return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -78,7 +78,7 @@ public class LeaveRequestController {
             }
             return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
 
         }
     }

@@ -227,7 +227,7 @@ public class LeaveRequestService {
                 return mess;
             }
         } catch (Exception e) {
-            return "Lỗi nội bộ";
+            return "Internal server error";
         }
     }
 

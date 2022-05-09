@@ -26,12 +26,12 @@ public class ShiftController {
     public ResponseEntity<?> getEmployeeTotalShift(@RequestBody int month, @PathVariable("id") String id) {
         try {
             if(employeeService.getById(id)==null){
-                return new ResponseEntity<>("Mã nhân viên không tồn tại", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("Mã Employee not existed", HttpStatus.INTERNAL_SERVER_ERROR);
             }
             int totalShiftInMonth = service.getEmployeeTotalShiftInMonth(id,month);
             return new ResponseEntity<>(totalShiftInMonth, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -40,11 +40,11 @@ public class ShiftController {
         try {
             List<Shift> shifts = service.getTable(request);
             if(shifts==null){
-                return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
             }
             return new ResponseEntity<>(shifts, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -63,7 +63,7 @@ public class ShiftController {
                 }
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -83,7 +83,7 @@ public class ShiftController {
             }
             return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
-            return new ResponseEntity<>("Lỗi nội bộ", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
