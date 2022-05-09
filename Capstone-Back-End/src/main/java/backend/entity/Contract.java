@@ -46,7 +46,7 @@ public class Contract {
                 try {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                    return sdf.parse(ngayHieuLuc.toString());
+                    return sdf.parse(sdf.format(ngayHieuLuc));
                 } catch (ParseException e) {
                     return null;
                 }
@@ -60,7 +60,7 @@ public class Contract {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(ngayHetHan.toString());
+                return sdf.parse(sdf.format(ngayHetHan));
             } catch (ParseException e) {
                 return null;
             }

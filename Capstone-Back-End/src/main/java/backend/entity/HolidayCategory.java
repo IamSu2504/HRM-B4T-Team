@@ -32,7 +32,7 @@ public class HolidayCategory {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(ngay.toString());
+                return sdf.parse(sdf.format(ngay));
             } catch (ParseException e) {
                 return null;
             }

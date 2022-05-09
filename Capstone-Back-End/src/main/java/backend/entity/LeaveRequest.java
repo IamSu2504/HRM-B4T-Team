@@ -53,7 +53,7 @@ public class LeaveRequest {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(date.toString());
+                return sdf.parse(sdf.format(date));
             } catch (ParseException e) {
                 return null;
             }

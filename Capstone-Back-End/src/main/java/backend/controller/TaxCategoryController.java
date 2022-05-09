@@ -65,7 +65,7 @@ public class TaxCategoryController {
             if(t==null){
                 return new ResponseEntity<>("Mã phân loại thuế đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
-            return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Update successfully", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }

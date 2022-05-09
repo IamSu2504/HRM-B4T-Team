@@ -64,7 +64,7 @@ public class SpecializeCategoryController {
             if(c==null){
                 return new ResponseEntity<>("Mã chuyên môn đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
-            return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Update successfully", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }

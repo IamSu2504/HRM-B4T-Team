@@ -86,7 +86,7 @@ public class EmployeeService {
         }
 
         if (newUser == null)
-            return "Lỗi lấy thông tin nhân viên";
+            return "Error retriving employee data";
         if (!oldUser.getId().equalsIgnoreCase(newUser.getId()) && employeeRepo.findById(newUser.getId()).isPresent()) {
             return "Employee ID existed";
         } else if (!oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && employeeRepo.getBySdt(newUser.getSoDienThoai()) != null) {

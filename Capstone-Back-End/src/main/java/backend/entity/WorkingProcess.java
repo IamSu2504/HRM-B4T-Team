@@ -54,7 +54,7 @@ public class WorkingProcess {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(ngayVao.toString());
+                return sdf.parse(sdf.format(ngayVao));
             } catch (ParseException e) {
                 return null;
             }
@@ -68,7 +68,7 @@ public class WorkingProcess {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(ngayRa.toString());
+                return sdf.parse(sdf.format(ngayRa));
             } catch (ParseException e) {
                 return null;
             }

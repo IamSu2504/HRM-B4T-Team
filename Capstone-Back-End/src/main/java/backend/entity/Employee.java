@@ -143,7 +143,7 @@ public class Employee {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(ngaySinh.toString());
+                return sdf.parse(sdf.format(ngaySinh));
             } catch (ParseException e) {
                 return null;
             }
@@ -157,7 +157,7 @@ public class Employee {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(ngayCapCccd.toString());
+                return sdf.parse(sdf.format(ngayCapCccd));
             } catch (ParseException e) {
                 return null;
             }
@@ -171,7 +171,7 @@ public class Employee {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(ngayHetHanCccd.toString());
+                return sdf.parse(sdf.format(ngayHetHanCccd));
             } catch (ParseException e) {
                 return null;
             }
@@ -185,7 +185,7 @@ public class Employee {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(ngayCapHoChieu.toString());
+                return sdf.parse(sdf.format(ngayCapHoChieu));
             } catch (ParseException e) {
                 return null;
             }
@@ -199,7 +199,7 @@ public class Employee {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(ngayHetHanHoChieu.toString());
+                return sdf.parse(sdf.format(ngayHetHanHoChieu));
             } catch (ParseException e) {
                 return null;
             }
@@ -213,7 +213,7 @@ public class Employee {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(ngayBatDauLam.toString());
+                return sdf.parse(sdf.format(ngayBatDauLam));
             } catch (ParseException e) {
                 return null;
             }
@@ -227,7 +227,7 @@ public class Employee {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(ngayNghiViec.toString());
+                return sdf.parse(sdf.format(ngayNghiViec));
             } catch (ParseException e) {
                 return null;
             }

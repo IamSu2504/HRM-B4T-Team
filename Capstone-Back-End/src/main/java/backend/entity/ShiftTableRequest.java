@@ -36,7 +36,7 @@ public class ShiftTableRequest {
                 try {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
                     sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                    return sdf.parse(ngayTu.toString());
+                    return sdf.parse(sdf.format(ngayTu));
                 } catch (ParseException e) {
                     return null;
                 }
@@ -50,7 +50,7 @@ public class ShiftTableRequest {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(ngayDen.toString());
+                return sdf.parse(sdf.format(ngayDen));
             } catch (ParseException e) {
                 return null;
             }

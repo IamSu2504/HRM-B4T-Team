@@ -11,6 +11,15 @@ import java.util.List;
 @Repository
 public interface ContractRepository extends JpaRepository<Contract, String> {
 
+    @Query(value = "SELECT ma_hop_dong FROM nhanvien order by ma_nv desc LIMIT 1", nativeQuery = true)
+    String getLastID();
+
+    @Query(value = "SELECT * FROM hopdong where ma_nv = ? order by ngay_hieu_luc desc", nativeQuery = true)
+    List<Contract> getAllByEmp(String empID);
+
+    @Query(value = "SELECT * FROM hopdong where ma_hop_dong = ?", nativeQuery = true)
+    List<Contract> getByContractID(String empID);
+
     @Query(value = "SELECT * FROM hopdong where ngay_het_han >= ? and ngay_het_han <= ? and trang_thai = true", nativeQuery = true)
     List<Contract> getListReportContract(String start,String end);
 

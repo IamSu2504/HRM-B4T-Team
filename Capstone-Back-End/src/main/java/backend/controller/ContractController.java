@@ -22,7 +22,20 @@ public class ContractController {
         try {
             List<Contract> listContract = service.getAll();
             if(listContract.isEmpty()){
-                return new ResponseEntity<>("Danh sách hợp đồng trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("No contract existed", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(listContract, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/employee/{id}")
+    public ResponseEntity<?> getAllByEmp(@PathVariable("id") String id) {
+        try {
+            List<Contract> listContract = service.getAllByEmp(id);
+            if(listContract.isEmpty()){
+                return new ResponseEntity<>("No contract existed", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listContract, HttpStatus.OK);
         }catch(Exception e){
@@ -35,7 +48,7 @@ public class ContractController {
         try {
             Contract c = service.getById(pv);
             if(c==null){
-                return new ResponseEntity<>("Không tìm thấy hợp đồng", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Contract not existed", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
@@ -50,7 +63,7 @@ public class ContractController {
             if(mess!=null){
                 return new ResponseEntity<>(mess, HttpStatus.EXPECTATION_FAILED);
             }
-            return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Add contract successfully", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -60,14 +73,14 @@ public class ContractController {
     public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody CreateUpdateContractRequest request) {
         try {
             if (service.getById(pv) == null) {
-                return new ResponseEntity<>("Mã hợp đồng không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Contract not existed", HttpStatus.NOT_FOUND);
             }
             request.setMaHD(pv);
             String mess = service.getUpdateMessage(request);
             if(mess!=null){
                 return new ResponseEntity<>(mess, HttpStatus.EXPECTATION_FAILED);
             }
-            return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Update successfully", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }

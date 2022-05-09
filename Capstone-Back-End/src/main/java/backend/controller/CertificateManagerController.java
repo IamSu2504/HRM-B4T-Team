@@ -79,7 +79,7 @@ public class CertificateManagerController {
             if(t==null){
                 return new ResponseEntity<>("Chứng chỉ này đã tồn tại", HttpStatus.EXPECTATION_FAILED);
             }
-            return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Update successfully", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -91,7 +91,7 @@ public class RewardDisciplineController {
             request.setId(id);
             String mess = service.getSaveMessage(request);
             if(mess==null){
-                return new ResponseEntity<>("Cập nhật thành công", HttpStatus.OK);
+                return new ResponseEntity<>("Update successfully", HttpStatus.OK);
             }
             return new ResponseEntity<>(mess, HttpStatus.EXPECTATION_FAILED);
         }catch(Exception e){

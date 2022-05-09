@@ -38,7 +38,7 @@ public class TimeKeepingEmployee {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(dateTime.toString());
+                return sdf.parse(sdf.format(dateTime));
             } catch (ParseException e) {
                 return null;
             }

@@ -24,6 +24,10 @@ public class ContractService {
         return repo.findAll();
     }
 
+    public List<Contract> getAllByEmp(String empID) {
+        return repo.getAllByEmp(empID);
+    }
+
     public Contract getById(String id) {
         if (repo.findById(id).isPresent()) {
             return repo.findById(id).get();
@@ -38,23 +42,29 @@ public class ContractService {
         SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
 
         if(newContract.getNgayHetHan().compareTo(newContract.getNgayHieuLuc())<=0){
-            return "Ngày hết hạn phải sau ngày hiệu lực";
+            return "End date must be after start date";
         }
 
         // add
         if(!repo.findById(newContract.getMaHD()).isPresent()){
             String start = sdf.format(newContract.getNgayHieuLuc());
             String end = sdf.format(newContract.getNgayHetHan());
+            Contract c;
 
-            if(repo.getContractStartInRange(start,end,newContract.getMaNV())!=null || repo.getContractEndInRange(start,end,newContract.getMaNV())!=null){
-                return "Nhân viên mã " + newContract.getMaNV() + " đã có hợp đồng còn hiệu lực trong thời gian từ " + sdf2.format(newContract.getNgayHieuLuc()) + " đến " + sdf2.format(newContract.getNgayHetHan());
+            if(repo.getContractStartInRange(start,end,newContract.getMaNV())!=null){
+                c = repo.getContractStartInRange(start,end,newContract.getMaNV());
+                return "Employee with ID " + newContract.getMaNV() + " had a contract available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Add fail";
+            }
+            if(repo.getContractEndInRange(start,end,newContract.getMaNV())!=null){
+                c = repo.getContractStartInRange(start,end,newContract.getMaNV());
+                return "Employee with ID " + newContract.getMaNV() + " had a contract available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Add fail";
             }
             newContract.setTrangThai(true);
             repo.save(newContract);
             return null;
         }
         else{
-            return "Mã hợp đồng đã tồn tại";
+            return "Contract ID existed";
         }
     }
 
@@ -64,22 +74,28 @@ public class ContractService {
         SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
 
         if(newContract.getNgayHetHan().compareTo(newContract.getNgayHieuLuc())<=0){
-            return "Ngày hết hạn phải sau ngày hiệu lực";
+            return "End date must be after start date";
         }
 
         // update
         if(repo.findById(newContract.getMaHD()).isPresent()){
             String start = sdf.format(newContract.getNgayHieuLuc());
             String end = sdf.format(newContract.getNgayHetHan());
+            Contract c;
 
-            if(repo.getContractStartInRange2(start,end,newContract.getMaNV(),newContract.getMaHD())!=null || repo.getContractEndInRange2(start,end, newContract.getMaNV(),newContract.getMaHD())!=null){
-                return "Nhân viên mã " + newContract.getMaNV() + " đang có hợp đồng còn hiệu lực trong thời gian từ " + sdf2.format(newContract.getNgayHieuLuc()) + " đến " + sdf2.format(newContract.getNgayHetHan());
+            if(repo.getContractStartInRange2(start,end,newContract.getMaNV(),newContract.getMaHD())!=null){
+                c = repo.getContractStartInRange2(start,end,newContract.getMaNV(),newContract.getMaHD());
+                return "Employee with ID " + newContract.getMaNV() + " had a contract available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Update fail";
+            }
+            if(repo.getContractEndInRange2(start,end,newContract.getMaNV(),newContract.getMaHD())!=null || repo.getContractEndInRange2(start,end, newContract.getMaNV(),newContract.getMaHD())!=null){
+                c = repo.getContractEndInRange2(start,end,newContract.getMaNV(),newContract.getMaHD());
+                return "Employee with ID " + newContract.getMaNV() + " had a contract available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Update fail";
             }
             newContract.setTrangThai(true);
             repo.save(newContract);
             return null;
         }
-        return "Mã hợp đồng không tồn tại, không thể cập nhật";
+        return "Contract not existed, update fail";
     }
 
     public Contract getNewContract(CreateUpdateContractRequest request){

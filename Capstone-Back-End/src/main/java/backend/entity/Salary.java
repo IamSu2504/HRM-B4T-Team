@@ -67,7 +67,7 @@ public class Salary {
                 try {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                    return sdf.parse(ngayHieuLuc.toString());
+                    return sdf.parse(sdf.format(ngayHieuLuc));
                 } catch (ParseException e) {
                     return null;
                 }
@@ -81,7 +81,7 @@ public class Salary {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(ngayKetThuc.toString());
+                return sdf.parse(sdf.format(ngayKetThuc));
             } catch (ParseException e) {
                 return null;
             }
