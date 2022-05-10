@@ -53,16 +53,10 @@ export default function ViewDayOff() {
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-<<<<<<< HEAD
-                            <th scope="col">STT</th>
-                            <th scope="col">Ngày Nghỉ</th>
-                            <th scope="col">Sửa</th>
-                            {/* <th scope="col">Xoá</th> */}
-=======
                             <th scope="col">No. </th>
                             <th scope="col">Type of day off</th>
                             <th scope="col">Edit</th>
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
                         </tr>
                     </thead>
                     <tbody>
@@ -76,30 +70,7 @@ export default function ViewDayOff() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-<<<<<<< HEAD
-                                    {/* <td>                
-                                        <CustomPopover
-                                            open={popoverId === dayOffItem?.id}
-                                            onClose={() => setPopoverId("")}
-                                            handleSubmit={() => {
-                                                deleteDayOff(dayOffItem?.id)
-                                            }}
-                                        >          
-                                            <div 
-                                                onClick={() => {
-                                                    if (popoverId !== dayOffItem?.id) {
-                                                        setPopoverId(dayOffItem?.id);
-                                                    } else {
-                                                        setPopoverId("");
-                                                    }
-                                                }}
-                                            >
-                                                <img src="/home/delete-icon.svg" />
-                                            </div>
-                                        </CustomPopover>
-                                    </td> */}
-=======
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
                                 </tr>
                             )
                         })}

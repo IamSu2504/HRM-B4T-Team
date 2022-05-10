@@ -9,11 +9,9 @@ import ContractAPI from "../../../../api/contract";
 
 
 export default function AddContract() {
-<<<<<<< HEAD
-    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', maNV : ''})
-=======
+
     const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', trangThai: '', maNV: '' })
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
 

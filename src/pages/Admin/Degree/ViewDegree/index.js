@@ -53,16 +53,11 @@ export default function ViewDegree() {
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-<<<<<<< HEAD
-                            <th scope="col">STT</th>
-                            <th scope="col">Loại Bằng Cấp</th>
-                            <th scope="col">Sửa</th>
-                            {/* <th scope="col">Xoá</th> */}
-=======
+
                             <th scope="col">No.</th>
                             <th scope="col">Type of degree</th>
                             <th scope="col">Edit</th>
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
                         </tr>
                     </thead>
                     <tbody>
@@ -76,30 +71,7 @@ export default function ViewDegree() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-<<<<<<< HEAD
-                                    {/* <td>                
-                                        <CustomPopover
-                                            open={popoverId === degreeItem?.id}
-                                            onClose={() => setPopoverId("")}
-                                            handleSubmit={() => {
-                                                deleteNation(degreeItem?.id)
-                                            }}
-                                        >          
-                                            <div 
-                                                onClick={() => {
-                                                    if (popoverId !== degreeItem?.id) {
-                                                        setPopoverId(degreeItem?.id);
-                                                    } else {
-                                                        setPopoverId("");
-                                                    }
-                                                }}
-                                            >
-                                                <img src="/home/delete-icon.svg" />
-                                            </div>
-                                        </CustomPopover>
-                                    </td> */}
-=======
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
                                 </tr>
                             )
                         })}

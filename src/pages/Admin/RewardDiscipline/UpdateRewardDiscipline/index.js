@@ -13,17 +13,12 @@ export default function UpdateRewardDiscipline() {
     const [rewardDisciplineDetail, setRewardDisciplineDetail] = useState({ danhMuc: '', tieuDe: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
-<<<<<<< HEAD
-    const {rewardDisciplineId} = useParams()
     const navigate = useNavigate()
-    const getRewardDisciplineDetail = async() => {
-        if(rewardDisciplineId){
-=======
     const { rewardDisciplineId } = useParams()
 
     const getRewardDisciplineDetail = async () => {
         if (rewardDisciplineId) {
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
             const rewardDisciplineRes = await RewardDisciplineAPI.getRewardDisciplineById(rewardDisciplineId)
             if (rewardDisciplineRes?.status === 200) {
                 setRewardDisciplineDetail(rewardDisciplineRes?.data)

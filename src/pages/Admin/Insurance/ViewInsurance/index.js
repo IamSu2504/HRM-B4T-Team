@@ -53,18 +53,12 @@ export default function ViewInsurance() {
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-<<<<<<< HEAD
-                            <th scope="col">STT</th>
-                            <th scope="col">Mã Bảo Hiểm</th>
-                            <th scope="col">Tên Bảo Hiểm</th>
-                            <th scope="col">Sửa</th>
-                           
-=======
+
                             <th scope="col">No.</th>
                             <th scope="col">Insurance code</th>
                             <th scope="col">Insurance name</th>
                             <th scope="col">Edit</th>
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
                         </tr>
                     </thead>
                     <tbody>
@@ -79,30 +73,7 @@ export default function ViewInsurance() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-<<<<<<< HEAD
-                                    {/* <td>                
-                                        <CustomPopover
-                                            open={popoverId === insuranceItem?.id}
-                                            onClose={() => setPopoverId("")}
-                                            handleSubmit={() => {
-                                                deleteInsurance(insuranceItem?.id)
-                                            }}
-                                        >          
-                                            <div 
-                                                onClick={() => {
-                                                    if (popoverId !== insuranceItem?.id) {
-                                                        setPopoverId(insuranceItem?.id);
-                                                    } else {
-                                                        setPopoverId("");
-                                                    }
-                                                }}
-                                            >
-                                                <img src="/home/delete-icon.svg" />
-                                            </div>
-                                        </CustomPopover>
-                                    </td> */}
-=======
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
                                 </tr>
                             )
                         })}

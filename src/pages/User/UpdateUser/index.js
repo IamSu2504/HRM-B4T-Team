@@ -158,11 +158,11 @@ export default function UpdateUser() {
         soAtm, ngayBatDauLam, ngayNghiViec, lyDoNghi
       } = userDetail;
 
-<<<<<<< HEAD
+
       console.log('test user>>>',userDetail)
-=======
+
       console.log('test user', userDetail)
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
       // if (!tinhChatHopDongID.toString()?.trim()?.length || !tinhTrangHonNhanID.toString()?.trim()?.length
       //   || !quocTichID.trim().toString()?.trim()?.length || !tenNv.toString()?.trim()?.length || !ngaySinh.toString()?.trim()?.length
       //   || !gioiTinh.toString()?.trim()?.length || !soDienThoai.toString()?.trim()?.length || !soDienThoai2.toString()?.trim()?.length
@@ -173,11 +173,11 @@ export default function UpdateUser() {
       //   || !diaChiTamTru.toString()?.trim()?.length || !atmNganHang.toString()?.trim()?.length || !soAtm.toString()?.trim()?.length
       //   || !trangThaiLaoDong.toString()?.trim()?.length || !ngayBatDauLam.toString()?.trim()?.length || !ngayNghiViec.toString()?.trim()?.length 
       //   || !lyDoNghi.toString()?.trim()?.length)
-<<<<<<< HEAD
 
-=======
+
+
       console.log('>>>>>', tinhChatHopDongID.toString().trim()?.length)
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
       if (!tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
         || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
         || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length

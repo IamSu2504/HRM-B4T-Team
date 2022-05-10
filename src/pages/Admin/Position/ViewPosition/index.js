@@ -53,19 +53,12 @@ export default function ViewPosition() {
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-<<<<<<< HEAD
-                            <th scope="col">STT</th>
-                            <th scope="col">Mã Chức Vụ</th>
-                            <th scope="col">Tên Chức Vụ</th>
-                            
-                            <th scope="col">Sửa</th>
-                            {/* <th scope="col">Xoá</th> */}
-=======
+
                             <th scope="col">No.</th>
                             <th scope="col">Position code</th>
                             <th scope="col">Position name</th>
                             <th scope="col">Edit</th>
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
                         </tr>
                     </thead>
                     <tbody>
@@ -81,30 +74,7 @@ export default function ViewPosition() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-<<<<<<< HEAD
-                                    {/* <td>                
-                                        <CustomPopover
-                                            open={popoverId === positionItem?.id}
-                                            onClose={() => setPopoverId("")}
-                                            handleSubmit={() => {
-                                                deletePosition(positionItem?.id)
-                                            }}
-                                        >          
-                                            <div 
-                                                onClick={() => {
-                                                    if (popoverId !== positionItem?.id) {
-                                                        setPopoverId(positionItem?.id);
-                                                    } else {
-                                                        setPopoverId("");
-                                                    }
-                                                }}
-                                            >
-                                                <img src="/home/delete-icon.svg" />
-                                            </div>
-                                        </CustomPopover>
-                                    </td> */}
-=======
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
                                 </tr>
                             )
                         })}

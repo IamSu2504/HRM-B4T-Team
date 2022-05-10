@@ -53,18 +53,12 @@ export default function ViewRewardDiscipline() {
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-<<<<<<< HEAD
-                            <th scope="col">STT</th>
-                            <th scope="col">Danh Mục</th>
-                     
-                            <th scope="col">Sửa</th>
-                        
-=======
+
                             <th scope="col">no.</th>
                             <th scope="col">Category</th>
                             <th scope="col">Title</th>
                             <th scope="col">Edit</th>
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
                         </tr>
                     </thead>
                     <tbody>
@@ -79,31 +73,7 @@ export default function ViewRewardDiscipline() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-<<<<<<< HEAD
-                                    {/* <td>                
-                                        <CustomPopover
-                                            open={popoverId === rewardDisciplineItem?.id}
-                                            onClose={() => setPopoverId("")}
-                                            handleSubmit={() => {
-                                                deleteRewardDiscipline(rewardDisciplineItem?.id)
-                                            }}
-                                        >          
-                                            <div 
-                                                onClick={() => {
-                                                    if (popoverId !== rewardDisciplineItem?.id) {
-                                                        setPopoverId(rewardDisciplineItem?.id);
-                                                    } else {
-                                                        setPopoverId("");
-                                                    }
-                                                }}
-                                            >
-                                                <img src="/home/delete-icon.svg" />
-                                            </div>
-                                        </CustomPopover>
-                                    </td> */}
-=======
 
->>>>>>> 80678713916747c943fac48661764b7116a0d064
                                 </tr>
                             )
                         })}

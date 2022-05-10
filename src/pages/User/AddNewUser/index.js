@@ -61,7 +61,8 @@ export default function AddNewUser() {
     getAllMarriage()
   }, [])
 
-  const [userDetail, setUserDetail] = useState({id:'',
+  const [userDetail, setUserDetail] = useState({
+    id: '',
     tinhChatHopDongID: '1', tinhTrangHonNhanID: '1',
     quocTichID: '1', tenNv: '', ngaySinh: '', gioiTinh: true,
     soDienThoai: '', soDienThoai2: '', email: '',
@@ -79,7 +80,7 @@ export default function AddNewUser() {
   const handleCreate = async () => {
     try {
       setSubmitError({ status: false, error: '' })
-      const { id,tinhChatHopDongID, tinhTrangHonNhanID,
+      const { id, tinhChatHopDongID, tinhTrangHonNhanID,
         quocTichID, tenNv, ngaySinh,
         gioiTinh, soDienThoai, soDienThoai2,
         email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
@@ -87,22 +88,22 @@ export default function AddNewUser() {
         noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
         soAtm, ngayBatDauLam
       } = userDetail;
-      console.log('test user: ',userDetail)
-      if ( !id.toString().trim()?.length || !tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
-      || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
-      || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length || !soDienThoai2.toString().trim()?.length
-      || !email.toString().trim()?.length || !cccd.toString().trim()?.length || !noiCapCccd.toString().trim()?.length
-      || !ngayCapCccd.toString().trim()?.length || !ngayHetHanCccd.toString().trim()?.length || !hoChieu.toString().trim()?.length
-      || !noiCapHoChieu.toString().trim()?.length || !ngayCapHoChieu.toString().trim()?.length || !ngayHetHanHoChieu.toString().trim()?.length
-      || !noiSinh.toString().trim()?.length || !queQuan.toString().trim()?.length || !diaChiThuongTru.toString().trim()?.length
-      || !diaChiTamTru.toString().trim()?.length || !atmNganHang.toString().trim()?.length || !soAtm.toString().trim()?.length
-     || !ngayBatDauLam.toString().trim()?.length
+      console.log('test user: ', userDetail)
+      if (!id.toString().trim()?.length || !tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
+        || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
+        || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length || !soDienThoai2.toString().trim()?.length
+        || !email.toString().trim()?.length || !cccd.toString().trim()?.length || !noiCapCccd.toString().trim()?.length
+        || !ngayCapCccd.toString().trim()?.length || !ngayHetHanCccd.toString().trim()?.length || !hoChieu.toString().trim()?.length
+        || !noiCapHoChieu.toString().trim()?.length || !ngayCapHoChieu.toString().trim()?.length || !ngayHetHanHoChieu.toString().trim()?.length
+        || !noiSinh.toString().trim()?.length || !queQuan.toString().trim()?.length || !diaChiThuongTru.toString().trim()?.length
+        || !diaChiTamTru.toString().trim()?.length || !atmNganHang.toString().trim()?.length || !soAtm.toString().trim()?.length
+        || !ngayBatDauLam.toString().trim()?.length
       ) {
         setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
       } else {
         setIsSubmit(true)
 
-        const updateRes = await UserAPI.addNewUser({...userDetail })
+        const updateRes = await UserAPI.addNewUser({ ...userDetail })
         if (updateRes?.status === 200) {
           toast.success(updateRes?.data)
         }
@@ -125,11 +126,11 @@ export default function AddNewUser() {
       </div>
 
       <div className="row avatar-row">
-   
+
         <div>
           <CustomInputField
             title="Employee code"
-            placeholder = "VD: NV000000"
+            placeholder="VD: NV000000"
             type="text"
             disabled={false}
             require={true}
@@ -137,15 +138,15 @@ export default function AddNewUser() {
               setUserDetail({ ...userDetail, id: event.target.value })
             }}
           />
-          
+
         </div>
       </div>
 
       <div className="row fied-data-row">
         <div>
-        <CustomInputField
+          <CustomInputField
             title="Full name"
-            
+
             type="text"
             disabled={false}
             require={true}
@@ -155,7 +156,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Citizen identification"
-            
+
             type="text"
             disabled={false}
             require={true}
@@ -166,7 +167,7 @@ export default function AddNewUser() {
           <CustomInputField
             title="Place of issue of identity card"
             type="text"
-            
+
             disabled={false}
             require={true}
             handleChange={(event) => {
@@ -175,7 +176,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Date of issuance of citizen's identity card"
-            
+
             type="date"
             disabled={false}
             require={true}
@@ -188,18 +189,18 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Citizen ID expiration date"
-            
+
             type="date"
             disabled={false}
             require={true}
             handleChange={(event) => {
-           
-              setUserDetail({ ...userDetail, ngayHetHanCccd:  event.target.value })
+
+              setUserDetail({ ...userDetail, ngayHetHanCccd: event.target.value })
             }}
           />
           <CustomInputField
             title="Passport"
-            
+
             type="text"
             disabled={false}
             handleChange={(event) => {
@@ -208,7 +209,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Place of issue of passport"
-            
+
             type="text"
             disabled={false}
             handleChange={(event) => {
@@ -217,29 +218,29 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Passport issuance date"
-            
+
             type="date"
             disabled={false}
             require={true}
             handleChange={(event) => {
-    
+
               setUserDetail({ ...userDetail, ngayCapHoChieu: event.target.value })
             }}
           />
           <CustomInputField
             title="Passport expiration date"
-            
+
             type="date"
             disabled={false}
             require={true}
             handleChange={(event) => {
-            
+
               setUserDetail({ ...userDetail, ngayHetHanHoChieu: event.target.value })
             }}
           />
           <CustomInputField
             title="Bank name"
-            
+
             type="text"
             disabled={false}
             require={true}
@@ -249,7 +250,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="ATM number"
-            
+
             type="text"
             disabled={false}
             require={true}
@@ -259,17 +260,17 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Date start work"
-            
+
             type="date"
             disabled={false}
             handleChange={(event) => {
-              
+
               setUserDetail({ ...userDetail, ngayBatDauLam: event.target.value })
             }}
           />
           <CustomSelectBox
             title="Nature of Contract"
-            value = {userDetail?.tinhChatHopDongID || 1}
+            value={userDetail?.tinhChatHopDongID || 1}
             option={listContractNature.map((contractNatureItem) => {
               return (
                 { label: contractNatureItem.tinhChatHopDong, value: contractNatureItem.id }
@@ -285,7 +286,7 @@ export default function AddNewUser() {
         <div>
           <CustomSelectBox
             title="Gender"
-            value = {userDetail?.gioiTinh || true}
+            value={userDetail?.gioiTinh || true}
             option={[{ label: "Male", value: true }, { label: "Female", value: false }]}
             require={true}
             handleChange={(event) => {
@@ -294,7 +295,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Date of birth"
-            
+
             type="date"
             disabled={false} //yyyy-mm-dd
             require={true}
@@ -304,7 +305,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Place of birth"
-            
+
             type="text"
             require={true}
             disabled={false}
@@ -314,7 +315,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Home town"
-            
+
             type="text"
             disabled={false}
             require={true}
@@ -324,7 +325,7 @@ export default function AddNewUser() {
           />
           <CustomSelectBox
             title="Nationality"
-            value = {userDetail?.quocTichID || 1}
+            value={userDetail?.quocTichID || 1}
             option={listNation.map((nationItem) => {
               return (
                 { label: nationItem.quocTich, value: nationItem.id }
@@ -337,7 +338,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Permanent address"
-            
+
             type="text"
             require={true}
             disabled={false}
@@ -347,7 +348,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Temporary residence address"
-            
+
             type="text"
             disabled={false}
             require={true}
@@ -357,7 +358,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Phone number"
-            
+
             type="text"
             disabled={false}
             require={true}
@@ -367,7 +368,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Phone number 2"
-           
+
             type="text"
             disabled={false}
             require={false}
@@ -377,7 +378,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Email"
-            
+
             type="text"
             disabled={false}
             require={true}
@@ -387,7 +388,7 @@ export default function AddNewUser() {
           />
           <CustomSelectBox
             title="Marital status"
-            value = {userDetail?.tinhTrangHonNhanID || 1}
+            value={userDetail?.tinhTrangHonNhanID || 1}
             option={listMarriage.map((marriageItem) => {
               return (
                 { label: marriageItem.tinhTrang, value: marriageItem.id }
@@ -407,37 +408,30 @@ export default function AddNewUser() {
               setUserDetail({ ...userDetail, trangThaiLaoDong: event.currentTarget.value })
             }}
           /> */}
-<<<<<<< HEAD
-          {/* <CustomInputField
-            title="Ngày Nghỉ Việc"
-=======
+
           <CustomInputField
             title="Severance day"
->>>>>>> 80678713916747c943fac48661764b7116a0d064
-            
+
+
             type="date"
             disabled={false} //yyyy-mm-dd
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, ngayNghiViec: event.target.value })
             }}
-<<<<<<< HEAD
-          /> */}
-          {/* <CustomInputField
-            title="Lý Do Nghỉ"
-=======
+
           />
           <CustomInputField
             title="Reason for leaving job"
->>>>>>> 80678713916747c943fac48661764b7116a0d064
-            
+
+
             type="text"
             disabled={false}
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, lyDoNghi: event.target.value })
             }}
-          /> */}
+          />
         </div>
       </div>
       <div>

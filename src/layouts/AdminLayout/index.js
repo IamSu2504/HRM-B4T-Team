@@ -183,14 +183,13 @@ export default function AdminLayout(props) {
                         <img src="/menu/list-icon.svg" />
                         <span style={{ marginLeft: '15px' }}>Relationship</span>
                       </div>
-<<<<<<< HEAD
                       
-=======
+
                       <div onClick={() => navigate('/admin/viewsalaryGroup')}>
                         <img src="/menu/list-icon.svg" />
                         <span style={{ marginLeft: '15px' }}>Salary group</span>
                       </div>
->>>>>>> 80678713916747c943fac48661764b7116a0d064
+
                       <div onClick={() => navigate('/admin/viewnation')}>
                         <img src="/menu/list-icon.svg" />
                         <span style={{ marginLeft: '15px' }}>Nationality</span>
