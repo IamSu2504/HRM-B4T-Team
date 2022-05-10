@@ -6,13 +6,15 @@ import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SalaryGradeAPI from "../../../../api/SalaryGrade";
+import { useNavigate } from "react-router-dom";
+
 
 export default function UpdateSalaryGrade() {
     const [salaryGradeDetail, setSalaryGradeDetail] = useState({ maBacLuong: '', tenBacLuong: '', khoangLuongTu: '', khoangLuongDen: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const { salaryGradeId } = useParams()
-
+    const navigate = useNavigate()
     const getSalaryGradeDetail = async () => {
         if (salaryGradeId) {
             const salaryGradeRes = await SalaryGradeAPI.getSalaryGradeById(salaryGradeId)
@@ -114,6 +116,14 @@ export default function UpdateSalaryGrade() {
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">Lưu thông tin</span>
+                </button>
+            </div>
+            <div>
+                <button className="save-button" disabled={isSubmit} onClick={() => navigate(`/admin/viewsalarygrade`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">List Account</span>
                 </button>
             </div>
             <ToastContainer />

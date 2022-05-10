@@ -49,7 +49,7 @@ export default function ViewTax() {
                             <th scope="col">Mã Phân Loại</th>
                             <th scope="col">Tên Loại Thuế</th>
                             <th scope="col">Sửa</th>
-                            <th scope="col">Xoá</th>
+                            {/* <th scope="col">Xoá</th> */}
                         </tr>
                     </thead>
                     <tbody> 
@@ -64,7 +64,7 @@ export default function ViewTax() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-                                    <td>                
+                                    {/* <td>                
                                         <CustomPopover
                                             open={popoverId === taxItem?.id}
                                             onClose={() => setPopoverId("")}
@@ -84,7 +84,7 @@ export default function ViewTax() {
                                                 <img src="/home/delete-icon.svg" />
                                             </div>
                                         </CustomPopover>
-                                    </td>
+                                    </td> */}
                                 </tr>
                             )
                         })}

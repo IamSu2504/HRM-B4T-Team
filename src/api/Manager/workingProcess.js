@@ -7,7 +7,11 @@ const ManagerWorkingProcessAPI = {
     },
 
     getManagerWorkingProcessById(id) {
-        const url = `/workingProcess/${id}`;
+        const url = `/workingProcess/id/${id}`;
+        return AxiosClient.get(url);
+    },
+    getManagerWorkingProcessByMaNV(MaNV) {
+        const url = `/workingProcess/${MaNV}`;
         return AxiosClient.get(url);
     },
 

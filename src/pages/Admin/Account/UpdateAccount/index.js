@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AccountAPI from "../../../../api/account";
 import CustomInputField from "../../../../components/customInputField";
 import CustomSelectBox from "../../../../components/customSelectbox";
@@ -13,7 +14,7 @@ export default function UpdateAccount() {
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const { accountId } = useParams()
-
+    const navigate = useNavigate()
     const getAccountDetail = async () => {
         if (accountId) {
             const accountRes = await AccountAPI.getAccountById(accountId)
@@ -131,6 +132,14 @@ export default function UpdateAccount() {
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">Lưu thông tin</span>
+                </button>
+            </div>
+            <div>
+                <button className="save-button" disabled={isSubmit} onClick={() => navigate(`/admin/viewaccount`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">List Account</span>
                 </button>
             </div>
             <ToastContainer />

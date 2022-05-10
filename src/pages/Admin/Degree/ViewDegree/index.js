@@ -48,7 +48,7 @@ export default function ViewDegree() {
                             <th scope="col">STT</th>
                             <th scope="col">Loại Bằng Cấp</th>
                             <th scope="col">Sửa</th>
-                            <th scope="col">Xoá</th>
+                            {/* <th scope="col">Xoá</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -62,7 +62,7 @@ export default function ViewDegree() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-                                    <td>                
+                                    {/* <td>                
                                         <CustomPopover
                                             open={popoverId === degreeItem?.id}
                                             onClose={() => setPopoverId("")}
@@ -82,7 +82,7 @@ export default function ViewDegree() {
                                                 <img src="/home/delete-icon.svg" />
                                             </div>
                                         </CustomPopover>
-                                    </td>
+                                    </td> */}
                                 </tr>
                             )
                         })}

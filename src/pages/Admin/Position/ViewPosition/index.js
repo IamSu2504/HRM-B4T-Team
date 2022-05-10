@@ -50,7 +50,7 @@ export default function ViewPosition() {
                             <th scope="col">Tên Chức Vụ</th>
                             
                             <th scope="col">Sửa</th>
-                            <th scope="col">Xoá</th>
+                            {/* <th scope="col">Xoá</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -66,7 +66,7 @@ export default function ViewPosition() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-                                    <td>                
+                                    {/* <td>                
                                         <CustomPopover
                                             open={popoverId === positionItem?.id}
                                             onClose={() => setPopoverId("")}
@@ -86,7 +86,7 @@ export default function ViewPosition() {
                                                 <img src="/home/delete-icon.svg" />
                                             </div>
                                         </CustomPopover>
-                                    </td>
+                                    </td> */}
                                 </tr>
                             )
                         })}

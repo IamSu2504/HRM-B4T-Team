@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import CustomInputField from "../../../../components/customInputField";
 import CustomSelectBox from "../../../../components/customSelectbox";
 import "./style.css";
@@ -11,12 +12,12 @@ export default function AddAccount() {
     const [accountDetail, setAccountDetail] = useState({ username: '', password: '', maNv: '', roleID: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
-
+    const navigate = useNavigate()
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
             const { username, password, maNv, roleID } = accountDetail
-            console.log('>>>>>',accountDetail)
+            console.log('>>>>>', accountDetail)
             if (!username.trim().length || !password.trim().length || !maNv.trim().length || !roleID.trim().length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
@@ -38,9 +39,9 @@ export default function AddAccount() {
 
     const [listRole, setListRole] = useState([])
 
-    const getAllRole = async() => {
+    const getAllRole = async () => {
         const roleRes = await RoleAPI.getAll()
-        if ( roleRes?.status === 200 ){
+        if (roleRes?.status === 200) {
             setListRole(roleRes?.data)
         }
     }
@@ -86,15 +87,15 @@ export default function AddAccount() {
                     />
                     <CustomSelectBox
                         title="Quyền Hạn :"
-                        option = {listRole.map((roleItem) =>{
-                            return(
-                                {label: roleItem.tenRole, value: roleItem.id}
+                        option={listRole.map((roleItem) => {
+                            return (
+                                { label: roleItem.tenRole, value: roleItem.id }
                             )
                         })}
                         require={true}
                         value={accountDetail?.roleID || 1}
                         handleChange={(event) => {
-                            setAccountDetail({ ...accountDetail, roleID: event.currentTarget.value})
+                            setAccountDetail({ ...accountDetail, roleID: event.currentTarget.value })
                         }}
                     />
                 </div>
@@ -108,6 +109,15 @@ export default function AddAccount() {
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">Thêm</span>
+                </button>
+
+            </div>
+            <div>
+                <button className="save-button" disabled={isSubmit} onClick={() => navigate(`/admin/viewaccount`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">List Account</span>
                 </button>
             </div>
             <ToastContainer />

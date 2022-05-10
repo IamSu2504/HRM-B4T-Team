@@ -5,12 +5,14 @@ import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RewardDisciplineAPI from "../../../../api/rewardDiscipline";
+import { useNavigate } from "react-router-dom";
+
 
 export default function AddRewardDiscipline() {
     const [rewardDisciplineDetail, setRewardDisciplineDetail] = useState({danhMuc: '', tieuDe: ''})
     const [submitError, setSubmitError] = useState({status: false, error: ''})
     const [isSubmit, setIsSubmit] = useState(false)
-
+    const navigate = useNavigate()
     const handleCreate = async () => {
         try{
             setSubmitError({status: false, error: ''})
@@ -73,6 +75,14 @@ export default function AddRewardDiscipline() {
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">Thêm</span>
+                </button>
+            </div>
+            <div>
+                <button className="save-button" disabled={isSubmit} onClick={() => navigate(`/admin/viewrewardDiscipline`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">List Account</span>
                 </button>
             </div>
             <ToastContainer />

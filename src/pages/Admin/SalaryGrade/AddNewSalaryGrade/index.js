@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import CustomInputField from "../../../../components/customInputField";
+import { useNavigate } from "react-router-dom";
+
 import CustomSelectBox from "../../../../components/customSelectbox";
 import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,7 +12,7 @@ export default function AddSalaryGrade() {
     const [salaryGradeDetail, setSalaryGradeDetail] = useState({ maBacLuong: '', tenBacLuong: '', khoangLuongTu: '', khoangLuongDen: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
-
+    const navigate = useNavigate()
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
@@ -93,6 +95,14 @@ export default function AddSalaryGrade() {
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">Thêm</span>
+                </button>
+            </div>
+            <div>
+                <button className="save-button" disabled={isSubmit} onClick={() => navigate(`/admin/viewsalarygrade`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">List Account</span>
                 </button>
             </div>
             <ToastContainer />

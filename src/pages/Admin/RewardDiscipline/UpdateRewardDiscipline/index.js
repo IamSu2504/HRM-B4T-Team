@@ -6,13 +6,15 @@ import CustomSelectBox from "../../../../components/customSelectbox";
 import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
+
 
 export default function UpdateRewardDiscipline() {
     const [rewardDisciplineDetail, setRewardDisciplineDetail] = useState({danhMuc: '', tieuDe: ''})
     const [submitError, setSubmitError] = useState({status: false, error: ''})
     const [isSubmit, setIsSubmit] = useState(false)
     const {rewardDisciplineId} = useParams()
-
+    const navigate = useNavigate()
     const getRewardDisciplineDetail = async() => {
         if(rewardDisciplineId){
             const rewardDisciplineRes = await RewardDisciplineAPI.getRewardDisciplineById(rewardDisciplineId)
@@ -96,6 +98,14 @@ export default function UpdateRewardDiscipline() {
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">Lưu thông tin</span>
+                </button>
+            </div>
+            <div>
+                <button className="save-button" disabled={isSubmit} onClick={() => navigate(`/admin/viewrewardDiscipline`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">List Account</span>
                 </button>
             </div>
             <ToastContainer />

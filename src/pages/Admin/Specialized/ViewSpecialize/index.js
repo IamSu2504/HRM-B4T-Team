@@ -49,7 +49,7 @@ export default function ViewSpecialize() {
                             <th scope="col">Mã Chuyên Môn</th>
                             <th scope="col">Chuyên Môn</th>
                             <th scope="col">Sửa</th>
-                            <th scope="col">Xoá</th>
+                            {/* <th scope="col">Xoá</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -64,7 +64,7 @@ export default function ViewSpecialize() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-                                    <td>                
+                                    {/* <td>                
                                         <CustomPopover
                                             open={popoverId === specializItem?.id}
                                             onClose={() => setPopoverId("")}
@@ -84,7 +84,7 @@ export default function ViewSpecialize() {
                                                 <img src="/home/delete-icon.svg" />
                                             </div>
                                         </CustomPopover>
-                                    </td>
+                                    </td> */}
                                 </tr>
                             )
                         })}

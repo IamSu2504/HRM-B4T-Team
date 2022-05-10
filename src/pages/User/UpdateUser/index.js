@@ -86,7 +86,6 @@ export default function UpdateUser() {
   const getUserDetail = async () => {
     if (maNv) {
       const userRes = await UserAPI.getUserById(maNv)
-      console.log('xem user', userRes?.data)
       if (userRes?.status === 200) {
         setUserDetail({
           tinhChatHopDongID: userRes?.data?.tinhChatHopDong?.id,
@@ -143,7 +142,9 @@ export default function UpdateUser() {
   // useEffect(() => {
   //   getUserImage()
   // }, [])
-
+  
+  //validate
+  const [checSoDienThoai, setCheckSoDienThoai] = useState([''])
 
   const handleUpdate = async () => {
     try {
@@ -157,7 +158,7 @@ export default function UpdateUser() {
         soAtm, ngayBatDauLam, ngayNghiViec, lyDoNghi
       } = userDetail;
 
-      console.log('test user',userDetail)
+      console.log('test user>>>',userDetail)
       // if (!tinhChatHopDongID.toString()?.trim()?.length || !tinhTrangHonNhanID.toString()?.trim()?.length
       //   || !quocTichID.trim().toString()?.trim()?.length || !tenNv.toString()?.trim()?.length || !ngaySinh.toString()?.trim()?.length
       //   || !gioiTinh.toString()?.trim()?.length || !soDienThoai.toString()?.trim()?.length || !soDienThoai2.toString()?.trim()?.length
@@ -168,7 +169,7 @@ export default function UpdateUser() {
       //   || !diaChiTamTru.toString()?.trim()?.length || !atmNganHang.toString()?.trim()?.length || !soAtm.toString()?.trim()?.length
       //   || !trangThaiLaoDong.toString()?.trim()?.length || !ngayBatDauLam.toString()?.trim()?.length || !ngayNghiViec.toString()?.trim()?.length 
       //   || !lyDoNghi.toString()?.trim()?.length)
-      console.log('>>>>>',tinhChatHopDongID.toString().trim()?.length)
+
       if (!tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
         || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
         || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length
@@ -181,7 +182,11 @@ export default function UpdateUser() {
         ) {
         console.log("da vao day 1")
         setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
-      } else {
+      } else
+      if (soDienThoai.toString().trim()?.length != 10){
+        setCheckSoDienThoai('Số điện thoại phải có 10 số')
+      }else{
+        setCheckSoDienThoai('')
         setIsSubmit(true)
         console.log("da vao day 2")
         // const ngaySinhMoi = ngaySinh.split('-');
@@ -192,7 +197,7 @@ export default function UpdateUser() {
         // const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail, ngaySinh: ngaySinhCN })
         if (updateRes?.status === 200) {
           toast.success(updateRes?.data)
-
+          console.log('aaaa',updateRes?.data)
           const formData = new FormData();
           formData.append("file", userImage);
           try {
@@ -484,6 +489,7 @@ export default function UpdateUser() {
               setUserDetail({ ...userDetail, soDienThoai: event.target.value })
             }}
           />
+          <p className="check">{checSoDienThoai}</p>
           <CustomInputField
             title="Số điện thoại 2"
             value={userDetail?.soDienThoai2 || ''}

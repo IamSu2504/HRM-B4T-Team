@@ -19,6 +19,13 @@ const UserAPI = {
         noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
         soAtm, trangThaiLaoDong, ngayBatDauLam, ngayNghiViec, lyDoNghi }) {
         const url = `/user/${id}`;
+        console.log('api>>>',{ id, tinhChatHopDongID, tinhTrangHonNhanID,
+            quocTichID, tenNv, ngaySinh,
+            gioiTinh, soDienThoai, soDienThoai2,
+            email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
+            hoChieu, noiCapHoChieu, ngayCapHoChieu, ngayHetHanHoChieu,
+            noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
+            soAtm, trangThaiLaoDong, ngayBatDauLam, ngayNghiViec, lyDoNghi })
         return AxiosClient.put(url, {
             tinhChatHopDongID, tinhTrangHonNhanID,
         quocTichID, tenNv, ngaySinh,
