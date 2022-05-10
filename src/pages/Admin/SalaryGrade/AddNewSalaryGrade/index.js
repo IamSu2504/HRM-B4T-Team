@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import CustomInputField from "../../../../components/customInputField";
 import { useNavigate } from "react-router-dom";
 
@@ -28,7 +28,7 @@ export default function AddSalaryGrade() {
                     console.log('da vao day 2')
                     toast.success(updateRes?.data)
                 }
-                else{
+                else {
                     toast.error('aaaa')
                 }
             }
@@ -44,15 +44,16 @@ export default function AddSalaryGrade() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Thêm Thông Tin Bậc Lương</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Add Information of Salary Grade</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Mã Bậc Lương *:"
+                        title="Salary grade code"
+                        require={true}
                         type="text"
                         handleChange={(event) => {
                             setSalaryGradeDetail({ ...salaryGradeDetail, maBacLuong: event.target.value })
@@ -60,7 +61,8 @@ export default function AddSalaryGrade() {
                     />
 
                     <CustomInputField
-                        title="Tên Bậc Lương *:"
+                        title="Salary grade name"
+                        require={true}
                         type="text"
                         handleChange={(event) => {
                             setSalaryGradeDetail({ ...salaryGradeDetail, tenBacLuong: event.target.value })
@@ -68,7 +70,8 @@ export default function AddSalaryGrade() {
                     />
 
                     <CustomInputField
-                        title="Khoảng Lương Từ *:"
+                        title="From"
+                        require={true}
                         type="text"
                         handleChange={(event) => {
                             setSalaryGradeDetail({ ...salaryGradeDetail, khoangLuongTu: event.target.value })
@@ -76,7 +79,8 @@ export default function AddSalaryGrade() {
                     />
 
                     <CustomInputField
-                        title="Khoảng Lương Đến *:"
+                        title="To"
+                        require={true}
                         type="text"
                         handleChange={(event) => {
                             setSalaryGradeDetail({ ...salaryGradeDetail, khoangLuongDen: event.target.value })
@@ -90,11 +94,11 @@ export default function AddSalaryGrade() {
                 {submitError.status && <div className="tax-update-error">{submitError.error}</div>}
             </div>
             <div>
-                <button className="save-button" disabled={isSubmit} onClick={()=>handleCreate()}>
+                <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Thêm</span>
+                    <span class="text">Add</span>
                 </button>
             </div>
             <div>

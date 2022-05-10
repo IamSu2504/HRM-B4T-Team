@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NationAPI from "../../../../api/nation";
 import CustomInputField from "../../../../components/customInputField";
@@ -8,18 +8,18 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function UpdateNation() {
-    const [ nationDetail, setNationDetail] = useState({quocTich: ''})
-    const [submitError, setSubmitError] = useState({status: false, error: ''})
+    const [nationDetail, setNationDetail] = useState({ quocTich: '' })
+    const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
-    const {nationId} = useParams()
+    const { nationId } = useParams()
 
-    const getNationDetail = async() => {
-        if(nationId){
+    const getNationDetail = async () => {
+        if (nationId) {
             const nationIdRes = await NationAPI.getNationById(nationId)
-            if ( nationIdRes?.status === 200){
+            if (nationIdRes?.status === 200) {
                 setNationDetail(nationIdRes?.data)
             }
-        }      
+        }
     }
 
     useEffect(() => {
@@ -27,35 +27,35 @@ export default function UpdateNation() {
     }, [])
 
     const handleUpdate = async () => {
-        try{
-            setSubmitError({status: false, error: ''})
-            const {quocTich} = nationDetail
-    
-            if ( !quocTich.trim().length){
-                setSubmitError({status: true, error: 'Thông tin không được bỏ trống'})
-            }else{
+        try {
+            setSubmitError({ status: false, error: '' })
+            const { quocTich } = nationDetail
+
+            if (!quocTich.trim().length) {
+                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+            } else {
                 setIsSubmit(true)
-    
-                const updateRes = await NationAPI.updateNation({id: nationId, ...nationDetail})
-                if ( updateRes?.status === 200 ){
+
+                const updateRes = await NationAPI.updateNation({ id: nationId, ...nationDetail })
+                if (updateRes?.status === 200) {
                     toast.success('Cập nhật thông tin thành công')
                 }
             }
-        }catch(error){
+        } catch (error) {
             if (error.response) {
-                setSubmitError({status: true, error: error.response.data})
+                setSubmitError({ status: true, error: error.response.data })
             }
-        }finally{
+        } finally {
             setIsSubmit(false)
-        }      
+        }
     }
 
     return (
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Quốc Tịch</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Edit Information of Nationality</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
@@ -69,25 +69,26 @@ export default function UpdateNation() {
                     />
 
                     <CustomInputField
-                        title="Quốc Tịch *:"
+                        title="Nationality"
+                        require={true}
                         value={nationDetail?.quocTich || ''}
                         type="text"
                         handleChange={(event) => {
-                            setNationDetail({...nationDetail, quocTich: event.target.value})
+                            setNationDetail({ ...nationDetail, quocTich: event.target.value })
                         }}
                     />
-                    
+
                 </div>
             </div>
             <div>
                 {submitError.status && <div className="tax-update-error">{submitError.error}</div>}
             </div>
             <div>
-                <button className="save-button" disabled={isSubmit} onClick={()=>handleUpdate()}>
+                <button className="save-button" disabled={isSubmit} onClick={() => handleUpdate()}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
                 </button>
             </div>
             <ToastContainer />

@@ -39,12 +39,12 @@ export default function EmployeeLayout(props) {
                                         <div className="header-popover-content">
                                             <div onClick={() => {
                                                 navigate(`/employee/viewuser/${localStorage.getItem('maNv')}`);
-                                            }}>Thông tin tài khoản</div>
+                                            }}>Personal information</div>
                                             <hr />
                                             <div onClick={() => {
                                                 localStorage.clear()
                                                 navigate("/login");
-                                            }}>Đăng xuất</div>
+                                            }}>Logout</div>
                                         </div>
                                     }
                                 >
@@ -77,7 +77,7 @@ export default function EmployeeLayout(props) {
                                 <div className="right">
                                     <div className="name">{localStorage.getItem('name')}</div>
                                     <div className="active">
-                                        <img src="/menu/active.svg" /> Nhân Viên
+                                        <img src="/menu/active.svg" /> Employee
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@ export default function EmployeeLayout(props) {
                             </div> */}
 
                             <hr className="user-info-hr" />
-                            <div className="text-sub">Quản lí thông tin</div>
+                            <div className="text-sub">Information management</div>
                             <br />
                             <div id="accordion" className="menu-accordion menu-accordion1">
                                 <div className="card">
@@ -105,7 +105,7 @@ export default function EmployeeLayout(props) {
                                                     <div className="content1">
                                                         <img src="/menu/hopdong.svg" />
                                                     </div>
-                                                    <div className="content2">Thông tin hợp đồng</div>
+                                                    <div className="content2">Contract information</div>
                                                 </div>
                                                 <div className="content3">
                                                     <img src="/menu/down-arrow.svg" />
@@ -121,7 +121,7 @@ export default function EmployeeLayout(props) {
                                         <div className="card-body">
                                             <div onClick={() => navigate(`/employee/viewcontract/${localStorage.getItem('maNv')}`)}>
                                                 <img src="/menu/list-icon.svg" />
-                                                <span style={{ marginLeft: '15px' }}>Hợp đồng lao động</span>
+                                                <span style={{ marginLeft: '15px' }}>Labor contract</span>
                                             </div>
 
                                         </div>
@@ -139,7 +139,7 @@ export default function EmployeeLayout(props) {
                                                     <div className="content1">
                                                         <img src="/menu/employer.svg" />
                                                     </div>
-                                                    <div className="content2">Chấm công</div>
+                                                    <div className="content2">Timekeeping</div>
                                                 </div>
                                                 <div className="content3">
                                                     <img src="/menu/down-arrow.svg" />
@@ -155,15 +155,15 @@ export default function EmployeeLayout(props) {
                                         <div className="card-body">
                                             <div onClick={() => navigate('/employee/timeKeeping')}>
                                                 <img src="/menu/list-icon.svg" />
-                                                <span style={{ marginLeft: '15px' }}>Chấm công</span>
+                                                <span style={{ marginLeft: '15px' }}>Timekeeping</span>
                                             </div>
                                             <div>
                                                 <img src="/menu/list-icon.svg" />
-                                                <span style={{ marginLeft: '15px' }}>Nghỉ phép</span>
+                                                <span style={{ marginLeft: '15px' }}>Leave</span>
                                             </div>
                                             <div onClick={() => navigate('/admin/registerShift')}>
                                                 <img src="/menu/list-icon.svg" />
-                                                <span style={{ marginLeft: '15px' }}>Đăng Kí Ca Làm</span>
+                                                <span style={{ marginLeft: '15px' }}>Register for Shifts</span>
                                             </div>
                                         </div>
                                     </div>

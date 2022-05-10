@@ -60,8 +60,8 @@ export default function UpdateSalaryGrade() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Bậc Lương</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Edit Information of Salary Grade</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
@@ -69,7 +69,8 @@ export default function UpdateSalaryGrade() {
                 <div>
 
                     <CustomInputField
-                        title="Mã Bậc Lương *:"
+                        title="Salary grade code"
+                        require={true}
                         value={salaryGradeDetail?.maBacLuong || ''}
                         type="text"
                         handleChange={(event) => {
@@ -78,7 +79,8 @@ export default function UpdateSalaryGrade() {
                     />
 
                     <CustomInputField
-                        title="Tên Bậc Lương *:"
+                        title="Salary grade name"
+                        require={true}
                         value={salaryGradeDetail?.tenBacLuong || ''}
                         type="text"
                         handleChange={(event) => {
@@ -87,7 +89,8 @@ export default function UpdateSalaryGrade() {
                     />
 
                     <CustomInputField
-                        title="Khoảng Lương Từ *:"
+                        title="From"
+                        require={true}
                         value={salaryGradeDetail?.khoangLuongTu || ''}
                         type="text"
                         handleChange={(event) => {
@@ -96,7 +99,8 @@ export default function UpdateSalaryGrade() {
                     />
 
                     <CustomInputField
-                        title="Khoảng Lương Đến *:"
+                        title="To"
+                        require={true}
                         value={salaryGradeDetail?.khoangLuongDen || ''}
                         type="text"
                         handleChange={(event) => {
@@ -115,7 +119,7 @@ export default function UpdateSalaryGrade() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Edit</span>
                 </button>
             </div>
             <div>

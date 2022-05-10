@@ -31,7 +31,7 @@ export default function AddReward() {
         try {
             setSubmitError({ status: false, error: '' })
             const { phanLoaiID, lyDo, maNv } = rewardDisciplineDetail
-            
+
             if (!phanLoaiID.trim().length || !lyDo.trim().length || !maNv.trim().length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
@@ -55,15 +55,15 @@ export default function AddReward() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Thêm Thông Tin Khen Thưởng </div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Add Information of Reward</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomSelectBox
-                        title="Phân Loại"
+                        title="Type of Reward"
                         option={listReward.map((rewardItem) => {
                             return (
                                 { label: rewardItem.danhMuc, value: rewardItem.id }
@@ -75,14 +75,16 @@ export default function AddReward() {
                         }}
                     />
                     <CustomInputField
-                        title="Lý Do *:"
+                        title="Reason"
+                        require={true}
                         type="text"
                         handleChange={(event) => {
                             setRewardDisciplineDetail({ ...rewardDisciplineDetail, lyDo: event.target.value })
                         }}
                     />
                     <CustomInputField
-                        title="Mã Số Nhân Viên *:"
+                        title="Employee code"
+                        require={true}
                         type="text"
                         handleChange={(event) => {
                             setRewardDisciplineDetail({ ...rewardDisciplineDetail, maNv: event.target.value })
@@ -98,7 +100,7 @@ export default function AddReward() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Thêm</span>
+                    <span class="text">Add</span>
                 </button>
             </div>
             <ToastContainer />

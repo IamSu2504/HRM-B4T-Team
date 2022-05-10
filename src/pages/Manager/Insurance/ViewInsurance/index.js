@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ManagerInsuranceAPI from "../../../../api/Manager/Insurance";
 import CustomPopover from "../../../../components/CustomPopover";
@@ -13,9 +13,9 @@ export default function ViewInsurance() {
 
     const navigate = useNavigate()
 
-    const getAllInsurance = async() => {
+    const getAllInsurance = async () => {
         const insuranceRes = await ManagerInsuranceAPI.getAll()
-        if ( insuranceRes?.status === 200 ){
+        if (insuranceRes?.status === 200) {
             setListInsurance(insuranceRes?.data)
         }
     }
@@ -27,21 +27,29 @@ export default function ViewInsurance() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Bảo Hiểm</div>
+            <div className="title">List of Insurance</div>
             <div className="table-frame">
+                <div>
+                    <button className="save-button" onClick={() => navigate(`/manager/addinsurance`)}>
+                        <span class="image">
+                            <img src="/home/save-icon.svg" />
+                        </span>
+                        <span class="text">Add</span>
+                    </button>
+                </div>
                 <table class="table table-bordered" id="insurancetable">
                     <thead>
                         <tr className="head">
-                            <th scope="col">STT</th>
-                            <th scope="col">Mã Số Nhân Viên</th>
-                            <th scope="col">Loại Bảo Hiểm</th>
-                            <th scope="col">Mã Số Bảo Hiểm</th>
-                            <th scope="col">Tiền Bảo Hiểm</th>
-                            
-                            <th scope="col">Sửa</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Employee code</th>
+                            <th scope="col">Type of Insurance</th>
+                            <th scope="col">Insurance code</th>
+                            <th scope="col">Insurance money</th>
+
+                            <th scope="col">Edit</th>
                         </tr>
                     </thead>
-                    <tbody> 
+                    <tbody>
                         {listInsurance.map((insuranceItem, insuranceIndex) => {
                             return (
                                 <tr key={`tax-item-${insuranceIndex}`}>
@@ -51,7 +59,7 @@ export default function ViewInsurance() {
                                     <td>{insuranceItem?.maSoBH}</td>
                                     <td>{insuranceItem?.tienBH}</td>
                                     <td>
-                                        <div onClick={()=>navigate(`/manager/updateinsurance/${insuranceItem?.id}`)}>
+                                        <div onClick={() => navigate(`/manager/updateinsurance/${insuranceItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
@@ -124,14 +132,7 @@ export default function ViewInsurance() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/manager/addinsurance`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+
             <ToastContainer />
         </div>
     );

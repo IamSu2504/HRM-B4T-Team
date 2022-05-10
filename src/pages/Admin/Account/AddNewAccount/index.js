@@ -17,15 +17,21 @@ export default function AddAccount() {
         try {
             setSubmitError({ status: false, error: '' })
             const { username, password, maNv, roleID } = accountDetail
+<<<<<<< HEAD
             console.log('>>>>>', accountDetail)
             if (!username.trim().length || !password.trim().length || !maNv.trim().length || !roleID.trim().length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+=======
+
+            if (!username.trim().length || !password.trim().length || !maNv.trim().length) {
+                setSubmitError({ status: true, error: 'Information cannot be left blank' })
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
             } else {
                 setIsSubmit(true)
 
                 const updateRes = await AccountAPI.addNewAccount({ ...accountDetail })
                 if (updateRes?.status === 200) {
-                    toast.success('Thêm mới tài khoản thành công')
+                    toast.success('New account successfully added')
                 }
             }
         } catch (error) {
@@ -54,42 +60,52 @@ export default function AddAccount() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Thêm Thông Tin Tài Khoản</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Add Account Information</div>
+                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Tên Đăng Nhập *:"
+                        title="Username"
                         value={accountDetail?.username || ''}
                         type="text"
                         handleChange={(event) => {
                             setAccountDetail({ ...accountDetail, username: event.target.value })
                         }}
+                        require={true}
                     />
                     <CustomInputField
-                        title="Mật Khẩu *:"
+                        title="Password"
                         value={accountDetail?.password || ''}
                         type="password"
                         handleChange={(event) => {
                             setAccountDetail({ ...accountDetail, password: event.target.value })
                         }}
+                        require={true}
                     />
                     <CustomInputField
-                        title="Mã Nhân Viên *:"
+                        title="Employee code"
                         value={accountDetail?.maNv || ''}
                         type="text"
                         handleChange={(event) => {
                             setAccountDetail({ ...accountDetail, maNv: event.target.value })
                         }}
+                        require={true}
                     />
                     <CustomSelectBox
+<<<<<<< HEAD
                         title="Quyền Hạn :"
                         option={listRole.map((roleItem) => {
                             return (
                                 { label: roleItem.tenRole, value: roleItem.id }
+=======
+                        title="Role"
+                        option = {listRole.map((roleItem) =>{
+                            return(
+                                {label: roleItem.tenRole, value: roleItem.id}
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                             )
                         })}
                         require={true}
@@ -108,7 +124,7 @@ export default function AddAccount() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Thêm</span>
+                    <span class="text">Add</span>
                 </button>
 
             </div>

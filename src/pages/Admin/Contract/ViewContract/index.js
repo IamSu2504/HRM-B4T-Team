@@ -40,16 +40,32 @@ export default function ViewContract() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Loại Hợp Đồng</div>
+            <div className="title">List of Contract Types</div>
             <div className="table-frame">
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/addcontract`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Add</span>
+                </button>
+            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
+<<<<<<< HEAD
                             <th scope="col">STT</th>
                             <th scope="col">Mã Hợp Đồng</th>
                             <th scope="col">Tên Loại Hợp Đồng</th>
                             <th scope="col">Sửa</th>
                             {/* <th scope="col">Xoá</th> */}
+=======
+                            <th scope="col">No.</th>
+                            <th scope="col">Classification code</th>
+                            <th scope="col">Contract type name</th>
+                            <th scope="col">Edit</th>
+                           
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                         </tr>
                     </thead>
                     <tbody>
@@ -64,6 +80,7 @@ export default function ViewContract() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
+<<<<<<< HEAD
                                     {/* <td>                
                                         <CustomPopover
                                             open={popoverId === contractItem?.id}
@@ -85,6 +102,8 @@ export default function ViewContract() {
                                             </div>
                                         </CustomPopover>
                                     </td> */}
+=======
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                                 </tr>
                             )
                         })}
@@ -126,14 +145,7 @@ export default function ViewContract() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addcontract`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+           
             <ToastContainer />
         </div>
     );

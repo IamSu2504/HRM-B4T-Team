@@ -95,15 +95,15 @@ export default function UpdateWorkingProcess() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Qúa Trình Công Tác</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Edit Information of Working Process</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomSelectBox
-                        title="Phòng Ban Làm Việc"
+                        title="Department"
                         value={workingProcessDetail?.idPhongBan}
                         option={listDepartment.map((departmentItem) => {
                             return (
@@ -116,7 +116,7 @@ export default function UpdateWorkingProcess() {
                         }}
                     />
                     <CustomSelectBox
-                        title="Chức Vụ Làm Việc"
+                        title="Position"
                         value={workingProcessDetail?.idChucVu}
                         option={listPosition.map((positionItem) => {
                             return (
@@ -129,8 +129,8 @@ export default function UpdateWorkingProcess() {
                         }}
                     />
                     <CustomInputField
-                        title="Ngày Vào Làm Việc"
-                        type="date"
+                         title="Date start work"
+                         require={true}
                         handleChange={(event) => {
                             const parts =event.target.value.split('-');
                             const mydate = parts[2]+'/'+ parts[1]+'/'+ parts[0] 
@@ -138,7 +138,8 @@ export default function UpdateWorkingProcess() {
                         }}
                     />
                     <CustomInputField
-                        title="Ngày Kết Thúc"
+                        title="Date end work"
+                        require={true}
                         type="date"
 
                         handleChange={(event) => {
@@ -148,10 +149,10 @@ export default function UpdateWorkingProcess() {
                         }}
                     />
                     <CustomSelectBox
-                        title="Trạng Thái"
+                         title="Status"
                         value={workingProcessDetail?.trangThai}
                         option={
-                            [{ label: "Đang Làm Việc", value: true }, { label: "Đã Kết Thúc", value: false }]
+                            [{ label: "Working", value: true }, { label: "Finished", value: false }]
                         }
                         require={true}
                         handleChange={(event) => {
@@ -159,7 +160,8 @@ export default function UpdateWorkingProcess() {
                         }}
                     />
                     <CustomInputField
-                        title="Mã Nhân Viên"
+                        title="Employee code"
+                        require={true}
                         type="text"
                         disabled={true}
                         value={workingProcessDetail?.maNV}
@@ -178,7 +180,7 @@ export default function UpdateWorkingProcess() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
                 </button>
             </div>
             <ToastContainer />

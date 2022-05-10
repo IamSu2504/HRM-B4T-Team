@@ -119,8 +119,8 @@ export default function AddNewUser() {
     <div className="update-account-page">
       <div className="row">
         <div className="col-12">
-          <div className="title">Thêm Thông Tin Nhân Viên</div>
-          <div className="title-sub">Những ô có dấu * không được để trống</div>
+          <div className="title">Add Information of Employee</div>
+          <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
         </div>
       </div>
 
@@ -128,8 +128,8 @@ export default function AddNewUser() {
    
         <div>
           <CustomInputField
-            title="Mã Số Nhân Viên"
-            placeholder = "VD: NV0000xyz"
+            title="Employee code"
+            placeholder = "VD: NV000000"
             type="text"
             disabled={false}
             require={true}
@@ -144,7 +144,7 @@ export default function AddNewUser() {
       <div className="row fied-data-row">
         <div>
         <CustomInputField
-            title="Họ và tên"
+            title="Full name"
             
             type="text"
             disabled={false}
@@ -154,7 +154,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Căn cước công dân"
+            title="Citizen identification"
             
             type="text"
             disabled={false}
@@ -164,7 +164,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Nơi cấp căn cước công dân"
+            title="Place of issue of identity card"
             type="text"
             
             disabled={false}
@@ -174,7 +174,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Ngày cấp căn cước"
+            title="Date of issuance of citizen's identity card"
             
             type="date"
             disabled={false}
@@ -187,7 +187,7 @@ export default function AddNewUser() {
 
           />
           <CustomInputField
-            title="Ngày hết hạn căn cước"
+            title="Citizen ID expiration date"
             
             type="date"
             disabled={false}
@@ -198,7 +198,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Hộ chiếu"
+            title="Passport"
             
             type="text"
             disabled={false}
@@ -207,7 +207,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Nơi cấp hộ chiếu"
+            title="Place of issue of passport"
             
             type="text"
             disabled={false}
@@ -216,7 +216,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Ngày cấp hộ chiếu"
+            title="Passport issuance date"
             
             type="date"
             disabled={false}
@@ -227,7 +227,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Ngày hết hạn hộ chiếu"
+            title="Passport expiration date"
             
             type="date"
             disabled={false}
@@ -238,7 +238,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="ATM ngân hàng"
+            title="Bank name"
             
             type="text"
             disabled={false}
@@ -248,7 +248,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Số ATM"
+            title="ATM number"
             
             type="text"
             disabled={false}
@@ -258,7 +258,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Ngày Bắt Đầu Làm: "
+            title="Date start work"
             
             type="date"
             disabled={false}
@@ -268,7 +268,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomSelectBox
-            title="Tính Chất Hợp Đồng"
+            title="Nature of Contract"
             value = {userDetail?.tinhChatHopDongID || 1}
             option={listContractNature.map((contractNatureItem) => {
               return (
@@ -284,16 +284,16 @@ export default function AddNewUser() {
 
         <div>
           <CustomSelectBox
-            title="Giới Tính :"
+            title="Gender"
             value = {userDetail?.gioiTinh || true}
-            option={[{ label: "Nam", value: true }, { label: "Nữ", value: false }]}
+            option={[{ label: "Male", value: true }, { label: "Female", value: false }]}
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, gioiTinh: event.currentTarget.value })
             }}
           />
           <CustomInputField
-            title="Ngày sinh"
+            title="Date of birth"
             
             type="date"
             disabled={false} //yyyy-mm-dd
@@ -303,7 +303,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Nơi Sinh"
+            title="Place of birth"
             
             type="text"
             require={true}
@@ -313,7 +313,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Quê Quán"
+            title="Home town"
             
             type="text"
             disabled={false}
@@ -323,7 +323,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomSelectBox
-            title="Quốc Tịch"
+            title="Nationality"
             value = {userDetail?.quocTichID || 1}
             option={listNation.map((nationItem) => {
               return (
@@ -336,7 +336,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Địa chỉ thường trú"
+            title="Permanent address"
             
             type="text"
             require={true}
@@ -346,7 +346,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Địa chỉ tạm trú"
+            title="Temporary residence address"
             
             type="text"
             disabled={false}
@@ -356,7 +356,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Số điện thoại"
+            title="Phone number"
             
             type="text"
             disabled={false}
@@ -366,7 +366,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Số điện thoại 2"
+            title="Phone number 2"
            
             type="text"
             disabled={false}
@@ -386,7 +386,7 @@ export default function AddNewUser() {
             }}
           />
           <CustomSelectBox
-            title="Tình Trạng Hôn Nhân"
+            title="Marital status"
             value = {userDetail?.tinhTrangHonNhanID || 1}
             option={listMarriage.map((marriageItem) => {
               return (
@@ -407,8 +407,13 @@ export default function AddNewUser() {
               setUserDetail({ ...userDetail, trangThaiLaoDong: event.currentTarget.value })
             }}
           /> */}
+<<<<<<< HEAD
           {/* <CustomInputField
             title="Ngày Nghỉ Việc"
+=======
+          <CustomInputField
+            title="Severance day"
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
             
             type="date"
             disabled={false} //yyyy-mm-dd
@@ -416,9 +421,15 @@ export default function AddNewUser() {
             handleChange={(event) => {
               setUserDetail({ ...userDetail, ngayNghiViec: event.target.value })
             }}
+<<<<<<< HEAD
           /> */}
           {/* <CustomInputField
             title="Lý Do Nghỉ"
+=======
+          />
+          <CustomInputField
+            title="Reason for leaving job"
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
             
             type="text"
             disabled={false}
@@ -437,7 +448,7 @@ export default function AddNewUser() {
           <span class="image">
             <img src="/home/save-icon.svg" />
           </span>
-          <span class="text">Thêm thông tin</span>
+          <span class="text">Add</span>
         </button>
       </div>
       <ToastContainer />

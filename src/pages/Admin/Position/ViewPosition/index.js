@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PositionAPI from "../../../../api/position";
 import CustomPopover from "../../../../components/CustomPopover";
@@ -12,9 +12,9 @@ export default function ViewPosition() {
 
     const navigate = useNavigate()
 
-    const getAllPosition = async() => {
+    const getAllPosition = async () => {
         const positionRes = await PositionAPI.getAll()
-        if ( positionRes?.status === 200 ){
+        if (positionRes?.status === 200) {
             setListPosition(positionRes?.data)
         }
     }
@@ -23,15 +23,15 @@ export default function ViewPosition() {
         getAllPosition()
     }, [])
 
-    const deletePosition = async(positionId) => {
-        try{
+    const deletePosition = async (positionId) => {
+        try {
             const deleteRes = await PositionAPI.deletePosition(positionId)
 
-            if (deleteRes?.status === 200){
+            if (deleteRes?.status === 200) {
                 toast('Xóa thành công')
                 getAllPosition()
             }
-        }catch(error){
+        } catch (error) {
             if (error.response) {
                 toast(error.response.data)
             }
@@ -40,17 +40,32 @@ export default function ViewPosition() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh Sách Chức Vụ</div>
+            <div className="title">List of Position</div>
             <div className="table-frame">
+                <div>
+                    <button className="save-button" onClick={() => navigate(`/admin/addposition`)}>
+                        <span class="image">
+                            <img src="/home/save-icon.svg" />
+                        </span>
+                        <span class="text">Add</span>
+                    </button>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
+<<<<<<< HEAD
                             <th scope="col">STT</th>
                             <th scope="col">Mã Chức Vụ</th>
                             <th scope="col">Tên Chức Vụ</th>
                             
                             <th scope="col">Sửa</th>
                             {/* <th scope="col">Xoá</th> */}
+=======
+                            <th scope="col">No.</th>
+                            <th scope="col">Position code</th>
+                            <th scope="col">Position name</th>
+                            <th scope="col">Edit</th>
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                         </tr>
                     </thead>
                     <tbody>
@@ -60,12 +75,13 @@ export default function ViewPosition() {
                                     <th scope="row">{positionIndex + 1}</th>
                                     <td>{positionItem?.maChucVu}</td>
                                     <td>{positionItem?.tenChucVu}</td>
-                                    
+
                                     <td>
-                                        <div onClick={()=>navigate(`/admin/updateposition/${positionItem?.id}`)}>
+                                        <div onClick={() => navigate(`/admin/updateposition/${positionItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
+<<<<<<< HEAD
                                     {/* <td>                
                                         <CustomPopover
                                             open={popoverId === positionItem?.id}
@@ -87,6 +103,8 @@ export default function ViewPosition() {
                                             </div>
                                         </CustomPopover>
                                     </td> */}
+=======
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                                 </tr>
                             )
                         })}
@@ -128,14 +146,7 @@ export default function ViewPosition() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addposition`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+
             <ToastContainer />
         </div>
     );

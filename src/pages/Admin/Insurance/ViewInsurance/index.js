@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import InsuranceAPI from "../../../../api/insurance";
 import CustomPopover from "../../../../components/CustomPopover";
@@ -12,9 +12,9 @@ export default function ViewInsurance() {
 
     const navigate = useNavigate()
 
-    const getAllInsurance = async() => {
+    const getAllInsurance = async () => {
         const insuranceRes = await InsuranceAPI.getAll()
-        if ( insuranceRes?.status === 200 ){
+        if (insuranceRes?.status === 200) {
             setListInsurance(insuranceRes?.data)
         }
     }
@@ -23,15 +23,15 @@ export default function ViewInsurance() {
         getAllInsurance()
     }, [])
 
-    const deleteInsurance = async(insuranceId) => {
-        try{
+    const deleteInsurance = async (insuranceId) => {
+        try {
             const deleteRes = await InsuranceAPI.deleteInsurance(insuranceId)
 
-            if (deleteRes?.status === 200){
+            if (deleteRes?.status === 200) {
                 toast('Xóa thành công')
                 getAllInsurance()
             }
-        }catch(error){
+        } catch (error) {
             if (error.response) {
                 toast(error.response.data)
             }
@@ -40,16 +40,31 @@ export default function ViewInsurance() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh Sách Bảo Hiểm</div>
+            <div className="title">List of Insurance</div>
             <div className="table-frame">
+                <div>
+                    <button className="save-button" onClick={() => navigate(`/admin/addinsurance`)}>
+                        <span class="image">
+                            <img src="/home/save-icon.svg" />
+                        </span>
+                        <span class="text">Add</span>
+                    </button>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
+<<<<<<< HEAD
                             <th scope="col">STT</th>
                             <th scope="col">Mã Bảo Hiểm</th>
                             <th scope="col">Tên Bảo Hiểm</th>
                             <th scope="col">Sửa</th>
                            
+=======
+                            <th scope="col">No.</th>
+                            <th scope="col">Insurance code</th>
+                            <th scope="col">Insurance name</th>
+                            <th scope="col">Edit</th>
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                         </tr>
                     </thead>
                     <tbody>
@@ -60,10 +75,11 @@ export default function ViewInsurance() {
                                     <td>{insuranceItem?.maBH}</td>
                                     <td>{insuranceItem?.tenBH}</td>
                                     <td>
-                                        <div onClick={()=>navigate(`/admin/updateinsurance/${insuranceItem?.id}`)}>
+                                        <div onClick={() => navigate(`/admin/updateinsurance/${insuranceItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
+<<<<<<< HEAD
                                     {/* <td>                
                                         <CustomPopover
                                             open={popoverId === insuranceItem?.id}
@@ -85,6 +101,8 @@ export default function ViewInsurance() {
                                             </div>
                                         </CustomPopover>
                                     </td> */}
+=======
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                                 </tr>
                             )
                         })}
@@ -126,14 +144,7 @@ export default function ViewInsurance() {
                 </nav>
             </div> */}
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addinsurance`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+
             <ToastContainer />
         </div>
     );

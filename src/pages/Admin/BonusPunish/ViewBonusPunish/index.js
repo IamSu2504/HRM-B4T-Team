@@ -9,10 +9,10 @@ export default function ViewBonusPunish() {
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">STT</th>
-                            <th scope="col">Danh Mục</th>
-                            <th scope="col">Tiêu Đề</th>
-                            <th scope="col">Sửa</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Edit</th>
                             <th scope="col">Xoá</th>
                         </tr>
                     </thead>
@@ -71,7 +71,7 @@ export default function ViewBonusPunish() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Thêm Mới</span>
+                    <span class="text">Add</span>
                 </button>
             </div>
         </div>

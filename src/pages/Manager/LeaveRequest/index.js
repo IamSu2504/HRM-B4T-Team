@@ -45,20 +45,20 @@ export default function ViewLeaveRequest() {
     <div>
       {/* Danh sách */}
       <div className="homepage">
-        <div className="title">Danh sách yêu cầu</div>
+        <div className="title">List of request</div>
         <div className="table-frame">
           <table class="table table-bordered">
             <thead>
               <tr className="head">
-                <th scope="col">STT</th>
-                <th scope="col">Mã nhân viên</th>
-                <th scope="col">Hình thức nghỉ</th>
-                <th scope="col">Lý do</th>
-                <th scope="col">Người duyệt</th>
-                <th scope="col">Ca</th>
-                <th scope="col">Ngày</th>
-                <th scope="col">Trạng thái</th>
-                <th>Xét duyệt</th>
+                <th scope="col">No.</th>
+                <th scope="col">Employee code</th>
+                <th scope="col">Type of leave</th>
+                <th scope="col">Reason</th>
+                <th scope="col">Approved by</th>
+                <th scope="col">Shift</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+                <th>Approval</th>
               </tr>
               {/* ****************** Ví dụ ***********************/}
               <tr>

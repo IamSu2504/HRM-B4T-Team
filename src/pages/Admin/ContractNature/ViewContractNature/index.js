@@ -40,15 +40,29 @@ export default function ViewContractNature() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Tính Chất Hợp Đồng</div>
+            <div className="title">List of Contract Nature</div>
             <div className="table-frame">
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/addcontractNature`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Add</span>
+                </button>
+            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
+<<<<<<< HEAD
                             <th scope="col">STT</th>
                             <th scope="col">Tính Chất Hợp Đồng</th>
                             <th scope="col">Sửa</th>
                             {/* <th scope="col">Xoá</th> */}
+=======
+                            <th scope="col">No.</th>
+                            <th scope="col">Contract Nature</th>
+                            <th scope="col">Edit</th>
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                         </tr>
                     </thead>
                     <tbody>
@@ -62,6 +76,7 @@ export default function ViewContractNature() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
+<<<<<<< HEAD
                                     {/* <td>                
                                         <CustomPopover
                                             open={popoverId === contractNatureItem?.id}
@@ -83,6 +98,8 @@ export default function ViewContractNature() {
                                             </div>
                                         </CustomPopover>
                                     </td> */}
+=======
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                                 </tr>
                             )
                         })}
@@ -124,14 +141,7 @@ export default function ViewContractNature() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addcontractNature`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+            
             <ToastContainer />
         </div>
     );

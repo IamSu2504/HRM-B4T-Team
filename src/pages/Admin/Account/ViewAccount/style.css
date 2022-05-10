@@ -57,6 +57,8 @@
     width: 170px;
     height: 46px;
     border: unset;
+    float: right;
+    margin-bottom: 20px;
   }
   
   .homepage .save-button .text {

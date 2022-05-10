@@ -40,15 +40,29 @@ export default function ViewDegree() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh Sách Bằng Cấp</div>
+            <div className="title">List of Degree</div>
             <div className="table-frame">
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/adddegree`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Add</span>
+                </button>
+            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
+<<<<<<< HEAD
                             <th scope="col">STT</th>
                             <th scope="col">Loại Bằng Cấp</th>
                             <th scope="col">Sửa</th>
                             {/* <th scope="col">Xoá</th> */}
+=======
+                            <th scope="col">No.</th>
+                            <th scope="col">Type of degree</th>
+                            <th scope="col">Edit</th>
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                         </tr>
                     </thead>
                     <tbody>
@@ -62,6 +76,7 @@ export default function ViewDegree() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
+<<<<<<< HEAD
                                     {/* <td>                
                                         <CustomPopover
                                             open={popoverId === degreeItem?.id}
@@ -83,6 +98,8 @@ export default function ViewDegree() {
                                             </div>
                                         </CustomPopover>
                                     </td> */}
+=======
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                                 </tr>
                             )
                         })}
@@ -124,14 +141,7 @@ export default function ViewDegree() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/adddegree`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+            
             <ToastContainer />
         </div>
     );

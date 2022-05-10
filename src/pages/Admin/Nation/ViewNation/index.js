@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NationAPI from "../../../../api/nation";
 import CustomPopover from "../../../../components/CustomPopover";
@@ -12,9 +12,9 @@ export default function ViewNation() {
 
     const navigate = useNavigate()
 
-    const getAllNation = async() => {
+    const getAllNation = async () => {
         const nationRes = await NationAPI.getAll()
-        if ( nationRes?.status === 200 ){
+        if (nationRes?.status === 200) {
             setListNation(nationRes?.data)
         }
     }
@@ -23,15 +23,15 @@ export default function ViewNation() {
         getAllNation()
     }, [])
 
-    const deleteNation = async(nationId) => {
-        try{
+    const deleteNation = async (nationId) => {
+        try {
             const deleteRes = await NationAPI.deleteNation(nationId)
 
-            if (deleteRes?.status === 200){
+            if (deleteRes?.status === 200) {
                 toast('Xóa thành công')
                 getAllNation()
             }
-        }catch(error){
+        } catch (error) {
             if (error.response) {
                 toast(error.response.data)
             }
@@ -40,15 +40,29 @@ export default function ViewNation() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Quốc Tịch</div>
+            <div className="title">List of Nationality</div>
             <div className="table-frame">
+                <div>
+                    <button className="save-button" onClick={() => navigate(`/admin/addnation`)}>
+                        <span class="image">
+                            <img src="/home/save-icon.svg" />
+                        </span>
+                        <span class="text">Add</span>
+                    </button>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
+<<<<<<< HEAD
                             <th scope="col">STT</th>
                             <th scope="col">Quốc Tịch</th>
                             <th scope="col">Sửa</th>
                             {/* <th scope="col">Xoá</th> */}
+=======
+                            <th scope="col">No.</th>
+                            <th scope="col">Nationality</th>
+                            <th scope="col">Edit</th>
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                         </tr>
                     </thead>
                     <tbody>
@@ -58,10 +72,11 @@ export default function ViewNation() {
                                     <th scope="row">{nationIndex + 1}</th>
                                     <td>{nationItem?.quocTich}</td>
                                     <td>
-                                        <div onClick={()=>navigate(`/admin/updatenation/${nationItem?.id}`)}>
+                                        <div onClick={() => navigate(`/admin/updatenation/${nationItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
+<<<<<<< HEAD
                                     {/* <td>                
                                         <CustomPopover
                                             open={popoverId === nationItem?.id}
@@ -83,6 +98,8 @@ export default function ViewNation() {
                                             </div>
                                         </CustomPopover>
                                     </td> */}
+=======
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                                 </tr>
                             )
                         })}
@@ -124,14 +141,7 @@ export default function ViewNation() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addnation`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+
             <ToastContainer />
         </div>
     );

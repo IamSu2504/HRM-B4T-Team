@@ -25,7 +25,7 @@ export default function RegisterShift() {
     const [listviewShift, setlistviewShift] = useState([]);
     const [idPhong, setIdPhong] = useState()
     const [i, setI] = useState()
-    
+
     // var curr = new Date();
     // var ngayTu1 = new Date(curr.setDate(curr.getDate() - curr.getDay())).toLocaleDateString();
     // var ngayDen1 = new Date(curr.setDate(curr.getDate() - curr.getDay() + 6)).toLocaleDateString();
@@ -52,7 +52,7 @@ export default function RegisterShift() {
                 }
             }
         } catch (error) {
-            console.log('error',error)
+            console.log('error', error)
             if (error.response) {
                 setSubmitError({ status: true, error: error.response.data })
             }
@@ -100,8 +100,8 @@ export default function RegisterShift() {
         const classRoomRes = await ClassRoomAPI.getAll()
         if (classRoomRes?.status === 200) {
             setListClassRoom(classRoomRes?.data)
-            if ( classRoomRes?.data?.length ){
-                setRegisterShiftDetail({...registerShiftDetail, roomID: classRoomRes?.data[0]?.id})
+            if (classRoomRes?.data?.length) {
+                setRegisterShiftDetail({ ...registerShiftDetail, roomID: classRoomRes?.data[0]?.id })
                 setIdPhong(classRoomRes?.data[0]?.id)
             }
             // setRegisterShiftDetail({ ...registerShiftDetail, room: departmentRes?.data?.length ? departmentRes?.data[0] : {} })
@@ -120,7 +120,7 @@ export default function RegisterShift() {
         if (registerShiftByTimeRes?.status === 200) {
             setlistviewShift(registerShiftByTimeRes?.data)
         }
-        
+
     }
 
     useEffect(() => {
@@ -145,8 +145,8 @@ export default function RegisterShift() {
         getlistviewShift()
     }, [ngayDen]);
 
-    useEffect(() => {        
-        setRegisterShiftDetail({...registerShiftDetail, date: i})
+    useEffect(() => {
+        setRegisterShiftDetail({ ...registerShiftDetail, date: i })
         console.log(registerShiftDetail?.date)
     }, [i]);
 
@@ -154,15 +154,15 @@ export default function RegisterShift() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Đăng Kí Ca Làm</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Register Shift</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomSelectBox
-                        title="Phòng Làm Việc *:"
+                        title="Classroom"
                         option={listClassRoom.map((classRoomItem) => {
                             return (
                                 { label: `${classRoomItem.maPhongHoc}-${classRoomItem.tenPhongHoc}`, value: classRoomItem?.id }
@@ -173,11 +173,12 @@ export default function RegisterShift() {
                         handleChange={(event) => {
                             const id = event.currentTarget.value
                             setIdPhong(id)
-                            setRegisterShiftDetail({...registerShiftDetail, roomID: id})
+                            setRegisterShiftDetail({ ...registerShiftDetail, roomID: id })
                         }}
                     />
                     <CustomInputField
-                        title="Ngày Làm Việc *:"
+                        title="Working day"
+                        require={true}
                         type="date"
                         disabled={false}
                         handleChange={(event) => {
@@ -185,13 +186,13 @@ export default function RegisterShift() {
                             // console.log(event.target.value)
                             var curr = new Date(event.target.value);
                             setI(curr.toLocaleDateString())
-                            setRegisterShiftDetail({...registerShiftDetail, date: curr.toLocaleDateString()})
-                            
+                            setRegisterShiftDetail({ ...registerShiftDetail, date: curr.toLocaleDateString() })
+
                             var ngayTu = new Date(curr.setDate(curr.getDate() - curr.getDay())).toLocaleDateString();
                             var ngayDen = new Date(curr.setDate(curr.getDate() - curr.getDay() + 6)).toLocaleDateString();
                             setNgayTu(ngayTu)
                             setNgayDen(ngayDen)
-                            
+
                             // console.log(registerShiftDetail?.date)
                         }}
                     />
@@ -199,10 +200,10 @@ export default function RegisterShift() {
                         idPhong && ngayDen && ngayTu ?
                             <div>
                                 <CustomSelectBox
-                                    title="Ca Làm Việc *:"
+                                    title="Working shift"
                                     option={shiftDetail.map((shiftItem) => {
                                         return (
-                                            { label: `${shiftItem.tenCa} Bắt Đầu: ${shiftItem.gioBatDau}-Kết Thúc: ${shiftItem.gioKetThuc} `, value: shiftItem.id }
+                                            { label: `${shiftItem.tenCa} Start: ${shiftItem.gioBatDau}-End: ${shiftItem.gioKetThuc} `, value: shiftItem.id }
                                         )
                                     })}
                                     require={true}
@@ -214,7 +215,7 @@ export default function RegisterShift() {
                                     }}
                                 />
                                 <CustomSelectBox
-                                    title="Mã Nhân Viên *:"
+                                    title="Employee code"
                                     option={userDetail.map((userItem) => {
                                         return (
                                             { label: `${userItem.id} -- ${userItem.tenNv}`, value: userItem.id }
@@ -239,7 +240,7 @@ export default function RegisterShift() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Đăng Kí</span>
+                    <span class="text">Register</span>
                 </button>
             </div>
             {console.log('lisst view', listviewShift)}
@@ -250,6 +251,7 @@ export default function RegisterShift() {
                             <thead>
                                 <tr className="head">
                                     <th scope="col"></th>
+<<<<<<< HEAD
                                     
                                     <th scope="col">Thứ 2</th>
                                     <th scope="col">Thứ 3</th>
@@ -259,6 +261,16 @@ export default function RegisterShift() {
                                     <th scope="col">Thứ 7</th>
                                     <th scope="col">Chủ Nhật</th>
                                     
+=======
+                                    <th scope="col">Sunday</th>
+                                    <th scope="col">Monday</th>
+                                    <th scope="col">Tuesday</th>
+                                    <th scope="col">Wednesday</th>
+                                    <th scope="col">Thursday</th>
+                                    <th scope="col">Friday</th>
+                                    <th scope="col">Saturday </th>
+
+>>>>>>> 80678713916747c943fac48661764b7116a0d064
                                 </tr>
                             </thead>
                             {
