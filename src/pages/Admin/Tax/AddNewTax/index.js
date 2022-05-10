@@ -39,7 +39,7 @@ export default function AddTax() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Thêm Thông Tin Thuế</div>
+                    <div className="title">Add Information of Tax</div>
                     <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
                 </div>
             </div>
@@ -47,7 +47,8 @@ export default function AddTax() {
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Mã Phân Loại *:"
+                        title="Classification code"
+                        require={true}
                         value={taxDetail?.maPhanLoai || ''}
                         type="text"
                         handleChange={(event) => {
@@ -55,7 +56,8 @@ export default function AddTax() {
                         }}
                     />
                     <CustomInputField
-                        title="Tên Loại Thuế *:"
+                        title="Type of tax"
+                        require={true}
                         value={taxDetail?.tenLoaiThue || ''}
                         type="text"
                         handleChange={(event) => {
@@ -72,7 +74,7 @@ export default function AddTax() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Thêm</span>
+                    <span class="text">Add</span>
                 </button>
             </div>
             <ToastContainer />

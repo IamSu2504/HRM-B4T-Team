@@ -40,7 +40,7 @@ export default function ViewHoliday() {
 
     return (
         <div className="homepage">
-            <div className="title">List ò Holiday</div>
+            <div className="title">List of Holiday</div>
             <div className="table-frame">
                 
             <div>

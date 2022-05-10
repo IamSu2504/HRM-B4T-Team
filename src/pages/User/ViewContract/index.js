@@ -30,14 +30,14 @@ export default function ViewContract() {
         <div className="view-contract-page">
             <div className="row">
                 <div className="col-12">
-                    <div class="title">Hợp đồng</div>
+                    <div class="title">Contract</div>
                 </div>
             </div>
             <div class="list-contract">
                 <div id="contract1">
                     <div data-toggle="collapse" href="#collapse1" aria-expanded="true">
                         <div aria-expanded="true" class="title-list">
-                            <h5>Hợp đồng mã</h5>
+                            <h5>Contract code</h5>
                             <p>{userContractDetail[0]?.id || ''}</p>
                             {console.log("id",userContractDetail[0]?.id)}
                         </div>
@@ -45,31 +45,31 @@ export default function ViewContract() {
                     <div id="collapse1" data-parent="#contract1" class="collapse">
                         <div class="row fied-data-row">
                             <div>
-                                <div class="title-sub">Chi tiết hợp đồng</div>
+                                <div class="title-sub">Contract detail</div>
                                 <table>
                                     <tr>
-                                        <th>Mã nhân viên:</th>
+                                        <th>Employee code:</th>
                                         <td>{userContractDetail[0]?.maNV || ''}</td>
                                     </tr>
                                     <tr>
-                                        <th>Mã hợp đồng:</th>
+                                        <th>Type of Contract:</th>
                                         <td>{userContractDetail[0]?.loaiHopDong?.maLoaiHopDong || ''}</td>
                                     </tr>
                                     <tr>
-                                        <th>Tên hợp đồng:</th>
+                                        <th>Contract name:</th>
                                         <td>{userContractDetail[0]?.loaiHopDong?.tenLoaiHopDong || ''}</td>
                                     </tr>
                                     <tr>
-                                        <th>Ngày hiệu lực:</th>
+                                        <th>Effective date:</th>
                                         <td>{userContractDetail[0]?.ngayHieuLuc || ''}</td>
                                     </tr>
                                     <tr>
-                                        <th>Ngày hết hạn:</th>
+                                        <th>Expiration date:</th>
                                         <td>{userContractDetail[0]?.ngayHetHan || ''}</td>
                                     </tr>
                                     <tr>
-                                        <th>Trạng thái:</th>
-                                        <td>{userContractDetail[0]?.trangThai ? 'Đang Hoạt Động' : 'Đã Nghỉ Việc'}</td>
+                                        <th>Status:</th>
+                                        <td>{userContractDetail[0]?.trangThai ? 'Working' : 'Finished'}</td>
                                     </tr>
                                 </table>
                             </div>

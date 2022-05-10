@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SpecializeAPI from "../../../../api/specialize";
 import CustomPopover from "../../../../components/CustomPopover";
@@ -12,9 +12,9 @@ export default function ViewSpecialize() {
 
     const navigate = useNavigate()
 
-    const getAllSpecialize = async() => {
+    const getAllSpecialize = async () => {
         const specializeRes = await SpecializeAPI.getAll()
-        if ( specializeRes?.status === 200 ){
+        if (specializeRes?.status === 200) {
             setListSpecialize(specializeRes?.data)
         }
     }
@@ -23,15 +23,15 @@ export default function ViewSpecialize() {
         getAllSpecialize()
     }, [])
 
-    const deleteSpecialize = async(specializeId) => {
-        try{
+    const deleteSpecialize = async (specializeId) => {
+        try {
             const deleteRes = await SpecializeAPI.deleteSpecialize(specializeId)
 
-            if (deleteRes?.status === 200){
+            if (deleteRes?.status === 200) {
                 toast('Xóa thành công')
                 getAllSpecialize()
             }
-        }catch(error){
+        } catch (error) {
             if (error.response) {
                 toast(error.response.data)
             }
@@ -40,16 +40,24 @@ export default function ViewSpecialize() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Chuyên Môn</div>
+            <div className="title">List of Specialize</div>
             <div className="table-frame">
+
+                <div>
+                    <button className="save-button" onClick={() => navigate(`/admin/addspecialize`)}>
+                        <span class="image">
+                            <img src="/home/save-icon.svg" />
+                        </span>
+                        <span class="text">Add</span>
+                    </button>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">STT</th>
-                            <th scope="col">Mã Chuyên Môn</th>
-                            <th scope="col">Chuyên Môn</th>
-                            <th scope="col">Sửa</th>
-                            <th scope="col">Xoá</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Specialize code</th>
+                            <th scope="col">Specialize name</th>
+                            <th scope="col">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,30 +68,9 @@ export default function ViewSpecialize() {
                                     <td>{specializItem?.maChuyenMon}</td>
                                     <td>{specializItem?.chuyenMon}</td>
                                     <td>
-                                        <div onClick={()=>navigate(`/admin/updatespecialize/${specializItem?.id}`)}>
+                                        <div onClick={() => navigate(`/admin/updatespecialize/${specializItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
-                                    </td>
-                                    <td>                
-                                        <CustomPopover
-                                            open={popoverId === specializItem?.id}
-                                            onClose={() => setPopoverId("")}
-                                            handleSubmit={() => {
-                                                deleteSpecialize(specializItem?.id)
-                                            }}
-                                        >          
-                                            <div 
-                                                onClick={() => {
-                                                    if (popoverId !== specializItem?.id) {
-                                                        setPopoverId(specializItem?.id);
-                                                    } else {
-                                                        setPopoverId("");
-                                                    }
-                                                }}
-                                            >
-                                                <img src="/home/delete-icon.svg" />
-                                            </div>
-                                        </CustomPopover>
                                     </td>
                                 </tr>
                             )
@@ -126,14 +113,6 @@ export default function ViewSpecialize() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addspecialize`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
             <ToastContainer />
         </div>
     );

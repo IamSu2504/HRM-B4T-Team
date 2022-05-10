@@ -90,7 +90,7 @@ export default function NewPassword() {
 
 
             <div className='forgot-button'>
-              <button disabled={isSubmit} onClick={handleUpdate}>Cập Nhật Mật Khẩu Mới</button>
+              <button disabled={isSubmit} onClick={handleUpdate}>Update</button>
             </div>
 
           </div>

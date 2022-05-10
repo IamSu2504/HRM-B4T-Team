@@ -43,12 +43,12 @@ export default function UpdateReward() {
         try {
             setSubmitError({ status: false, error: '' })
             const { phanLoaiID, lyDo, maNv } = rewardDisciplineDetail
-     
+
             if (!phanLoaiID.toString()?.trim()?.length || !lyDo.toString()?.trim()?.length || !maNv.toString()?.trim()?.length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
                 setIsSubmit(true)
-                
+
                 const updateRes = await ManagerRewardDisciplineAPI.updateRewardDiscipline({ id: rewardDisciplineId, ...rewardDisciplineDetail })
                 if (updateRes?.status === 200) {
                     toast.success(updateRes?.data)
@@ -69,15 +69,15 @@ export default function UpdateReward() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Khen Thưởng </div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Edit Information of Reward</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomSelectBox
-                        title="Phân Loại"
+                        title="Type of Reward"
                         value={rewardDisciplineDetail?.phanLoaiID}
                         option={listReward.map((rewardItem) => {
                             return (
@@ -91,7 +91,8 @@ export default function UpdateReward() {
                         }}
                     />
                     <CustomInputField
-                        title="Lý Do *:"
+                        title="Reason"
+                        require={true}
                         value={rewardDisciplineDetail?.lyDo || ''}
                         type="text"
                         handleChange={(event) => {
@@ -99,7 +100,8 @@ export default function UpdateReward() {
                         }}
                     />
                     <CustomInputField
-                        title="Mã Số Nhân Viên *:"
+                        title="Employee code"
+                        require={true}
                         value={rewardDisciplineDetail?.maNv || ''}
                         type="text"
                         disabled={true}
@@ -118,7 +120,7 @@ export default function UpdateReward() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
                 </button>
             </div>
             <ToastContainer />

@@ -24,7 +24,7 @@ export default function UpdateLeave() {
                     />
 
                     <CustomInputField
-                        title="Loại nghỉ"
+                        title="Type of leave"
                         value=""
                         type="text"
                         disabled={false}
@@ -38,7 +38,7 @@ export default function UpdateLeave() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
                 </button>
             </div>
         </div>

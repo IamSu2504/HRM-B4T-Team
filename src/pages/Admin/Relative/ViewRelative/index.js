@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import RelativeAPI from "../../../../api/relative";
 import CustomPopover from "../../../../components/CustomPopover";
@@ -12,9 +12,9 @@ export default function ViewRelative() {
 
     const navigate = useNavigate()
 
-    const getAllRelative = async() => {
+    const getAllRelative = async () => {
         const relativeRes = await RelativeAPI.getAll()
-        if ( relativeRes?.status === 200 ){
+        if (relativeRes?.status === 200) {
             setListRelative(relativeRes?.data)
         }
     }
@@ -23,15 +23,15 @@ export default function ViewRelative() {
         getAllRelative()
     }, [])
 
-    const deleteRelative = async(relativeId) => {
-        try{
+    const deleteRelative = async (relativeId) => {
+        try {
             const deleteRes = await RelativeAPI.deleteRelative(relativeId)
 
-            if (deleteRes?.status === 200){
+            if (deleteRes?.status === 200) {
                 toast('Xóa thành công')
                 getAllRelative()
             }
-        }catch(error){
+        } catch (error) {
             if (error.response) {
                 toast(error.response.data)
             }
@@ -40,15 +40,22 @@ export default function ViewRelative() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Quan Hệ</div>
+            <div className="title">List of Relationship</div>
             <div className="table-frame">
+                <div>
+                    <button className="save-button" onClick={() => navigate(`/admin/addrelative`)}>
+                        <span class="image">
+                            <img src="/home/save-icon.svg" />
+                        </span>
+                        <span class="text">Add</span>
+                    </button>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">STT</th>
-                            <th scope="col">Quan Hệ</th>
-                            <th scope="col">Sửa</th>
-                            <th scope="col">Xoá</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Relationship</th>
+                            <th scope="col">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,31 +65,11 @@ export default function ViewRelative() {
                                     <th scope="row">{relativeIndex + 1}</th>
                                     <td>{relativeItem?.quanHe}</td>
                                     <td>
-                                        <div onClick={()=>navigate(`/admin/updaterelative/${relativeItem?.id}`)}>
+                                        <div onClick={() => navigate(`/admin/updaterelative/${relativeItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-                                    <td>                
-                                        <CustomPopover
-                                            open={popoverId === relativeItem?.id}
-                                            onClose={() => setPopoverId("")}
-                                            handleSubmit={() => {
-                                                deleteRelative(relativeItem?.id)
-                                            }}
-                                        >          
-                                            <div 
-                                                onClick={() => {
-                                                    if (popoverId !== relativeItem?.id) {
-                                                        setPopoverId(relativeItem?.id);
-                                                    } else {
-                                                        setPopoverId("");
-                                                    }
-                                                }}
-                                            >
-                                                <img src="/home/delete-icon.svg" />
-                                            </div>
-                                        </CustomPopover>
-                                    </td>
+
                                 </tr>
                             )
                         })}
@@ -124,14 +111,7 @@ export default function ViewRelative() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addrelative`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+
             <ToastContainer />
         </div>
     );

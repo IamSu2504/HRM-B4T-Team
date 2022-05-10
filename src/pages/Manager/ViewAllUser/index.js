@@ -65,18 +65,18 @@ export default function ViewAllUser() {
 
   return (
     <div className="homepage">
-      <div className="title">Danh sách nhân viên</div>
+      <div className="title">List of Employee</div>
 
 {/* search */}
       <div class="input-group mb-3 mt-3">
         <div class="input-group-prepend">
-        <span class="input-group-text">Bộ lọc</span>
+        <span class="input-group-text"><img src="/menu/filter.svg" />Filter</span>
           <select class="input-group-text" id="sel1" name="sellist1">
-            <option>Mã nhân viên</option>
-            <option>Tên nhân viên</option>
+            <option>Employee code</option>
+            <option>Employee name</option>
           </select>
         </div>
-        <input type="text" class="form-control" placeholder="Tìm kiếm" />
+        <input type="text" class="form-control" placeholder="Search" />
         <div class="input-group-append">
           <button class="btn btn-success" type="submit">Go</button>
         </div>
@@ -87,16 +87,16 @@ export default function ViewAllUser() {
         <table class="table table-bordered" id="userTable">
           <thead>
             <tr className="head">
-              <th scope="col">STT</th>
-              <th scope="col">Mã nhân viên</th>
-              <th scope="col">Ảnh</th>
-              <th scope="col">Tên nhân viên</th>
-              <th scope="col">Giới tính</th>
-              <th scope="col">Ngày sinh</th>
-              <th scope="col">Số điện thoại</th>
-              <th scope="col">Trang thái</th>
-              <th scope="col">Xem</th>
-              <th scope="col">Sửa</th>
+              <th scope="col">No.</th>
+              <th scope="col">Employee code</th>
+              <th scope="col">Image</th>
+              <th scope="col">Employee name</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Date of birthday</th>
+              <th scope="col">Phone number</th>
+              <th scope="col">Status </th>
+              <th scope="col">View</th>
+              <th scope="col">Edit</th>
             </tr>
           </thead>
           <tbody>

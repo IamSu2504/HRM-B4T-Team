@@ -40,7 +40,7 @@ export default function ViewContractNature() {
 
     return (
         <div className="homepage">
-            <div className="title">Edit Information of Contract Nature</div>
+            <div className="title">List of Contract Nature</div>
             <div className="table-frame">
             <div>
                 <button className="save-button" onClick={()=>navigate(`/admin/addcontractNature`)}>

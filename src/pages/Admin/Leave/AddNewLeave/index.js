@@ -8,7 +8,7 @@ export default function AddLeave() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Thêm Thông Tin Ngày Nghỉ</div>
+                    <div className="title">Add Information of Leave</div>
                     <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
                 </div>
             </div>
@@ -24,7 +24,7 @@ export default function AddLeave() {
                     />
 
                     <CustomInputField
-                        title="Loại nghỉ"
+                        title="Type of leave"
                         value=""
                         type="text"
                         disabled={false}
@@ -39,7 +39,7 @@ export default function AddLeave() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Thêm</span>
+                    <span class="text">Add</span>
                 </button>
             </div>
         </div>

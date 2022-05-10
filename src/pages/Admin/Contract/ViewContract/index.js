@@ -40,7 +40,7 @@ export default function ViewContract() {
 
     return (
         <div className="homepage">
-            <div className="title">List of contract types</div>
+            <div className="title">List of Contract Types</div>
             <div className="table-frame">
             <div>
                 <button className="save-button" onClick={()=>navigate(`/admin/addcontract`)}>

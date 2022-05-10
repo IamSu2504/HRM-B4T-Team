@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function UpdatePosition() {
-    const [positionDetail, setPositionDetail] = useState({ maChucVu: '', tenChucVu: ''})
+    const [positionDetail, setPositionDetail] = useState({ maChucVu: '', tenChucVu: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const { positionId } = useParams()
@@ -31,7 +31,7 @@ export default function UpdatePosition() {
             setSubmitError({ status: false, error: '' })
             const { maChucVu, tenChucVu } = positionDetail
 
-            if (!maChucVu.trim().length || !tenChucVu.trim().length ) {
+            if (!maChucVu.trim().length || !tenChucVu.trim().length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
                 setIsSubmit(true)
@@ -54,8 +54,8 @@ export default function UpdatePosition() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Chức Vụ</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    <div className="title">Edit Information of Position</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
@@ -69,7 +69,8 @@ export default function UpdatePosition() {
                     />
 
                     <CustomInputField
-                        title="Mã Chức Vụ *:"
+                        title="Position code"
+                        require={true}
                         value={positionDetail?.maChucVu || ''}
                         type="text"
                         handleChange={(event) => {
@@ -77,7 +78,8 @@ export default function UpdatePosition() {
                         }}
                     />
                     <CustomInputField
-                        title="Tên Chức Vụ *:"
+                        title="Position name"
+                        require={true}
                         value={positionDetail?.tenChucVu || ''}
                         type="text"
                         handleChange={(event) => {
@@ -95,7 +97,7 @@ export default function UpdatePosition() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
                 </button>
             </div>
             <ToastContainer />

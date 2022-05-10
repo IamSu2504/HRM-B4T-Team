@@ -54,8 +54,8 @@ export default function UpdateShift() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Ca Làm</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    <div className="title">Edit Information of Shift</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
@@ -69,7 +69,8 @@ export default function UpdateShift() {
                     />
 
                     <CustomInputField
-                        title="Tên Ca Làm*"
+                        title="Shift name"
+                        require={true}
                         value={shiftDetail?.tenCa || ''}
                         type="text"
                         handleChange={(event) => {
@@ -77,7 +78,8 @@ export default function UpdateShift() {
                         }}
                     />
                     <CustomInputField
-                        title="Giờ Bắt Đầu"
+                        title="Start time"
+                        require={true}
                         value={shiftDetail?.gioBatDau || ''}
                         type="text"
                         handleChange={(event) => {
@@ -85,7 +87,8 @@ export default function UpdateShift() {
                         }}
                     />
                     <CustomInputField
-                        title="Giờ Kết Thúc"
+                        title="End time"
+                        require={true}
                         value={shiftDetail?.gioKetThuc || ''}
                         type="text"
                         handleChange={(event) => {
@@ -103,7 +106,7 @@ export default function UpdateShift() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
                 </button>
             </div>
             <ToastContainer />

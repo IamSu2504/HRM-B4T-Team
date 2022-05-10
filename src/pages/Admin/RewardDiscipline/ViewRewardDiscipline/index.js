@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import RewardDisciplineAPI from "../../../../api/rewardDiscipline";
 import CustomPopover from "../../../../components/CustomPopover";
@@ -12,9 +12,9 @@ export default function ViewRewardDiscipline() {
 
     const navigate = useNavigate()
 
-    const getAllRewardDiscipline = async() => {
+    const getAllRewardDiscipline = async () => {
         const rewardDisciplineRes = await RewardDisciplineAPI.getAll()
-        if ( rewardDisciplineRes?.status === 200 ){
+        if (rewardDisciplineRes?.status === 200) {
             setListRewardDiscipline(rewardDisciplineRes?.data)
         }
     }
@@ -23,15 +23,15 @@ export default function ViewRewardDiscipline() {
         getAllRewardDiscipline()
     }, [])
 
-    const deleteRewardDiscipline = async(rewardDisciplineId) => {
-        try{
+    const deleteRewardDiscipline = async (rewardDisciplineId) => {
+        try {
             const deleteRes = await RewardDisciplineAPI.deleteRewardDiscipline(rewardDisciplineId)
 
-            if (deleteRes?.status === 200){
+            if (deleteRes?.status === 200) {
                 toast('Xóa thành công')
                 getAllRewardDiscipline()
             }
-        }catch(error){
+        } catch (error) {
             if (error.response) {
                 toast(error.response.data)
             }
@@ -40,16 +40,23 @@ export default function ViewRewardDiscipline() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Khen Thưởng Và Kỉ Luật</div>
+            <div className="title">List of Reward and Disciplinary</div>
             <div className="table-frame">
+                <div>
+                    <button className="save-button" onClick={() => navigate(`/admin/addrewardDiscipline`)}>
+                        <span class="image">
+                            <img src="/home/save-icon.svg" />
+                        </span>
+                        <span class="text">Add</span>
+                    </button>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">STT</th>
-                            <th scope="col">Danh Mục</th>
-                            <th scope="col">Tiêu Đề</th>
-                            <th scope="col">Sửa</th>
-                            <th scope="col">Xoá</th>
+                            <th scope="col">no.</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,31 +67,11 @@ export default function ViewRewardDiscipline() {
                                     <td>{rewardDisciplineItem?.danhMuc}</td>
                                     <td>{rewardDisciplineItem?.tieuDe}</td>
                                     <td>
-                                        <div onClick={()=>navigate(`/admin/updaterewardDiscipline/${rewardDisciplineItem?.id}`)}>
+                                        <div onClick={() => navigate(`/admin/updaterewardDiscipline/${rewardDisciplineItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-                                    <td>                
-                                        <CustomPopover
-                                            open={popoverId === rewardDisciplineItem?.id}
-                                            onClose={() => setPopoverId("")}
-                                            handleSubmit={() => {
-                                                deleteRewardDiscipline(rewardDisciplineItem?.id)
-                                            }}
-                                        >          
-                                            <div 
-                                                onClick={() => {
-                                                    if (popoverId !== rewardDisciplineItem?.id) {
-                                                        setPopoverId(rewardDisciplineItem?.id);
-                                                    } else {
-                                                        setPopoverId("");
-                                                    }
-                                                }}
-                                            >
-                                                <img src="/home/delete-icon.svg" />
-                                            </div>
-                                        </CustomPopover>
-                                    </td>
+
                                 </tr>
                             )
                         })}
@@ -126,14 +113,6 @@ export default function ViewRewardDiscipline() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addrewardDiscipline`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
             <ToastContainer />
         </div>
     );
