@@ -39,16 +39,15 @@ export default function AddShift() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Add Information of Shift</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    <div className="title">Thêm Thông Tin Ca Làm</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Shift name"
-                        require={true}
+                        title="Tên Ca Làm *:"
                         value={shiftDetail?.tenCa || ''}
                         type="text"
                         handleChange={(event) => {
@@ -56,8 +55,7 @@ export default function AddShift() {
                         }}
                     />
                     <CustomInputField
-                        title="Start time"
-                        require={true}
+                        title="Giờ Bắt Đầu *:"
                         value={shiftDetail?.gioBatDau || ''}
                         type="text"
                         handleChange={(event) => {
@@ -65,8 +63,7 @@ export default function AddShift() {
                         }}
                     />
                     <CustomInputField
-                        title="End time"
-                        require={true}
+                        title="Giờ Kết Thúc *:"
                         value={shiftDetail?.gioKetThuc || ''}
                         type="text"
                         handleChange={(event) => {
@@ -83,7 +80,7 @@ export default function AddShift() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Add</span>
+                    <span class="text">Thêm</span>
                 </button>
             </div>
             <ToastContainer />

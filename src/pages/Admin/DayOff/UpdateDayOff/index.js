@@ -54,8 +54,8 @@ export default function UpdateNation() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Edit Information on Day Off</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    <div className="title">Chỉnh Sửa Thông Tin Ngày Nghỉ</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
@@ -69,8 +69,7 @@ export default function UpdateNation() {
                     />
 
                     <CustomInputField
-                        title="Type of day off"
-                        require={true}
+                        title="Quốc Tịch *:"
                         value={dayOffDetail?.loaiNghi || ''}
                         type="text"
                         handleChange={(event) => {
@@ -88,7 +87,7 @@ export default function UpdateNation() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Add</span>
+                    <span class="text">Lưu thông tin</span>
                 </button>
             </div>
             <ToastContainer />

@@ -4,22 +4,15 @@ import "./style.css";
 export default function ViewLeave() {
     return (
         <div className="homepage">
-            <div className="title">List of Leave</div>
+            <div className="title">Danh sách bậc lương</div>
             <div className="table-frame">
-            <div>
-                <button className="save-button">
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Add</span>
-                </button>
-            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">No.</th>
-                            <th scope="col">Type of leave</th>
-                            <th scope="col">Edit</th>
+                            <th scope="col">STT</th>
+                            <th scope="col">Loại nghỉ</th>
+                            <th scope="col">Sửa</th>
+                            <th scope="col">Xoá</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,7 +64,14 @@ export default function ViewLeave() {
                 </nav>
             </div>
 
-
+            <div>
+                <button className="save-button">
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Thêm Mới</span>
+                </button>
+            </div>
         </div>
     );
 }

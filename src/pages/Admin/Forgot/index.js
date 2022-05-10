@@ -5,11 +5,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
-
 export default function Forgot() {
   const [gmail, setGmail] = useState('')
   const [forgotError, setForgotError] = useState({ status: false, error: '' })
-  const navigate = useNavigate();
+  
   async function forgot(event) {
     
     try {
@@ -50,7 +49,6 @@ export default function Forgot() {
               <div className='input-icon'>
                 {/* <img src="../login-user-icon.svg" alt='login-img' /> */}
               </div>
-              <div className="desc" >Please enter your email to get links for changing new passwords.</div>
               <input placeholder='Gmail'
                 value={gmail}
                 onChange={(event) => setGmail(event.target.value)} />
@@ -59,11 +57,9 @@ export default function Forgot() {
               {forgotError.status && <div className="forgot-error">{forgotError.error}</div>}
             </div>
             <div className='forgot-button'>
-              <button  onClick={forgot}>Get Password</button>
+              <button  onClick={forgot}>Lấy Mật Khẩu Mới</button>
             </div>
-            <div className='fogot-pw-txt' onClick={() => navigate('/')}>
-              <a>Login</a>
-            </div>
+
           </div>
         </div>
       </div>

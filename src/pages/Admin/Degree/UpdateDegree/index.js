@@ -54,9 +54,8 @@ export default function UpdateDegree() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Edit Information of Degree</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
-                    
+                    <div className="title">Chỉnh Sửa Thông Tin Bằng Cấp</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
@@ -70,8 +69,7 @@ export default function UpdateDegree() {
                     />
 
                     <CustomInputField
-                         title="Type of degree"
-                         require={true}
+                        title="Loại Bằng Cấp *:"
                         value={degreeDetail?.loaiBangCap || ''}
                         type="text"
                         handleChange={(event) => {
@@ -89,7 +87,7 @@ export default function UpdateDegree() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Save</span>
+                    <span class="text">Lưu thông tin</span>
                 </button>
             </div>
             <ToastContainer />

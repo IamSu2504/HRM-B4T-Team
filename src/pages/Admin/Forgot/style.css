@@ -79,12 +79,7 @@
   padding-right: 60px;
   outline: none;
 }
-.desc{
-  text-align: center;
-  font-size: 15px;
-  font-style: italic;
-  margin-bottom: 20px;
-}
+
 .input-icon {
   position : absolute;
   top: 13px;

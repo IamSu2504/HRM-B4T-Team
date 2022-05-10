@@ -94,15 +94,15 @@ export default function RegisterShift() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Register Shift</div>
-                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
+                    <div className="title">Đăng Kí Ca Làm</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomSelectBox
-                        title="Classroom"
+                        title="Phòng Làm Việc *:"
                         option={listClassRoom.map((classRoomItem) => {
                             return (
                                 { label: `${classRoomItem.maPhongHoc}-${classRoomItem.tenPhongHoc}`, value: classRoomItem?.id  }
@@ -117,7 +117,7 @@ export default function RegisterShift() {
                         }}
                     />
                     <CustomInputField
-                        title="Working date"
+                        title="Ngày Làm Việc *:"
                         type="date"
                         disabled={false}
                         handleChange={(event) => {
@@ -149,13 +149,13 @@ export default function RegisterShift() {
                             <thead>
                                 <tr className="head">
                                     <th scope="col"></th>
-                                    <th scope="col">Sunday</th>
-                                    <th scope="col">Monday</th>
-                                    <th scope="col">Tuesday</th>
-                                    <th scope="col">Wednesday</th>
-                                    <th scope="col">Thursday</th>
-                                    <th scope="col">Friday</th>
-                                    <th scope="col">Saturday </th>
+                                    <th scope="col">Chủ Nhật</th>
+                                    <th scope="col">Thứ 2</th>
+                                    <th scope="col">Thứ 3</th>
+                                    <th scope="col">Thứ 4</th>
+                                    <th scope="col">Thứ 5</th>
+                                    <th scope="col">Thứ 6</th>
+                                    <th scope="col">Thứ 7</th>
                                     
                                 </tr>
                             </thead>

@@ -54,8 +54,8 @@ export default function UpdateContract() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Edit Contract Information</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    <div className="title">Chỉnh Sửa Thông Tin Hợp Đồng</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
@@ -69,8 +69,7 @@ export default function UpdateContract() {
                     />
 
                     <CustomInputField
-                        title="Classification code"
-                        require={true}
+                        title="Mã Loại Hợp Đồng *:"
                         value={contractDetail?.maLoaiHopDong || ''}
                         type="text"
                         handleChange={(event) => {
@@ -78,8 +77,7 @@ export default function UpdateContract() {
                         }}
                     />
                     <CustomInputField
-                        title="Contract type name"
-                        require={true}
+                        title="Tên Loại Hợp Đồng *:"
                         value={contractDetail?.tenLoaiHopDong || ''}
                         type="text"
                         handleChange={(event) => {
@@ -97,7 +95,7 @@ export default function UpdateContract() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Save</span>
+                    <span class="text">Lưu thông tin</span>
                 </button>
             </div>
             <ToastContainer />

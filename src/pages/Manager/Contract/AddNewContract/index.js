@@ -9,18 +9,16 @@ import ContractAPI from "../../../../api/contract";
 
 
 export default function AddContract() {
-
-    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', trangThai: '', maNV: '' })
-
+    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', trangThai: '', maNV : ''})
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
 
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
-            const { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, maNV } = contractDetail
+            const { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, trangThai, maNV } = contractDetail
             console.log(contractDetail)
-            if (!maHD.trim().length || !loaiHopDong.trim().length || !ngayHieuLuc.trim().length || !ngayHetHan.trim().length || !ghiChu.trim().length || !maNV.trim().length) {
+            if (!maHD.trim().length || !loaiHopDong.trim().length || !ngayHieuLuc.trim().length || !ngayHetHan.trim().length || !ghiChu.trim().length|| !maNV.trim().length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
                 setIsSubmit(true)
@@ -56,16 +54,15 @@ export default function AddContract() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Add Contract Information</div>
-                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
+                    <div className="title">Thêm Thông Tin Hợp Đồng</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Contract code"
-                        require={true}
+                        title="Mã Hợp Đồng* :"
                         type="text"
                         placeholder="VD: HD000xyz"
                         handleChange={(event) => {
@@ -74,20 +71,19 @@ export default function AddContract() {
                     />
 
                     <CustomSelectBox
-                        title="Type of contract"
-                        require={true}
+                        title="Loại Hợp Đồng :"
                         option={listContract.map((contractItem) => {
                             return (
                                 { label: `${contractItem.maLoaiHopDong} - ${contractItem.tenLoaiHopDong}`, value: contractItem.id }
                             )
                         })}
+                        require={true}
                         handleChange={(event) => {
                             setContractDetail({ ...contractDetail, loaiHopDong: event.currentTarget.value })
                         }}
                     />
                     <CustomInputField
-                        title="Effective date"
-                        require={true}
+                        title="Ngày Hiệu Lực* :"
                         type="date"
                         handleChange={(event) => {
                             // const parts = event.target.value.split('-');
@@ -97,8 +93,7 @@ export default function AddContract() {
                         }}
                     />
                     <CustomInputField
-                        title="Expiration date"
-                        require={true}
+                        title="Ngày Hết Hạn* :"
                         type="date"
                         handleChange={(event) => {
                             // const parts = event.target.value.split('-');
@@ -108,17 +103,15 @@ export default function AddContract() {
                         }}
                     />
                     <CustomInputField
-                        title="Note"
-                        require={true}
+                        title="Ghi Chú* :"
                         type="text"
                         handleChange={(event) => {
                             setContractDetail({ ...contractDetail, ghiChu: event.target.value })
                         }}
                     />
-
+                    
                     <CustomInputField
-                        title="Employee code"
-                        require={true}
+                        title="Mã Nhân Viên* :"
                         type="text"
                         handleChange={(event) => {
                             setContractDetail({ ...contractDetail, maNV: event.target.value })
@@ -134,7 +127,7 @@ export default function AddContract() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Add</span>
+                    <span class="text">Thêm</span>
                 </button>
             </div>
             <ToastContainer />

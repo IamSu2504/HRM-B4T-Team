@@ -16,14 +16,14 @@ export default function ManagerHomePage(){
             
           </div> 
           <div className='position'>
-            Manager
+            Quản lý
           </div>
           <div className='menu'>
             <ul>
-              <li onClick={() => navigate('/manager/viewallUser')}>Personnel</li>
-              <li>Information Contract</li>
-              <li>Timekeeping</li>
-              <li onClick={() => navigate('/manager/viewallInsurance')}>Insurance</li>
+              <li onClick={() => navigate('/manager/viewallUser')}>Nhân Sự</li>
+              <li>Thông Tin Hợp Đồng</li>
+              <li>Chấm Công</li>
+              <li onClick={() => navigate('/manager/viewallInsurance')}>Bảo Hiểm</li>
             </ul>
           </div>
         </div>

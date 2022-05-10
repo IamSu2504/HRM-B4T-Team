@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import PositionAPI from "../../../../api/position";
 import CustomPopover from "../../../../components/CustomPopover";
@@ -12,9 +12,9 @@ export default function ViewPosition() {
 
     const navigate = useNavigate()
 
-    const getAllPosition = async () => {
+    const getAllPosition = async() => {
         const positionRes = await PositionAPI.getAll()
-        if (positionRes?.status === 200) {
+        if ( positionRes?.status === 200 ){
             setListPosition(positionRes?.data)
         }
     }
@@ -23,15 +23,15 @@ export default function ViewPosition() {
         getAllPosition()
     }, [])
 
-    const deletePosition = async (positionId) => {
-        try {
+    const deletePosition = async(positionId) => {
+        try{
             const deleteRes = await PositionAPI.deletePosition(positionId)
 
-            if (deleteRes?.status === 200) {
+            if (deleteRes?.status === 200){
                 toast('Xóa thành công')
                 getAllPosition()
             }
-        } catch (error) {
+        }catch(error){
             if (error.response) {
                 toast(error.response.data)
             }
@@ -40,25 +40,17 @@ export default function ViewPosition() {
 
     return (
         <div className="homepage">
-            <div className="title">List of Position</div>
+            <div className="title">Danh Sách Chức Vụ</div>
             <div className="table-frame">
-                <div>
-                    <button className="save-button" onClick={() => navigate(`/admin/addposition`)}>
-                        <span class="image">
-                            <img src="/home/save-icon.svg" />
-                        </span>
-                        <span class="text">Add</span>
-                    </button>
-                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-
-                            <th scope="col">No.</th>
-                            <th scope="col">Position code</th>
-                            <th scope="col">Position name</th>
-                            <th scope="col">Edit</th>
-
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã Chức Vụ</th>
+                            <th scope="col">Tên Chức Vụ</th>
+                            
+                            <th scope="col">Sửa</th>
+                            <th scope="col">Xoá</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,13 +60,33 @@ export default function ViewPosition() {
                                     <th scope="row">{positionIndex + 1}</th>
                                     <td>{positionItem?.maChucVu}</td>
                                     <td>{positionItem?.tenChucVu}</td>
-
+                                    
                                     <td>
-                                        <div onClick={() => navigate(`/admin/updateposition/${positionItem?.id}`)}>
+                                        <div onClick={()=>navigate(`/admin/updateposition/${positionItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-
+                                    <td>                
+                                        <CustomPopover
+                                            open={popoverId === positionItem?.id}
+                                            onClose={() => setPopoverId("")}
+                                            handleSubmit={() => {
+                                                deletePosition(positionItem?.id)
+                                            }}
+                                        >          
+                                            <div 
+                                                onClick={() => {
+                                                    if (popoverId !== positionItem?.id) {
+                                                        setPopoverId(positionItem?.id);
+                                                    } else {
+                                                        setPopoverId("");
+                                                    }
+                                                }}
+                                            >
+                                                <img src="/home/delete-icon.svg" />
+                                            </div>
+                                        </CustomPopover>
+                                    </td>
                                 </tr>
                             )
                         })}
@@ -116,7 +128,14 @@ export default function ViewPosition() {
                 </nav>
             </div>
 
-
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/addposition`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Thêm Mới</span>
+                </button>
+            </div>
             <ToastContainer />
         </div>
     );

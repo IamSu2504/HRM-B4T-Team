@@ -40,23 +40,16 @@ export default function ViewCertificate() {
 
     return (
         <div className="homepage">
-            <div className="title">List of Certificate</div>
+            <div className="title">Danh sách Chứng chỉ</div>
             <div className="table-frame">
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addcertificate`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Add</span>
-                </button>
-            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">No.</th>
-                            <th scope="col">Certificate code</th>
-                            <th scope="col">Certificate name</th>
-                            <th scope="col">Edit</th>
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã Chứng Chỉ</th>
+                            <th scope="col">Loại Chứng Chỉ</th>
+                            <th scope="col">Sửa</th>
+                            <th scope="col">Xoá</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,6 +63,27 @@ export default function ViewCertificate() {
                                         <div onClick={()=>navigate(`/admin/updatecertificate/${certificateItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
+                                    </td>
+                                    <td>                
+                                        <CustomPopover
+                                            open={popoverId === certificateItem?.id}
+                                            onClose={() => setPopoverId("")}
+                                            handleSubmit={() => {
+                                                deleteCertificate(certificateItem?.id)
+                                            }}
+                                        >          
+                                            <div 
+                                                onClick={() => {
+                                                    if (popoverId !== certificateItem?.id) {
+                                                        setPopoverId(certificateItem?.id);
+                                                    } else {
+                                                        setPopoverId("");
+                                                    }
+                                                }}
+                                            >
+                                                <img src="/home/delete-icon.svg" />
+                                            </div>
+                                        </CustomPopover>
                                     </td>
                                 </tr>
                             )
@@ -110,6 +124,15 @@ export default function ViewCertificate() {
                         </li>
                     </ul>
                 </nav>
+            </div>
+
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/addcertificate`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Thêm Mới</span>
+                </button>
             </div>
             <ToastContainer />
         </div>

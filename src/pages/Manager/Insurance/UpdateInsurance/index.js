@@ -68,8 +68,8 @@ export default function UpdateManagerInsurance() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Edit Contract Information</div>
-                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
+                    <div className="title">Chỉnh Sửa Thông Tin Bảo Hiểm</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
@@ -83,8 +83,7 @@ export default function UpdateManagerInsurance() {
                     />
 
                     <CustomInputField
-                        title="Employee code"
-                        require={true}
+                        title="Mã Nhân Viên *:"
                         value={managerInsuranceDetail?.maNV || ''}
                         type="text"
                         handleChange={(event) => {
@@ -92,21 +91,19 @@ export default function UpdateManagerInsurance() {
                         }}
                     />
                     <CustomSelectBox
-                         title="Type of Insurance"
-                         require={true}
+                        title="Loại Bảo Hiểm"
                         option={listInsurance.map((InsuranceItem) => {
                             return (
                                 { label: InsuranceItem.tenBH, value: InsuranceItem }
                             )
                         })}
-                       
+                        require={true}
                         handleChange={(event) => {
                             setManagerInsuranceDetail({ ...managerInsuranceDetail, idLoaiBH: event.currentTarget.value })
                         }}
                     />
                     <CustomInputField
-                         title="Insurance code"
-                         require={true}
+                        title="Mã Số Bảo Hiểm *:"
                         value={managerInsuranceDetail?.maSoBH || ''}
                         type="text"
                         handleChange={(event) => {
@@ -114,8 +111,7 @@ export default function UpdateManagerInsurance() {
                         }}
                     />
                     <CustomInputField
-                           title="Insurance money"
-                           require={true}
+                        title="Tiền Bảo Hiểm *:"
                         value={managerInsuranceDetail?.tienBH || ''}
                         type="text"
                         handleChange={(event) => {
@@ -133,7 +129,7 @@ export default function UpdateManagerInsurance() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Save</span>
+                    <span class="text">Lưu thông tin</span>
                 </button>
             </div>
             <ToastContainer />

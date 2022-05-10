@@ -14,14 +14,9 @@
   color: #000000;
 }
 
-
 .homepage .table-frame {
   margin-top: 50px;
   overflow-x: auto;
-}
-
-.homepage .table2{
-  display: none;
 }
 
 .homepage .table-frame .head>th {

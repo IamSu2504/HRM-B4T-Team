@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import ManagerWorkingProcessAPI from "../../../../api/Manager/workingProcess";
 import CustomPopover from "../../../../components/CustomPopover";
@@ -12,9 +12,9 @@ export default function ViewWorkingProcess() {
 
     const navigate = useNavigate()
 
-    const getAllWorkingProcess = async () => {
+    const getAllWorkingProcess = async() => {
         const workingProcessRes = await ManagerWorkingProcessAPI.getAll()
-        if (workingProcessRes?.status === 200) {
+        if ( workingProcessRes?.status === 200 ){
             setListWorkingProcess(workingProcessRes?.data)
         }
     }
@@ -26,27 +26,19 @@ export default function ViewWorkingProcess() {
 
     return (
         <div className="homepage">
-            <div className="title">List of Working Process</div>
+            <div className="title">Danh sách Quá Trình Làm Việc</div>
             <div className="table-frame">
-                <div>
-                    <button className="save-button" onClick={() => navigate(`/manager/addworkingProcess`)}>
-                        <span class="image">
-                            <img src="/home/save-icon.svg" />
-                        </span>
-                        <span class="text">Add</span>
-                    </button>
-                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">No.</th>
-                            <th scope="col">Employee code</th>
-                            <th scope="col">Department</th>
-                            <th scope="col">Position</th>
-                            <th scope="col">Date start work</th>
-                            <th scope="col">Date end work</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Edit</th>
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã Số Nhân Viên</th>
+                            <th scope="col">Phòng Ban Làm Việc</th>
+                            <th scope="col">Chức Vụ Làm Việc</th>
+                            <th scope="col">Ngày Bắt Đầu Làm Việc</th>
+                            <th scope="col">Ngày Kết Thúc</th>
+                            <th scope="col">Trạng Thái</th>
+                            <th scope="col">Sửa</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,9 +51,9 @@ export default function ViewWorkingProcess() {
                                     <td>{workingProcessItem?.idChucVu?.tenChucVu}</td>
                                     <td>{workingProcessItem?.ngayVao}</td>
                                     <td>{workingProcessItem?.ngayRa}</td>
-                                    <td>{workingProcessItem?.trangThai ? "Working" : "Finished"}</td>
+                                    <td>{workingProcessItem?.trangThai? "Đang Làm Việc" : "Đã Kết Thúc"}</td>
                                     <td>
-                                        <div onClick={() => navigate(`/manager/updateworkingProcess/${workingProcessItem?.id}`)}>
+                                        <div onClick={()=>navigate(`/manager/updateworkingProcess/${workingProcessItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
@@ -127,7 +119,14 @@ export default function ViewWorkingProcess() {
                 </nav>
             </div>
 
-
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/manager/addworkingProcess`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Thêm Mới</span>
+                </button>
+            </div>
             <ToastContainer />
         </div>
     );

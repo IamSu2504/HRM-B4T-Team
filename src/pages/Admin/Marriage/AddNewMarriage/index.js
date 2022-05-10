@@ -39,16 +39,15 @@ export default function AddMarriage() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Add Information of Marital Status</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    <div className="title">Thêm Thông Tin Tình Trạng Hôn Nhân</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Marital Status"
-                        require={true}
+                        title="Tình Trạng *:"
                         value={marriageDetail?.tinhTrang || ''}
                         type="text"
                         handleChange={(event) => {
@@ -65,7 +64,7 @@ export default function AddMarriage() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Add</span>
+                    <span class="text">Thêm</span>
                 </button>
             </div>
             <ToastContainer />

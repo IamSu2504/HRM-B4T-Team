@@ -40,24 +40,15 @@ export default function ViewDegree() {
 
     return (
         <div className="homepage">
-            <div className="title">List of Degree</div>
+            <div className="title">Danh Sách Bằng Cấp</div>
             <div className="table-frame">
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/adddegree`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Add</span>
-                </button>
-            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-
-                            <th scope="col">No.</th>
-                            <th scope="col">Type of degree</th>
-                            <th scope="col">Edit</th>
-
+                            <th scope="col">STT</th>
+                            <th scope="col">Loại Bằng Cấp</th>
+                            <th scope="col">Sửa</th>
+                            <th scope="col">Xoá</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,7 +62,27 @@ export default function ViewDegree() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-
+                                    <td>                
+                                        <CustomPopover
+                                            open={popoverId === degreeItem?.id}
+                                            onClose={() => setPopoverId("")}
+                                            handleSubmit={() => {
+                                                deleteNation(degreeItem?.id)
+                                            }}
+                                        >          
+                                            <div 
+                                                onClick={() => {
+                                                    if (popoverId !== degreeItem?.id) {
+                                                        setPopoverId(degreeItem?.id);
+                                                    } else {
+                                                        setPopoverId("");
+                                                    }
+                                                }}
+                                            >
+                                                <img src="/home/delete-icon.svg" />
+                                            </div>
+                                        </CustomPopover>
+                                    </td>
                                 </tr>
                             )
                         })}
@@ -113,7 +124,14 @@ export default function ViewDegree() {
                 </nav>
             </div>
 
-            
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/adddegree`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Thêm Mới</span>
+                </button>
+            </div>
             <ToastContainer />
         </div>
     );

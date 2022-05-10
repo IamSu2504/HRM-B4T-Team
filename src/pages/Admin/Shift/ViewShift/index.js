@@ -40,24 +40,17 @@ export default function ViewShift() {
 
     return (
         <div className="homepage">
-            <div className="title">List of Shift</div>
+            <div className="title">Danh sách Ca Làm</div>
             <div className="table-frame">
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addshift`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Add</span>
-                </button>
-            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">No.</th>
-                            <th scope="col">Shift name</th>
-                            <th scope="col">Start time</th>
-                            <th scope="col">End timec</th>
-                            <th scope="col">Edit</th>
+                            <th scope="col">STT</th>
+                            <th scope="col">Tên Ca Làm</th>
+                            <th scope="col">Giờ Bắt Đầu</th>
+                            <th scope="col">Giờ Kết Thúc</th>
+                            <th scope="col">Sửa</th>
+                            <th scope="col">Xoá</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,6 +65,27 @@ export default function ViewShift() {
                                         <div onClick={()=>navigate(`/admin/updateshift/${shiftItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
+                                    </td>
+                                    <td>                
+                                        <CustomPopover
+                                            open={popoverId === shiftItem?.id}
+                                            onClose={() => setPopoverId("")}
+                                            handleSubmit={() => {
+                                                deleteShift(shiftItem?.id)
+                                            }}
+                                        >          
+                                            <div 
+                                                onClick={() => {
+                                                    if (popoverId !== shiftItem?.id) {
+                                                        setPopoverId(shiftItem?.id);
+                                                    } else {
+                                                        setPopoverId("");
+                                                    }
+                                                }}
+                                            >
+                                                <img src="/home/delete-icon.svg" />
+                                            </div>
+                                        </CustomPopover>
                                     </td>
                                 </tr>
                             )
@@ -114,7 +128,14 @@ export default function ViewShift() {
                 </nav>
             </div>
 
-           
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/addshift`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Thêm Mới</span>
+                </button>
+            </div>
             <ToastContainer />
         </div>
     );

@@ -6,7 +6,7 @@ export default function CustomInputField(props){
   return (
     <div className='custom-input-frame'>
       <label className='input-title'>{
-        require ? <p>{title} <span>*</span></p> : <p>{title}</p>
+        require ? <p>{title} <span>*</span> :</p> : <p>{title}</p>
       }</label>
       <input 
         type={type} 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import MarriageAPI from "../../../../api/marriage";
 import CustomPopover from "../../../../components/CustomPopover";
@@ -12,9 +12,9 @@ export default function ViewMarriage() {
 
     const navigate = useNavigate()
 
-    const getAllMarriage = async () => {
+    const getAllMarriage = async() => {
         const marriageRes = await MarriageAPI.getAll()
-        if (marriageRes?.status === 200) {
+        if ( marriageRes?.status === 200 ){
             setListMarriage(marriageRes?.data)
         }
     }
@@ -23,15 +23,15 @@ export default function ViewMarriage() {
         getAllMarriage()
     }, [])
 
-    const deleteMarriage = async (marriageId) => {
-        try {
+    const deleteMarriage = async(marriageId) => {
+        try{
             const deleteRes = await MarriageAPI.deleteMarriage(marriageId)
 
-            if (deleteRes?.status === 200) {
+            if (deleteRes?.status === 200){
                 toast('Xóa thành công')
                 getAllMarriage()
             }
-        } catch (error) {
+        }catch(error){
             if (error.response) {
                 toast(error.response.data)
             }
@@ -40,24 +40,15 @@ export default function ViewMarriage() {
 
     return (
         <div className="homepage">
-            <div className="title">List of Marital Status</div>
+            <div className="title">Danh sách Tình Trạng Hôn Nhân</div>
             <div className="table-frame">
-                <div>
-                    <button className="save-button" onClick={() => navigate(`/admin/addmarriage`)}>
-                        <span class="image">
-                            <img src="/home/save-icon.svg" />
-                        </span>
-                        <span class="text">Add</span>
-                    </button>
-                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-
-                            <th scope="col">No.</th>
-                            <th scope="col">Marital Status</th>
-                            <th scope="col">Edit</th>
-
+                            <th scope="col">STT</th>
+                            <th scope="col">Tình Trạng</th>
+                            <th scope="col">Sửa</th>
+                            <th scope="col">Xoá</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,11 +58,31 @@ export default function ViewMarriage() {
                                     <th scope="row">{marriageIndex + 1}</th>
                                     <td>{marriageItem?.tinhTrang}</td>
                                     <td>
-                                        <div onClick={() => navigate(`/admin/updatemarriage/${marriageItem?.id}`)}>
+                                        <div onClick={()=>navigate(`/admin/updatemarriage/${marriageItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-
+                                    <td>                
+                                        <CustomPopover
+                                            open={popoverId === marriageItem?.id}
+                                            onClose={() => setPopoverId("")}
+                                            handleSubmit={() => {
+                                                deleteMarriage(marriageItem?.id)
+                                            }}
+                                        >          
+                                            <div 
+                                                onClick={() => {
+                                                    if (popoverId !== marriageItem?.id) {
+                                                        setPopoverId(marriageItem?.id);
+                                                    } else {
+                                                        setPopoverId("");
+                                                    }
+                                                }}
+                                            >
+                                                <img src="/home/delete-icon.svg" />
+                                            </div>
+                                        </CustomPopover>
+                                    </td>
                                 </tr>
                             )
                         })}
@@ -111,6 +122,15 @@ export default function ViewMarriage() {
                         </li>
                     </ul>
                 </nav>
+            </div>
+
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/addmarriage`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Thêm Mới</span>
+                </button>
             </div>
             <ToastContainer />
         </div>

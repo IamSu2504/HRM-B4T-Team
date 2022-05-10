@@ -39,16 +39,15 @@ export default function AddDegree() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Add Information of Degree</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    <div className="title">Thêm Thông Tin Bằng Cấp</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Type of degree"
-                        require={true}
+                        title="Loại bằng cấp *:"
                         value={degreeDetail?.loaiBangCap || ''}
                         type="text"
                         handleChange={(event) => {
@@ -65,7 +64,7 @@ export default function AddDegree() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Add</span>
+                    <span class="text">Thêm</span>
                 </button>
             </div>
             <ToastContainer />

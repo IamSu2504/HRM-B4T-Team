@@ -40,24 +40,16 @@ export default function ViewHoliday() {
 
     return (
         <div className="homepage">
-            <div className="title">List of Holiday</div>
+            <div className="title">Danh sách Ngày Lễ</div>
             <div className="table-frame">
-                
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addholiday`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Add</span>
-                </button>
-            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">No.</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Holiday name</th>
-                            <th scope="col">Edit</th>
+                            <th scope="col">STT</th>
+                            <th scope="col">Ngày</th>
+                            <th scope="col">Tên Ngày Lễ</th>
+                            <th scope="col">Sửa</th>
+                            <th scope="col">Xoá</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,6 +63,27 @@ export default function ViewHoliday() {
                                         <div onClick={()=>navigate(`/admin/updateholiday/${holidayItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
+                                    </td>
+                                    <td>                
+                                        <CustomPopover
+                                            open={popoverId === holidayItem?.id}
+                                            onClose={() => setPopoverId("")}
+                                            handleSubmit={() => {
+                                                deleteHoliday(holidayItem?.id)
+                                            }}
+                                        >          
+                                            <div 
+                                                onClick={() => {
+                                                    if (popoverId !== holidayItem?.id) {
+                                                        setPopoverId(holidayItem?.id);
+                                                    } else {
+                                                        setPopoverId("");
+                                                    }
+                                                }}
+                                            >
+                                                <img src="/home/delete-icon.svg" />
+                                            </div>
+                                        </CustomPopover>
                                     </td>
                                 </tr>
                             )
@@ -113,6 +126,14 @@ export default function ViewHoliday() {
                 </nav>
             </div>
 
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/addholiday`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Thêm Mới</span>
+                </button>
+            </div>
             <ToastContainer />
         </div>
     );

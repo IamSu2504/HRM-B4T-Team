@@ -39,30 +39,28 @@ export default function AddCertificate() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Add Certificate Information</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    <div className="title">Thêm Thông Tin Chứng Chỉ Tiếng Anh</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Certificate code"
+                        title="Mã Chứng Chỉ *:"
                         value={certificateDetail?.maChungChi || ''}
                         type="text"
                         handleChange={(event) => {
                             setCertificateDetail({...certificateDetail, maChungChi: event.target.value})
                         }}
-                        require={true}
                     />
                     <CustomInputField
-                        title="Certificate name"
+                        title="Tên Chứng Chỉ *:"
                         value={certificateDetail?.loaiChungChi || ''}
                         type="text"
                         handleChange={(event) => {
                             setCertificateDetail({...certificateDetail, loaiChungChi: event.target.value})
                         }}
-                        require={true}
                     />
                 </div>
             </div>
@@ -74,7 +72,7 @@ export default function AddCertificate() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Add</span>
+                    <span class="text">Thêm</span>
                 </button>
             </div>
             <ToastContainer />

@@ -54,8 +54,8 @@ export default function UpdateTax() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Edit Information of Holiday</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    <div className="title">Chỉnh Sửa Thông Tin Ngày Lễ</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
@@ -69,8 +69,7 @@ export default function UpdateTax() {
                     />
 
                     <CustomInputField
-                        title="Date"
-                        require={true}
+                        title="Ngày *:"
                         value={holidayDetail?.ngay || ''}
                         type="date"
                         handleChange={(event) => {
@@ -78,8 +77,7 @@ export default function UpdateTax() {
                         }}
                     />
                     <CustomInputField
-                        title="Holiday name"
-                        require={true}
+                        title="Tên Ngày Lễ *:"
                         value={holidayDetail?.tenNgayLe || ''}
                         type="text"
                         handleChange={(event) => {
@@ -97,7 +95,7 @@ export default function UpdateTax() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Save</span>
+                    <span class="text">Lưu thông tin</span>
                 </button>
             </div>
             <ToastContainer />

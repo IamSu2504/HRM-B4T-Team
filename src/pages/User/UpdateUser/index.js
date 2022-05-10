@@ -81,11 +81,12 @@ export default function UpdateUser() {
     getAllMarriage()
   }, [])
 
-
+ 
 
   const getUserDetail = async () => {
     if (maNv) {
       const userRes = await UserAPI.getUserById(maNv)
+      console.log('xem user', userRes?.data)
       if (userRes?.status === 200) {
         setUserDetail({
           tinhChatHopDongID: userRes?.data?.tinhChatHopDong?.id,
@@ -101,20 +102,20 @@ export default function UpdateUser() {
           cccd: userRes?.data?.cccd,
           noiCapCccd: userRes?.data?.noiCapCccd,
           ngayCapCccd: userRes?.data?.ngayCapCccd,
-          ngayHetHanCccd: userRes?.data?.ngayHetHanCccd,
-          hoChieu: userRes?.data?.hoChieu,
+          ngayHetHanCccd: userRes?.data?.ngayHetHanCccd, 
+          hoChieu: userRes?.data?.hoChieu, 
           noiCapHoChieu: userRes?.data?.noiCapHoChieu,
-          ngayCapHoChieu: userRes?.data?.ngayCapHoChieu,
-          ngayHetHanHoChieu: userRes?.data?.ngayHetHanHoChieu,
+          ngayCapHoChieu: userRes?.data?.ngayCapHoChieu, 
+          ngayHetHanHoChieu: userRes?.data?.ngayHetHanHoChieu, 
           noiSinh: userRes?.data?.noiSinh,
-          queQuan: userRes?.data?.queQuan,
-          diaChiThuongTru: userRes?.data?.diaChiThuongTru,
+          queQuan: userRes?.data?.queQuan, 
+          diaChiThuongTru: userRes?.data?.diaChiThuongTru, 
           diaChiTamTru: userRes?.data?.diaChiTamTru,
-          atmNganHang: userRes?.data?.atmNganHang,
-          soAtm: userRes?.data?.soAtm,
-
-          ngayBatDauLam: userRes?.data?.ngayBatDauLam,
-          ngayNghiViec: userRes?.data?.ngayNghiViec,
+          atmNganHang: userRes?.data?.atmNganHang, 
+          soAtm: userRes?.data?.soAtm, 
+          
+          ngayBatDauLam: userRes?.data?.ngayBatDauLam, 
+          ngayNghiViec: userRes?.data?.ngayNghiViec, 
           lyDoNghi: userRes?.data?.lyDoNghi, image: userRes?.data?.image
         })
       }
@@ -142,9 +143,7 @@ export default function UpdateUser() {
   // useEffect(() => {
   //   getUserImage()
   // }, [])
-  
-  //validate
-  const [checSoDienThoai, setCheckSoDienThoai] = useState([''])
+
 
   const handleUpdate = async () => {
     try {
@@ -158,11 +157,7 @@ export default function UpdateUser() {
         soAtm, ngayBatDauLam, ngayNghiViec, lyDoNghi
       } = userDetail;
 
-
-      console.log('test user>>>',userDetail)
-
-      console.log('test user', userDetail)
-
+      console.log('test user',userDetail)
       // if (!tinhChatHopDongID.toString()?.trim()?.length || !tinhTrangHonNhanID.toString()?.trim()?.length
       //   || !quocTichID.trim().toString()?.trim()?.length || !tenNv.toString()?.trim()?.length || !ngaySinh.toString()?.trim()?.length
       //   || !gioiTinh.toString()?.trim()?.length || !soDienThoai.toString()?.trim()?.length || !soDienThoai2.toString()?.trim()?.length
@@ -173,11 +168,7 @@ export default function UpdateUser() {
       //   || !diaChiTamTru.toString()?.trim()?.length || !atmNganHang.toString()?.trim()?.length || !soAtm.toString()?.trim()?.length
       //   || !trangThaiLaoDong.toString()?.trim()?.length || !ngayBatDauLam.toString()?.trim()?.length || !ngayNghiViec.toString()?.trim()?.length 
       //   || !lyDoNghi.toString()?.trim()?.length)
-
-
-
-      console.log('>>>>>', tinhChatHopDongID.toString().trim()?.length)
-
+      console.log('>>>>>',tinhChatHopDongID.toString().trim()?.length)
       if (!tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
         || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
         || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length
@@ -186,26 +177,22 @@ export default function UpdateUser() {
         || !noiCapHoChieu.toString().trim()?.length || !ngayCapHoChieu.toString().trim()?.length || !ngayHetHanHoChieu.toString().trim()?.length
         || !noiSinh.toString().trim()?.length || !queQuan.toString().trim()?.length || !diaChiThuongTru.toString().trim()?.length
         || !diaChiTamTru.toString().trim()?.length || !atmNganHang.toString().trim()?.length || !soAtm.toString().trim()?.length
-        || !ngayBatDauLam.toString().trim()?.length
-      ) {
+       || !ngayBatDauLam.toString().trim()?.length
+        ) {
         console.log("da vao day 1")
         setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
-      } else
-      if (soDienThoai.toString().trim()?.length != 10){
-        setCheckSoDienThoai('Số điện thoại phải có 10 số')
-      }else{
-        setCheckSoDienThoai('')
+      } else {
         setIsSubmit(true)
         console.log("da vao day 2")
         // const ngaySinhMoi = ngaySinh.split('-');
         // const ngaySinhCN = ngaySinhMoi[2] + '/' + ngaySinhMoi[1] + '/' + ngaySinhMoi[0]
-
+        
         // const updateImg = await UserAPI.updateUserImage(maNv, ...userImage)
-        const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail })
+        const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail})
         // const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail, ngaySinh: ngaySinhCN })
         if (updateRes?.status === 200) {
           toast.success(updateRes?.data)
-          console.log('aaaa',updateRes?.data)
+
           const formData = new FormData();
           formData.append("file", userImage);
           try {
@@ -238,8 +225,8 @@ export default function UpdateUser() {
     <div className="update-account-page">
       <div className="row">
         <div className="col-12">
-          <div className="title">Edit Information of Employee</div>
-          <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
+          <div className="title">Chỉnh Sửa Thông Tin Nhân Viên</div>
+          <div className="title-sub">Những ô có dấu * không được để trống</div>
         </div>
       </div>
 
@@ -253,14 +240,14 @@ export default function UpdateUser() {
         </div>
         <div>
           <CustomInputField
-            title="Employee code"
+            title="Mã Số Nhân Viên"
             value={maNv}
             type="text"
             disabled={true}
             require={true}
           />
           <CustomInputField
-            title="Full name"
+            title="Họ và tên"
             value={userDetail?.tenNv || ''}
             type="text"
             disabled={false}
@@ -275,7 +262,7 @@ export default function UpdateUser() {
       <div className="row fied-data-row">
         <div>
           <CustomInputField
-            title="Image 3*4"
+            title="Ảnh 3*4"
             type="file"
             disabled={false}
             require={true}
@@ -285,7 +272,7 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="Citizen identification"
+            title="Căn cước công dân"
             value={userDetail?.cccd || ''}
             type="text"
             disabled={false}
@@ -295,7 +282,7 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="Place of issue of identity card"
+            title="Nơi cấp căn cước công dân"
             type="text"
             value={userDetail?.noiCapCccd || ''}
             disabled={false}
@@ -305,7 +292,7 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="Date of issuance of citizen's identity card"
+            title="Ngày cấp căn cước"
             value={userDetail?.ngayCapCccd}
             type="date"
             disabled={false}
@@ -318,18 +305,18 @@ export default function UpdateUser() {
 
           />
           <CustomInputField
-            title="Citizen ID expiration date"
+            title="Ngày hết hạn căn cước"
             value={userDetail?.ngayHetHanCccd}
             type="date"
             disabled={false}
             require={true}
             handleChange={(event) => {
-
-              setUserDetail({ ...userDetail, ngayHetHanCccd: event.target.value })
+           
+              setUserDetail({ ...userDetail, ngayHetHanCccd:  event.target.value })
             }}
           />
           <CustomInputField
-            title="Passport"
+            title="Hộ chiếu"
             value={userDetail?.hoChieu || ''}
             type="text"
             disabled={false}
@@ -338,7 +325,7 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="Place of issue of passport"
+            title="Nơi cấp hộ chiếu"
             value={userDetail?.noiCapHoChieu || ''}
             type="text"
             disabled={false}
@@ -347,30 +334,29 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="Passport issuance date"
-
+            title="Ngày cấp hộ chiếu"
             value={userDetail?.ngayCapHoChieu}
             type="date"
             disabled={false}
             require={true}
             handleChange={(event) => {
-
+    
               setUserDetail({ ...userDetail, ngayCapHoChieu: event.target.value })
             }}
           />
           <CustomInputField
-            title="Passport expiration date"
+            title="Ngày hết hạn hộ chiếu"
             value={userDetail?.ngayHetHanHoChieu}
             type="date"
             disabled={false}
             require={true}
             handleChange={(event) => {
-
+            
               setUserDetail({ ...userDetail, ngayHetHanHoChieu: event.target.value })
             }}
           />
           <CustomInputField
-            title="Bank name"
+            title="ATM ngân hàng"
             value={userDetail?.atmNganHang || ''}
             type="text"
             disabled={false}
@@ -380,7 +366,7 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="ATM number"
+            title="Số ATM"
             value={userDetail?.soAtm || ''}
             type="text"
             disabled={false}
@@ -390,18 +376,17 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="Date start work"
+            title="Ngày Bắt Đầu Làm: "
             value={userDetail?.ngayBatDauLam}
             type="date"
-            disabled={true}
+            disabled={false}
             handleChange={(event) => {
-
+              
               setUserDetail({ ...userDetail, ngayBatDauLam: event.target.value })
             }}
           />
-          
           <CustomSelectBox
-            title="Nature of Contract"
+            title="Tính Chất Hợp Đồng"
             value={userDetail?.tinhChatHopDongID}
             option={listContractNature.map((contractNatureItem) => {
               return (
@@ -417,8 +402,7 @@ export default function UpdateUser() {
 
         <div>
           <CustomSelectBox
-            title="Gender"
-
+            title="Giới Tính :"
             value={userDetail?.gioiTinh}
             option={[{ label: "Nam", value: true }, { label: "Nữ", value: false }]}
             require={true}
@@ -427,8 +411,7 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="Date of birth"
-
+            title="Ngày sinh"
             value={userDetail?.ngaySinh}
             type="date"
             disabled={false} //yyyy-mm-dd
@@ -438,8 +421,7 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="Place of birth"
-
+            title="Nơi Sinh"
             value={userDetail?.noiSinh || ''}
             type="text"
             require={true}
@@ -449,8 +431,7 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="Home town"
-
+            title="Quê Quán"
             value={userDetail?.queQuan || ''}
             type="text"
             disabled={false}
@@ -460,8 +441,7 @@ export default function UpdateUser() {
             }}
           />
           <CustomSelectBox
-            title="Nationality"
-
+            title="Quốc Tịch"
             value={userDetail?.quocTichID}
             option={listNation.map((nationItem) => {
               return (
@@ -474,8 +454,7 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="Permanent address"
-
+            title="Địa chỉ thường trú"
             value={userDetail?.diaChiThuongTru || ''}
             type="text"
             require={true}
@@ -485,8 +464,7 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="Temporary residence address"
-
+            title="Địa chỉ tạm trú"
             value={userDetail?.diaChiTamTru || ''}
             type="text"
             disabled={false}
@@ -496,8 +474,7 @@ export default function UpdateUser() {
             }}
           />
           <CustomInputField
-            title="Phone number"
-
+            title="Số điện thoại"
             value={userDetail?.soDienThoai || ''}
             type="text"
             disabled={false}
@@ -506,10 +483,8 @@ export default function UpdateUser() {
               setUserDetail({ ...userDetail, soDienThoai: event.target.value })
             }}
           />
-          <p className="check">{checSoDienThoai}</p>
           <CustomInputField
-            title="Phone number 2"
-
+            title="Số điện thoại 2"
             value={userDetail?.soDienThoai2 || ''}
             type="text"
             disabled={false}
@@ -522,15 +497,14 @@ export default function UpdateUser() {
             title="Email"
             value={userDetail?.email || ''}
             type="text"
-            disabled={true}
+            disabled={false}
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, email: event.target.value })
             }}
           />
           <CustomSelectBox
-            title="Marital status"
-
+            title="Tình Trạng Hôn Nhân"
             value={userDetail?.tinhTrangHonNhanID}
             option={listMarriage.map((marriageItem) => {
               return (
@@ -552,22 +526,20 @@ export default function UpdateUser() {
             }}
           /> */}
           <CustomInputField
-            title="Severance day"
-
+            title="Ngày Nghỉ Việc"
             value={userDetail?.ngayNghiViec}
             type="date"
-            disabled={true} //yyyy-mm-dd
+            disabled={false} //yyyy-mm-dd
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, ngayNghiViec: event.target.value })
             }}
           />
           <CustomInputField
-            title="Reason for leaving job"
-
+            title="Lý Do Nghỉ"
             value={userDetail?.lyDoNghi || ''}
             type="text"
-            disabled={true}
+            disabled={false}
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, lyDoNghi: event.target.value })
@@ -583,7 +555,7 @@ export default function UpdateUser() {
           <span class="image">
             <img src="/home/save-icon.svg" />
           </span>
-          <span class="text">Save</span>
+          <span class="text">Lưu thông tin</span>
         </button>
       </div>
       <ToastContainer />

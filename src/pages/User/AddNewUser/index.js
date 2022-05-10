@@ -61,8 +61,7 @@ export default function AddNewUser() {
     getAllMarriage()
   }, [])
 
-  const [userDetail, setUserDetail] = useState({
-    id: '',
+  const [userDetail, setUserDetail] = useState({id:'',
     tinhChatHopDongID: '1', tinhTrangHonNhanID: '1',
     quocTichID: '1', tenNv: '', ngaySinh: '', gioiTinh: true,
     soDienThoai: '', soDienThoai2: '', email: '',
@@ -71,7 +70,7 @@ export default function AddNewUser() {
     ngayCapHoChieu: '', ngayHetHanHoChieu: '', noiSinh: '',
     queQuan: '', diaChiThuongTru: '', diaChiTamTru: '',
     atmNganHang: '', soAtm: '',
-    ngayBatDauLam: ''
+    ngayBatDauLam: '', ngayNghiViec: '', lyDoNghi: ''
 
   })
   const [submitError, setSubmitError] = useState({ status: false, error: '' })
@@ -80,30 +79,30 @@ export default function AddNewUser() {
   const handleCreate = async () => {
     try {
       setSubmitError({ status: false, error: '' })
-      const { id, tinhChatHopDongID, tinhTrangHonNhanID,
+      const { id,tinhChatHopDongID, tinhTrangHonNhanID,
         quocTichID, tenNv, ngaySinh,
         gioiTinh, soDienThoai, soDienThoai2,
         email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
         hoChieu, noiCapHoChieu, ngayCapHoChieu, ngayHetHanHoChieu,
         noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
-        soAtm, ngayBatDauLam
+        soAtm, ngayBatDauLam, ngayNghiViec, lyDoNghi
       } = userDetail;
-      console.log('test user: ', userDetail)
-      if (!id.toString().trim()?.length || !tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
-        || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
-        || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length || !soDienThoai2.toString().trim()?.length
-        || !email.toString().trim()?.length || !cccd.toString().trim()?.length || !noiCapCccd.toString().trim()?.length
-        || !ngayCapCccd.toString().trim()?.length || !ngayHetHanCccd.toString().trim()?.length || !hoChieu.toString().trim()?.length
-        || !noiCapHoChieu.toString().trim()?.length || !ngayCapHoChieu.toString().trim()?.length || !ngayHetHanHoChieu.toString().trim()?.length
-        || !noiSinh.toString().trim()?.length || !queQuan.toString().trim()?.length || !diaChiThuongTru.toString().trim()?.length
-        || !diaChiTamTru.toString().trim()?.length || !atmNganHang.toString().trim()?.length || !soAtm.toString().trim()?.length
-        || !ngayBatDauLam.toString().trim()?.length
+      console.log('test user: ',userDetail)
+      if ( !id.toString().trim()?.length || !tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
+      || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
+      || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length || !soDienThoai2.toString().trim()?.length
+      || !email.toString().trim()?.length || !cccd.toString().trim()?.length || !noiCapCccd.toString().trim()?.length
+      || !ngayCapCccd.toString().trim()?.length || !ngayHetHanCccd.toString().trim()?.length || !hoChieu.toString().trim()?.length
+      || !noiCapHoChieu.toString().trim()?.length || !ngayCapHoChieu.toString().trim()?.length || !ngayHetHanHoChieu.toString().trim()?.length
+      || !noiSinh.toString().trim()?.length || !queQuan.toString().trim()?.length || !diaChiThuongTru.toString().trim()?.length
+      || !diaChiTamTru.toString().trim()?.length || !atmNganHang.toString().trim()?.length || !soAtm.toString().trim()?.length
+     || !ngayBatDauLam.toString().trim()?.length
       ) {
         setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
       } else {
         setIsSubmit(true)
 
-        const updateRes = await UserAPI.addNewUser({ ...userDetail })
+        const updateRes = await UserAPI.addNewUser({...userDetail })
         if (updateRes?.status === 200) {
           toast.success(updateRes?.data)
         }
@@ -120,17 +119,17 @@ export default function AddNewUser() {
     <div className="update-account-page">
       <div className="row">
         <div className="col-12">
-          <div className="title">Add Information of Employee</div>
-          <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
+          <div className="title">Thêm Thông Tin Nhân Viên</div>
+          <div className="title-sub">Những ô có dấu * không được để trống</div>
         </div>
       </div>
 
       <div className="row avatar-row">
-
+   
         <div>
           <CustomInputField
-            title="Employee code"
-            placeholder="VD: NV000000"
+            title="Mã Số Nhân Viên"
+            placeholder = "VD: NV0000xyz"
             type="text"
             disabled={false}
             require={true}
@@ -138,15 +137,15 @@ export default function AddNewUser() {
               setUserDetail({ ...userDetail, id: event.target.value })
             }}
           />
-
+          
         </div>
       </div>
 
       <div className="row fied-data-row">
         <div>
-          <CustomInputField
-            title="Full name"
-
+        <CustomInputField
+            title="Họ và tên"
+            
             type="text"
             disabled={false}
             require={true}
@@ -155,8 +154,8 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Citizen identification"
-
+            title="Căn cước công dân"
+            
             type="text"
             disabled={false}
             require={true}
@@ -165,9 +164,9 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Place of issue of identity card"
+            title="Nơi cấp căn cước công dân"
             type="text"
-
+            
             disabled={false}
             require={true}
             handleChange={(event) => {
@@ -175,8 +174,8 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Date of issuance of citizen's identity card"
-
+            title="Ngày cấp căn cước"
+            
             type="date"
             disabled={false}
             require={true}
@@ -188,19 +187,19 @@ export default function AddNewUser() {
 
           />
           <CustomInputField
-            title="Citizen ID expiration date"
-
+            title="Ngày hết hạn căn cước"
+            
             type="date"
             disabled={false}
             require={true}
             handleChange={(event) => {
-
-              setUserDetail({ ...userDetail, ngayHetHanCccd: event.target.value })
+           
+              setUserDetail({ ...userDetail, ngayHetHanCccd:  event.target.value })
             }}
           />
           <CustomInputField
-            title="Passport"
-
+            title="Hộ chiếu"
+            
             type="text"
             disabled={false}
             handleChange={(event) => {
@@ -208,8 +207,8 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Place of issue of passport"
-
+            title="Nơi cấp hộ chiếu"
+            
             type="text"
             disabled={false}
             handleChange={(event) => {
@@ -217,30 +216,30 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Passport issuance date"
-
+            title="Ngày cấp hộ chiếu"
+            
             type="date"
             disabled={false}
             require={true}
             handleChange={(event) => {
-
+    
               setUserDetail({ ...userDetail, ngayCapHoChieu: event.target.value })
             }}
           />
           <CustomInputField
-            title="Passport expiration date"
-
+            title="Ngày hết hạn hộ chiếu"
+            
             type="date"
             disabled={false}
             require={true}
             handleChange={(event) => {
-
+            
               setUserDetail({ ...userDetail, ngayHetHanHoChieu: event.target.value })
             }}
           />
           <CustomInputField
-            title="Bank name"
-
+            title="ATM ngân hàng"
+            
             type="text"
             disabled={false}
             require={true}
@@ -249,8 +248,8 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="ATM number"
-
+            title="Số ATM"
+            
             type="text"
             disabled={false}
             require={true}
@@ -259,18 +258,18 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Date start work"
-
+            title="Ngày Bắt Đầu Làm: "
+            
             type="date"
             disabled={false}
             handleChange={(event) => {
-
+              
               setUserDetail({ ...userDetail, ngayBatDauLam: event.target.value })
             }}
           />
           <CustomSelectBox
-            title="Nature of Contract"
-            value={userDetail?.tinhChatHopDongID || 1}
+            title="Tính Chất Hợp Đồng"
+            value = {userDetail?.tinhChatHopDongID || 1}
             option={listContractNature.map((contractNatureItem) => {
               return (
                 { label: contractNatureItem.tinhChatHopDong, value: contractNatureItem.id }
@@ -285,17 +284,17 @@ export default function AddNewUser() {
 
         <div>
           <CustomSelectBox
-            title="Gender"
-            value={userDetail?.gioiTinh || true}
-            option={[{ label: "Male", value: true }, { label: "Female", value: false }]}
+            title="Giới Tính :"
+            value = {userDetail?.gioiTinh || true}
+            option={[{ label: "Nam", value: true }, { label: "Nữ", value: false }]}
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, gioiTinh: event.currentTarget.value })
             }}
           />
           <CustomInputField
-            title="Date of birth"
-
+            title="Ngày sinh"
+            
             type="date"
             disabled={false} //yyyy-mm-dd
             require={true}
@@ -304,8 +303,8 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Place of birth"
-
+            title="Nơi Sinh"
+            
             type="text"
             require={true}
             disabled={false}
@@ -314,8 +313,8 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Home town"
-
+            title="Quê Quán"
+            
             type="text"
             disabled={false}
             require={true}
@@ -324,8 +323,8 @@ export default function AddNewUser() {
             }}
           />
           <CustomSelectBox
-            title="Nationality"
-            value={userDetail?.quocTichID || 1}
+            title="Quốc Tịch"
+            value = {userDetail?.quocTichID || 1}
             option={listNation.map((nationItem) => {
               return (
                 { label: nationItem.quocTich, value: nationItem.id }
@@ -337,8 +336,8 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Permanent address"
-
+            title="Địa chỉ thường trú"
+            
             type="text"
             require={true}
             disabled={false}
@@ -347,8 +346,8 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Temporary residence address"
-
+            title="Địa chỉ tạm trú"
+            
             type="text"
             disabled={false}
             require={true}
@@ -357,8 +356,8 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Phone number"
-
+            title="Số điện thoại"
+            
             type="text"
             disabled={false}
             require={true}
@@ -367,8 +366,8 @@ export default function AddNewUser() {
             }}
           />
           <CustomInputField
-            title="Phone number 2"
-
+            title="Số điện thoại 2"
+           
             type="text"
             disabled={false}
             require={false}
@@ -378,7 +377,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Email"
-
+            
             type="text"
             disabled={false}
             require={true}
@@ -387,8 +386,8 @@ export default function AddNewUser() {
             }}
           />
           <CustomSelectBox
-            title="Marital status"
-            value={userDetail?.tinhTrangHonNhanID || 1}
+            title="Tình Trạng Hôn Nhân"
+            value = {userDetail?.tinhTrangHonNhanID || 1}
             option={listMarriage.map((marriageItem) => {
               return (
                 { label: marriageItem.tinhTrang, value: marriageItem.id }
@@ -408,23 +407,19 @@ export default function AddNewUser() {
               setUserDetail({ ...userDetail, trangThaiLaoDong: event.currentTarget.value })
             }}
           /> */}
-
           <CustomInputField
-            title="Severance day"
-
-
+            title="Ngày Nghỉ Việc"
+            
             type="date"
             disabled={false} //yyyy-mm-dd
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, ngayNghiViec: event.target.value })
             }}
-
           />
           <CustomInputField
-            title="Reason for leaving job"
-
-
+            title="Lý Do Nghỉ"
+            
             type="text"
             disabled={false}
             require={true}
@@ -442,7 +437,7 @@ export default function AddNewUser() {
           <span class="image">
             <img src="/home/save-icon.svg" />
           </span>
-          <span class="text">Add</span>
+          <span class="text">Thêm thông tin</span>
         </button>
       </div>
       <ToastContainer />

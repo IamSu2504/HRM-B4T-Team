@@ -30,21 +30,21 @@ export default function AddNewAccount() {
       </div>
 
       <div className="add-account-frame">
-        <div className="title">Add account</div>
+        <div className="title">Thêm Tài Khoản</div>
         <div className="input-field-frame">
           <CustomInput placeHolder="ID" />
         </div>
         <div className="input-field-frame">
-          <CustomInput placeHolder="Employee code" />
+          <CustomInput placeHolder="Mã số nhân viên" />
         </div>
         <div className="input-field-frame">
-          <CustomInput placeHolder="Username" />
+          <CustomInput placeHolder="Tên đăng nhập" />
         </div>
         <div className="input-field-frame">
-          <CustomInput placeHolder="Password" />
+          <CustomInput placeHolder="Mật khẩu" />
         </div>
         <div className="button-frame">
-          <button>Add</button>
+          <button>Tạo Tài Khoản</button>
         </div>
       </div>
     </div>

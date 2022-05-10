@@ -8,8 +8,8 @@ export default function UpdateLeave() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Edit Information of Leave</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    <div className="title">Chỉnh Sửa Thông Tin Ngày Nghỉ</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
@@ -24,7 +24,7 @@ export default function UpdateLeave() {
                     />
 
                     <CustomInputField
-                        title="Type of leave"
+                        title="Loại nghỉ"
                         value=""
                         type="text"
                         disabled={false}
@@ -38,7 +38,7 @@ export default function UpdateLeave() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Save</span>
+                    <span class="text">Lưu thông tin</span>
                 </button>
             </div>
         </div>

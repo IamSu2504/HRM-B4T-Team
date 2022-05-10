@@ -57,7 +57,7 @@ export default function UpdateDiscipline() {
             if (error.response) {
                 setSubmitError({ status: true, error: error.response.data })
             }
-        }
+        } 
         finally {
             setIsSubmit(false)
         }
@@ -66,15 +66,15 @@ export default function UpdateDiscipline() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Edit Information of Discipline</div>
-                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
+                    <div className="title">Chỉnh Sửa Thông Tin Kỉ Luật </div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomSelectBox
-                        title="Type of Discipline"
+                        title="Phân Loại"
                         value={rewardDisciplineDetail?.phanLoaiID}
                         option={listDiscipline.map((disciplineItem) => {
                             return (
@@ -87,8 +87,7 @@ export default function UpdateDiscipline() {
                         }}
                     />
                     <CustomInputField
-                        title="Reason"
-                        require={true}
+                        title="Lý Do *:"
                         value={rewardDisciplineDetail?.lyDo || ''}
                         type="text"
                         handleChange={(event) => {
@@ -96,8 +95,7 @@ export default function UpdateDiscipline() {
                         }}
                     />
                     <CustomInputField
-                        title="Employee code"
-                        require={true}
+                        title="Mã Số Nhân Viên *:"
                         value={rewardDisciplineDetail?.maNv || ''}
                         type="text"
                         handleChange={(event) => {
@@ -115,10 +113,10 @@ export default function UpdateDiscipline() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Save</span>
+                    <span class="text">Lưu thông tin</span>
                 </button>
             </div>
-            <ToastContainer />
+            <ToastContainer />  
         </div>
     );
 }

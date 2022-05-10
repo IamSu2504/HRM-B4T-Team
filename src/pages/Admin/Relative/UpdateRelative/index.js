@@ -54,8 +54,8 @@ export default function UpdateRelative() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Edit Information of Relationship</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    <div className="title">Chỉnh Sửa Thông Tin Quan Hệ</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
@@ -69,8 +69,7 @@ export default function UpdateRelative() {
                     />
 
                     <CustomInputField
-                        title="Relationship"
-                        require={true}
+                        title="Quan Hệ *:"
                         value={relativeDetail?.quanHe || ''}
                         type="text"
                         handleChange={(event) => {
@@ -88,7 +87,7 @@ export default function UpdateRelative() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Save</span>
+                    <span class="text">Lưu thông tin</span>
                 </button>
             </div>
             <ToastContainer />

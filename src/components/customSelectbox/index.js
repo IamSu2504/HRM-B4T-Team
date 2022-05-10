@@ -6,8 +6,8 @@ export default function CustomSelectBox(props) {
   return (
     <div className="custom-select-frame">
       <label className='input-title'>{
-        require ? <p>{title} <span style={{color:"red"}}>*</span></p> : <p>{title}</p>
-      } </label>
+        require ? <p>{title}  </p> : <p>{title}</p>
+      }</label>
       <select
         value={value}
         onChange={(event) => {

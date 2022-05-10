@@ -21,7 +21,7 @@ export default function CustomPopover(props) {
           }}
         >
           <div style={{ textAlign: "center" }}>
-            {noti ? noti : 'Are you sure you want to delete?'}
+            {noti ? noti : 'Bạn có chắc chắn muốn xóa không?'}
           </div>
           <div
             style={{
@@ -38,13 +38,13 @@ export default function CustomPopover(props) {
               }}
               onClick={handleSubmit}
             >
-              Delete
+              Đồng ý
             </button>
             <button
               style={{ padding: "5px 20px", border: "gray 1px solid" }}
               onClick={onClose}
             >
-              Cancel
+              Huỷ
             </button>
           </div>
         </div>

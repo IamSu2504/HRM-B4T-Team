@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import CustomInputField from "../../../../components/customInputField";
-import { useNavigate } from "react-router-dom";
-
 import CustomSelectBox from "../../../../components/customSelectbox";
 import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,7 +10,7 @@ export default function AddSalaryGrade() {
     const [salaryGradeDetail, setSalaryGradeDetail] = useState({ maBacLuong: '', tenBacLuong: '', khoangLuongTu: '', khoangLuongDen: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
-    const navigate = useNavigate()
+
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
@@ -28,7 +26,7 @@ export default function AddSalaryGrade() {
                     console.log('da vao day 2')
                     toast.success(updateRes?.data)
                 }
-                else {
+                else{
                     toast.error('aaaa')
                 }
             }
@@ -44,16 +42,15 @@ export default function AddSalaryGrade() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Add Information of Salary Grade</div>
-                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
+                    <div className="title">Thêm Thông Tin Bậc Lương</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Salary grade code"
-                        require={true}
+                        title="Mã Bậc Lương *:"
                         type="text"
                         handleChange={(event) => {
                             setSalaryGradeDetail({ ...salaryGradeDetail, maBacLuong: event.target.value })
@@ -61,8 +58,7 @@ export default function AddSalaryGrade() {
                     />
 
                     <CustomInputField
-                        title="Salary grade name"
-                        require={true}
+                        title="Tên Bậc Lương *:"
                         type="text"
                         handleChange={(event) => {
                             setSalaryGradeDetail({ ...salaryGradeDetail, tenBacLuong: event.target.value })
@@ -70,8 +66,7 @@ export default function AddSalaryGrade() {
                     />
 
                     <CustomInputField
-                        title="From"
-                        require={true}
+                        title="Khoảng Lương Từ *:"
                         type="text"
                         handleChange={(event) => {
                             setSalaryGradeDetail({ ...salaryGradeDetail, khoangLuongTu: event.target.value })
@@ -79,8 +74,7 @@ export default function AddSalaryGrade() {
                     />
 
                     <CustomInputField
-                        title="To"
-                        require={true}
+                        title="Khoảng Lương Đến *:"
                         type="text"
                         handleChange={(event) => {
                             setSalaryGradeDetail({ ...salaryGradeDetail, khoangLuongDen: event.target.value })
@@ -94,19 +88,11 @@ export default function AddSalaryGrade() {
                 {submitError.status && <div className="tax-update-error">{submitError.error}</div>}
             </div>
             <div>
-                <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
+                <button className="save-button" disabled={isSubmit} onClick={()=>handleCreate()}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Add</span>
-                </button>
-            </div>
-            <div>
-                <button className="save-button" disabled={isSubmit} onClick={() => navigate(`/admin/viewsalarygrade`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">List Account</span>
+                    <span class="text">Thêm</span>
                 </button>
             </div>
             <ToastContainer />

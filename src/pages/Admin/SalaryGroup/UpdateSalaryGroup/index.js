@@ -55,7 +55,7 @@ export default function UpdateSalaryGroup() {
             <div className="row">
                 <div className="col-12">
                     <div className="title">Chỉnh Sửa Thông Tin Nhóm Lương</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    <div className="title-sub">Những ô có dấu * không được để trống</div>
                 </div>
             </div>
 

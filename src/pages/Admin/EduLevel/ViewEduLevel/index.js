@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import EduLevelAPI from "../../../../api/eduLevel";
 import CustomPopover from "../../../../components/CustomPopover";
@@ -12,9 +12,9 @@ export default function ViewEduLevel() {
 
     const navigate = useNavigate()
 
-    const getAllEduLevel = async () => {
+    const getAllEduLevel = async() => {
         const eduLevelRes = await EduLevelAPI.getAll()
-        if (eduLevelRes?.status === 200) {
+        if ( eduLevelRes?.status === 200 ){
             setListEduLevel(eduLevelRes?.data)
         }
     }
@@ -23,15 +23,15 @@ export default function ViewEduLevel() {
         getAllEduLevel()
     }, [])
 
-    const deleteEduLevel = async (eduLevelId) => {
-        try {
+    const deleteEduLevel = async(eduLevelId) => {
+        try{
             const deleteRes = await EduLevelAPI.deleteEduLevel(eduLevelId)
 
-            if (deleteRes?.status === 200) {
+            if (deleteRes?.status === 200){
                 toast('Xóa thành công')
                 getAllEduLevel()
             }
-        } catch (error) {
+        }catch(error){
             if (error.response) {
                 toast(error.response.data)
             }
@@ -40,22 +40,15 @@ export default function ViewEduLevel() {
 
     return (
         <div className="homepage">
-            <div className="title">List of Education Level</div>
+            <div className="title">Danh sách Trình Độ Học Vấn</div>
             <div className="table-frame">
-                <div>
-                    <button className="save-button" onClick={() => navigate(`/admin/addeduLevel`)}>
-                        <span class="image">
-                            <img src="/home/save-icon.svg" />
-                        </span>
-                        <span class="text">Add</span>
-                    </button>
-                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">No.</th>
-                            <th scope="col">Level</th>
-                            <th scope="col">Edit</th>
+                            <th scope="col">STT</th>
+                            <th scope="col">Trình Độ</th>
+                            <th scope="col">Sửa</th>
+                            <th scope="col">Xoá</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,9 +58,30 @@ export default function ViewEduLevel() {
                                     <th scope="row">{eduLevelIndex + 1}</th>
                                     <td>{eduLevelItem?.trinhDo}</td>
                                     <td>
-                                        <div onClick={() => navigate(`/admin/updateeduLevel/${eduLevelItem?.id}`)}>
+                                        <div onClick={()=>navigate(`/admin/updateeduLevel/${eduLevelItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
+                                    </td>
+                                    <td>                
+                                        <CustomPopover
+                                            open={popoverId === eduLevelItem?.id}
+                                            onClose={() => setPopoverId("")}
+                                            handleSubmit={() => {
+                                                deleteEduLevel(eduLevelItem?.id)
+                                            }}
+                                        >          
+                                            <div 
+                                                onClick={() => {
+                                                    if (popoverId !== eduLevelItem?.id) {
+                                                        setPopoverId(eduLevelItem?.id);
+                                                    } else {
+                                                        setPopoverId("");
+                                                    }
+                                                }}
+                                            >
+                                                <img src="/home/delete-icon.svg" />
+                                            </div>
+                                        </CustomPopover>
                                     </td>
                                 </tr>
                             )
@@ -110,7 +124,14 @@ export default function ViewEduLevel() {
                 </nav>
             </div>
 
-
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/addeduLevel`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Thêm Mới</span>
+                </button>
+            </div>
             <ToastContainer />
         </div>
     );

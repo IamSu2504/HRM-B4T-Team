@@ -40,26 +40,16 @@ export default function ViewContract() {
 
     return (
         <div className="homepage">
-            <div className="title">List of Contract Types</div>
+            <div className="title">Danh sách Loại Hợp Đồng</div>
             <div className="table-frame">
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addcontract`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Add</span>
-                </button>
-            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-
-                            <th scope="col">No.</th>
-                            <th scope="col">Classification code</th>
-                            <th scope="col">Contract type name</th>
-                            <th scope="col">Edit</th>
-                           
-
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã Hợp Đồng</th>
+                            <th scope="col">Tên Loại Hợp Đồng</th>
+                            <th scope="col">Sửa</th>
+                            <th scope="col">Xoá</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,7 +64,27 @@ export default function ViewContract() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-
+                                    <td>                
+                                        <CustomPopover
+                                            open={popoverId === contractItem?.id}
+                                            onClose={() => setPopoverId("")}
+                                            handleSubmit={() => {
+                                                deleteContract(contractItem?.id)
+                                            }}
+                                        >          
+                                            <div 
+                                                onClick={() => {
+                                                    if (popoverId !== contractItem?.id) {
+                                                        setPopoverId(contractItem?.id);
+                                                    } else {
+                                                        setPopoverId("");
+                                                    }
+                                                }}
+                                            >
+                                                <img src="/home/delete-icon.svg" />
+                                            </div>
+                                        </CustomPopover>
+                                    </td>
                                 </tr>
                             )
                         })}
@@ -116,7 +126,14 @@ export default function ViewContract() {
                 </nav>
             </div>
 
-           
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/addcontract`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Thêm Mới</span>
+                </button>
+            </div>
             <ToastContainer />
         </div>
     );
