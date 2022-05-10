@@ -6,13 +6,15 @@ import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SalaryGradeAPI from "../../../../api/SalaryGrade";
+import { useNavigate } from "react-router-dom";
+
 
 export default function UpdateSalaryGrade() {
     const [salaryGradeDetail, setSalaryGradeDetail] = useState({ maBacLuong: '', tenBacLuong: '', khoangLuongTu: '', khoangLuongDen: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const { salaryGradeId } = useParams()
-
+    const navigate = useNavigate()
     const getSalaryGradeDetail = async () => {
         if (salaryGradeId) {
             const salaryGradeRes = await SalaryGradeAPI.getSalaryGradeById(salaryGradeId)
@@ -58,8 +60,8 @@ export default function UpdateSalaryGrade() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Bậc Lương</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Edit Information of Salary Grade</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
@@ -67,7 +69,8 @@ export default function UpdateSalaryGrade() {
                 <div>
 
                     <CustomInputField
-                        title="Mã Bậc Lương *:"
+                        title="Salary grade code"
+                        require={true}
                         value={salaryGradeDetail?.maBacLuong || ''}
                         type="text"
                         handleChange={(event) => {
@@ -76,7 +79,8 @@ export default function UpdateSalaryGrade() {
                     />
 
                     <CustomInputField
-                        title="Tên Bậc Lương *:"
+                        title="Salary grade name"
+                        require={true}
                         value={salaryGradeDetail?.tenBacLuong || ''}
                         type="text"
                         handleChange={(event) => {
@@ -85,7 +89,8 @@ export default function UpdateSalaryGrade() {
                     />
 
                     <CustomInputField
-                        title="Khoảng Lương Từ *:"
+                        title="From"
+                        require={true}
                         value={salaryGradeDetail?.khoangLuongTu || ''}
                         type="text"
                         handleChange={(event) => {
@@ -94,7 +99,8 @@ export default function UpdateSalaryGrade() {
                     />
 
                     <CustomInputField
-                        title="Khoảng Lương Đến *:"
+                        title="To"
+                        require={true}
                         value={salaryGradeDetail?.khoangLuongDen || ''}
                         type="text"
                         handleChange={(event) => {
@@ -113,7 +119,15 @@ export default function UpdateSalaryGrade() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Edit</span>
+                </button>
+            </div>
+            <div>
+                <button className="save-button" disabled={isSubmit} onClick={() => navigate(`/admin/viewsalarygrade`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">List Account</span>
                 </button>
             </div>
             <ToastContainer />

@@ -39,15 +39,17 @@ export default function AddClassRoom() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Thêm Thông Tin Phòng Học</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Add Classroom Information</div>
+                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank
+</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Mã Phòng Học *:"
+                        title="Classroom code"
+                        require={true}
                         value={classRoomDetail?.maPhongHoc || ''}
                         type="text"
                         handleChange={(event) => {
@@ -55,7 +57,8 @@ export default function AddClassRoom() {
                         }}
                     />
                     <CustomInputField
-                        title="Tên Phòng Học *:"
+                        title="Classroom name"
+                        require={true}
                         value={classRoomDetail?.tenPhongHoc || ''}
                         type="text"
                         handleChange={(event) => {
@@ -72,7 +75,7 @@ export default function AddClassRoom() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Thêm</span>
+                    <span class="text">Add</span>
                 </button>
             </div>
             <ToastContainer />

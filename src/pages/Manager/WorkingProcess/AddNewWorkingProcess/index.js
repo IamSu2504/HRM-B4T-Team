@@ -68,15 +68,15 @@ export default function AddWorkingProcess() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Thêm Thông Tin Quá Trình Công Tác</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Add Information of Working Process</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomSelectBox
-                        title="Phòng Ban Làm Việc"
+                        title="Department"
                         option={listDepartment.map((departmentItem) => {
                             return (
                                 { label: departmentItem.tenPhongBan, value: departmentItem.id }
@@ -88,7 +88,7 @@ export default function AddWorkingProcess() {
                         }}
                     />
                     <CustomSelectBox
-                        title="Chức Vụ Làm Việc"
+                        title="Position"
                         option={listPosition.map((positionItem) => {
                             return (
                                 { label: positionItem.tenChucVu, value: positionItem.id }
@@ -100,8 +100,8 @@ export default function AddWorkingProcess() {
                         }}
                     />
                     <CustomInputField
-                        title="Ngày Vào Làm Việc"
-
+                        title="Date start work"
+                        require={true}
                         type="date"
                         handleChange={(event) => {
                             const parts = event.target.value.split('-');
@@ -110,7 +110,8 @@ export default function AddWorkingProcess() {
                         }}
                     />
                     <CustomInputField
-                        title="Ngày Kết Thúc"
+                        title="Date end work"
+                        require={true}
                         type="date"
                         handleChange={(event) => {
                             const parts = event.target.value.split('-');
@@ -119,9 +120,9 @@ export default function AddWorkingProcess() {
                         }}
                     />
                     <CustomSelectBox
-                        title="Trạng Thái"
+                        title="Status"
                         option={
-                            [{ label: "Đang Làm Việc", value: true }, { label: "Đã Kết Thúc", value: false }]
+                            [{ label: "Working", value: true }, { label: "Finished", value: false }]
                         }
                         require={true}
                         handleChange={(event) => {
@@ -129,7 +130,8 @@ export default function AddWorkingProcess() {
                         }}
                     />
                     <CustomInputField
-                        title="Mã Nhân Viên"
+                        title="Employee code"
+                        require={true}
                         type="text"
                         handleChange={(event) => {
                             setWorkingProcessDetail({ ...workingProcessDetail, maNV: event.target.value })
@@ -145,7 +147,7 @@ export default function AddWorkingProcess() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Thêm</span>
+                    <span class="text">Add</span>
                 </button>
             </div>
             <ToastContainer />

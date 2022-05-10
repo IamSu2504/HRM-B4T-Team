@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ManagerRewardDisciplineAPI from "../../../../api/Manager/rewardDiscipline";
 import CustomPopover from "../../../../components/CustomPopover";
@@ -11,9 +11,9 @@ export default function ViewReward() {
 
     const navigate = useNavigate()
 
-    const getAllReward = async() => {
+    const getAllReward = async () => {
         const RewardRes = await ManagerRewardDisciplineAPI.getAllReward()
-        if ( RewardRes?.status === 200 ){
+        if (RewardRes?.status === 200) {
             setListReward(RewardRes?.data)
         }
     }
@@ -24,17 +24,25 @@ export default function ViewReward() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Khen Thưởng</div>
+            <div className="title">List of Reward</div>
             <div className="table-frame">
+                <div>
+                    <button className="save-button" onClick={() => navigate(`/manager/addreward`)}>
+                        <span class="image">
+                            <img src="/home/save-icon.svg" />
+                        </span>
+                        <span class="text">Add</span>
+                    </button>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">STT</th>
-                            <th scope="col">Mã Nhân Viên</th>
-                            <th scope="col">Tên Nhân Viên</th>
-                            <th scope="col">Phân Loại</th>
-                            <th scope="col">Lý Do</th>
-                            <th scope="col">Sửa</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Employee code</th>
+                            <th scope="col">Employee name</th>
+                            <th scope="col">Type of Reward</th>
+                            <th scope="col">Reason</th>
+                            <th scope="col">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,7 +55,7 @@ export default function ViewReward() {
                                     <td>{rewardItem?.phanLoai?.danhMuc}</td>
                                     <td>{rewardItem?.lyDo}</td>
                                     <td>
-                                        <div onClick={()=>navigate(`/manager/updatereward/${rewardItem?.id}`)}>
+                                        <div onClick={() => navigate(`/manager/updatereward/${rewardItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
@@ -58,16 +66,8 @@ export default function ViewReward() {
                     </tbody>
                 </table>
             </div>
- 
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/manager/addreward`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+
             <ToastContainer />
         </div>
     );

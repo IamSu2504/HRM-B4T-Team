@@ -55,15 +55,15 @@ export default function AddDiscipline() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Thêm Thông Tin Kỉ Luật </div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Add Information of Discipline</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomSelectBox
-                        title="Phân Loại"
+                        title="Type of Discipline"
                         option={listDiscipline.map((disciplineItem) => {
                             return (
                                 { label: disciplineItem.danhMuc, value: disciplineItem.id }
@@ -75,14 +75,16 @@ export default function AddDiscipline() {
                         }}
                     />
                     <CustomInputField
-                        title="Lý Do *:"
+                        title="Reason"
+                        require={true}
                         type="text"
                         handleChange={(event) => {
                             setrewardDisciplineDetail({ ...rewardDisciplineDetail, lyDo: event.target.value })
                         }}
                     />
                     <CustomInputField
-                        title="Mã Số Nhân Viên *:"
+                        title="Employee code"
+                        require={true}
                         type="text"
                         handleChange={(event) => {
                             setrewardDisciplineDetail({ ...rewardDisciplineDetail, maNv: event.target.value })
@@ -98,7 +100,7 @@ export default function AddDiscipline() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Thêm</span>
+                    <span class="text">Add</span>
                 </button>
             </div>
             <ToastContainer />

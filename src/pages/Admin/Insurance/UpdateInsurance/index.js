@@ -54,8 +54,8 @@ export default function UpdateInsurance() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Bảo Hiểm</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Edit Information of Insurance</div>
+                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
@@ -69,7 +69,8 @@ export default function UpdateInsurance() {
                     />
 
                     <CustomInputField
-                        title="Mã Bảo Hiểm *:"
+                        title="Insurance code"
+                        require={true}
                         value={insuranceDetail?.maBH || ''}
                         type="text"
                         handleChange={(event) => {
@@ -77,7 +78,8 @@ export default function UpdateInsurance() {
                         }}
                     />
                     <CustomInputField
-                        title="Tên Bảo Hiểm *:"
+                        title="Insurance name"
+                        require={true}
                         value={insuranceDetail?.tenBH || ''}
                         type="text"
                         handleChange={(event) => {
@@ -95,7 +97,7 @@ export default function UpdateInsurance() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
                 </button>
             </div>
             <ToastContainer />

@@ -8,8 +8,8 @@ export default function UpdateBonusPunish() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Khen Thưởng Và Kỉ Luật</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Edit information on reward and discipline</div>
+                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
@@ -24,14 +24,14 @@ export default function UpdateBonusPunish() {
                     />
 
                     <CustomInputField
-                        title="Danh Mục"
+                        title="Category"
                         value=""
                         type="text"
                         disabled={false}
                         require={true}
                     />
                     <CustomInputField
-                        title="Tiêu Đề"
+                        title="Title"
                         value=""
                         type="text"
                         disabled={false}
@@ -46,7 +46,7 @@ export default function UpdateBonusPunish() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
                 </button>
             </div>
         </div>

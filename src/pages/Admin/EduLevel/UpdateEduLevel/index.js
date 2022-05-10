@@ -54,8 +54,9 @@ export default function UpdateEduLevel() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Trình Độ Học Vấn</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Edit Information of Education Level</div>
+                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    
                 </div>
             </div>
 
@@ -69,7 +70,8 @@ export default function UpdateEduLevel() {
                     />
 
                     <CustomInputField
-                        title="Trình Độ Học Vấn *:"
+                        title="Education Leve"
+                        require={true}
                         value={eduLevelDetail?.trinhDo || ''}
                         type="text"
                         handleChange={(event) => {
@@ -87,7 +89,7 @@ export default function UpdateEduLevel() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
                 </button>
             </div>
             <ToastContainer />

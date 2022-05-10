@@ -26,18 +26,26 @@ export default function ViewOutdated() {
         <div className="homepage">
             <div className="title">Danh sách Nhân Viên Sắp Hết Hạn</div>
             <div className="table-frame">
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/manager/addreward`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Add</span>
+                </button>
+            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">STT</th>
-                            <th scope="col">Ảnh</th>
-                            <th scope="col">Mã Nhân Viên</th>
-                            <th scope="col">Tên Nhân Viên</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Employee code</th>
+                            <th scope="col">Employee name</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Căn Cước Công Dân</th>
-                            <th scope="col">Hộ Chiếu</th>
-                            <th scope="col">Ngày Hiệu Lực</th>
-                            <th scope="col">Ngày Hết Hạn</th>
+                            <th scope="col">Citizen ID</th>
+                            <th scope="col">Passport</th>
+                            <th scope="col">Effective date</th>
+                            <th scope="col">Expiration date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,14 +70,7 @@ export default function ViewOutdated() {
             </div>
  
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/manager/addreward`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+            
             <ToastContainer />
         </div>
     );

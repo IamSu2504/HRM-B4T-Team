@@ -25,20 +25,28 @@ export default function ViewContract() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh Sách Hợp Đồng</div>
+            <div className="title">List of Contract</div>
             <div className="table-frame">
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/manager/addcontract`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Add</span>
+                </button>
+            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">STT</th>
-                            <th scope="col">Mã Hơp Đồng</th>
-                            <th scope="col">Mã Số Nhân Viên</th>
-                            <th scope="col">Loại Hợp Đồng</th>
-                            <th scope="col">Ngày Hiệu Lực</th>
-                            <th scope="col">Ngày Hết Hạn</th>
-                            <th scope="col">Ghi Chú</th>
-                            <th scope="col">Trạng Thái</th>
-                            <th scope="col">Sửa</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Contract code</th>
+                            <th scope="col">Employee code</th>
+                            <th scope="col">Type of Contract</th>
+                            <th scope="col">Effective date</th>
+                            <th scope="col">Expiration date</th>
+                            <th scope="col">Note</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,14 +109,6 @@ export default function ViewContract() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/manager/addcontract`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
             <ToastContainer />
         </div>
     );

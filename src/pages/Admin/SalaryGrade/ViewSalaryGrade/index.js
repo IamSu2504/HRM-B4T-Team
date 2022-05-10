@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
@@ -23,17 +23,25 @@ export default function ViewSalaryGrade() {
     }, [])
     return (
         <div className="homepage">
-            <div className="title">Danh sách Bậc Lương</div>
+            <div className="title">List of Salary Grade</div>
             <div className="table-frame">
+                <div>
+                    <button className="save-button" onClick={() => navigate(`/admin/addsalarygrade`)}>
+                        <span class="image">
+                            <img src="/home/save-icon.svg" />
+                        </span>
+                        <span class="text">Add</span>
+                    </button>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">STT</th>
-                            <th scope="col">Mã Bậc Lương</th>
-                            <th scope="col">Tên Bậc Lương</th>
-                            <th scope="col">Khoảng Lương Từ</th>
-                            <th scope="col">Khoảng Lương Đến</th>
-                            <th scope="col">Sửa</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Salary grade code</th>
+                            <th scope="col">Salary grade name</th>
+                            <th scope="col">From</th>
+                            <th scope="col">To</th>
+                            <th scope="col">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,7 +54,7 @@ export default function ViewSalaryGrade() {
                                     <td>{salaryGradeItem?.khoangLuongTu}</td>
                                     <td>{salaryGradeItem?.khoangLuongDen}</td>
                                     <td>
-                                        <div onClick={()=>navigate(`/admin/updatesalarygrade/${salaryGradeItem?.id}`)}>
+                                        <div onClick={() => navigate(`/admin/updatesalarygrade/${salaryGradeItem?.id}`)}>
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
@@ -112,14 +120,7 @@ export default function ViewSalaryGrade() {
                 </nav>
             </div> */}
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addsalarygrade`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+
             <ToastContainer />
         </div>
     );

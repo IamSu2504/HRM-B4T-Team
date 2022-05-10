@@ -39,15 +39,16 @@ export default function AddSpecialize() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Thêm Thông Tin Chuyên Môn</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Add Information of Specialize</div>
+                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Mã Chuyên Môn"
+                        title="Specialize code"
+                        require={true}
                         value={specializeDetail?.maChuyenMon || ''}
                         type="text"
                         handleChange={(event) => {
@@ -55,7 +56,8 @@ export default function AddSpecialize() {
                         }}
                     />
                     <CustomInputField
-                        title="Chuyên Môn"
+                        title="Specialize name"
+                        require={true}
                         value={specializeDetail?.chuyenMon || ''}
                         type="text"
                         handleChange={(event) => {
@@ -72,7 +74,7 @@ export default function AddSpecialize() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Thêm</span>
+                    <span class="text">Add</span>
                 </button>
             </div>
             <ToastContainer />

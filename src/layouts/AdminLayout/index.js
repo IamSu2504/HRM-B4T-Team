@@ -37,12 +37,12 @@ export default function AdminLayout(props) {
                   onClickOutside={() => setVisibleInfoPopover(false)}
                   content={
                     <div className="header-popover-content">
-                      <div onClick={() => navigate(`/admin/viewuser/${localStorage.getItem('maNv')}`)}>Thông tin tài khoản</div>
+                      <div onClick={() => navigate(`/admin/viewuser/${localStorage.getItem('maNv')}`)}>Personal information</div>
                       <hr />
                       <div onClick={() => {
                         localStorage.clear()
                         navigate("/login");
-                      }}>Đăng xuất</div>
+                      }}>Logout</div>
                     </div>
                   }
                 >
@@ -89,7 +89,7 @@ export default function AdminLayout(props) {
               </div> */}
 
               <hr className="user-info-hr" />
-              <div className="text-sub">Quản lí tài khoản</div>
+              <div className="text-sub">Account Management</div>
               <br />
               <div id="accordion" className="menu-accordion menu-accordion1">
                 <div className="card">
@@ -104,7 +104,7 @@ export default function AdminLayout(props) {
                           <div className="content1">
                             <img src="/menu/account.svg" />
                           </div>
-                          <div className="content2">Tài khoản</div>
+                          <div className="content2">Account</div>
                         </div>
                         <div className="content3">
                           <img src="/menu/down-arrow.svg" />
@@ -120,7 +120,7 @@ export default function AdminLayout(props) {
                     <div className="card-body">
                       <div onClick={() => navigate('/admin/viewaccount')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Xem tài khoản</span>
+                        <span style={{ marginLeft: '15px' }}>List Account</span>
                       </div>
                       {/* <div onClick={()=>navigate('/admin/forgot')}>
                         <img src="/menu/list-icon.svg" />
@@ -141,7 +141,7 @@ export default function AdminLayout(props) {
                           <div className="content1">
                             <img src="/menu/list.svg" />
                           </div>
-                          <div className="content2">Danh mục</div>
+                          <div className="content2">Categories</div>
                         </div>
                         <div className="content3">
                           <img src="/menu/down-arrow.svg" />
@@ -157,90 +157,93 @@ export default function AdminLayout(props) {
                     <div className="card-body">
                       <div onClick={() => navigate('/admin/viewsalarygrade')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Bậc Lương</span>
+                        <span style={{ marginLeft: '15px' }}>Salary grade</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewtax')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Thuế</span>
+                        <span style={{ marginLeft: '15px' }}>Tax</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewshift')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Ca Làm</span>
+                        <span style={{ marginLeft: '15px' }}>Shifts</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewposition')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Chức Vụ</span>
+                        <span style={{ marginLeft: '15px' }}>Position</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewspecialize')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Chuyên Môn</span>
+                        <span style={{ marginLeft: '15px' }}>Specialize</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewrewardDiscipline')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Khen Thưởng Kỉ Luật</span>
+                        <span style={{ marginLeft: '15px' }}>Rewards and Discipline</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewrelative')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Quan Hệ</span>
+                        <span style={{ marginLeft: '15px' }}>Relationship</span>
                       </div>
+                      
+
                       <div onClick={() => navigate('/admin/viewsalaryGroup')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Nhóm Lương</span>
+                        <span style={{ marginLeft: '15px' }}>Salary group</span>
                       </div>
+
                       <div onClick={() => navigate('/admin/viewnation')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Quốc Tịch</span>
+                        <span style={{ marginLeft: '15px' }}>Nationality</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewmarriage')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Tình Trạng Hôn Nhân</span>
+                        <span style={{ marginLeft: '15px' }}>Marital status</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewdegree')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Bằng Cấp</span>
+                        <span style={{ marginLeft: '15px' }}>Degree</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewinsurance')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Bảo Hiểm</span>
+                        <span style={{ marginLeft: '15px' }}>Insurance</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewcertificate')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Chứng Chỉ</span>
+                        <span style={{ marginLeft: '15px' }}>Certificate</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewcontract')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Hợp Đồng</span>
+                        <span style={{ marginLeft: '15px' }}>Contract</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewcontractNature')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Tính Chất Hợp Đồng</span>
+                        <span style={{ marginLeft: '15px' }}>Nature of contract</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewclassRoom')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Phòng Học</span>
+                        <span style={{ marginLeft: '15px' }}>Classroom</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewholiday')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Ngày Lễ</span>
+                        <span style={{ marginLeft: '15px' }}>Holiday</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewdayOff')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Ngày Nghỉ</span>
+                        <span style={{ marginLeft: '15px' }}>Day off</span>
                       </div>
                       <div onClick={() => navigate('/admin/viewdepartment')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Phòng Ban</span>
+                        <span style={{ marginLeft: '15px' }}>Department</span>
                       </div>
                       <div onClick={() => navigate('/admin/vieweduLevel')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Trình Độ Học Vấn</span>
+                        <span style={{ marginLeft: '15px' }}>Academic level</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="text-sub">Quản lí thông tin</div>
+              <div className="text-sub">Information management</div>
               <br />
               <div id="accordion1" className="menu-accordion menu-accordion2">
                 <div className="card">
@@ -255,7 +258,7 @@ export default function AdminLayout(props) {
                           <div className="content1">
                             <img src="/menu/hopdong.svg" />
                           </div>
-                          <div className="content2">Thông tin hợp đồng</div>
+                          <div className="content2">Contract information</div>
                         </div>
                         <div className="content3">
                           <img src="/menu/down-arrow.svg" />
@@ -271,7 +274,7 @@ export default function AdminLayout(props) {
                     <div className="card-body">
                       <div>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Hợp đồng lao động</span>
+                        <span style={{ marginLeft: '15px' }}>Labor contract</span>
                       </div>
                     </div>
                   </div>
@@ -288,7 +291,7 @@ export default function AdminLayout(props) {
                           <div className="content1">
                             <img src="/menu/employer.svg" />
                           </div>
-                          <div className="content2">Chấm công</div>
+                          <div className="content2">Timekeeping</div>
                         </div>
                         <div className="content3">
                           <img src="/menu/down-arrow.svg" />
@@ -304,15 +307,15 @@ export default function AdminLayout(props) {
                     <div className="card-body">
                       <div>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Chấm công</span>
+                        <span style={{ marginLeft: '15px' }}>Timekeeping</span>
                       </div>
                       <div>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Nghỉ phép</span>
+                        <span style={{ marginLeft: '15px' }}>Leave</span>
                       </div>
                       <div onClick={() => navigate('/admin/registerShift')}>
                         <img src="/menu/list-icon.svg" />
-                        <span style={{ marginLeft: '15px' }}>Đăng Kí Ca Làm</span>
+                        <span style={{ marginLeft: '15px' }}>Register for Shifts</span>
                       </div>
                     </div>
                   </div>

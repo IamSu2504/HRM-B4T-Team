@@ -40,15 +40,23 @@ export default function ViewDayOff() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Ngày Nghỉ</div>
+            <div className="title">List of Day Off</div>
             <div className="table-frame">
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/adddayOff`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Add</span>
+                </button>
+            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">STT</th>
-                            <th scope="col">Ngày Nghỉ</th>
-                            <th scope="col">Sửa</th>
-                            <th scope="col">Xoá</th>
+                            <th scope="col">No. </th>
+                            <th scope="col">Type of day off</th>
+                            <th scope="col">Edit</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -62,27 +70,7 @@ export default function ViewDayOff() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-                                    <td>                
-                                        <CustomPopover
-                                            open={popoverId === dayOffItem?.id}
-                                            onClose={() => setPopoverId("")}
-                                            handleSubmit={() => {
-                                                deleteDayOff(dayOffItem?.id)
-                                            }}
-                                        >          
-                                            <div 
-                                                onClick={() => {
-                                                    if (popoverId !== dayOffItem?.id) {
-                                                        setPopoverId(dayOffItem?.id);
-                                                    } else {
-                                                        setPopoverId("");
-                                                    }
-                                                }}
-                                            >
-                                                <img src="/home/delete-icon.svg" />
-                                            </div>
-                                        </CustomPopover>
-                                    </td>
+
                                 </tr>
                             )
                         })}
@@ -124,14 +112,7 @@ export default function ViewDayOff() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/adddayOff`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+          
             <ToastContainer />
         </div>
     );

@@ -25,10 +25,10 @@ export default function AdminHomePage(props) {
           </div>
           <div className="list-menu">
             <ul>
-              <li onClick={()=>navigate('/admin/viewaccount')}>Tài Khoản</li>
-              <li onClick={()=>navigate('/admin/viewsalarygrade')}>Danh Mục </li>
-              <li>Thông Tin Hợp Đồng</li>
-              <li>Chấm Công</li>
+              <li onClick={()=>navigate('/admin/viewaccount')}>Account</li>
+              <li onClick={()=>navigate('/admin/viewsalarygrade')}>Categories</li>
+              <li>Contract information</li>
+              <li>Timekeeping</li>
               
             </ul>
           </div>

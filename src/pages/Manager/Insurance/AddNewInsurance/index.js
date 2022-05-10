@@ -57,41 +57,44 @@ export default function AddManagerInsurance() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Thêm Thông Tin Bảo Hiểm</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Add Information of Insurance</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Mã Nhân Viên *:"
+                        title="Employee code"
+                        require={true}
                         type="text"
                         handleChange={(event) => {
                             setManagerInsuranceDetail({ ...managerInsuranceDetail, maNV: event.target.value })
                         }}
                     />
                     <CustomSelectBox
-                        title="Loại Bảo Hiểm"
+                        title="Type of Insurance"
+                        require={true}
                         option={listInsurance.map((insuranceItem) => {
                             return (
                                 { label: insuranceItem.tenBH, value: insuranceItem.id }
                             )
                         })}
-                        require={true}
                         handleChange={(event) => {
                             setManagerInsuranceDetail({ ...managerInsuranceDetail, idLoaiBH: event.currentTarget.value })
                         }}
                     />
                     <CustomInputField
-                        title="Mã Số Bảo Hiểm *:"
+                        title="Insurance code"
+                        require={true}
                         type="text"
                         handleChange={(event) => {
                             setManagerInsuranceDetail({ ...managerInsuranceDetail, maSoBH: event.target.value })
                         }}
                     />
                     <CustomInputField
-                        title="Tiền Bảo Hiểm *:"
+                        title="Insurance money"
+                        require={true}
                         type="text"
                         handleChange={(event) => {
                             setManagerInsuranceDetail({ ...managerInsuranceDetail, tienBH: event.target.value })
@@ -107,7 +110,7 @@ export default function AddManagerInsurance() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Thêm</span>
+                    <span class="text">Add</span>
                 </button>
             </div>
             <ToastContainer />

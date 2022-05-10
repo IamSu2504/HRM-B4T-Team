@@ -15,12 +15,12 @@ export default function EmployeeHomepage(){
           {localStorage.getItem('name')}
         </div>
         <div className='position'>
-          Nhân viên
+          Employee
         </div>
         <div className='menu'>
           <ul>
-            <li onClick={()=>navigate(`/employee/viewcontract/${localStorage.getItem('maNv')}`)}>Thông Tin Hợp Đồng</li>
-            <li>Chấm Công</li>
+            <li onClick={()=>navigate(`/employee/viewcontract/${localStorage.getItem('maNv')}`)}>Contract information</li>
+            <li>Timekeeping</li>
           </ul>
         </div>
       </div>

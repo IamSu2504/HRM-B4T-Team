@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AccountAPI from "../../../../api/account";
 import CustomInputField from "../../../../components/customInputField";
 import CustomSelectBox from "../../../../components/customSelectbox";
@@ -13,7 +14,7 @@ export default function UpdateAccount() {
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const { accountId } = useParams()
-
+    const navigate = useNavigate()
     const getAccountDetail = async () => {
         if (accountId) {
             const accountRes = await AccountAPI.getAccountById(accountId)
@@ -46,13 +47,13 @@ export default function UpdateAccount() {
             const { username, password, maNv, roleID } = accountDetail
 
             if (!username.trim().length || !password.trim().length || !maNv.trim().length) {
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information cannot be left blank' })
             } else {
                 setIsSubmit(true)
 
                 const updateRes = await AccountAPI.updateAccount({ id: accountId, ...accountDetail })
                 if (updateRes?.status === 200) {
-                    toast.success('Cập nhật thông tin thành công')
+                    toast.success('New account successfully added')
                 }
             }
         } catch (error) {
@@ -68,8 +69,8 @@ export default function UpdateAccount() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Tài Khoản</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Edit Account Information</div>
+                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
@@ -83,31 +84,34 @@ export default function UpdateAccount() {
                     />
 
                     <CustomInputField
-                        title="Tên Đăng Nhập *:"
+                        title="Username"
                         value={accountDetail?.username || ''}
                         type="text"
                         handleChange={(event) => {
                             setAccountDetail({ ...accountDetail, username: event.target.value })
                         }}
+                        require={true}
                     />
                     <CustomInputField
-                        title="Mật Khẩu *:"
+                        title="Password"
                         value={accountDetail?.password || ''}
                         type="password"
                         handleChange={(event) => {
                             setAccountDetail({ ...accountDetail, password: event.target.value })
                         }}
+                        require={true}
                     />
                     <CustomInputField
-                        title="Mã Nhân Viên *:"
+                        title="Employee code"
                         value={accountDetail?.maNv || ''}
                         type="text"
                         handleChange={(event) => {
                             setAccountDetail({ ...accountDetail, maNv: event.target.value })
                         }}
+                        require={true}
                     />
                     <CustomSelectBox
-                        title="Quyền Hạn :"
+                        title="Role" 
                         option={listRole.map((roleItem) => {
                             return (
                                 { label: roleItem.tenRole, value: roleItem.id }
@@ -130,7 +134,15 @@ export default function UpdateAccount() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
+                </button>
+            </div>
+            <div>
+                <button className="save-button" disabled={isSubmit} onClick={() => navigate(`/admin/viewaccount`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">List Account</span>
                 </button>
             </div>
             <ToastContainer />

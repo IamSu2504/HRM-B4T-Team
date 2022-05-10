@@ -75,10 +75,10 @@ export default function Login() {
       <div className='login-frame'>
         <div className='left'>
           <div className='header'>
-            <p>Chào mừng bạn</p>
+            <p>B4T Education</p>
           </div>
           <div className='desc'>
-            <p>Hãy đảm bảo tài khoản của bạn đã được ủy quyền</p>
+            <p>Be All You Can Be</p>
           </div>
           <div className='img'>
             <img src="/login-bg.svg" alt='login-img' />

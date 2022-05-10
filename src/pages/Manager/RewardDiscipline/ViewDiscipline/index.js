@@ -24,17 +24,25 @@ export default function ViewDiscipline() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Kỉ Luật</div>
+            <div className="title">List of Discipline</div>
             <div className="table-frame">
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/manager/adddiscipline`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Add</span>
+                </button>
+            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">STT</th>
-                            <th scope="col">Mã Nhân Viên</th>
-                            <th scope="col">Tên Nhân Viên</th>
-                            <th scope="col">Phân Loại</th>
-                            <th scope="col">Lý Do</th>
-                            <th scope="col">Sửa</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Employee code</th>
+                            <th scope="col">Employee name</th>
+                            <th scope="col">Type of Discipline</th>
+                            <th scope="col">Reason</th>
+                            <th scope="col">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,14 +68,7 @@ export default function ViewDiscipline() {
             </div>
  
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/manager/adddiscipline`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+
             <ToastContainer />
         </div>
     );

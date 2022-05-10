@@ -54,8 +54,8 @@ export default function UpdateTax() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Thuế</div>
-                    <div className="title-sub">Những ô có dấu * không được để trống</div>
+                    <div className="title">Edit Information of Tax</div>
+                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
@@ -69,7 +69,8 @@ export default function UpdateTax() {
                     />
 
                     <CustomInputField
-                        title="Mã Phân Loại *:"
+                         title="Classification code"
+                         require={true}
                         value={taxDetail?.maPhanLoai || ''}
                         type="text"
                         handleChange={(event) => {
@@ -77,7 +78,8 @@ export default function UpdateTax() {
                         }}
                     />
                     <CustomInputField
-                        title="Tên Loại Thuế *:"
+                        title="Type of tax"
+                        require={true}
                         value={taxDetail?.tenLoaiThue || ''}
                         type="text"
                         handleChange={(event) => {
@@ -95,7 +97,7 @@ export default function UpdateTax() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
                 </button>
             </div>
             <ToastContainer />

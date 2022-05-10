@@ -6,7 +6,7 @@ export default function ViewTimekeeping() {
         <div className="view-timekeeping-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chấm công</div>
+                    <div className="title">Timekeeping</div>
                 </div>
             </div>
             <div className="row fied-data-row">
@@ -14,12 +14,12 @@ export default function ViewTimekeeping() {
                     <div className="title-sub">Timesheet</div>
                     <table>
                         <tr>
-                            <th>STT</th>
-                            <th>Ngày/Tháng/Năm</th>
-                            <th>Ca làm</th>
+                            <th>No.</th>
+                            <th>Date</th>
+                            <th>Shift</th>
                             <th>Check-in</th>
                             <th>Check-out</th>
-                            <th>Ngày làm việc</th>
+                            <th>Working day</th>
                         </tr>
                         <tr>
                             <td>1</td>
@@ -148,14 +148,14 @@ export default function ViewTimekeeping() {
                     <div>
                         <table className="description">
                             <tr>
-                                <th>Số ngày đến muộn</th>
+                                <th>Number of days of late arrival</th>
                                 <td>0</td>
                             </tr>
                             <tr>
-                                <th>Số ngày về sớm</th>
+                                <th>Number of days to return early</th>
                                 <td>0</td>
                             </tr><tr>
-                                <th>Số ngày không chấm công</th>
+                                <th>Number of days to return early</th>
                                 <td>0</td>
                             </tr>
                         </table>

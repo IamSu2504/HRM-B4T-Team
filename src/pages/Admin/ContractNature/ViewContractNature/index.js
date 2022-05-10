@@ -40,15 +40,25 @@ export default function ViewContractNature() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách Tính Chất Hợp Đồng</div>
+            <div className="title">List of Contract Nature</div>
             <div className="table-frame">
+            <div>
+                <button className="save-button" onClick={()=>navigate(`/admin/addcontractNature`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Add</span>
+                </button>
+            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">STT</th>
-                            <th scope="col">Tính Chất Hợp Đồng</th>
-                            <th scope="col">Sửa</th>
-                            <th scope="col">Xoá</th>
+
+
+                            <th scope="col">No.</th>
+                            <th scope="col">Contract Nature</th>
+                            <th scope="col">Edit</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -62,27 +72,7 @@ export default function ViewContractNature() {
                                             <img src="/home/update-icon.svg" />
                                         </div>
                                     </td>
-                                    <td>                
-                                        <CustomPopover
-                                            open={popoverId === contractNatureItem?.id}
-                                            onClose={() => setPopoverId("")}
-                                            handleSubmit={() => {
-                                                deleteContractNature(contractNatureItem?.id)
-                                            }}
-                                        >          
-                                            <div 
-                                                onClick={() => {
-                                                    if (popoverId !== contractNatureItem?.id) {
-                                                        setPopoverId(contractNatureItem?.id);
-                                                    } else {
-                                                        setPopoverId("");
-                                                    }
-                                                }}
-                                            >
-                                                <img src="/home/delete-icon.svg" />
-                                            </div>
-                                        </CustomPopover>
-                                    </td>
+
                                 </tr>
                             )
                         })}
@@ -124,14 +114,7 @@ export default function ViewContractNature() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={()=>navigate(`/admin/addcontractNature`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
+            
             <ToastContainer />
         </div>
     );

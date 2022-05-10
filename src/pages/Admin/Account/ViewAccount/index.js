@@ -26,16 +26,25 @@ export default function ViewAccount() {
 
     return (
         <div className="homepage">
-            <div className="title">Danh sách tài khoản</div>
+            <div className="title">List of Accounts</div>
+            
             <div className="table-frame">
+            <div>
+                <button className="save-button" onClick={() => navigate(`/admin/addaccount`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Add</span>
+                </button>
+            </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">
-                            <th scope="col">STT</th>
-                            <th scope="col">Mã Số Nhân Viên</th>
-                            <th scope="col">Tên Đăng Nhập</th>
-                            <th scope="col">Quyền Hạn</th>
-                            <th scope="col">Sửa</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Employee code</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,15 +102,8 @@ export default function ViewAccount() {
                 </nav>
             </div>
 
-            <div>
-                <button className="save-button" onClick={() => navigate(`/admin/addaccount`)}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Thêm Mới</span>
-                </button>
-            </div>
-            <ToastContainer />
+            
+            <ToastContainer/>
         </div>
     );
 }
