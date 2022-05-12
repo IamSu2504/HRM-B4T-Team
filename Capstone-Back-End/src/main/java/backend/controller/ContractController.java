@@ -56,6 +56,20 @@ public class ContractController {
         }
     }
 
+    @GetMapping(value = "/newID")
+    public ResponseEntity<?> getNewID() {
+        try {
+            String newID = service.getLastID();
+            if(newID==null){
+                return new ResponseEntity<>("Unable to get new contract ID", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(newID, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody CreateUpdateContractRequest request) {
         try {

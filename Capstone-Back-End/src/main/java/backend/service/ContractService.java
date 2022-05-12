@@ -24,6 +24,13 @@ public class ContractService {
         return repo.findAll();
     }
 
+    public String getLastID() {
+        String lastID = repo.getLastID();
+        String newID = "HD";
+        newID += String.valueOf(Integer.parseInt(lastID.substring(2,lastID.length()))+1);
+        return newID;
+    }
+
     public List<Contract> getAllByEmp(String empID) {
         return repo.getAllByEmp(empID);
     }
