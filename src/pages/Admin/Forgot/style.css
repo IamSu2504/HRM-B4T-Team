@@ -67,6 +67,10 @@
   margin-left: 45%;
   cursor: pointer;
 }
+.forgot-page .forgot-frame .right .forgot-pw-txt:hover {
+  text-decoration: underline;
+  color: red;
+}
 .forgot-page .forgot-frame .right input {
   width: 90%;
   margin-left: 5%;

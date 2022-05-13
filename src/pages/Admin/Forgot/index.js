@@ -61,7 +61,7 @@ export default function Forgot() {
               <button  onClick={forgot}>Get Password</button>
             </div>
             <div className='forgot-pw-txt' onClick={() => navigate('/')}>
-              <a>Login</a>
+              <a>Back to login</a>
             </div>
           </div>
         </div>

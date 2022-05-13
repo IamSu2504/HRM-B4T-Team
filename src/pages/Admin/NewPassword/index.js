@@ -73,7 +73,7 @@ export default function NewPassword() {
 
             <div className='user-input' >
 
-              <input placeholder='Nhập Mật Khẩu Mới'
+              <input placeholder='Enter your password'
                 type="password"
                 value={newpassword}
                 onChange={(event) => setNewPassword(event.target.value)} />
@@ -81,7 +81,7 @@ export default function NewPassword() {
             </div>
             <div className='user-input' >
 
-              <input placeholder='Nhập Lại Mật Khẩu Mới'
+              <input placeholder='Re-enter your password'
                 type="password"
                 value={repassword}
                 onChange={(event) => setRePassword(event.target.value)} />
@@ -90,14 +90,13 @@ export default function NewPassword() {
             <div>
               {submitError.status && <div className="forgot-error">{submitError.error}</div>}
             </div>
-            <div className='fogot-pw-txt' onClick={() => navigate('/')}>
-              <a>Login</a>
-            </div>
 
             <div className='forgot-button'>
               <button disabled={isSubmit} onClick={handleUpdate}>Update</button>
             </div>
-
+            <div className='forgot-pw-txt' onClick={() => navigate('/')}>
+              <a>Back to login</a>
+            </div>
           </div>
         </div>
       </div>
