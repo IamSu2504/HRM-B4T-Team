@@ -21,7 +21,7 @@ public class TaxCategoryController {
         try {
             List<TaxCategory> listTaxCategory = service.getAll();
             if(listTaxCategory.isEmpty()){
-                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Category is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listTaxCategory, HttpStatus.OK);
         }catch(Exception e){
@@ -35,7 +35,7 @@ public class TaxCategoryController {
             int id = Integer.parseInt(pv);
             TaxCategory c = service.getById(id);
             if(c==null){
-                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Category not found.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
@@ -48,9 +48,9 @@ public class TaxCategoryController {
         try {
             TaxCategory t = service.save(taxCategory);
             if(t==null){
-                return new ResponseEntity<>("Mã phân loại thuế đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Tax code already exist.", HttpStatus.EXPECTATION_FAILED);
             }
-            return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Add successful.", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -63,7 +63,7 @@ public class TaxCategoryController {
             taxCategory.setId(id);
             TaxCategory t = service.save(taxCategory);
             if(t==null){
-                return new ResponseEntity<>("Mã phân loại thuế đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Tax code already exist.", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Update successfully", HttpStatus.OK);
         }catch(Exception e){
@@ -76,7 +76,7 @@ public class TaxCategoryController {
         try {
             int id = Integer.parseInt(pv);
             service.delete(id);
-            return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Delete successful.", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }

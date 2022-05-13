@@ -22,7 +22,7 @@ public class InsuranceController {
         try {
             List<Insurance> listInsurance = service.getAll();
             if(listInsurance.isEmpty()){
-                return new ResponseEntity<>("Danh sách bảo hiểm trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List of insurance is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listInsurance, HttpStatus.OK);
         }catch(Exception e){
@@ -36,7 +36,7 @@ public class InsuranceController {
             int id = Integer.parseInt(pv);
             Insurance c = service.getById(id);
             if(c==null){
-                return new ResponseEntity<>("Không tìm thấy bảo hiểm", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Insurance not found.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
@@ -49,9 +49,9 @@ public class InsuranceController {
         try {
             Insurance t = service.save(request);
             if(t==null){
-                return new ResponseEntity<>("Mã số bảo hiểm đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Insurance code already exist.", HttpStatus.EXPECTATION_FAILED);
             }
-            return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Add successful.", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -63,11 +63,11 @@ public class InsuranceController {
             int id = Integer.parseInt(pv);
             request.setId(id);
             if (service.getById(id) == null) {
-                return new ResponseEntity<>("Mã bảo hiểm này không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Insurance code doesn't exist.", HttpStatus.NOT_FOUND);
             }
             Insurance t = service.save(request);
             if(t==null){
-                return new ResponseEntity<>("Mã số bảo hiểm đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Insurance code already exist.", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Update successfully", HttpStatus.OK);
         }catch(Exception e){

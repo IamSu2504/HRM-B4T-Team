@@ -22,7 +22,7 @@ public class WorkingProcessController {
         try {
             List<WorkingProcess> listWP = service.getAll();
             if(listWP.isEmpty()){
-                return new ResponseEntity<>("Danh sách quá trình làm việc trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Working process is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listWP, HttpStatus.OK);
         }catch(Exception e){
@@ -45,7 +45,7 @@ public class WorkingProcessController {
             int id = Integer.parseInt(pv);
             WorkingProcess c = service.getById(id);
             if(c==null){
-                return new ResponseEntity<>("Không tìm thấy quá trình làm việc này", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Working process not found.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
@@ -58,9 +58,9 @@ public class WorkingProcessController {
         try {
             WorkingProcess t = service.save(request);
             if(t==null){
-                return new ResponseEntity<>("Quá trình công tác này đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Working process already exist.", HttpStatus.EXPECTATION_FAILED);
             }
-            return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Add successful.", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -71,12 +71,12 @@ public class WorkingProcessController {
         try {
             int id = Integer.parseInt(pv);
             if (service.getById(id) == null) {
-                return new ResponseEntity<>("Quá trình công tác này không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Working process doesn't exist.", HttpStatus.NOT_FOUND);
             }
             request.setId(id);
             WorkingProcess t = service.save(request);
             if(t==null){
-                return new ResponseEntity<>("Quá trình công tác này đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Working process already exist.", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Update successfully", HttpStatus.OK);
         }catch(Exception e){

@@ -22,7 +22,7 @@ public class HealthController {
         try {
             List<Health> listHealth = service.getAll();
             if(listHealth.isEmpty()){
-                return new ResponseEntity<>("Danh sách tình trạng sức khỏe trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List of health is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listHealth, HttpStatus.OK);
         }catch(Exception e){
@@ -36,7 +36,7 @@ public class HealthController {
             int id = Integer.parseInt(pv);
             Health h = service.getById(id);
             if(h==null){
-                return new ResponseEntity<>("Không tìm thấy tình trạng sức khỏe", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Health condition not found.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(h, HttpStatus.OK);
         }catch(Exception e){
@@ -49,9 +49,9 @@ public class HealthController {
         try {
             Health t = service.save(request);
             if(t==null){
-                return new ResponseEntity<>("Tình trạng sức khỏe này đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Health condition already exist.", HttpStatus.EXPECTATION_FAILED);
             }
-            return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Add successful.", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -63,11 +63,11 @@ public class HealthController {
             int id = Integer.parseInt(pv);
             request.setId(id);
             if (service.getById(id) == null) {
-                return new ResponseEntity<>("Tình trạng sức khỏe này không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Health condition doesn't exist.", HttpStatus.NOT_FOUND);
             }
             Health t = service.save(request);
             if(t==null){
-                return new ResponseEntity<>("Tình trạng sức khỏe này đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Health condition already exist.", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Update successfully", HttpStatus.OK);
         }catch(Exception e){

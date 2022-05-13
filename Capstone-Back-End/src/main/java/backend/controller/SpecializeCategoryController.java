@@ -20,7 +20,7 @@ public class SpecializeCategoryController {
         try {
             List<SpecializeCategory> list = service.getAll();
             if(list.isEmpty()){
-                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Category is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){
@@ -34,7 +34,7 @@ public class SpecializeCategoryController {
             int id = Integer.parseInt(pv);
             SpecializeCategory c = service.getById(id);
             if(c==null){
-                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Category not found.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
@@ -47,9 +47,9 @@ public class SpecializeCategoryController {
         try {
             SpecializeCategory c = service.save(specializeCategory);
             if(c==null){
-                return new ResponseEntity<>("Mã chuyên môn đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Specialize code already exist.", HttpStatus.EXPECTATION_FAILED);
             }
-            return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Add successful.", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -62,7 +62,7 @@ public class SpecializeCategoryController {
             specializeCategory.setId(id);
             SpecializeCategory c = service.save(specializeCategory);
             if(c==null){
-                return new ResponseEntity<>("Mã chuyên môn đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Specialize code already exist.", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Update successfully", HttpStatus.OK);
         }catch(Exception e){
@@ -75,7 +75,7 @@ public class SpecializeCategoryController {
         try {
             int id = Integer.parseInt(pv);
             service.delete(id);
-            return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Delete successful.", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }

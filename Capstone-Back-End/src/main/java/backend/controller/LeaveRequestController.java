@@ -23,7 +23,7 @@ public class LeaveRequestController {
         try {
             List<LeaveRequest> list = service.getAll();
             if (list.isEmpty()) {
-                return new ResponseEntity<>("Chưa có yêu cầu đăng kí nghỉ nào.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List of leave request id empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class LeaveRequestController {
             int id = Integer.parseInt(pv);
             LeaveRequest c = service.getById(id);
             if (c == null) {
-                return new ResponseEntity<>("Không tìm thấy yêu cầu đăng kí nghỉ.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Could not find any leave request.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         } catch (Exception e) {
@@ -50,7 +50,7 @@ public class LeaveRequestController {
         try {
             String mess = service.createLeaveRequest(request);
             if (mess == null) {
-                return new ResponseEntity<>("Đăng kí nghỉ thành công", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("Send leave request successful.", HttpStatus.INTERNAL_SERVER_ERROR);
             }
             if (mess.contains("thành công")) {
                 return new ResponseEntity<>(mess, HttpStatus.OK);
@@ -66,12 +66,12 @@ public class LeaveRequestController {
         try {
             int id = Integer.parseInt(pv);
             if (service.getById(id) == null) {
-                return new ResponseEntity<>("Yêu cầu đăng kí nghỉ không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Leave request doesn't exist.", HttpStatus.NOT_FOUND);
             }
             request.setId(id);
             String mess = service.createLeaveRequest(request);
             if (mess == null) {
-                return new ResponseEntity<>("Duyệt đơn thành công", HttpStatus.OK);
+                return new ResponseEntity<>("Approve successful.", HttpStatus.OK);
             }
             if (mess.contains("thành công")) {
                 return new ResponseEntity<>(mess, HttpStatus.OK);
