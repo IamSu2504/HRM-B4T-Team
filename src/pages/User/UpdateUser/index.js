@@ -13,6 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { dateTimeConverter } from "../../../utils/util";
+import validator from 'validator'
 
 export default function UpdateUser() {
   const [listPosition, setListPosition] = useState([])
@@ -142,12 +143,31 @@ export default function UpdateUser() {
   // useEffect(() => {
   //   getUserImage()
   // }, [])
-  
+
   //validate
-  const [checSoDienThoai, setCheckSoDienThoai] = useState([''])
+  const [checkCccd, setCheckCccd] = useState('')
+  const [checkHoChieu, setCheckHoChieu] = useState('')
+  const [checSoDienThoai, setCheckSoDienThoai] = useState('')
+  const [checSoDienThoai2, setCheckSoDienThoai2] = useState('')
+  const [checkEmail, setCheckEmail] = useState('')
+
+  var valiCccd = /^[0-9]{12}$/;
+  var valiHoChieu = /(([A-Z]{1})+([0-9]{7})\b)/g;
+  var valiSoDienThoai = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+  var valiSoDienThoai2 = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+
+  // const validateEmail = (email) => {
+
+  //   if (validator.isEmail(email)) {
+  //     setEmailError('Valid Email :)')
+  //   } else {
+  //     setEmailError('Enter valid Email!')
+  //   }
+  // }
 
   const handleUpdate = async () => {
     try {
+      var valid = false;
       setSubmitError({ status: false, error: '' })
       const { tinhChatHopDongID, tinhTrangHonNhanID,
         quocTichID, tenNv, ngaySinh,
@@ -157,11 +177,6 @@ export default function UpdateUser() {
         noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
         soAtm, ngayBatDauLam, ngayNghiViec, lyDoNghi
       } = userDetail;
-
-
-      console.log('test user>>>',userDetail)
-
-      console.log('test user', userDetail)
 
       // if (!tinhChatHopDongID.toString()?.trim()?.length || !tinhTrangHonNhanID.toString()?.trim()?.length
       //   || !quocTichID.trim().toString()?.trim()?.length || !tenNv.toString()?.trim()?.length || !ngaySinh.toString()?.trim()?.length
@@ -176,8 +191,6 @@ export default function UpdateUser() {
 
 
 
-      console.log('>>>>>', tinhChatHopDongID.toString().trim()?.length)
-
       if (!tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
         || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
         || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length
@@ -188,40 +201,35 @@ export default function UpdateUser() {
         || !diaChiTamTru.toString().trim()?.length || !atmNganHang.toString().trim()?.length || !soAtm.toString().trim()?.length
         || !ngayBatDauLam.toString().trim()?.length
       ) {
-        console.log("da vao day 1")
         setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
-      } else
-      if (soDienThoai.toString().trim()?.length != 10){
-        setCheckSoDienThoai('Số điện thoại phải có 10 số')
-      }else{
-        setCheckSoDienThoai('')
-        setIsSubmit(true)
-        console.log("da vao day 2")
-        // const ngaySinhMoi = ngaySinh.split('-');
-        // const ngaySinhCN = ngaySinhMoi[2] + '/' + ngaySinhMoi[1] + '/' + ngaySinhMoi[0]
+      }
+      else
+        if (!valiCccd.test(cccd) || !validator.isEmail(email) || !valiHoChieu.test(hoChieu) || !valiSoDienThoai.test(soDienThoai) ||
+          (soDienThoai2.toString().trim()?.length && !valiSoDienThoai2.test(soDienThoai2))) {
+          setSubmitError({ status: true, error: 'Thông tin sai định dạng' })
+        }
+        else {
 
-        // const updateImg = await UserAPI.updateUserImage(maNv, ...userImage)
-        const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail })
-        // const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail, ngaySinh: ngaySinhCN })
-        if (updateRes?.status === 200) {
-          toast.success(updateRes?.data)
-          console.log('aaaa',updateRes?.data)
-          const formData = new FormData();
-          formData.append("file", userImage);
-          try {
-            let urlStr = 'http://localhost:8080/user/' + maNv + '/image'
-            const response = await axios({
-              method: "put",
-              url: urlStr,
-              data: formData,
-              headers: { "Content-Type": "multipart/form-data" },
-            });
-          } catch (error) {
+          const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail })
+          if (updateRes?.status === 200) {
+            toast.success(updateRes?.data)
+            console.log('aaaa', updateRes?.data)
+            const formData = new FormData();
+            formData.append("file", userImage);
+            try {
+              let urlStr = 'http://localhost:8080/user/' + maNv + '/image'
+              const response = await axios({
+                method: "put",
+                url: urlStr,
+                data: formData,
+                headers: { "Content-Type": "multipart/form-data" },
+              });
+            } catch (error) {
+
+            }
 
           }
-
         }
-      }
     } catch (error) {
       if (error.response) {
         console.log(error)
@@ -291,9 +299,15 @@ export default function UpdateUser() {
             disabled={false}
             require={true}
             handleChange={(event) => {
+              if (!valiCccd.test(event.target.value)) {
+                setCheckCccd('Căn cước công dân sai định dạng')
+              }
+              else
+                setCheckCccd('')
               setUserDetail({ ...userDetail, cccd: event.target.value })
             }}
           />
+          <span style={{ fontSize: '10px', color: 'red', }}>{checkCccd}</span>
           <CustomInputField
             title="Place of issue of identity card"
             type="text"
@@ -334,9 +348,15 @@ export default function UpdateUser() {
             type="text"
             disabled={false}
             handleChange={(event) => {
+              if (!valiHoChieu.test(event.target.value)) {
+                setCheckHoChieu('Hộ chiếu sai định dạng')
+              }
+              else
+                setCheckHoChieu('')
               setUserDetail({ ...userDetail, hoChieu: event.target.value })
             }}
           />
+          <span style={{ fontSize: '10px', color: 'red', }}>{checkHoChieu}</span>
           <CustomInputField
             title="Place of issue of passport"
             value={userDetail?.noiCapHoChieu || ''}
@@ -399,7 +419,7 @@ export default function UpdateUser() {
               setUserDetail({ ...userDetail, ngayBatDauLam: event.target.value })
             }}
           />
-          
+
           <CustomSelectBox
             title="Nature of Contract"
             value={userDetail?.tinhChatHopDongID}
@@ -503,21 +523,33 @@ export default function UpdateUser() {
             disabled={false}
             require={true}
             handleChange={(event) => {
+              if (!valiSoDienThoai.test(event.target.value)) {
+                setCheckSoDienThoai('Số Điện Thoại sai định dạng')
+              }
+              else
+                setCheckSoDienThoai('')
               setUserDetail({ ...userDetail, soDienThoai: event.target.value })
             }}
           />
-          <p className="check">{checSoDienThoai}</p>
+          <span style={{ fontSize: '10px', color: 'red', }}>{checSoDienThoai}</span>
           <CustomInputField
             title="Phone number 2"
 
             value={userDetail?.soDienThoai2 || ''}
             type="text"
             disabled={false}
-            require={false}
+            require={true}
             handleChange={(event) => {
+              
+              if (!valiSoDienThoai2.test(event.target.value) && (event.target.value)) {
+                setCheckSoDienThoai2('Số điện thoại 2 sai định dạng')
+              }
+              else
+                setCheckSoDienThoai2('')
               setUserDetail({ ...userDetail, soDienThoai2: event.target.value })
             }}
           />
+          <span style={{ fontSize: '10px', color: 'red', }}>{checSoDienThoai2}</span>
           <CustomInputField
             title="Email"
             value={userDetail?.email || ''}
@@ -525,9 +557,15 @@ export default function UpdateUser() {
             disabled={true}
             require={true}
             handleChange={(event) => {
+              if (!validator.isEmail(event.target.value)) {
+                setCheckEmail('Email sai định dạng')
+              }
+              else
+                setCheckEmail('')
               setUserDetail({ ...userDetail, email: event.target.value })
             }}
           />
+          <span style={{ fontSize: '10px', color: 'red', }}>{checkEmail}</span>
           <CustomSelectBox
             title="Marital status"
 
