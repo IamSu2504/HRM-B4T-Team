@@ -38,7 +38,6 @@ export default function Forgot() {
 
   return (
     <div className='forgot-page'>
-
       <div className='forgot-frame'>
         <div className='right'>
           <div className='form'>
@@ -61,7 +60,7 @@ export default function Forgot() {
             <div className='forgot-button'>
               <button  onClick={forgot}>Get Password</button>
             </div>
-            <div className='fogot-pw-txt' onClick={() => navigate('/')}>
+            <div className='forgot-pw-txt' onClick={() => navigate('/')}>
               <a>Login</a>
             </div>
           </div>
