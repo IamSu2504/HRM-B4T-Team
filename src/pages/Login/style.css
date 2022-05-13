@@ -87,6 +87,10 @@
   margin-left: 15%;
   cursor: pointer;
 }
+.login-page .login-frame .right .fogot-pw-txt:hover {
+  text-decoration: underline;
+  color: red;
+}
 .login-page .login-frame .right input {
   width: 90%;
   margin-left: 5%;

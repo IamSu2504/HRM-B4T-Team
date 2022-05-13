@@ -1,5 +1,5 @@
  .forgot-page {
-  background: #ffffff;
+  background: #34aacf;
   width: 100vw;
   height: 100vh;
   padding-left: 35%;
@@ -10,12 +10,11 @@
   width: 50%;
   height: 90%;
   border-radius: 20px;
-  background-color: white;
+  background-color: #34aacf;
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
   padding: 40px 40px;
-
 }
 
 .forgot-page .forgot-frame .right {
@@ -65,8 +64,12 @@
   font-size: 14px;
   line-height: 23px;
   color: #34aacf;
-  margin-left: 15%;
+  margin-left: 45%;
   cursor: pointer;
+}
+.forgot-page .forgot-frame .right .forgot-pw-txt:hover {
+  text-decoration: underline;
+  color: red;
 }
 .forgot-page .forgot-frame .right input {
   width: 90%;

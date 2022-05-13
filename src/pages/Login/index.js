@@ -94,7 +94,7 @@ export default function Login() {
               <div className='input-icon'>
                 <img src="/login-user-icon.svg" />
               </div>
-              <input placeholder='Tên đăng nhập'
+              <input placeholder='Username'
                 value={userName}
                 onChange={(event) => setUserName(event.target.value)}
               />
@@ -105,7 +105,7 @@ export default function Login() {
 
               </div>
               <input type="password"
-                placeholder='Mật khẩu'
+                placeholder='Password'
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
               />
@@ -119,13 +119,13 @@ export default function Login() {
                 disabled={loginLoading}
               >
                 {loginLoading ? <img src='/loading-animate.svg' className='login-loading' /> :
-                  'ĐĂNG NHẬP'
+                  'LOGIN'
                 }
               </button>
             </div>
 
             <div className='fogot-pw-txt' onClick={() => navigate('/forgot')}>
-              <a>Quên mật khẩu?</a>
+              <a>Forget password?</a>
             </div>
           </div>
         </div>
