@@ -23,7 +23,7 @@ export default function Login() {
         setLoginError({ status: true, error: 'Tên đăng nhập hoặc mật khẩu không thể để trống' })
       } else {
         setLoginLoading(true)
-        const loginRes = await LoginAPI.login({ username: userName, password : password })
+        const loginRes = await LoginAPI.login({ username: userName, password: password })
         if (loginRes?.status === 200) {
           const loginData = loginRes?.data
           const roleName = loginData?.role?.tenRole
@@ -35,7 +35,7 @@ export default function Login() {
 
           const userRes = await UserAPI.getUserById(localStorage.getItem('maNv'))
           if (userRes?.status === 200) {
-            
+
             localStorage.setItem('name', userRes?.data?.tenNv)
           }
 
@@ -71,6 +71,7 @@ export default function Login() {
   //   getUserDetail()
   // }, [])
   return (
+    
     <div className='login-page'>
       <div className='login-frame'>
         <div className='left'>
@@ -78,7 +79,7 @@ export default function Login() {
             <p>B4T Education</p>
           </div>
           <div className='desc'>
-            <p>Be All You Can Be</p>
+            <p>Be all you can be</p>
           </div>
           <div className='img'>
             <img src="/login-bg.svg" alt='login-img' />

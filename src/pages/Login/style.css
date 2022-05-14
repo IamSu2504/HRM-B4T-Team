@@ -19,16 +19,18 @@
   width: 48%;
 }
 .login-page .login-frame .left .header p {
-  font-size: 40px;
+  font-size: 50px;
   line-height: 47px;
   text-align: center;
   color: #000;
+  font-family: Brush Script MT;
 }
 .login-page .login-frame .left .desc p {
-  font-size: 24px;
+  font-size: 34px;
   line-height: 30px;
   text-align: center;
   color: #000;
+  font-family: Brush Script MT;
 }
 .login-page .login-frame .left .img {
   margin-top: 20px;

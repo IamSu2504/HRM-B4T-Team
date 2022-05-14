@@ -2,19 +2,24 @@ import React from 'react'
 import './style.css'
 import { useNavigate } from "react-router-dom";
 
-export default function ManagerHomePage(){
+export default function ManagerHomePage() {
   console.log(localStorage.getItem('name'))
   const navigate = useNavigate();
   return (
     <div className='manager-homepage'>
       <div className='left'>
+        <div className="logout">
+          <div onClick={() => {
+            localStorage.clear()
+            navigate("/login");
+          }}>Logout</div>
+        </div>
         <div className='tile-on'>
         </div>
         <div className='content'>
           <div className='name'>
             {localStorage.getItem('name')}
-            
-          </div> 
+          </div>
           <div className='position'>
             Manager
           </div>
@@ -31,12 +36,12 @@ export default function ManagerHomePage(){
         </div>
       </div>
       <div className='right'>
-        <img src='/manager/homepage/bg.png' alt=''/>
+        <img src='/manager/homepage/bg.png' alt='' />
         <div className='dot1'>
-          <img src='/manager/homepage/white-dot.png' alt=''/>  
+          <img src='/manager/homepage/white-dot.png' alt='' />
         </div>
         <div className='dot2'>
-          <img src='/manager/homepage/white-dot.png' alt=''/>  
+          <img src='/manager/homepage/white-dot.png' alt='' />
         </div>
       </div>
     </div>

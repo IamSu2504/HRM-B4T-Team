@@ -54,9 +54,9 @@ export default function ViewRewardDiscipline() {
                     <thead>
                         <tr className="head">
 
-                            <th scope="col">no.</th>
+                            <th scope="col">No.</th>
                             <th scope="col">Category</th>
-                            <th scope="col">Title</th>
+                            {/* <th scope="col">Title</th> */}
                             <th scope="col">Edit</th>
 
                         </tr>

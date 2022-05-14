@@ -41,6 +41,7 @@
 }
 
 .manager-homepage .left .tile-on {
+  margin-top: 50px;
   border-bottom: 3px solid white;
 }
 
@@ -64,6 +65,14 @@
   padding-left: 0;
   color: white;
   font-size: 30px;
+}
+
+.manager-homepage .left .menu ul li {
+  width: fit-content;
+}
+
+.manager-homepage .left .menu ul li:hover {
+  text-decoration: underline;
 }
 
 .manager-homepage .left .underlined {

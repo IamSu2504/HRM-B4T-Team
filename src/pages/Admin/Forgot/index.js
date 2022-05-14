@@ -11,7 +11,7 @@ export default function Forgot() {
   const [forgotError, setForgotError] = useState({ status: false, error: '' })
   const navigate = useNavigate();
   async function forgot(event) {
-    
+
     try {
 
       event.preventDefault();
@@ -20,7 +20,7 @@ export default function Forgot() {
       if (!gmail.trim().length) {
         setForgotError({ status: true, error: 'Gmail không thể để trống' })
       } else {
-       
+
         const forgotRes = await ForgotAPI.forgot(gmail2)
         if (forgotRes?.status === 200) {
           toast(forgotRes?.data)
@@ -58,7 +58,7 @@ export default function Forgot() {
               {forgotError.status && <div className="forgot-error">{forgotError.error}</div>}
             </div>
             <div className='forgot-button'>
-              <button  onClick={forgot}>Get Password</button>
+              <button onClick={forgot}>Get Password</button>
             </div>
             <div className='forgot-pw-txt' onClick={() => navigate('/')}>
               <a>Back to login</a>

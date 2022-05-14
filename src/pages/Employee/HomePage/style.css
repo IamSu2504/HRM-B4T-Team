@@ -48,6 +48,10 @@
 
 .employee-homepage .bg-top .menu ul li {
   cursor: pointer;
+  width: fit-content;
+}
+.employee-homepage .bg-top .menu ul li:hover {
+  text-decoration: underline;
 }
 
 .employee-homepage .dot1 {

@@ -11,6 +11,12 @@ export default function EmployeeHomepage(){
       </div>
 
       <div className='bg-top'>
+      <div className="logout">
+          <div onClick={() => {
+            localStorage.clear()
+            navigate("/login");
+          }}>Logout</div>
+        </div>
         <div className='name'>
           {localStorage.getItem('name')}
         </div>
