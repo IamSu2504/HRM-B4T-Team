@@ -149,7 +149,7 @@ export default function UpdateContract() {
                             setContractDetail({ ...contractDetail, ghiChu: event.target.value })
                         }}
                     />
-                    <CustomSelectBox
+                    {/* <CustomSelectBox
                         title="Status"
                         value={contractDetail?.trangThai}
                         option={
@@ -159,7 +159,7 @@ export default function UpdateContract() {
                         handleChange={(event) => {
                             setContractDetail({ ...contractDetail, trangThai: event.currentTarget.value })
                         }}
-                    />
+                    /> */}
                     <CustomInputField
                         title="Employee code"
                         require={true}

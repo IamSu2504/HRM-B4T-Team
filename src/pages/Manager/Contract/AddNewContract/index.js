@@ -6,21 +6,37 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ManagercontractAPI from "../../../../api/Manager/contract";
 import ContractAPI from "../../../../api/contract";
+import { useParams , useNavigate} from "react-router-dom";
 
 
 export default function AddContract() {
 
-    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', trangThai: '', maNV: '' })
-
+    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', maNV: '' })
+    const navigate = useNavigate();
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
+    const { maNv } = useParams()
+    const [newMaHd, setNewMaHd] = useState('')
+    const getNewMaNv = async () => {
+        const newMaNvRes = await ManagercontractAPI.getnewID()
+        if (newMaNvRes?.status === 200) {
+            setNewMaHd(newMaNvRes?.data)
+        }
+    }
+    useEffect(() => {
+        getNewMaNv()
+    }, [])
 
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
             const { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, maNV } = contractDetail
-            console.log(contractDetail)
-            if (!maHD.trim().length || !loaiHopDong.trim().length || !ngayHieuLuc.trim().length || !ngayHetHan.trim().length || !ghiChu.trim().length || !maNV.trim().length) {
+            contractDetail.maHD = newMaHd
+            contractDetail.maNV = maNv
+            console.log(maNv)
+            console.log('>>>>', contractDetail)
+            if (!maHD.toString().trim()?.length || !loaiHopDong.toString().trim()?.length || !ngayHieuLuc.toString().trim()?.length
+                || !ngayHetHan.toString().trim()?.length || !ghiChu.toString().trim()?.length || !maNV.toString().trim()?.length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
                 setIsSubmit(true)
@@ -67,7 +83,8 @@ export default function AddContract() {
                         title="Contract code"
                         require={true}
                         type="text"
-                        placeholder="VD: HD000xyz"
+                        value={newMaHd}
+                        disabled={true}
                         handleChange={(event) => {
                             setContractDetail({ ...contractDetail, maHD: event.target.value })
                         }}
@@ -92,8 +109,8 @@ export default function AddContract() {
                         handleChange={(event) => {
                             // const parts = event.target.value.split('-');
                             // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-                            var mydate = new Date(event.target.value).toLocaleDateString();
-                            setContractDetail({ ...contractDetail, ngayHieuLuc: mydate })
+
+                            setContractDetail({ ...contractDetail, ngayHieuLuc: event.target.value })
                         }}
                     />
                     <CustomInputField
@@ -103,8 +120,8 @@ export default function AddContract() {
                         handleChange={(event) => {
                             // const parts = event.target.value.split('-');
                             // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-                            var mydate = new Date(event.target.value).toLocaleDateString();
-                            setContractDetail({ ...contractDetail, ngayHetHan: mydate })
+
+                            setContractDetail({ ...contractDetail, ngayHetHan: event.target.value })
                         }}
                     />
                     <CustomInputField
@@ -119,7 +136,9 @@ export default function AddContract() {
                     <CustomInputField
                         title="Employee code"
                         require={true}
+                        value={maNv}
                         type="text"
+                        disabled={true}
                         handleChange={(event) => {
                             setContractDetail({ ...contractDetail, maNV: event.target.value })
                         }}
@@ -135,6 +154,12 @@ export default function AddContract() {
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">Add</span>
+                </button>
+                <button className="save-button" onClick={() => navigate(`/manager/viewcontract/${maNv}`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">View Contract</span>
                 </button>
             </div>
             <ToastContainer />

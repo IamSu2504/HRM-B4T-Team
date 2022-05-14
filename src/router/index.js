@@ -260,8 +260,9 @@ export default function MainApp() {
         <Route exact path="/manager/updateInsurance/:managerInsuranceId" element={<ManagerLayoutPrivateRoute><MUpdateInsurance /></ManagerLayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewallcontract" element={<ManagerLayoutPrivateRoute><MViewContract /></ManagerLayoutPrivateRoute>} />
-        <Route exact path="/manager/addcontract" element={<ManagerLayoutPrivateRoute><MAddContract /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/addcontract/:maNv" element={<ManagerLayoutPrivateRoute><MAddContract /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/updatecontract/:maHD" element={<ManagerLayoutPrivateRoute><MUpdateContract /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/viewcontract/:maNv"  element={<ManagerLayoutPrivateRoute><EViewContract /></ManagerLayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewallUser" element={<ManagerLayoutPrivateRoute><ViewAllUser /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/viewuser/:maNv" element={<ManagerLayoutPrivateRoute><ViewUser /></ManagerLayoutPrivateRoute>} />

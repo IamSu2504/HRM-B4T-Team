@@ -15,6 +15,16 @@
     margin-bottom: 30px;
 }
 
+.view-contract-page .save-button {
+    background: #34AACF;
+    border-radius: 8px;
+    margin-top: 10px;
+    width: fit-content;
+    height: 46px;
+    border: unset;
+  }
+
+
 .view-contract-page .title-sub {
     font-style: normal;
     font-weight: 300;

@@ -32,14 +32,14 @@ export default function ViewUser() {
     }
   }
 
- 
-  
+
+
   const [certificateDetail, setCertificate] = useState([])
   const getCertificate = async () => {
     if (maNv) {
       const certificateAPIRes = await MCertificateAPI.getByMaNV(maNv)
       if (certificateAPIRes?.status === 200) {
-        console.log('>>>>>',certificateAPIRes?.data)
+        console.log('>>>>>', certificateAPIRes?.data)
         setCertificate(certificateAPIRes?.data)
       }
     }
@@ -179,7 +179,7 @@ export default function ViewUser() {
         </button>
       </div>
       <div>
-      <button className="save-button">
+        <button className="save-button" onClick={() => navigate(`/manager/viewcontract/${maNv}`)}>
           <span class="image">
             <img src="/home/save-icon.svg" />
           </span>
@@ -187,7 +187,7 @@ export default function ViewUser() {
         </button>
       </div>
       <div>
-      <button className="save-button" onClick={() => navigate(`/manager/workingProcess/${maNv}`)}>
+        <button className="save-button" onClick={() => navigate(`/manager/workingProcess/${maNv}`)}>
           <span class="image">
             <img src="/home/save-icon.svg" />
           </span>
@@ -195,7 +195,7 @@ export default function ViewUser() {
         </button>
       </div>
       <div>
-      <button className="save-button">
+        <button className="save-button">
           <span class="image">
             <img src="/home/save-icon.svg" />
           </span>
@@ -203,7 +203,7 @@ export default function ViewUser() {
         </button>
       </div>
       <div>
-      <button className="save-button" onClick={() => navigate(`/manager/certificate/${maNv}`)}>
+        <button className="save-button" onClick={() => navigate(`/manager/certificate/${maNv}`)}>
           <span class="image">
             <img src="/home/save-icon.svg" />
           </span>
