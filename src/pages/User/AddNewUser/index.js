@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams , useNavigate} from "react-router-dom";
 import UserAPI from "../../../api/user";
 import PositionAPI from "../../../api/position";
 import ContractNatureAPI from "../../../api/contractNature";
@@ -14,6 +14,7 @@ import { dateTimeConverter } from "../../../utils/util";
 import validator from 'validator'
 
 export default function AddNewUser() {
+  const navigate = useNavigate();
   const [listPosition, setListPosition] = useState([])
   const getAllPosition = async () => {
     const positionRes = await PositionAPI.getAll()
@@ -149,6 +150,21 @@ export default function AddNewUser() {
       setIsSubmit(false)
     }
   }
+
+  const [viewuserDetail, setviewUserDetail] = useState(false)
+  const getviewUserDetail = async () => {
+    if (newMaNv) {
+
+      const userRes = await UserAPI.getUserById(newMaNv)
+      if (userRes?.status === 200) {
+        setviewUserDetail(true)
+      }
+    }
+  }
+  useEffect(() => {
+    getviewUserDetail()
+
+  }, [])
   return (
     <div className="update-account-page">
       <div className="row">
@@ -501,6 +517,14 @@ export default function AddNewUser() {
           </span>
           <span class="text">Add</span>
         </button>
+      </div>
+      <div>
+        {viewuserDetail ? <button className="save-button"  onClick={() => navigate(`/manager/viewuser/${newMaNv}`)}>
+          <span class="image">
+            <img src="/home/save-icon.svg" />
+          </span>
+          <span class="text">View</span>
+        </button> : <div></div>}
       </div>
       <ToastContainer />
     </div>
