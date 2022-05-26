@@ -42,7 +42,10 @@ public class InsuranceService {
             Insurance oldInsurance = repo.findById(newInsurance.getId()).get();
             if(!newInsurance.getMaSoBH().equalsIgnoreCase(oldInsurance.getMaSoBH())){
                 if(repo.getByMaSoBH(newInsurance.getMaSoBH())==null){
-                    return repo.save(newInsurance);
+                    if(newInsurance.getMaSoBH().matches("[A-Z]{5}[0-9]{10}$")) {
+                        return repo.save(newInsurance);
+                    }
+                    return null;
                 }
                 else{
                     return null;
@@ -53,7 +56,10 @@ public class InsuranceService {
         // add
         else{
             if(repo.getByMaSoBH(newInsurance.getMaSoBH())==null){
-                return repo.save(newInsurance);
+                if(newInsurance.getMaSoBH().matches("[A-Z]{5}[0-9]{10}$")) {
+                    return repo.save(newInsurance);
+                }
+                return null;
             }
             else{
                 return null;
@@ -67,7 +73,6 @@ public class InsuranceService {
             i.setId(request.getId());
             i.setIdLoaiBH(insuranceCategoryRepository.findById(request.getIdLoaiBH()).get());
             i.setMaSoBH(request.getMaSoBH());
-            i.setTienBH(request.getTienBH());
             i.setMaNV(request.getMaNV());
 
             return i;

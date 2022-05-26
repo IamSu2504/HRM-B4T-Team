@@ -9,13 +9,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateUpdateInsuranceRequest {
+public class CreateUpdateTaxRequest {
 
     private Integer id;
 
-    private Integer idLoaiBH;
+    private Integer idLoaiThue;
 
-    private String maSoBH;
+    private String maSoThue;
 
     private String maNV;
 }

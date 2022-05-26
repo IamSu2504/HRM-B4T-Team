@@ -60,18 +60,18 @@ public class LeaveRequestService {
             if(newLeave.getId() != null) {
                 // check emp existed
                 if (!empRepo.findById(request.getUser()).isPresent()) {
-                    return "Employee number " + request.getUser() + " doesn't exist";
+                    return "Employee code " + request.getUser() + " doesn't exist";
                 }
 
                 // check leaved
                 Employee e = empRepo.findById(request.getUser()).get();
                 if (e.getNgayNghiViec() != null && e.getNgayNghiViec().compareTo(sdf2.parse(request.getDate())) <= 0) {
-                    return "Employee number " + request.getUser() + " has retired";
+                    return "Employee code " + request.getUser() + " has retired";
                 }
 
                 // check chuc vu
                 if (positionRepo.getByMaNvInRange(newLeave.getUser().getId(), monthFirst, monthEnd) == null) {
-                    return "Employee number " + request.getUser() + " hasn't position from " + monthFirst + " to " + monthEnd + ". Please update working process of this employee.";
+                    return "Employee code " + request.getUser() + " hasn't position from " + monthFirst + " to " + monthEnd + ". Please update working process of this employee.";
                 }
                 String chucVu = positionRepo.getByMaNvInRange(newLeave.getUser().getId(), monthFirst, monthEnd).getTenChucVu();
                 String shiftName = newLeave.getShiftID().getTenCa();
@@ -144,18 +144,18 @@ public class LeaveRequestService {
             else{
                 // check emp existed
                 if (!empRepo.findById(request.getUser()).isPresent()) {
-                    return "Employee number " + request.getUser() + " doesn't exist";
+                    return "Employee code " + request.getUser() + " doesn't exist";
                 }
 
                 // check leaved
                 Employee e = empRepo.findById(request.getUser()).get();
                 if (e.getNgayNghiViec() != null && e.getNgayNghiViec().compareTo(sdf2.parse(request.getDate())) <= 0) {
-                    return "Employee number " + request.getUser() + " has retired";
+                    return "Employee code " + request.getUser() + " has retired";
                 }
 
                 // check chuc vu
                 if (positionRepo.getByMaNvInRange(newLeave.getUser().getId(), monthFirst, monthEnd) == null) {
-                    return "Employee number " + request.getUser() + " hasn't position from " + monthFirst + " to " + monthEnd + ". Vui lòng bổ sung trong quá trình công tác của nhân viên này";
+                    return "Employee code " + request.getUser() + " hasn't position from " + monthFirst + " to " + monthEnd + ". Vui lòng bổ sung trong quá trình công tác của nhân viên này";
                 }
                 String chucVu = positionRepo.getByMaNvInRange(newLeave.getUser().getId(), monthFirst, monthEnd).getTenChucVu();
                 String shiftName = newLeave.getShiftID().getTenCa();
