@@ -67,7 +67,6 @@ public class InsuranceService {
             i.setId(request.getId());
             i.setIdLoaiBH(insuranceCategoryRepository.findById(request.getIdLoaiBH()).get());
             i.setMaSoBH(request.getMaSoBH());
-            i.setTienBH(request.getTienBH());
             i.setMaNV(request.getMaNV());
 
             return i;

@@ -17,7 +17,5 @@ public class CreateUpdateInsuranceRequest {
 
     private String maSoBH;
 
-    private Double tienBH;
-
     private String maNV;
 }
