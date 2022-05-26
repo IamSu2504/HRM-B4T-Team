@@ -11,7 +11,7 @@ import { useParams , useNavigate} from "react-router-dom";
 
 export default function AddContract() {
 
-    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', maNV: '' })
+    
     const navigate = useNavigate();
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
@@ -23,18 +23,15 @@ export default function AddContract() {
             setNewMaHd(newMaNvRes?.data)
         }
     }
-    useEffect(() => {
-        getNewMaNv()
-    }, [])
 
+    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', maNV: '' })
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
-            const { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, maNV } = contractDetail
             contractDetail.maHD = newMaHd
             contractDetail.maNV = maNv
-            console.log(maNv)
-            console.log('>>>>', contractDetail)
+            const { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, maNV } = contractDetail
+            
             if (!maHD.toString().trim()?.length || !loaiHopDong.toString().trim()?.length || !ngayHieuLuc.toString().trim()?.length
                 || !ngayHetHan.toString().trim()?.length || !ghiChu.toString().trim()?.length || !maNV.toString().trim()?.length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
@@ -65,6 +62,7 @@ export default function AddContract() {
     }
 
     useEffect(() => {
+        getNewMaNv()
         getAllContract()
     }, [])
 
@@ -85,9 +83,6 @@ export default function AddContract() {
                         type="text"
                         value={newMaHd}
                         disabled={true}
-                        handleChange={(event) => {
-                            setContractDetail({ ...contractDetail, maHD: event.target.value })
-                        }}
                     />
 
                     <CustomSelectBox
@@ -139,9 +134,7 @@ export default function AddContract() {
                         value={maNv}
                         type="text"
                         disabled={true}
-                        handleChange={(event) => {
-                            setContractDetail({ ...contractDetail, maNV: event.target.value })
-                        }}
+                        
                     />
                 </div>
             </div>
