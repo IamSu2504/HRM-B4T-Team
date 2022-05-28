@@ -205,7 +205,7 @@ export default function AddNewUser() {
             require={true}
             handleChange={(event) => {
               if (!valiCccd.test(event.target.value)) {
-                setCheckCccd('Căn cước công dân sai định dạng')
+                setCheckCccd('Citizen identification incorrect format')
               }
               else
                 setCheckCccd('')
@@ -254,7 +254,7 @@ export default function AddNewUser() {
             disabled={false}
             handleChange={(event) => {
               if (!valiHoChieu.test(event.target.value)) {
-                setCheckHoChieu('Hộ chiếu sai định dạng')
+                setCheckHoChieu('Passport incorrect format')
               }
               else
                 setCheckHoChieu('')
@@ -419,7 +419,7 @@ export default function AddNewUser() {
             require={true}
             handleChange={(event) => {
               if (!valiSoDienThoai.test(event.target.value)) {
-                setCheckSoDienThoai('Số Điện Thoại sai định dạng')
+                setCheckSoDienThoai('Phone number incorrect format')
               }
               else
                 setCheckSoDienThoai('')
@@ -435,7 +435,7 @@ export default function AddNewUser() {
             require={false}
             handleChange={(event) => {
               if (!valiSoDienThoai2.test(event.target.value) && (event.target.value)) {
-                setCheckSoDienThoai2('Số điện thoại 2 sai định dạng')
+                setCheckSoDienThoai2('Phone number 2 incorrect format')
               }
               else
                 setCheckSoDienThoai2('')
@@ -451,7 +451,7 @@ export default function AddNewUser() {
             require={true}
             handleChange={(event) => {
               if (!validator.isEmail(event.target.value)) {
-                setCheckEmail('Email sai định dạng')
+                setCheckEmail('Email incorrect format')
               }
               else
                 setCheckEmail('')

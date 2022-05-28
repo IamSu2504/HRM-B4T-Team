@@ -65,42 +65,42 @@ export default function ViewUser() {
         </div>
         <div>
           <p className="hoten">{userDetail?.tenNv}</p>
-          <p className="manhanvien">Mã Số Nhân Viên: {userDetail?.id}</p>
+          <p className="manhanvien">Employee code: {userDetail?.id}</p>
           {/* <p className="manhanvien">Giới tính: {userDetail?.gioiTinh ? 'Nam' : 'Nữ'}</p> */}
         </div>
 
         <div>
-          <p className="title">Thông tin - Liên hệ</p>
+          <p className="title">Contact</p>
           {/* <p className="contents"><img className="img-contents" src="/employee/birthday.svg" />01/01/1999</p> */}
           <p className="contents"><img className="img-contents" src="/employee/mail.svg" />{userDetail?.email}</p>
           <p className="contents"><img className="img-contents" src="/employee/phone.svg" />{userDetail?.soDienThoai} | {userDetail?.soDienThoai2}</p>
-          <p className="contents"><img className="img-contents" src="/employee/address.svg" />Địa chỉ thường trú: {userDetail?.diaChiThuongTru}</p>
-          <p className="contents"><img className="img-contents" src="/employee/address.svg" />Địa chỉ tạm trú: {userDetail?.diaChiTamTru}</p>
+          <p className="contents"><img className="img-contents" src="/employee/address.svg" />Permanent address: {userDetail?.diaChiThuongTru}</p>
+          <p className="contents"><img className="img-contents" src="/employee/address.svg" />Temporary residence address: {userDetail?.diaChiTamTru}</p>
         </div>
         <div>
-          <p className="title">Thông Tin Cá Nhân</p>
+          <p className="title">Personal information</p>
           {/* <p className="contents"><img className="img-contents" src="/employee/dot.svg" />Kỹ thuật phần mềm</p> */}
-          <p className="contents">Ngày Sinh: {userDetail?.ngaySinh}</p>
-          <p className="contents">Giới tính: {userDetail?.gioiTinh ? 'Nam' : 'Nữ'}</p>
-          <p className="contents">Quốc Tịch: {userDetail?.quocTich?.quocTich}</p>
-          <p className="contents">Tính Chất Hợp Đồng: {userDetail?.tinhChatHopDong?.tinhChatHopDong}</p>
-          <p className="contents">Tình Trạng Hôn Nhân: {userDetail?.tinhTrangHonNhan?.tinhTrang}</p>
-          <p className="contents">Căn Cước Công Dân: {userDetail?.cccd}</p>
-          <p className="contents">Nơi Cấp Căn Cước Công Dân: {userDetail?.noiCapCccd}</p>
-          <p className="contents">Ngày Cấp Căn Cước Công Dân: {userDetail?.ngayCapCccd}</p>
-          <p className="contents">Ngày Hết Hạn Căn Cước Công Dân: {userDetail?.ngayHetHanCccd}</p>
-          <p className="contents">Hộ Chiếu: {userDetail?.hoChieu}</p>
-          <p className="contents">Nơi Cấp Hộ Chiếu: {userDetail?.noiCapHoChieu}</p>
-          <p className="contents">Ngày Cấp Hộ Chiếu: {userDetail?.ngayCapHoChieu}</p>
-          <p className="contents">Ngày Hết Hạn Hộ Chiếu: {userDetail?.ngayHetHanHoChieu}</p>
-          <p className="contents">Nơi Sinh: {userDetail?.noiSinh}</p>
-          <p className="contents">Quê Quán: {userDetail?.noiSinh}</p>
-          <p className="contents">Ngân Hàng: {userDetail?.atmNganHang}</p>
-          <p className="contents">Số ATM: {userDetail?.soAtm}</p>
-          <p className="contents">Ngày Bắt Đầu Làm: {userDetail?.ngayBatDauLam}</p>
-          <p className="contents">Ngày Nghỉ Việc: {userDetail?.ngayNghiViec}</p>
-          <p className="contents">Lý Do Nghỉ: {userDetail?.lyDoNghi}</p>
-          <p className="contents">Trạng Thái: {userDetail?.trangThai ? 'Đang Làm Việc' : 'Đã Nghỉ Việc'}</p>
+          <p className="contents">Date of birth: {userDetail?.ngaySinh}</p>
+          <p className="contents">Gender: {userDetail?.gioiTinh ? 'Male' : 'Female'}</p>
+          <p className="contents">Nationality: {userDetail?.quocTich?.quocTich}</p>
+          <p className="contents">The nature of the contract: {userDetail?.tinhChatHopDong?.tinhChatHopDong}</p>
+          <p className="contents">Marital status: {userDetail?.tinhTrangHonNhan?.tinhTrang}</p>
+          <p className="contents">Citizen identification: {userDetail?.cccd}</p>
+          <p className="contents">Place of issue of identity card: {userDetail?.noiCapCccd}</p>
+          <p className="contents">Date of issuance of citizen's identity card: {userDetail?.ngayCapCccd}</p>
+          <p className="contents">Citizen ID expiration date: {userDetail?.ngayHetHanCccd}</p>
+          <p className="contents">Passport: {userDetail?.hoChieu}</p>
+          <p className="contents">Place of issue of passport: {userDetail?.noiCapHoChieu}</p>
+          <p className="contents">Passport issuance date: {userDetail?.ngayCapHoChieu}</p>
+          <p className="contents">Passport expiration date: {userDetail?.ngayHetHanHoChieu}</p>
+          <p className="contents">Place of birth: {userDetail?.noiSinh}</p>
+          <p className="contents">Home town: {userDetail?.noiSinh}</p>
+          <p className="contents">Bank name: {userDetail?.atmNganHang}</p>
+          <p className="contents">ATM number: {userDetail?.soAtm}</p>
+          <p className="contents">Date start work: {userDetail?.ngayBatDauLam}</p>
+          <p className="contents">Day off: {userDetail?.ngayNghiViec}</p>
+          <p className="contents">Reason for leave: {userDetail?.lyDoNghi}</p>
+          <p className="contents">Status: {userDetail?.trangThai ? 'Working' : 'Finished'}</p>
         </div>
         {/* <div>
           <p className="title">Các Kĩ năng</p>
@@ -157,7 +157,7 @@ export default function ViewUser() {
             <span class="image">
               <img src="/home/save-icon.svg" />
             </span>
-            <span class="text">Sửa Thông Tin</span>
+            <span class="text">Edit information</span>
           </button>
         </div>
         <div onClick={() => {
@@ -176,7 +176,7 @@ export default function ViewUser() {
             <span class="image">
               <img src="/home/save-icon.svg" />
             </span>
-            <span class="text">Ca Làm</span>
+            <span class="text">Shift</span>
           </button>
         </div>
         <div>
@@ -184,7 +184,7 @@ export default function ViewUser() {
             <span class="image">
               <img src="/home/save-icon.svg" />
             </span>
-            <span class="text">Hợp Đồng</span>
+            <span class="text">Contract</span>
           </button>
         </div>
         <div>
@@ -192,7 +192,7 @@ export default function ViewUser() {
             <span class="image">
               <img src="/home/save-icon.svg" />
             </span>
-            <span class="text">Quá Trình Làm Việc</span>
+            <span class="text">Work progress</span>
           </button>
         </div>
         <div>
@@ -200,7 +200,7 @@ export default function ViewUser() {
             <span class="image">
               <img src="/home/save-icon.svg" />
             </span>
-            <span class="text">Trình Độ Học Vấn</span>
+            <span class="text">Academic level</span>
           </button>
         </div>
         <div>
@@ -208,7 +208,7 @@ export default function ViewUser() {
             <span class="image">
               <img src="/home/save-icon.svg" />
             </span>
-            <span class="text">Chứng Chỉ Tiếng Anh</span>
+            <span class="text">English certificate</span>
           </button>
         </div>
       </div>
