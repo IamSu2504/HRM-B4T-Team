@@ -140,75 +140,77 @@ export default function ViewUser() {
           <p>Số ATM: {userDetail?.soAtm || ''}</p>
         </div> */}
       </div>
-      <div onClick={() => {
-        if (localStorage.getItem('role') === 'Admin') {
-          navigate(`/admin/updateuser/${maNv}`)
-        }
-        else
-          if (localStorage.getItem('role') === 'Manager') {
-            navigate(`/manager/updateuser/${maNv}`)
+      <div className="list-button">
+        <div onClick={() => {
+          if (localStorage.getItem('role') === 'Admin') {
+            navigate(`/admin/updateuser/${maNv}`)
           }
-          else {
-            navigate(`/employee/updateuser/${maNv}`)
+          else
+            if (localStorage.getItem('role') === 'Manager') {
+              navigate(`/manager/updateuser/${maNv}`)
+            }
+            else {
+              navigate(`/employee/updateuser/${maNv}`)
+            }
+        }}>
+          <button className="save-button">
+            <span class="image">
+              <img src="/home/save-icon.svg" />
+            </span>
+            <span class="text">Sửa Thông Tin</span>
+          </button>
+        </div>
+        <div onClick={() => {
+          if (localStorage.getItem('role') === 'Admin') {
+            navigate(`/admin/viewshift/${maNv}`)
           }
-      }}>
-        <button className="save-button">
-          <span class="image">
-            <img src="/home/save-icon.svg" />
-          </span>
-          <span class="text">Sửa Thông Tin</span>
-        </button>
-      </div>
-      <div onClick={() => {
-        if (localStorage.getItem('role') === 'Admin') {
-          navigate(`/admin/viewshift/${maNv}`)
-        }
-        else
-          if (localStorage.getItem('role') === 'Manager') {
-            navigate(`/manager/viewshift/${maNv}`)
-          }
-          else {
-            navigate(`/employee/viewshift/${maNv}`)
-          }
-      }}>
-        <button className="save-button">
-          <span class="image">
-            <img src="/home/save-icon.svg" />
-          </span>
-          <span class="text">Ca Làm</span>
-        </button>
-      </div>
-      <div>
-        <button className="save-button" onClick={() => navigate(`/manager/viewcontract/${maNv}`)}>
-          <span class="image">
-            <img src="/home/save-icon.svg" />
-          </span>
-          <span class="text">Hợp Đồng</span>
-        </button>
-      </div>
-      <div>
-        <button className="save-button" onClick={() => navigate(`/manager/workingProcess/${maNv}`)}>
-          <span class="image">
-            <img src="/home/save-icon.svg" />
-          </span>
-          <span class="text">Quá Trình Làm Việc</span>
-        </button>
-      </div>
-      <div>
-        <button className="save-button">
-          <span class="image">
-            <img src="/home/save-icon.svg" />
-          </span>
-          <span class="text">Trình Độ Học Vấn</span>
-        </button>
-      </div>
-      <div>
-        <button className="save-button" onClick={() => navigate(`/manager/certificate/${maNv}`)}>
-          <span class="image">
-            <img src="/home/save-icon.svg" />
-          </span>
-          <span class="text">Chứng Chỉ Tiếng Anh</span>
-        </button>
+          else
+            if (localStorage.getItem('role') === 'Manager') {
+              navigate(`/manager/viewshift/${maNv}`)
+            }
+            else {
+              navigate(`/employee/viewshift/${maNv}`)
+            }
+        }}>
+          <button className="save-button">
+            <span class="image">
+              <img src="/home/save-icon.svg" />
+            </span>
+            <span class="text">Ca Làm</span>
+          </button>
+        </div>
+        <div>
+          <button className="save-button" onClick={() => navigate(`/manager/viewcontract/${maNv}`)}>
+            <span class="image">
+              <img src="/home/save-icon.svg" />
+            </span>
+            <span class="text">Hợp Đồng</span>
+          </button>
+        </div>
+        <div>
+          <button className="save-button" onClick={() => navigate(`/manager/workingProcess/${maNv}`)}>
+            <span class="image">
+              <img src="/home/save-icon.svg" />
+            </span>
+            <span class="text">Quá Trình Làm Việc</span>
+          </button>
+        </div>
+        <div>
+          <button className="save-button">
+            <span class="image">
+              <img src="/home/save-icon.svg" />
+            </span>
+            <span class="text">Trình Độ Học Vấn</span>
+          </button>
+        </div>
+        <div>
+          <button className="save-button" onClick={() => navigate(`/manager/certificate/${maNv}`)}>
+            <span class="image">
+              <img src="/home/save-icon.svg" />
+            </span>
+            <span class="text">Chứng Chỉ Tiếng Anh</span>
+          </button>
+        </div>
       </div>
     </div>
 

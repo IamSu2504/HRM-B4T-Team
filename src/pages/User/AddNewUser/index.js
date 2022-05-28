@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams , useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import UserAPI from "../../../api/user";
 import PositionAPI from "../../../api/position";
 import ContractNatureAPI from "../../../api/contractNature";
@@ -510,21 +510,23 @@ export default function AddNewUser() {
       <div>
         {submitError.status && <div >{submitError.error}</div>}
       </div>
-      <div>
-        <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
-          <span class="image">
-            <img src="/home/save-icon.svg" />
-          </span>
-          <span class="text">Add</span>
-        </button>
-      </div>
-      <div>
-        {viewuserDetail ? <button className="save-button"  onClick={() => navigate(`/manager/viewuser/${newMaNv}`)}>
-          <span class="image">
-            <img src="/home/save-icon.svg" />
-          </span>
-          <span class="text">View</span>
-        </button> : <div></div>}
+      <div className="list-button">
+        <div>
+          <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
+            <span class="image">
+              <img src="/home/save-icon.svg" />
+            </span>
+            <span class="text">Add</span>
+          </button>
+        </div>
+        <div>
+          {viewuserDetail ? <button className="save-button" onClick={() => navigate(`/manager/viewuser/${newMaNv}`)}>
+            <span class="image">
+              <img src="/home/save-icon.svg" />
+            </span>
+            <span class="text">View</span>
+          </button> : <div></div>}
+        </div>
       </div>
       <ToastContainer />
     </div>

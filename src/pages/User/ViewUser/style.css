@@ -109,6 +109,10 @@
   width: fit-content;
   height: 46px;
   border: unset;
+  margin-right: 15px;
+}
+.list-button{
+  display: flex;
 }
 
 .update-account-page .save-button .text {
