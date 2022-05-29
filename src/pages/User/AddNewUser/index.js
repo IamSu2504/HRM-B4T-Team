@@ -173,11 +173,7 @@ export default function AddNewUser() {
           <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
         </div>
       </div>
-
-      <div className="row avatar-row">
-
-      </div>
-
+      <br></br>
       <div className="row fied-data-row">
         <div>
           <CustomInputField
@@ -185,7 +181,7 @@ export default function AddNewUser() {
             value={newMaNv}
             type="text"
             disabled={true}
-            require={true}
+            require={false}
           />
           <CustomInputField
             title="Full name"
@@ -197,149 +193,6 @@ export default function AddNewUser() {
               setUserDetail({ ...userDetail, tenNv: event.target.value })
             }}
           />
-          <CustomInputField
-            title="Citizen identification"
-
-            type="text"
-            disabled={false}
-            require={false}
-
-            handleChange={(event) => {
-              if (!valiCccd.test(event.target.value)) {
-                setCheckCccd('Citizen identification incorrect format')
-              }
-              else
-                setCheckCccd('')
-              setUserDetail({ ...userDetail, cccd: event.target.value })
-            }}
-          />
-          <span style={{ fontSize: '10px', color: 'red', }}>{checkCccd}</span>
-          <CustomInputField
-            title="Place of issue of identity card"
-            type="text"
-
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, noiCapCccd: event.target.value })
-            }}
-          />
-          <CustomInputField
-            title="Date of issuance of citizen's identity card"
-
-            type="date"
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-              // const parts = event.target.value.split('-');
-              // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-              setUserDetail({ ...userDetail, ngayCapCccd: event.target.value })
-            }}
-
-          />
-          <CustomInputField
-            title="Citizen ID expiration date"
-
-            type="date"
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-
-              setUserDetail({ ...userDetail, ngayHetHanCccd: event.target.value })
-            }}
-          />
-          <CustomInputField
-            title="Passport"
-
-            type="text"
-            disabled={false}
-            handleChange={(event) => {
-              if (!valiHoChieu.test(event.target.value)) {
-                setCheckHoChieu('Passport incorrect format')
-              }
-              else
-                setCheckHoChieu('')
-              setUserDetail({ ...userDetail, hoChieu: event.target.value })
-            }}
-          />
-          <span style={{ fontSize: '10px', color: 'red', }}>{checkHoChieu}</span>
-          <CustomInputField
-            title="Place of issue of passport"
-
-            type="text"
-            disabled={false}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, noiCapHoChieu: event.target.value })
-            }}
-          />
-          <CustomInputField
-            title="Passport issuance date"
-
-            type="date"
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-
-              setUserDetail({ ...userDetail, ngayCapHoChieu: event.target.value })
-            }}
-          />
-          <CustomInputField
-            title="Passport expiration date"
-
-            type="date"
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-
-              setUserDetail({ ...userDetail, ngayHetHanHoChieu: event.target.value })
-            }}
-          />
-          <CustomInputField
-            title="Bank name"
-
-            type="text"
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, atmNganHang: event.target.value })
-            }}
-          />
-          <CustomInputField
-            title="ATM number"
-
-            type="text"
-            disabled={false}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, soAtm: event.target.value })
-            }}
-          />
-          <CustomInputField
-            title="Date start work"
-
-            type="date"
-            disabled={false}
-            handleChange={(event) => {
-
-              setUserDetail({ ...userDetail, ngayBatDauLam: event.target.value })
-            }}
-          />
-          <CustomSelectBox
-            title="Nature of Contract"
-            value={userDetail?.tinhChatHopDongID || 1}
-            option={listContractNature.map((contractNatureItem) => {
-              return (
-                { label: contractNatureItem.tinhChatHopDong, value: contractNatureItem.id }
-              )
-            })}
-            require={true}
-            handleChange={(event) => {
-              setUserDetail({ ...userDetail, tinhChatHopDongID: event.currentTarget.value })
-            }}
-          />
-        </div>
-
-        <div>
           <CustomSelectBox
             title="Gender"
             value={userDetail?.gioiTinh || true}
@@ -481,7 +334,7 @@ export default function AddNewUser() {
               setUserDetail({ ...userDetail, trangThaiLaoDong: event.currentTarget.value })
             }}
           /> */}
-{/* 
+          {/* 
           <CustomInputField
             title="Severance day"
 
@@ -505,6 +358,148 @@ export default function AddNewUser() {
               setUserDetail({ ...userDetail, lyDoNghi: event.target.value })
             }}
           /> */}
+        </div>
+        <div>
+          <CustomInputField
+            title="Citizen identification"
+
+            type="text"
+            disabled={false}
+            require={false}
+
+            handleChange={(event) => {
+              if (!valiCccd.test(event.target.value)) {
+                setCheckCccd('Citizen identification incorrect format')
+              }
+              else
+                setCheckCccd('')
+              setUserDetail({ ...userDetail, cccd: event.target.value })
+            }}
+          />
+          <span style={{ fontSize: '10px', color: 'red', }}>{checkCccd}</span>
+          <CustomInputField
+            title="Place of issue of identity card"
+            type="text"
+
+            disabled={false}
+            require={false}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, noiCapCccd: event.target.value })
+            }}
+          />
+          <CustomInputField
+            title="Date of issuance of citizen's identity card"
+
+            type="date"
+            disabled={false}
+            require={false}
+            handleChange={(event) => {
+              // const parts = event.target.value.split('-');
+              // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
+              setUserDetail({ ...userDetail, ngayCapCccd: event.target.value })
+            }}
+
+          />
+          <CustomInputField
+            title="Citizen ID expiration date"
+
+            type="date"
+            disabled={false}
+            require={false}
+            handleChange={(event) => {
+
+              setUserDetail({ ...userDetail, ngayHetHanCccd: event.target.value })
+            }}
+          />
+          <CustomInputField
+            title="Passport"
+            require={false}
+            type="text"
+            disabled={false}
+            handleChange={(event) => {
+              if (!valiHoChieu.test(event.target.value)) {
+                setCheckHoChieu('Passport incorrect format')
+              }
+              else
+                setCheckHoChieu('')
+              setUserDetail({ ...userDetail, hoChieu: event.target.value })
+            }}
+          />
+          <span style={{ fontSize: '10px', color: 'red', }}>{checkHoChieu}</span>
+          <CustomInputField
+            title="Place of issue of passport"
+            require={false}
+            type="text"
+            disabled={false}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, noiCapHoChieu: event.target.value })
+            }}
+          />
+          <CustomInputField
+            title="Passport issuance date"
+
+            type="date"
+            disabled={false}
+            require={false}
+            handleChange={(event) => {
+
+              setUserDetail({ ...userDetail, ngayCapHoChieu: event.target.value })
+            }}
+          />
+          <CustomInputField
+            title="Passport expiration date"
+
+            type="date"
+            disabled={false}
+            require={false}
+            handleChange={(event) => {
+
+              setUserDetail({ ...userDetail, ngayHetHanHoChieu: event.target.value })
+            }}
+          />
+          <CustomInputField
+            title="Bank name"
+
+            type="text"
+            disabled={false}
+            require={true}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, atmNganHang: event.target.value })
+            }}
+          />
+          <CustomInputField
+            title="ATM number"
+
+            type="text"
+            disabled={false}
+            require={true}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, soAtm: event.target.value })
+            }}
+          />
+          <CustomInputField
+            title="Date start work"
+            require={true}
+            type="date"
+            disabled={false}
+            handleChange={(event) => {
+
+              setUserDetail({ ...userDetail, ngayBatDauLam: event.target.value })
+            }}
+          />
+          <CustomSelectBox
+            title="Nature of Contract"
+            value={userDetail?.tinhChatHopDongID || 1}
+            option={listContractNature.map((contractNatureItem) => {
+              return (
+                { label: contractNatureItem.tinhChatHopDong, value: contractNatureItem.id }
+              )
+            })}
+            require={true}
+            handleChange={(event) => {
+              setUserDetail({ ...userDetail, tinhChatHopDongID: event.currentTarget.value })
+            }}
+          />
         </div>
       </div>
       <div>
