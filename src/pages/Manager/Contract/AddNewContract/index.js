@@ -115,7 +115,6 @@ export default function AddContract() {
                         handleChange={(event) => {
                             // const parts = event.target.value.split('-');
                             // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-
                             setContractDetail({ ...contractDetail, ngayHetHan: event.target.value })
                         }}
                     />

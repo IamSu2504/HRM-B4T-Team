@@ -202,7 +202,8 @@ export default function AddNewUser() {
 
             type="text"
             disabled={false}
-            require={true}
+            require={false}
+
             handleChange={(event) => {
               if (!valiCccd.test(event.target.value)) {
                 setCheckCccd('Citizen identification incorrect format')
@@ -429,7 +430,6 @@ export default function AddNewUser() {
           <span style={{ fontSize: '10px', color: 'red', }}>{checSoDienThoai}</span>
           <CustomInputField
             title="Phone number 2"
-
             type="text"
             disabled={false}
             require={false}
@@ -481,7 +481,7 @@ export default function AddNewUser() {
               setUserDetail({ ...userDetail, trangThaiLaoDong: event.currentTarget.value })
             }}
           /> */}
-
+{/* 
           <CustomInputField
             title="Severance day"
 
@@ -493,8 +493,8 @@ export default function AddNewUser() {
               setUserDetail({ ...userDetail, ngayNghiViec: event.target.value })
             }}
 
-          />
-          <CustomInputField
+          /> */}
+          {/* <CustomInputField
             title="Reason for leaving job"
 
 
@@ -504,7 +504,7 @@ export default function AddNewUser() {
             handleChange={(event) => {
               setUserDetail({ ...userDetail, lyDoNghi: event.target.value })
             }}
-          />
+          /> */}
         </div>
       </div>
       <div>
