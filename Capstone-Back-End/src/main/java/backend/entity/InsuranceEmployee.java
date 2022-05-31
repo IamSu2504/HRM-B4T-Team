@@ -27,7 +27,7 @@ public class InsuranceEmployee {
     private String maSoBH;
 
     @Column(name = "tien_bao_hiem")
-    private double tienBH;
+    private Double tienBH;
 
     @Column(name = "ma_nv")
     private String maNV;

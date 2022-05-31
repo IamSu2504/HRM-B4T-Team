@@ -35,11 +35,14 @@ public class Contract {
     @Column(name = "ghi_chu")
     private String ghiChu;
 
-    @Column(name = "trang_thai")
+    @Transient
     private Boolean trangThai;
 
     @Column(name = "ma_nv")
     private String maNV;
+
+    @Column(name = "giam_tru_gia_canh")
+    private Double giamTruGiaCanh;
 
     public Date getNgayHieuLuc(){
             if (ngayHieuLuc != null) {
@@ -67,6 +70,29 @@ public class Contract {
         } else {
             return null;
         }
+    }
+
+    public Boolean getTrangThai(){
+        if (ngayHetHan != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                ngayHetHan = sdf.parse(sdf.format(ngayHetHan));
+            } catch (ParseException e) {
+                return true;
+            }
+        } else {
+            return true;
+        }
+        if(ngayHetHan !=null){
+            if(ngayHetHan.after(new Date())){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        return true;
     }
 
 }

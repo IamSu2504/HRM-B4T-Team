@@ -43,30 +43,33 @@ public class WorkingProcessService {
         return repo.getByMaNV(maNV);
     }
 
-    public WorkingProcess save(CreateUpdateWorkingProcess request)
+    public String getSaveMessage(CreateUpdateWorkingProcess request)
     {
         WorkingProcess newWorkingProcess = getNewWorkingProcess(request);
         // update
         if(newWorkingProcess.getId()!=null){
             WorkingProcess oldWorkingProcess = repo.findById(newWorkingProcess.getId()).get();
-            if((newWorkingProcess.getIdPhongBan().getId()) == (oldWorkingProcess.getIdPhongBan().getId())){
-                if(!repo.getByIdPhongBan(newWorkingProcess.getIdPhongBan().getId()).isEmpty()){
-                    return repo.save(newWorkingProcess);
-                }
-                else{
-                    return null;
-                }
-            }
-            return repo.save(newWorkingProcess);
+//            if((newWorkingProcess.getIdPhongBan().getId()) == (oldWorkingProcess.getIdPhongBan().getId())){
+//                if(!repo.getByIdPhongBan(newWorkingProcess.getIdPhongBan().getId()).isEmpty()){
+//                    repo.save(newWorkingProcess);
+//                    return null;
+//                }
+//                else{
+//                    return "";
+//                }
+//            }
+            repo.save(newWorkingProcess);
+            return null;
         }
         // add
         else{
             DepartmentCategory departmentCategory = departmentCategoryRepository.findById(newWorkingProcess.getIdPhongBan().getId()).get();
             if(departmentCategory.getId() != null){
-                return repo.save(newWorkingProcess);
+                repo.save(newWorkingProcess);
+                return null;
             }
             else{
-                return null;
+                return "";
             }
         }
     }

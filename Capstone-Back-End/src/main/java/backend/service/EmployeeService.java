@@ -33,6 +33,9 @@ public class EmployeeService {
     public String getNewID() {
         String lastID = employeeRepo.getLastID();
         String newID = "NV";
+        for (int i =1; i<=4-String.valueOf(Integer.parseInt(lastID.substring(2,lastID.length()))+1).length(); i++){
+            newID += '0';
+        }
         newID += String.valueOf(Integer.parseInt(lastID.substring(2,lastID.length()))+1);
         return newID;
     }

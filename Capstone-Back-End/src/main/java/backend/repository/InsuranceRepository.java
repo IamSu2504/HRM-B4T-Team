@@ -12,6 +12,6 @@ public interface InsuranceRepository extends JpaRepository<Insurance, Integer> {
     @Query(value = "select * from baohiem where UPPER(ma_so_bh) = UPPER(?)", nativeQuery = true)
     Insurance getByMaSoBH(String maSoBH);
 
-    @Query(value = "select h from Insurance h where upper(h.idLoaiBH.tenBH) like %:maBH% and h.maNV = :maNV")
-    Insurance getByLoai(@Param("maBH") String title, @Param("maNV") String maNV);
+    @Query(value = "select h from Insurance h where h.idLoaiBH.maBH = :maBH and h.maNV = :maNV")
+    Insurance getByLoai(@Param("maBH") String maBH, @Param("maNV") String maNV);
 }
