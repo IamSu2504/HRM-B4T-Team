@@ -112,11 +112,11 @@ export default function ViewAllUser() {
                     <img src={`http://localhost:8080/user/${userItem?.id}/image`} alt="avatar" width={220} height={180} />
                   </td>
                   <td>{userItem?.tenNv}</td>
-                  <td>{userItem?.gioiTinh ? 'Nam' : 'Nữ'}</td>
+                  <td>{userItem?.gioiTinh ? 'Male' : 'Female'}</td>
                   <td>{userItem?.ngaySinh}</td>
                   <td>{userItem?.soDienThoai}</td>
                   <td>
-                    <div>{userItem?.trangThai == 'Đang làm việc' ? <a className="jobactive">Đang làm việc</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
+                    <div>{userItem?.trangThai == 'Working' ? <a className="jobactive">Đang làm việc</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
                   </td>
                   <td>
                     <div onClick={() => navigate(`/manager/viewuser/${userItem.id}`)}>
