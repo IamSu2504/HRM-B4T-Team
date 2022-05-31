@@ -77,7 +77,7 @@ export default function ViewWorkingProcess() {
 
       </div>
       <div>
-        <button className="save-button" onClick={() => navigate(`/manager/viewallUser`)}>
+        <button className="save-button" onClick={() => navigate(`/manager/viewUser/${maNv}`)}>
           <span class="image">
             <img src="/home/save-icon.svg" />
           </span>
