@@ -76,7 +76,18 @@ export default function ViewCertificate() {
 
       </div>
       <div>
-        <button className="save-button" onClick={() => navigate(`/manager/viewallUser`)}>
+        <button className="save-button" onClick={() => {
+          if (localStorage.getItem('role') === 'Admin') {
+            navigate(`/admin/viewUser/${maNv}`)
+          }
+          else
+            if (localStorage.getItem('role') === 'Manager') {
+              navigate(`/manager/viewUser/${maNv}`)
+            }
+            else {
+              navigate(`/employee/viewUser/${maNv}`)
+            }
+        }}>
           <span class="image">
             <img src="/home/save-icon.svg" />
           </span>

@@ -30,6 +30,7 @@ export default function ViewAllUser() {
   const getAllUser = async () => {
     const userRes = await UserAPI.getAll()
     if (userRes?.status === 200) {
+      console.log(userRes?.data)
       const userData = userRes?.data || []
       const spliceUserData = [...userData].splice(page * rowsPerPage, (page + 1) * rowsPerPage)
       setListUser(spliceUserData)
@@ -68,7 +69,7 @@ export default function ViewAllUser() {
       <div className="title">List of Employee</div>
 
 
-{/* search */}
+      {/* search */}
 
       {/* <div class="input-group mb-3 mt-3">
         <div class="input-group-prepend">
@@ -83,7 +84,7 @@ export default function ViewAllUser() {
           <button class="btn btn-success" type="submit">Go</button>
         </div>
       </div> */}
-{/* ******** */}
+      {/* ******** */}
 
       <div className="table-frame">
         <table class="table table-bordered" >
@@ -133,7 +134,7 @@ export default function ViewAllUser() {
 
           </tbody>
         </table>
-        <table   class="table2" id="userTable" >
+        <table class="table2" id="userTable" >
           <thead>
             <tr className="head">
               <th scope="col">STT</th>
@@ -144,7 +145,7 @@ export default function ViewAllUser() {
               <th scope="col">Ngày sinh</th>
               <th scope="col">Số điện thoại</th>
               <th scope="col">Trang thái</th>
-       
+
             </tr>
           </thead>
           <tbody>
@@ -157,11 +158,11 @@ export default function ViewAllUser() {
                     <img src={`http://localhost:8080/user/${userItem?.id}/image`} alt="avatar" width={220} height={180} />
                   </td>
                   <td>{userItem?.tenNv}</td>
-                  <td>{userItem?.gioiTinh ? 'Nam' : 'Nữ'}</td>
+                  <td>{userItem?.gioiTinh ? 'Male' : 'Female'}</td>
                   <td>{userItem?.ngaySinh}</td>
                   <td>{userItem?.soDienThoai}</td>
                   <td>
-                    <div>{userItem?.trangThai == 'Đang làm việc' ? <a className="jobactive">Đang làm việc</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
+                    <div>{userItem?.trangThai == 'Working' ? <a className="jobactive">Đang làm việc</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
                   </td>
                   {/* <td>
                     <div>{userItem?.trangThaiLaoDong ? <a className="jobactive">Đang Hoạt Động</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>

@@ -303,6 +303,8 @@ export default function MainApp() {
        
         <Route exact path="/employee/viewtimekeeping"  element={<EmployeeLayoutPrivateRoute><ViewTimekeeping /></EmployeeLayoutPrivateRoute>} />
         <Route exact path="/employee/viewcontract/:maNv"  element={<EmployeeLayoutPrivateRoute><EViewContract /></EmployeeLayoutPrivateRoute>} />
+        <Route exact path="/employee/workingProcess/:maNv"  element={<EmployeeLayoutPrivateRoute><UViewWorkingProcess /></EmployeeLayoutPrivateRoute>} />
+        <Route exact path="/employee/certificate/:maNv"  element={<EmployeeLayoutPrivateRoute><UViewCertificate /></EmployeeLayoutPrivateRoute>} />
         <Route exact path="/employee/timeKeeping"  element={<EmployeeLayoutPrivateRoute><TimeKeeping /></EmployeeLayoutPrivateRoute>} />
 
         <Route exact path="/employee/leaveRequest"  element={<EmployeeLayoutPrivateRoute><ELeaveRequest /></EmployeeLayoutPrivateRoute>} />

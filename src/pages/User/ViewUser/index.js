@@ -217,14 +217,14 @@ export default function ViewUser() {
             <span class="text">Work progress</span>
           </button>
         </div>
-        <div >
+        {/* <div >
           <button className="save-button">
             <span class="image">
               <img src="/home/save-icon.svg" />
             </span>
             <span class="text">Academic level</span>
           </button>
-        </div>
+        </div> */}
         <div onClick={() => {
           if (localStorage.getItem('role') === 'Admin') {
             navigate(`/admin/certificate/${maNv}`)
