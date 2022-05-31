@@ -11,11 +11,11 @@ import java.util.Date;
 import java.util.TimeZone;
 
 @Entity
+@Table(name = "phanloai_ngaynghile")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "phanloai_ngaynghile")
 public class HolidayCategory {
 
     @Id
@@ -30,13 +30,13 @@ public class HolidayCategory {
     @Column(name = "ten_ngay_le")
     private String tenNgayLe;
 
-    public Date getNgay(){
-        if (ngay != null) {
-            ngay.setHours(8);
-            return ngay;
-        } else {
-            return null;
-        }
-    }
+//    public Date getNgay(){
+//        if (ngay != null) {
+//            ngay.setHours(8);
+//            return ngay;
+//        } else {
+//            return null;
+//        }
+//    }
 
 }

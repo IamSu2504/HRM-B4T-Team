@@ -116,7 +116,7 @@ public class ShiftService {
                 //------------- check dublicate shift -------------
                 Shift dublicateShift = shiftRepo.getDublicateShift(newShift.getShiftCategory().getId(), sdf1.format(newShift.getDate()), newShift.getRoom().getId());
                 if (dublicateShift != null) {
-                    return "Teacher " + newShift.getEmployee().getTenNv() + "(" + newShift.getEmployee().getId() + ") registered the same shift in " + newShift.getRoom().getTenPhongHoc() + " in " + sdf2.format(request.getDate());
+                    return "Teacher " + newShift.getEmployee().getTenNv() + "(" + newShift.getEmployee().getId() + ") registered the same shift in " + newShift.getRoom().getTenPhongHoc() + " in " + sdf2.format(sdf1.parse(request.getDate()));
                 }
 
                 shiftRepo.save(newShift);

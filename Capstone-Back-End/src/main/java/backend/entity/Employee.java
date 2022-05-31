@@ -141,64 +141,50 @@ public class Employee {
     public Date getNgaySinh(){
         if (ngaySinh != null) {
             ngaySinh.setHours(8);
-            return ngaySinh;
-        } else {
-            return null;
         }
+        return ngaySinh;
     }
 
     public Date getNgayCapCccd(){
         if (ngayCapCccd != null) {
             ngayCapCccd.setHours(8);
-            return ngayCapCccd;
-        } else {
-            return null;
         }
+        return ngayCapCccd;
     }
 
     public Date getNgayHetHanCccd(){
         if (ngayHetHanCccd != null) {
             ngayHetHanCccd.setHours(8);
-            return ngayHetHanCccd;
-        } else {
-            return null;
         }
+        return ngayHetHanCccd;
     }
 
     public Date getNgayCapHoChieu(){
         if (ngayCapHoChieu != null) {
             ngayCapHoChieu.setHours(8);
-            return ngayCapHoChieu;
-        } else {
-            return null;
         }
+        return ngayCapHoChieu;
     }
 
     public Date getNgayHetHanHoChieu(){
         if (ngayHetHanHoChieu != null) {
             ngayHetHanHoChieu.setHours(8);
-            return ngayHetHanHoChieu;
-        } else {
-            return null;
         }
+        return ngayHetHanHoChieu;
     }
 
     public Date getNgayBatDauLam(){
         if (ngayBatDauLam != null) {
             ngayBatDauLam.setHours(8);
-            return ngayBatDauLam;
-        } else {
-            return null;
         }
+        return ngayBatDauLam;
     }
 
     public Date getNgayNghiViec(){
         if (ngayNghiViec != null) {
             ngayNghiViec.setHours(8);
-            return ngayNghiViec;
-        } else {
-            return null;
         }
+        return ngayNghiViec;
     }
 
 }
