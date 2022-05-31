@@ -57,11 +57,12 @@ public class ReportService {
             double thueTNCN = 0;
             double thueSuat = 0;
             double tong = 0;
-            double soCa = 0;
-            double soCaLamThem = 0;
             double luongTruocThue = 0;
             double luongOT = 0;
+            int soCa = 0;
+            int soCaLamThem = 0;
             int soCaToiThieu;
+            int soCaChiuThue;
             String chucVu;
             String phongBan;
             Contract c;
@@ -108,14 +109,18 @@ public class ReportService {
                         // so ca lam
                         if (soCa > 80) {
                             soCaLamThem = soCa - 80;
-                            soCa = 80;
+                            soCaChiuThue = 80;
+                        }
+                        else{
+                            soCaLamThem = 0;
+                            soCaChiuThue = soCa;
                         }
 
                         // luong OT
                         luongOT = soCaLamThem * luongMoiCa * 1.5;
 
                         // luong tinh theo ca
-                        luongTruocThue = luongMoiCa * soCa;
+                        luongTruocThue = luongMoiCa * soCaChiuThue;
 
                         // giam tru gia canh
                         if (c.getGiamTruGiaCanh() == null) {

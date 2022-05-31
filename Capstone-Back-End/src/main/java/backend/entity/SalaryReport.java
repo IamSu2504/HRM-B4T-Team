@@ -15,12 +15,13 @@ public class SalaryReport {
     String tenNV;
     String chucVu;
     String phongBan;
-    double soCaToiThieu;
-    double soCa;
     double luongCoBan;
     double giamTruGiaCanh;
-    double luongTruocThue;
+    double soCaToiThieu;
+    double soCa;
+    double soCaLamThem;
     double luongOT;
+    double luongTruocThue;
     double luongChiuThueTNCN;
     double thueTNCN;
     double baoHiemXaHoi;
