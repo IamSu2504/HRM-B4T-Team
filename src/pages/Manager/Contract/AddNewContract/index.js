@@ -30,6 +30,7 @@ export default function AddContract() {
             setSubmitError({ status: false, error: '' })
             contractDetail.maHD = newMaHd
             contractDetail.maNV = maNv
+            console.log(contractDetail)
             const { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, maNV } = contractDetail
             
             if (!maHD.toString().trim()?.length || !loaiHopDong.toString().trim()?.length || !ngayHieuLuc.toString().trim()?.length
@@ -148,12 +149,12 @@ export default function AddContract() {
                     </span>
                     <span class="text">Add</span>
                 </button>
-                <button className="save-button" onClick={() => navigate(`/manager/viewcontract/${maNv}`)}>
+                {/* <button className="save-button" onClick={() => navigate(`/manager/viewcontract/${maNv}`)}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">View Contract</span>
-                </button>
+                </button> */}
             </div>
             <ToastContainer />
         </div>

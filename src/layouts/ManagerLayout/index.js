@@ -201,7 +201,7 @@ export default function ManagerLayout(props) {
                     </a>
                   </div>
                 </div>
-                <div className="card">
+                {/* <div className="card">
                   <div className="card-header">
                     <a
                       className="card-link"
@@ -221,8 +221,8 @@ export default function ManagerLayout(props) {
                       </div>
                     </a>
                   </div>
-                </div>
-                <div className="card">
+                </div> */}
+                {/* <div className="card">
                   <div className="card-header">
                     <a
                       className="card-link"
@@ -242,8 +242,8 @@ export default function ManagerLayout(props) {
                       </div>
                     </a>
                   </div>
-                </div>
-                <div className="card">
+                </div> */}
+                {/* <div className="card">
                   <div className="card-header">
                     <a
                       className="card-link"
@@ -263,7 +263,7 @@ export default function ManagerLayout(props) {
                       </div>
                     </a>
                   </div>
-                </div>
+                </div> */}
                 <div className="card">
                   <div className="card-header">
                     <a

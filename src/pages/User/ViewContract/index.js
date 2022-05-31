@@ -33,12 +33,14 @@ export default function ViewContract() {
                     <div class="title">Contract</div>
                 </div>
             </div>
-            <button className="save-button" onClick={() => navigate(`/manager/addcontract/${maNv}`)}>
-                <span class="image">
-                    <img src="/home/save-icon.svg" />
-                </span>
-                <span class="text">Add Contract {maNv}</span>
-            </button>
+            {localStorage.getItem('role') == 'Manager' ? <div>
+                <button className="save-button" onClick={() => navigate(`/manager/addcontract/${maNv}`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Add Contract {maNv}</span>
+                </button>
+            </div> : <div></div>}
             {userContractDetail.map((contractItem, contractIndex) => {
                 return (
                     <div class="list-contract">
@@ -119,12 +121,17 @@ export default function ViewContract() {
                                 </div>
                             </div>
                         </div>
-                        <button className="save-button" onClick={() => navigate(`/manager/updatecontract/${contractItem.maHD}`)}>
-                            <span class="image">
-                                <img src="/home/save-icon.svg" />
-                            </span>
-                            <span class="text">Update {contractItem.maHD}</span>
-                        </button>
+                        {
+                            localStorage.getItem('role') == 'Manager' ? <div>
+                                <button className="save-button" onClick={() => navigate(`/manager/updatecontract/${contractItem.maHD}`)}>
+                                    <span class="image">
+                                        <img src="/home/save-icon.svg" />
+                                    </span>
+                                    <span class="text">Update {contractItem.maHD}</span>
+                                </button>
+                            </div> : <div></div>
+                        }
+
                     </div>
                 )
             })}

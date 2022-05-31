@@ -179,23 +179,45 @@ export default function ViewUser() {
             <span class="text">Shift</span>
           </button>
         </div>
-        <div>
-          <button className="save-button" onClick={() => navigate(`/manager/viewcontract/${maNv}`)}>
+        <div onClick={() => {
+          if (localStorage.getItem('role') === 'Admin') {
+            navigate(`/admin/viewcontract/${maNv}`)
+          }
+          else
+            if (localStorage.getItem('role') === 'Manager') {
+              navigate(`/manager/viewcontract/${maNv}`)
+            }
+            else {
+              navigate(`/employee/viewcontract/${maNv}`)
+            }
+        }}>
+          <button className="save-button">
             <span class="image">
               <img src="/home/save-icon.svg" />
             </span>
             <span class="text">Contract</span>
           </button>
         </div>
-        <div>
-          <button className="save-button" onClick={() => navigate(`/manager/workingProcess/${maNv}`)}>
+        <div onClick={() => {
+          if (localStorage.getItem('role') === 'Admin') {
+            navigate(`/admin/workingProcess/${maNv}`)
+          }
+          else
+            if (localStorage.getItem('role') === 'Manager') {
+              navigate(`/manager/workingProcess/${maNv}`)
+            }
+            else {
+              navigate(`/employee/workingProcess/${maNv}`)
+            }
+        }}>
+          <button className="save-button" >
             <span class="image">
               <img src="/home/save-icon.svg" />
             </span>
             <span class="text">Work progress</span>
           </button>
         </div>
-        <div>
+        <div >
           <button className="save-button">
             <span class="image">
               <img src="/home/save-icon.svg" />
@@ -203,8 +225,19 @@ export default function ViewUser() {
             <span class="text">Academic level</span>
           </button>
         </div>
-        <div>
-          <button className="save-button" onClick={() => navigate(`/manager/certificate/${maNv}`)}>
+        <div onClick={() => {
+          if (localStorage.getItem('role') === 'Admin') {
+            navigate(`/admin/certificate/${maNv}`)
+          }
+          else
+            if (localStorage.getItem('role') === 'Manager') {
+              navigate(`/manager/certificate/${maNv}`)
+            }
+            else {
+              navigate(`/employee/certificate/${maNv}`)
+            }
+        }}>
+          <button className="save-button">
             <span class="image">
               <img src="/home/save-icon.svg" />
             </span>

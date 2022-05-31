@@ -512,14 +512,14 @@ export default function AddNewUser() {
             <span class="text">Add</span>
           </button>
         </div>
-        <div>
+        {/* <div>
           {viewuserDetail ? <button className="save-button" onClick={() => navigate(`/manager/viewuser/${newMaNv}`)}>
             <span class="image">
               <img src="/home/save-icon.svg" />
             </span>
-            <span class="text">View</span>
+            <span class="text">View</span>  
           </button> : <div></div>}
-        </div>
+        </div> */}
       </div>
       <ToastContainer />
     </div>
