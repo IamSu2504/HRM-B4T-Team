@@ -59,7 +59,7 @@ public class ContractService {
             Contract c;
             if(repo.getContractInRange(newContract.getNgayHieuLuc(),newContract.getNgayHetHan(),newContract.getMaNV())!=null){
                 c = repo.getContractInRange(newContract.getNgayHieuLuc(),newContract.getNgayHetHan(),newContract.getMaNV());
-                return "Employee with ID " + newContract.getMaNV() + " had a contract available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Contracts cannot have same dates";
+                return "Employee with ID " + newContract.getMaNV() + " had a contract available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Add failed";
             }
 //            if(repo.getContractStartInRange(start,end,newContract.getMaNV())!=null){
 //                c = repo.getContractStartInRange(start,end,newContract.getMaNV());
@@ -122,6 +122,7 @@ public class ContractService {
             if(request.getNgayHetHan() != null)
                 s.setNgayHetHan(sdf.parse(request.getNgayHetHan()));
             s.setTrangThai(request.getTrangThai());
+            s.setGiamTruGiaCanh(request.getGiamTruGiaCanh());
             return s;
         } catch (Exception e){
             return null;

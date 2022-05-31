@@ -23,4 +23,6 @@ public class CreateUpdateContractRequest {
     private Boolean trangThai;
 
     private String maNV;
+
+    private Double giamTruGiaCanh;
 }
