@@ -1,10 +1,13 @@
 package backend.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "phanloai_nguoithan")
 public class RelativeCategory {

@@ -1,13 +1,16 @@
 package backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 
-@Data
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "chungchitienganh")
 public class CertificateManager {
