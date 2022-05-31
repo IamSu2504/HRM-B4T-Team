@@ -120,10 +120,8 @@ export default function AddNewUser() {
       console.log('test user: ', userDetail)
       if (!tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
         || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
-        || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length || !soDienThoai2.toString().trim()?.length
-        || !email.toString().trim()?.length || !cccd.toString().trim()?.length || !noiCapCccd.toString().trim()?.length
-        || !ngayCapCccd.toString().trim()?.length || !ngayHetHanCccd.toString().trim()?.length || !hoChieu.toString().trim()?.length
-        || !noiCapHoChieu.toString().trim()?.length || !ngayCapHoChieu.toString().trim()?.length || !ngayHetHanHoChieu.toString().trim()?.length
+        || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length 
+        || !email.toString().trim()?.length 
         || !noiSinh.toString().trim()?.length || !queQuan.toString().trim()?.length || !diaChiThuongTru.toString().trim()?.length
         || !diaChiTamTru.toString().trim()?.length || !atmNganHang.toString().trim()?.length || !soAtm.toString().trim()?.length
         || !ngayBatDauLam.toString().trim()?.length
@@ -139,7 +137,7 @@ export default function AddNewUser() {
 
           const updateRes = await UserAPI.addNewUser({ ...userDetail })
           if (updateRes?.status === 200) {
-            toast.success(updateRes?.data)
+            navigate(`/manager/addcontract/${newMaNv}`)
           }
         }
     } catch (error) {
@@ -272,7 +270,7 @@ export default function AddNewUser() {
             disabled={false}
             require={true}
             handleChange={(event) => {
-              if (!valiSoDienThoai.test(event.target.value)) {
+              if ((event.target.value).toString().trim()?.length && !valiSoDienThoai.test(event.target.value)) {
                 setCheckSoDienThoai('Phone number incorrect format')
               }
               else
@@ -303,7 +301,7 @@ export default function AddNewUser() {
             disabled={false}
             require={true}
             handleChange={(event) => {
-              if (!validator.isEmail(event.target.value)) {
+              if ( (event.target.value) && !validator.isEmail(event.target.value)) {
                 setCheckEmail('Email incorrect format')
               }
               else
@@ -368,7 +366,7 @@ export default function AddNewUser() {
             require={false}
 
             handleChange={(event) => {
-              if (!valiCccd.test(event.target.value)) {
+              if ((event.target.value).toString().trim()?.length && !valiCccd.test(event.target.value)) {
                 setCheckCccd('Citizen identification incorrect format')
               }
               else
@@ -417,7 +415,7 @@ export default function AddNewUser() {
             type="text"
             disabled={false}
             handleChange={(event) => {
-              if (!valiHoChieu.test(event.target.value)) {
+              if ((event.target.value).toString().trim()?.length && !valiHoChieu.test(event.target.value)) {
                 setCheckHoChieu('Passport incorrect format')
               }
               else

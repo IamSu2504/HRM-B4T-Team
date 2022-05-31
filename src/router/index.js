@@ -110,6 +110,10 @@ import MViewInsurance from "../pages/Manager/Insurance/ViewInsurance";
 import MAddInsurance from "../pages/Manager/Insurance/AddNewInsurance";
 import MUpdateInsurance from "../pages/Manager/Insurance/UpdateInsurance";
 
+import MViewTax from "../pages/Manager/Tax/ViewTax";
+import MAddTax from "../pages/Manager/Tax/AddNewTax";
+import MUpdateTax from "../pages/Manager/Tax/UpdateTax";
+
 import MViewContract from "../pages/Manager/Contract/ViewContract";
 import MAddContract from "../pages/Manager/Contract/AddNewContract";
 import MUpdateContract from "../pages/Manager/Contract/UpdateContract";
@@ -256,8 +260,12 @@ export default function MainApp() {
         <Route exact path="/admin/homepage" element={<AdminHomePagePrivateRoute/>} />
         {/* manager */}
         <Route exact path="/manager/viewallInsurance" element={<ManagerLayoutPrivateRoute><MViewInsurance /></ManagerLayoutPrivateRoute>} />
-        <Route exact path="/manager/addInsurance" element={<ManagerLayoutPrivateRoute><MAddInsurance /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/addInsurance/:maNv" element={<ManagerLayoutPrivateRoute><MAddInsurance /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/updateInsurance/:managerInsuranceId" element={<ManagerLayoutPrivateRoute><MUpdateInsurance /></ManagerLayoutPrivateRoute>} />
+
+        <Route exact path="/manager/viewallTax" element={<ManagerLayoutPrivateRoute><MViewTax /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/addTax/:maNv" element={<ManagerLayoutPrivateRoute><MAddTax /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/updateTax/:managerInsuranceId" element={<ManagerLayoutPrivateRoute><MUpdateTax /></ManagerLayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewallcontract" element={<ManagerLayoutPrivateRoute><MViewContract /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/addcontract/:maNv" element={<ManagerLayoutPrivateRoute><MAddContract /></ManagerLayoutPrivateRoute>} />

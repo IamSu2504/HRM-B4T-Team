@@ -40,7 +40,7 @@ export default function AddContract() {
 
                 const addRes = await ManagercontractAPI.addNewManagercontract({ ...contractDetail })
                 if (addRes?.status === 200) {
-                    toast.success(addRes?.data)
+                    navigate(`/manager/addInsurance/${maNv}`)
                 }
             }
         } catch (error) {
@@ -88,6 +88,7 @@ export default function AddContract() {
                     <CustomSelectBox
                         title="Type of contract"
                         require={true}
+                        value = {contractDetail?.loaiHopDong || 1}
                         option={listContract.map((contractItem) => {
                             return (
                                 { label: `${contractItem.maLoaiHopDong} - ${contractItem.tenLoaiHopDong}`, value: contractItem.id }

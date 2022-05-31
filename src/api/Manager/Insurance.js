@@ -11,14 +11,14 @@ const ManagerInsuranceAPI = {
         return AxiosClient.get(url);
     },
 
-    updateManagerInsurance({id, idLoaiBH, maSoBH, tienBH, maNV}) {
+    updateManagerInsurance({id, idLoaiBH, maSoBH, maNV}) {
         const url = `/insurance/${id}`;
-        return AxiosClient.put(url, { idLoaiBH, maSoBH, tienBH, maNV});
+        return AxiosClient.put(url, { idLoaiBH, maSoBH, maNV});
     },
 
-    addNewManagerInsurance({idLoaiBH, maSoBH, tienBH, maNV}) {
+    addNewManagerInsurance({idLoaiBH, maSoBH, maNV}) {
         const url = `/insurance`;
-        return AxiosClient.post(url, {idLoaiBH, maSoBH, tienBH, maNV});
+        return AxiosClient.post(url, {idLoaiBH, maSoBH, maNV});
     },
 
 }
