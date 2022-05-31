@@ -1,7 +1,7 @@
 package backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.text.ParseException;
@@ -10,8 +10,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-@Data
 @Entity
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "phanloai_ngaynghile")
 public class HolidayCategory {
 
