@@ -19,4 +19,7 @@ public class InsuranceCategory {
     @Column(name = "ten_bh")
     private String tenBH;
 
+    @Column(name = "phan_tram")
+    private double phanTram;
+
 }

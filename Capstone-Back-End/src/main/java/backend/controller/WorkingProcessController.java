@@ -56,11 +56,11 @@ public class WorkingProcessController {
     @PostMapping(value = "")
     public ResponseEntity<?> create(@RequestBody CreateUpdateWorkingProcess request) {
         try {
-            WorkingProcess t = service.save(request);
-            if(t==null){
-                return new ResponseEntity<>("Working process already exist.", HttpStatus.EXPECTATION_FAILED);
+            String mess = service.getSaveMessage(request);
+            if(mess==null){
+                return new ResponseEntity<>("Add successful",HttpStatus.OK);
             }
-            return new ResponseEntity<>("Add successful.", HttpStatus.OK);
+            return new ResponseEntity<>(mess,HttpStatus.EXPECTATION_FAILED);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -74,11 +74,11 @@ public class WorkingProcessController {
                 return new ResponseEntity<>("Working process doesn't exist.", HttpStatus.NOT_FOUND);
             }
             request.setId(id);
-            WorkingProcess t = service.save(request);
-            if(t==null){
-                return new ResponseEntity<>("Working process already exist.", HttpStatus.EXPECTATION_FAILED);
+            String mess = service.getSaveMessage(request);
+            if(mess==null){
+                return new ResponseEntity<>("Update successfully",HttpStatus.OK);
             }
-            return new ResponseEntity<>("Update successfully", HttpStatus.OK);
+            return new ResponseEntity<>(mess,HttpStatus.EXPECTATION_FAILED);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }

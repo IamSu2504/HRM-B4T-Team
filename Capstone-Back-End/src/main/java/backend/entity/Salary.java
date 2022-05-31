@@ -60,8 +60,6 @@ public class Salary {
         return luongCoBan + phuCapKhac;
     }
 
-
-
     public Date getNgayHieuLuc(){
             if (ngayHieuLuc != null) {
                 try {

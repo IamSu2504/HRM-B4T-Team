@@ -80,4 +80,8 @@ public class InsuranceService {
             return null;
         }
     }
+
+    public Insurance getByLoai(String maBH,String maNV){
+        return repo.getByLoai(maBH,maNV);
+    }
 }
