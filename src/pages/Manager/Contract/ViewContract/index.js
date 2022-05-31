@@ -61,7 +61,7 @@ export default function ViewContract() {
                                     <td>{contractItem?.ngayHieuLuc}</td>
                                     <td>{contractItem?.ngayHetHan}</td>
                                     <td>{contractItem?.ghiChu}</td>
-                                    <td>{contractItem?.trangThai? "Đang Hiệu Lực" : "Đã Hết Hiệu Lực"}</td>
+                                    <td>{contractItem?.trangThai? "Effect" : "Expire"}</td>
                                     <td>
                                         <div onClick={()=>navigate(`/manager/updatecontract/${contractItem?.maHD}`)}>
                                             <img src="/home/update-icon.svg" />
