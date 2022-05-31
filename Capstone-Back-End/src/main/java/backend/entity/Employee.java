@@ -128,13 +128,13 @@ public class Employee {
 
     public String getTrangThai(){
         if(ngayNghiViec==null){
-            return "Đang làm việc";
+            return "Working";
         }
         else {
             if(ngayNghiViec.before(new Date())) {
-                return "Đã nghỉ việc";
+                return "Leaved";
             }
-            return "Đang làm việc";
+            return "Working";
         }
     }
 
