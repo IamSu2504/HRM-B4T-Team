@@ -62,13 +62,8 @@ public class Salary {
 
     public Date getNgayHieuLuc(){
             if (ngayHieuLuc != null) {
-                try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                    return sdf.parse(sdf.format(ngayHieuLuc));
-                } catch (ParseException e) {
-                    return null;
-                }
+                ngayHieuLuc.setHours(8);
+                return ngayHieuLuc;
             } else {
                 return null;
             }
@@ -76,13 +71,8 @@ public class Salary {
 
     public Date getNgayKetThuc(){
         if (ngayKetThuc != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(ngayKetThuc));
-            } catch (ParseException e) {
-                return null;
-            }
+            ngayKetThuc.setHours(8);
+            return ngayKetThuc;
         } else {
             return null;
         }

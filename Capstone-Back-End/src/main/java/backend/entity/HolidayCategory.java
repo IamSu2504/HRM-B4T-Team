@@ -29,13 +29,8 @@ public class HolidayCategory {
 
     public Date getNgay(){
         if (ngay != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(ngay));
-            } catch (ParseException e) {
-                return null;
-            }
+            ngay.setHours(8);
+            return ngay;
         } else {
             return null;
         }

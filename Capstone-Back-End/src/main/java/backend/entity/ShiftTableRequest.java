@@ -33,13 +33,8 @@ public class ShiftTableRequest {
 
     public Date getNgayTu(){
             if (ngayTu != null) {
-                try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                    return sdf.parse(sdf.format(ngayTu));
-                } catch (ParseException e) {
-                    return null;
-                }
+                ngayTu.setHours(8);
+                return ngayTu;
             } else {
                 return null;
             }
@@ -47,13 +42,8 @@ public class ShiftTableRequest {
 
     public Date getNgayDen(){
         if (ngayDen != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(ngayDen));
-            } catch (ParseException e) {
-                return null;
-            }
+            ngayDen.setHours(8);
+            return ngayDen;
         } else {
             return null;
         }

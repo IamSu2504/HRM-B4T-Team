@@ -50,13 +50,8 @@ public class LeaveRequest {
 
     public Date getDate(){
         if (date != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(date));
-            } catch (ParseException e) {
-                return null;
-            }
+            date.setHours(8);
+            return date;
         } else {
             return null;
         }

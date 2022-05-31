@@ -165,8 +165,6 @@ public class ReportService {
                         luongMoiCa = luongCoBan / soCaToiThieu;
                         soCa = getMinimumShifts();
 
-
-
                         // so ca lam
                         if (soCa > 80) {
                             soCaLamThem = soCa - 80;

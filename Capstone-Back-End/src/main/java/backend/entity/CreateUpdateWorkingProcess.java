@@ -22,7 +22,5 @@ public class CreateUpdateWorkingProcess {
 
     private String ngayRa;
 
-    private Boolean trangThai;
-
     private String maNV;
 }

@@ -1,6 +1,5 @@
 package backend.service;
 
-import backend.entity.CertificateManager;
 import backend.entity.CreateUpdateWorkingProcess;
 import backend.entity.DepartmentCategory;
 import backend.entity.WorkingProcess;
@@ -76,7 +75,7 @@ public class WorkingProcessService {
 
     public WorkingProcess getNewWorkingProcess(CreateUpdateWorkingProcess request) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
             WorkingProcess s = new WorkingProcess();
             s.setId(request.getId());
@@ -87,7 +86,6 @@ public class WorkingProcessService {
             if(request.getNgayRa()!=null)
             s.setNgayRa(sdf.parse(request.getNgayRa()));
             s.setMaNV(request.getMaNV());
-            s.setTrangThai(request.getTrangThai());
 
             return s;
         } catch (Exception e) {

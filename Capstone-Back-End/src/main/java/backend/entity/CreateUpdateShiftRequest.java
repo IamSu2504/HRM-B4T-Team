@@ -17,8 +17,4 @@ public class CreateUpdateShiftRequest {
     private Integer roomID;
 
     private String date;
-
-    private Boolean accepted;
-
-    private String note;
 }

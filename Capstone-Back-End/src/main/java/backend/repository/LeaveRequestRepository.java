@@ -15,4 +15,6 @@ public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Inte
     @Query(value = "SELECT * FROM dangkinghi d, phanloai_calam p, phanloai_ngaynghi n \n" +
             "where d.id_ca = p.id and d.id_loai_nghi = n.id and d.ma_nv = ? and  d.id_ca = ? and  d.ngay = ? and n.id = ?", nativeQuery = true)
     LeaveRequest getDublicateLeaveRequest(String maNV, int shiftID, String date, int idNghi);
+
+
 }

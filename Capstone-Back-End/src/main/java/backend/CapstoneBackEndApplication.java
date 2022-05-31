@@ -20,10 +20,4 @@ public class CapstoneBackEndApplication extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(CapstoneBackEndApplication.class);
     }
-
-//    @PostConstruct
-//    public void init(){
-//        // Setting Spring Boot SetTimeZone
-//        TimeZone.setDefault(TimeZone.getTimeZone("GMT+7:00"));
-//    }
 }

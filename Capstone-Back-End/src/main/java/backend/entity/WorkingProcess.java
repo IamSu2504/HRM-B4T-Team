@@ -43,21 +43,13 @@ public class WorkingProcess {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date ngayRa;
 
-    @Column(name = "trang_thai")
-    private boolean trangThai;
-
     @Column(name = "ma_nv")
     private String maNV;
 
     public Date getNgayVao() {
         if (ngayVao != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(ngayVao));
-            } catch (ParseException e) {
-                return null;
-            }
+            ngayVao.setHours(8);
+            return ngayVao;
         } else {
             return null;
         }
@@ -65,13 +57,8 @@ public class WorkingProcess {
 
     public Date getNgayRa() {
         if (ngayRa != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(ngayRa));
-            } catch (ParseException e) {
-                return null;
-            }
+            ngayRa.setHours(8);
+            return ngayRa;
         } else {
             return null;
         }

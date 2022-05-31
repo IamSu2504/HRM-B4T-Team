@@ -41,7 +41,7 @@ public class Employee {
     private String tenNv;
 
     @Column(name = "ngay_sinh")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngaySinh;
 
@@ -140,13 +140,8 @@ public class Employee {
 
     public Date getNgaySinh(){
         if (ngaySinh != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(ngaySinh));
-            } catch (ParseException e) {
-                return null;
-            }
+            ngaySinh.setHours(8);
+            return ngaySinh;
         } else {
             return null;
         }
@@ -154,13 +149,8 @@ public class Employee {
 
     public Date getNgayCapCccd(){
         if (ngayCapCccd != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(ngayCapCccd));
-            } catch (ParseException e) {
-                return null;
-            }
+            ngayCapCccd.setHours(8);
+            return ngayCapCccd;
         } else {
             return null;
         }
@@ -168,13 +158,8 @@ public class Employee {
 
     public Date getNgayHetHanCccd(){
         if (ngayHetHanCccd != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(ngayHetHanCccd));
-            } catch (ParseException e) {
-                return null;
-            }
+            ngayHetHanCccd.setHours(8);
+            return ngayHetHanCccd;
         } else {
             return null;
         }
@@ -182,13 +167,8 @@ public class Employee {
 
     public Date getNgayCapHoChieu(){
         if (ngayCapHoChieu != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(ngayCapHoChieu));
-            } catch (ParseException e) {
-                return null;
-            }
+            ngayCapHoChieu.setHours(8);
+            return ngayCapHoChieu;
         } else {
             return null;
         }
@@ -196,13 +176,8 @@ public class Employee {
 
     public Date getNgayHetHanHoChieu(){
         if (ngayHetHanHoChieu != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(ngayHetHanHoChieu));
-            } catch (ParseException e) {
-                return null;
-            }
+            ngayHetHanHoChieu.setHours(8);
+            return ngayHetHanHoChieu;
         } else {
             return null;
         }
@@ -210,13 +185,8 @@ public class Employee {
 
     public Date getNgayBatDauLam(){
         if (ngayBatDauLam != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(ngayBatDauLam));
-            } catch (ParseException e) {
-                return null;
-            }
+            ngayBatDauLam.setHours(8);
+            return ngayBatDauLam;
         } else {
             return null;
         }
@@ -224,13 +194,8 @@ public class Employee {
 
     public Date getNgayNghiViec(){
         if (ngayNghiViec != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(ngayNghiViec));
-            } catch (ParseException e) {
-                return null;
-            }
+            ngayNghiViec.setHours(8);
+            return ngayNghiViec;
         } else {
             return null;
         }

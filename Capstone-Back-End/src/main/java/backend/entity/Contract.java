@@ -46,13 +46,8 @@ public class Contract {
 
     public Date getNgayHieuLuc(){
             if (ngayHieuLuc != null) {
-                try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                    return sdf.parse(sdf.format(ngayHieuLuc));
-                } catch (ParseException e) {
-                    return null;
-                }
+                ngayHieuLuc.setHours(8);
+                return ngayHieuLuc;
             } else {
                 return null;
             }
@@ -60,13 +55,8 @@ public class Contract {
 
     public Date getNgayHetHan(){
         if (ngayHetHan != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(ngayHetHan));
-            } catch (ParseException e) {
-                return null;
-            }
+            ngayHetHan.setHours(8);
+            return ngayHetHan;
         } else {
             return null;
         }
@@ -74,13 +64,7 @@ public class Contract {
 
     public Boolean getTrangThai(){
         if (ngayHetHan != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                ngayHetHan = sdf.parse(sdf.format(ngayHetHan));
-            } catch (ParseException e) {
-                return true;
-            }
+            ngayHetHan.setHours(8);
         } else {
             return true;
         }

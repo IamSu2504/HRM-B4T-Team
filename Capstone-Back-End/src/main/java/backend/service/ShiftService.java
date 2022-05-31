@@ -34,7 +34,9 @@ public class ShiftService {
         try {
             String mess = "";
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            sdf1.setTimeZone(TimeZone.getTimeZone("UTC"));
             SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+            sdf2.setTimeZone(TimeZone.getTimeZone("UTC"));
             Shift newShift = getNewShift(request);
 
             // get first+last of current month
@@ -47,23 +49,23 @@ public class ShiftService {
 
             // check emp existed
             if (!empRepo.findById(newShift.getEmployee().getId()).isPresent()) {
-                return "Mã nhân viên " + newShift.getEmployee().getId() + " không tồn tại";
+                return "Employee ID " + newShift.getEmployee().getId() + " not existed";
             }
 
             // check leaved
             Employee e = empRepo.findById(newShift.getEmployee().getId()).get();
             if (e.getNgayNghiViec() != null && e.getNgayNghiViec().compareTo(newShift.getDate()) <= 0) {
-                return "Nhân viên mã " + newShift.getEmployee().getId() + " đã nghỉ việc";
+                return "Employee " + e.getTenNv() + "(" + newShift.getEmployee().getId() + ") has leaved";
             }
 
             if (positionRepo.getByMaNvInRange(newShift.getEmployee().getId(), monthFirst, monthEnd) == null) {
                 e = empRepo.findById(newShift.getEmployee().getId()).get();
-                return "Nhân viên mã " + request.getId() + " hiện chưa có chức vụ trong tháng từ " + monthFirst + " đến " + monthEnd + ". Vui lòng bổ sung trong quá trình công tác của nhân viên này";
+                return "Employee " + e.getTenNv() + "(" + request.getId() + ") has no position from " + monthFirst + " to " + monthEnd + ". Please update this employee's position";
             }
             String chucVu = positionRepo.getByMaNvInRange(newShift.getEmployee().getId(), monthFirst, monthEnd).getTenChucVu();
 
             //------------ check if user is a teacher -------------------
-            if (chucVu.toLowerCase().contains("giáo viên")) {
+            if (chucVu.toLowerCase().contains("teacher")) {
 
                 Employee gv = empRepo.getById(request.getUserID());
 
@@ -71,7 +73,7 @@ public class ShiftService {
                 List<HolidayCategory> holidays = holidayRepo.findAll();
                 for (HolidayCategory h : holidays) {
                     if (newShift.getDate() == h.getNgay()) {
-                        return "Không thể đăng kí ngày " + sdf2.format(newShift.getDate()) + "(" + h.getTenNgayLe() + ")";
+                        return "Unable to add new shift in " + sdf2.format(newShift.getDate()) + "(" + h.getTenNgayLe() + ")";
                     }
                 }
 
@@ -79,7 +81,7 @@ public class ShiftService {
                 Integer dayTotal = shiftRepo.getDayTotal(sdf1.format(newShift.getDate()), newShift.getEmployee().getId());
                 if (dayTotal != null) {
                     if (dayTotal >= 10) {
-                        return "Giáo viên " + gv.getTenNv() + "(" + gv.getId() + ")" + " đã đăng kí tối đa trong 1 ngày là 10 tiếng. Không thể đăng kí thêm";
+                        return "Teacher " + gv.getTenNv() + "(" + gv.getId() + ")" + " has maximum(5) shifts in " + sdf2.format(newShift.getDate()) + ". Register failed";
                     }
                 }
 
@@ -98,37 +100,30 @@ public class ShiftService {
                 Integer totalInWeek = shiftRepo.getTotalShiftInRange(sdf1.format(monDay), sdf1.format(sunDay), newShift.getEmployee().getId());
 
                 // update min + max total in week
-                List<HolidayCategory> holidaysInWeek = holidayRepo.getNgayLeTrongKhoang(sdf1.format(monDay), sdf1.format(sunDay));
-                maxTotalInWeek -= holidaysInWeek.size() * 4;
-                minTotalInWeek -= holidaysInWeek.size() * 4;
+//                List<HolidayCategory> holidaysInWeek = holidayRepo.getNgayLeTrongKhoang(sdf1.format(monDay), sdf1.format(sunDay));
+//                maxTotalInWeek -= holidaysInWeek.size() * 4;
+//                minTotalInWeek -= holidaysInWeek.size() * 4;
 
-                // check if no shift signed up in week
                 if (totalInWeek != null) {
                     if (totalInWeek == maxTotalInWeek) {
-                        return "Số ca tối đa trong tuần của giáo viên " + gv.getTenNv() + "(" + gv.getId() + ")" + " từ " + sdf2.format(monDay) + " đến " + sdf2.format(sunDay) + " đã đạt đến tối đa là " + maxTotalInWeek + " ca. Không thể đăng kí thêm";
+                        return "Teacher " + gv.getTenNv() + "(" + gv.getId() + ")" + " has maximum(" + maxTotalInWeek + ") shifts in the week from " + sdf2.format(monDay) + " to " + sdf2.format(sunDay) + ". Register failed";
                     }
-                    if (totalInWeek < minTotalInWeek) {
-                        mess = "Vui lòng đăng kí thêm ca, tổng số ca tối thiểu của giáo viên " + gv.getTenNv() + "(" + gv.getId() + ")" + " trong tuần từ " + sdf2.format(monDay) + " đến " + sdf2.format(sunDay) + " là " + minTotalInWeek;
-                    }
+//                    if (totalInWeek < minTotalInWeek) {
+//                        mess = "Teacher " + gv.getTenNv() + "(" + gv.getId() + ")" + " doesn't in the week from " + sdf2.format(monDay) + " to " + sdf2.format(sunDay) + " is " + minTotalInWeek;
+//                    }
                 }
 
                 //------------- check dublicate shift -------------
                 Shift dublicateShift = shiftRepo.getDublicateShift(newShift.getShiftCategory().getId(), sdf1.format(newShift.getDate()), newShift.getRoom().getId());
                 if (dublicateShift != null) {
-                    if (dublicateShift.getEmployee().getId().equalsIgnoreCase(newShift.getEmployee().getId())) {
-                        return "Bạn đã đăng kí ca làm này";
-                    } else {
-                        if (!newShift.getEmployee().getId().equalsIgnoreCase(dublicateShift.getEmployee().getId())) {
-                            return "Giáo viên " + newShift.getEmployee().getTenNv() + "(" + newShift.getEmployee().getId() + ") đã đăng kí cùng ca làm tại " + newShift.getRoom().getTenPhongHoc() + " vào ngày " + request.getDate();
-                        }
-                    }
+                    return "Teacher " + newShift.getEmployee().getTenNv() + "(" + newShift.getEmployee().getId() + ") registered the same shift in " + newShift.getRoom().getTenPhongHoc() + " in " + sdf2.format(request.getDate());
                 }
 
                 shiftRepo.save(newShift);
-                return "Đăng kí thành công. " + mess;
+                return "Shift registered successfully. " + mess;
                 // check not teacher
             } else {
-                return "Chỉ giáo viên được đăng kí ca làm";
+                return "Position of employee " + newShift.getEmployee().getTenNv() + "(" + newShift.getEmployee().getId() + ") in " + sdf2.format(newShift.getDate()) + " is not teacher. Register failed";
             }
         } catch (Exception e) {
             return "Internal server error";
