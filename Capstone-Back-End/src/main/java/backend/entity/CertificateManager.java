@@ -24,7 +24,7 @@ public class CertificateManager {
     private CertificateCategory certificateID;
 
     @Column(name = "ngay_cap")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayCap;
 

@@ -26,9 +26,6 @@ public class InsuranceEmployee {
     @Column(name = "ma_so_bh")
     private String maSoBH;
 
-    @Column(name = "tien_bao_hiem")
-    private Double tienBH;
-
     @Column(name = "ma_nv")
     private String maNV;
 }

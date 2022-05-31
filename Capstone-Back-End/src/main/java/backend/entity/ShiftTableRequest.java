@@ -21,11 +21,11 @@ public class ShiftTableRequest {
 
     private Integer idPhong;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="dd/MM/yyyy")
     private Date ngayTu;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="dd/MM/yyyy")
     private Date ngayDen;
 

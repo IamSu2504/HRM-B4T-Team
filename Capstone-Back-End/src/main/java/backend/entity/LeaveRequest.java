@@ -41,7 +41,7 @@ public class LeaveRequest {
     private ShiftCategory shiftID;
 
     @Column(name = "ngay")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
 

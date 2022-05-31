@@ -23,11 +23,11 @@ public class EmployeeReport {
     String image;
     String hoChieu;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "dd/MM/yyyy")
     Date ngayHieuLuc;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "dd/MM/yyyy")
     Date ngayHetHan;
 

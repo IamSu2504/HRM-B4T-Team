@@ -28,6 +28,7 @@ public class TimeKeepingEmployee {
     private String maNV;
 
     @Column(name = "datetime")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateTime;
 
     @Column(name = "status")

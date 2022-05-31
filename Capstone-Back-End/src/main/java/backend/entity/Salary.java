@@ -41,12 +41,12 @@ public class Salary {
     private Double phuCapKhac;
 
     @Column(name = "ngay_hieu_luc")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayHieuLuc;
 
     @Column(name = "ngay_ket_thuc")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayKetThuc;
 

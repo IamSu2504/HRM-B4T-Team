@@ -39,7 +39,7 @@ public class Shift {
     private RoomCategory room;
 
     @Column(name = "ngay")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
 

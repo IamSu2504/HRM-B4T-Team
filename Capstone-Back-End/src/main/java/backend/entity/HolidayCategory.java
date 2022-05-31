@@ -23,7 +23,7 @@ public class HolidayCategory {
     private Integer id;
 
     @Column(name = "ngay")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngay;
 

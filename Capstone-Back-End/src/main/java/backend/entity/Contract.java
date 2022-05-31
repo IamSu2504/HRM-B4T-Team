@@ -26,12 +26,12 @@ public class Contract {
     private ContractCategory loaiHopDong;
 
     @Column(name = "ngay_hieu_luc")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayHieuLuc;
 
     @Column(name = "ngay_het_han")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayHetHan;
 

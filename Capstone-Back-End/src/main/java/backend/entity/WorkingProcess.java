@@ -34,12 +34,12 @@ public class WorkingProcess {
     private PositionCategory idChucVu;
 
     @Column(name = "ngay_vao")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date ngayVao;
 
     @Column(name = "ngay_ra")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date ngayRa;
 
