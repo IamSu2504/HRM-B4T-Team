@@ -12,6 +12,7 @@ import ClassRoomAPI from "../../../api/classRoom";
 import UserAPI from "../../../api/user";
 import ReactHtmlTableToExcel from "react-html-table-to-excel";
 import { useParams } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 
 
 export default function RegisterShift() {
@@ -20,11 +21,11 @@ export default function RegisterShift() {
     const [shiftDetail, setListShift] = useState([])
     const [listDepartment, setListDepartment] = useState([])
     const [listClassRoom, setListClassRoom] = useState([])
-
+    const navigate = useNavigate();
     const [listviewShift, setlistviewShift] = useState([]);
     const [idPhong, setIdPhong] = useState()
     const [i, setI] = useState()
-    
+
     const [ngayTu, setNgayTu] = useState()
     const [ngayDen, setNgayDen] = useState()
     const [dayOfWeek, setDayOfWeek] = useState(['Chủ Nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'])
@@ -36,7 +37,7 @@ export default function RegisterShift() {
         const shiftRes = await ShiftAPI.getAll()
         if (shiftRes?.status === 200) {
             setListShift(shiftRes?.data)
-           
+
         }
     }
 
@@ -44,7 +45,7 @@ export default function RegisterShift() {
     //     const departmentRes = await DepartmentAPI.getAll()
     //     if (departmentRes?.status === 200) {
     //         setListDepartment(departmentRes?.data)
-           
+
     //     }
     // }
 
@@ -73,20 +74,20 @@ export default function RegisterShift() {
     }, [])
 
     useEffect(() => {
-       
+
         getlistviewShift()
     }, [idPhong]);
     useEffect(() => {
-      
+
         getlistviewShift()
     }, [ngayTu]);
     useEffect(() => {
-  
+
         getlistviewShift()
     }, [ngayDen]);
     useEffect(() => {
-          
-        setRegisterShiftDetail({...registerShiftDetail, date: i})
+
+        setRegisterShiftDetail({ ...registerShiftDetail, date: i })
         console.log(registerShiftDetail?.date)
     }, [i]);
 
@@ -105,7 +106,7 @@ export default function RegisterShift() {
                         title="Classroom"
                         option={listClassRoom.map((classRoomItem) => {
                             return (
-                                { label: `${classRoomItem.maPhongHoc}-${classRoomItem.tenPhongHoc}`, value: classRoomItem?.id  }
+                                { label: `${classRoomItem.maPhongHoc}-${classRoomItem.tenPhongHoc}`, value: classRoomItem?.id }
                             )
                         })}
                         value={idPhong}
@@ -113,7 +114,7 @@ export default function RegisterShift() {
                         handleChange={(event) => {
                             const id = event.currentTarget.value
                             setIdPhong(id)
-                            setRegisterShiftDetail({...registerShiftDetail, roomID: id})
+                            setRegisterShiftDetail({ ...registerShiftDetail, roomID: id })
                         }}
                     />
                     <CustomInputField
@@ -121,20 +122,20 @@ export default function RegisterShift() {
                         type="date"
                         disabled={false}
                         handleChange={(event) => {
-                
+
                             var curr = new Date(event.target.value);
                             setI(curr.toLocaleDateString())
-                            setRegisterShiftDetail({...registerShiftDetail, date: curr.toLocaleDateString()})
-                            
+                            setRegisterShiftDetail({ ...registerShiftDetail, date: curr.toLocaleDateString() })
+
                             var ngayTu = new Date(curr.setDate(curr.getDate() - curr.getDay())).toLocaleDateString();
                             var ngayDen = new Date(curr.setDate(curr.getDate() - curr.getDay() + 6)).toLocaleDateString();
                             setNgayTu(ngayTu)
                             setNgayDen(ngayDen)
-                            
-                          
+
+
                         }}
                     />
-                    
+
 
 
                 </div>
@@ -156,7 +157,7 @@ export default function RegisterShift() {
                                     <th scope="col">Thursday</th>
                                     <th scope="col">Friday</th>
                                     <th scope="col">Saturday </th>
-                                    
+
                                 </tr>
                             </thead>
                             {
@@ -174,7 +175,7 @@ export default function RegisterShift() {
                                                             <td>
                                                                 <a>{listviewShift[t]?.room?.maPhongHoc}</a><br></br>
                                                                 <a>{listviewShift[t]?.employee?.id}-{listviewShift[t]?.employee?.tenNv}</a>
-                                                               
+
                                                             </td>
 
                                                         )
@@ -195,7 +196,25 @@ export default function RegisterShift() {
                     </div>
                 </div> : <div></div>
             }
-
+            <div>
+                <button className="save-button" onClick={() => {
+                    if (localStorage.getItem('role') === 'Admin') {
+                        navigate(`/admin/viewUser/${maNv}`)
+                    }
+                    else
+                        if (localStorage.getItem('role') === 'Manager') {
+                            navigate(`/manager/viewUser/${maNv}`)
+                        }
+                        else {
+                            navigate(`/employee/viewUser/${maNv}`)
+                        }
+                }}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">View User</span>
+                </button>
+            </div>
             <ToastContainer />
         </div>
     );

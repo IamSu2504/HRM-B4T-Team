@@ -116,7 +116,7 @@ export default function ViewAllUser() {
                   <td>{userItem?.ngaySinh}</td>
                   <td>{userItem?.soDienThoai}</td>
                   <td>
-                    <div>{userItem?.trangThai == 'Working' ? <a className="jobactive">Đang làm việc</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
+                    <div>{userItem?.trangThai == 'Working' ? <a className="jobactive">Working</a> : <a className="jobdeactive">Leaved</a>}</div>
                   </td>
                   <td>
                     <div onClick={() => navigate(`/manager/viewuser/${userItem.id}`)}>
@@ -162,7 +162,7 @@ export default function ViewAllUser() {
                   <td>{userItem?.ngaySinh}</td>
                   <td>{userItem?.soDienThoai}</td>
                   <td>
-                    ssssss
+                    <div>{userItem?.trangThai == 'Working' ? <a className="jobactive">Đang làm việc</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
                   </td>
                   {/* <td>
                     <div>{userItem?.trangThaiLaoDong ? <a className="jobactive">Đang Hoạt Động</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
