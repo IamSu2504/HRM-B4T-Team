@@ -10,4 +10,5 @@ public interface TaxRepository extends JpaRepository<Tax, Integer> {
 
     @Query(value = "select * from thue where UPPER(ma_so_thue) = UPPER(?)", nativeQuery = true)
     Tax getByMaSoThue(String maSoThue);
+
 }

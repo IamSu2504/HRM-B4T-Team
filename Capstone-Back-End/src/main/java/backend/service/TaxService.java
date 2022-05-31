@@ -59,10 +59,10 @@ public class TaxService {
         // add
         else{
             if(repo.getByMaSoThue(newTax.getMaSoThue())==null){
-                if(newTax.getMaSoThue().matches("[0-9]{10}\\-[0-9]{3}$")) {
-                    return repo.save(newTax);
+                if((newTax.getMaSoThue().matches("[0-9]{10}\\-[0-9]{3}$"))) {
+
                 }
-                return null;
+                return repo.save(newTax);
             }
             else{
                 return null;
