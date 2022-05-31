@@ -63,6 +63,7 @@ public class ReportService {
             double luongOT = 0;
             int soCaToiThieu;
             String chucVu;
+            String phongBan;
             Contract c;
 
             // get first + last of current month
@@ -96,11 +97,13 @@ public class ReportService {
                     soCaLamThem = 0;
                     luongTruocThue = 0;
                     luongOT = 0;
+                    chucVu = w.getIdChucVu().getTenChucVu();
+                    phongBan = w.getIdPhongBan().getTenPhongBan();
                     // Teacher
                     if (w.getIdChucVu().getTenChucVu().toUpperCase().equalsIgnoreCase("TEACHER")) {
                         soCaToiThieu = 80;
                         luongMoiCa = luongCoBan / soCaToiThieu;
-                        soCa = shiftRepo.getTotalShiftInRange(formattedMonthEnd, formattedMonthStart, e.getId());
+                        soCa = shiftRepo.getTotalShiftInRange(formattedMonthStart,formattedMonthEnd,e.getId());
 
                         // so ca lam
                         if (soCa > 80) {
@@ -227,6 +230,9 @@ public class ReportService {
                     sr = new SalaryReport();
                     sr.setMaNv(e.getId());
                     sr.setTenNV(e.getTenNv());
+                    sr.setChucVu(chucVu);
+                    sr.setPhongBan(phongBan);
+                    sr.setSoCaToiThieu(soCaToiThieu);
                     sr.setSoCa(soCa);
                     sr.setLuongCoBan(luongCoBan);
                     sr.setBaoHiemYte(baoHiemYte);

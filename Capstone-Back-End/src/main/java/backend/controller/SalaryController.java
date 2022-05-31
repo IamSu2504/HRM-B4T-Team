@@ -44,7 +44,7 @@ public class SalaryController {
         }
     }
 
-    @PostMapping("/employee/{id}")
+    @GetMapping("/employee/{id}")
     public ResponseEntity<?> getContract(@PathVariable("id") String maHD) {
         try {
             return new ResponseEntity<>(service.getByContractID(maHD), HttpStatus.OK);
