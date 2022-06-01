@@ -27,7 +27,7 @@ export default function ManagerHomePage() {
             <ul>
               <li onClick={() => navigate('/manager/viewallUser')}>Personnel</li>
               <li>Information Contract</li>
-              <li>Timekeeping</li>
+             
               <li onClick={() => navigate('/manager/viewallInsurance')}>Insurance</li>
             </ul>
           </div>

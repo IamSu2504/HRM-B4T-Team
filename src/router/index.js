@@ -114,6 +114,10 @@ import MViewTax from "../pages/Manager/Tax/ViewTax";
 import MAddTax from "../pages/Manager/Tax/AddNewTax";
 import MUpdateTax from "../pages/Manager/Tax/UpdateTax";
 
+import MViewSalary from "../pages/Manager/Salary/ViewSalary";
+import MAddSalary from "../pages/Manager/Salary/AddNewSalary";
+import MUpdateSalary from "../pages/Manager/Salary/UpdateSalary";
+
 import MViewContract from "../pages/Manager/Contract/ViewContract";
 import MAddContract from "../pages/Manager/Contract/AddNewContract";
 import MUpdateContract from "../pages/Manager/Contract/UpdateContract";
@@ -266,6 +270,10 @@ export default function MainApp() {
         <Route exact path="/manager/viewallTax" element={<ManagerLayoutPrivateRoute><MViewTax /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/addTax/:maNv" element={<ManagerLayoutPrivateRoute><MAddTax /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/updateTax/:managerInsuranceId" element={<ManagerLayoutPrivateRoute><MUpdateTax /></ManagerLayoutPrivateRoute>} />
+
+        <Route exact path="/manager/viewSalary" element={<ManagerLayoutPrivateRoute><MViewSalary /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/addSalary/:maNv&&:maHD" element={<ManagerLayoutPrivateRoute><MAddSalary/></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/updateSalary/:managerInsuranceId" element={<ManagerLayoutPrivateRoute><MUpdateSalary /></ManagerLayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewallcontract" element={<ManagerLayoutPrivateRoute><MViewContract /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/addcontract/:maNv" element={<ManagerLayoutPrivateRoute><MAddContract /></ManagerLayoutPrivateRoute>} />
