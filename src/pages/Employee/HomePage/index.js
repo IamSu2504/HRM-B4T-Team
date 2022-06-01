@@ -26,7 +26,7 @@ export default function EmployeeHomepage(){
         <div className='menu'>
           <ul>
             <li onClick={()=>navigate(`/employee/viewcontract/${localStorage.getItem('maNv')}`)}>Contract information</li>
-            <li>Timekeeping</li>
+            <li onClick={()=>navigate(`/employee/viewUser/${localStorage.getItem('maNv')}`)}>View Personal Infomation</li>
           </ul>
         </div>
       </div>
