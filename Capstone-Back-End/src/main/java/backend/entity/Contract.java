@@ -72,6 +72,7 @@ public class Contract {
             return true;
         }
         if(ngayHetHan !=null){
+            Date toDay = new Date();
             if(ngayHetHan.after(new Date())){
                 return false;
             }
