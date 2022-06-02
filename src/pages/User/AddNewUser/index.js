@@ -269,6 +269,7 @@ export default function AddNewUser() {
 
             type="text"
             disabled={false}
+            placeholder={"E.g. +84xxxxxxxxx"}
             require={true}
             handleChange={(event) => {
               if ((event.target.value).toString().trim()?.length && !valiSoDienThoai.test(event.target.value)) {
@@ -282,6 +283,7 @@ export default function AddNewUser() {
           <span style={{ fontSize: '10px', color: 'red', }}>{checSoDienThoai}</span>
           <CustomInputField
             title="Phone number 2"
+            placeholder={"E.g. 02xxxxxxxxx"}
             type="text"
             disabled={false}
             require={false}
@@ -297,7 +299,7 @@ export default function AddNewUser() {
           <span style={{ fontSize: '10px', color: 'red', }}>{checSoDienThoai2}</span>
           <CustomInputField
             title="Email"
-
+            placeholder={"E.g. eg@gmail.com"}
             type="text"
             disabled={false}
             require={true}
@@ -458,7 +460,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="Bank name"
-
+            placeholder={"E.g. TPBank"}
             type="text"
             disabled={false}
             require={true}
@@ -468,7 +470,7 @@ export default function AddNewUser() {
           />
           <CustomInputField
             title="ATM number"
-
+            placeholder={"E.g. 01234567890"}
             type="text"
             disabled={false}
             require={true}

@@ -142,7 +142,7 @@ export default function UpdateContract() {
                     />
                     <CustomInputField
                         title="Note"
-                        require={true}
+                        require={false}
                         value={contractDetail?.ghiChu}
                         type="text"
                         handleChange={(event) => {

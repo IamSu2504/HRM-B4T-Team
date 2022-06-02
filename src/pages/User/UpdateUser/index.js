@@ -391,6 +391,7 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="Bank name"
+            placeholder={"E.g. TPBank"}
             value={userDetail?.atmNganHang || ''}
             type="text"
             disabled={false}
@@ -401,6 +402,7 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="ATM number"
+            placeholder={"E.g. 01234567890"}
             value={userDetail?.soAtm || ''}
             type="text"
             disabled={false}
@@ -517,7 +519,7 @@ export default function UpdateUser() {
           />
           <CustomInputField
             title="Phone number"
-
+            placeholder={"E.g. +84xxxxxxxxx"}
             value={userDetail?.soDienThoai || ''}
             type="text"
             disabled={false}
@@ -534,7 +536,7 @@ export default function UpdateUser() {
           <span style={{ fontSize: '10px', color: 'red', }}>{checSoDienThoai}</span>
           <CustomInputField
             title="Phone number 2"
-
+            placeholder={"E.g. 02xxxxxxxxx"}
             value={userDetail?.soDienThoai2 || ''}
             type="text"
             disabled={false}
@@ -552,6 +554,7 @@ export default function UpdateUser() {
           <span style={{ fontSize: '10px', color: 'red', }}>{checSoDienThoai2}</span>
           <CustomInputField
             title="Email"
+            placeholder={"E.g. eg@gmail.com"}
             value={userDetail?.email || ''}
             type="text"
             disabled={true}

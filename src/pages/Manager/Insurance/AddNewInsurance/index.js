@@ -89,7 +89,7 @@ export default function AddManagerInsurance() {
                     />
                     <CustomInputField
                         title='Social insurance'
-                        placehole={"10 numbers"}
+                        placeholder={"10 numbers"}
                         type="text"
                         disabled={false}
                         require={true}
@@ -109,7 +109,7 @@ export default function AddManagerInsurance() {
                     <span style={{ fontSize: '10px', color: 'red', }}>{checkBaoHiemXaHoi}</span>
                     <CustomInputField
                         title='Health Insurance'
-                        placehole={"5 characters (the first 2 letters and the last 3 numbers)"}
+                        placeholder={"5 characters (the first 2 letters and the last 3 numbers)"}
                         type="text"
                         disabled={false}
                         require={true}
@@ -128,7 +128,7 @@ export default function AddManagerInsurance() {
                     <span style={{ fontSize: '10px', color: 'red', }}>{checkBaoHiemYTe}</span>
                     <CustomInputField
                         title='Trade union code'
-                        placehole={"10 numbers"}
+                        placeholder={"10 numbers"}
                         type="text"
                         disabled={false}
                         require={true}
