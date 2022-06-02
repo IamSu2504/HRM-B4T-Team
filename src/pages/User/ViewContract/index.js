@@ -38,7 +38,7 @@ export default function ViewContract() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Add Contract {maNv}</span>
+                    <span class="text"> Add Contract {maNv}</span>
                 </button>
             </div> : <div></div>}
             {userContractDetail.map((contractItem, contractIndex) => {
@@ -79,7 +79,7 @@ export default function ViewContract() {
                                             </tr>
                                             <tr>
                                                 <th>Status:</th>
-                                                <td>{contractItem.trangThai ? 'Working' : 'Finished'}</td>
+                                                <td>{contractItem.trangThai ? 'Working' : 'Leaved'}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -119,18 +119,19 @@ export default function ViewContract() {
                                     </table>
                                 </div> */}
                                 </div>
+                                {
+                                    localStorage.getItem('role') == 'Manager' ? <div>
+                                        <button className="save-button" onClick={() => navigate(`/manager/updatecontract/${contractItem.maHD}`)}>
+                                            <span class="image">
+                                                <img src="/home/save-icon.svg" />
+                                            </span>
+                                            <span class="text"> Update {contractItem.maHD}</span>
+                                        </button>
+                                    </div> : <div></div>
+                                }
                             </div>
                         </div>
-                        {
-                            localStorage.getItem('role') == 'Manager' ? <div>
-                                <button className="save-button" onClick={() => navigate(`/manager/updatecontract/${contractItem.maHD}`)}>
-                                    <span class="image">
-                                        <img src="/home/save-icon.svg" />
-                                    </span>
-                                    <span class="text">Update {contractItem.maHD}</span>
-                                </button>
-                            </div> : <div></div>
-                        }
+
 
                     </div>
                 )
@@ -239,7 +240,7 @@ export default function ViewContract() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">View User</span>
+                    <span class="text"> View User</span>
                 </button>
             </div>
         </div>

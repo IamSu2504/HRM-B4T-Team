@@ -17,13 +17,13 @@ export default function AddSalaryGroup() {
             const {maNhomLuong, tenNhomLuong} = salaryGroupDetail
     
             if ( !maNhomLuong.trim().length ||  !tenNhomLuong.trim().length){
-                setSubmitError({status: true, error: 'Thông tin không được bỏ trống'})
+                setSubmitError({status: true, error: 'Information is not blank'})
             }else{
                 setIsSubmit(true)
     
                 const updateRes = await SalaryGroupAPI.addNewSalaryGroup({...salaryGroupDetail})
                 if ( updateRes?.status === 200 ){
-                    toast.success('Thêm mới thông tin thành công')
+                    toast.success('Add new successful information')
                 }
             }
         }catch(error){
@@ -39,7 +39,7 @@ export default function AddSalaryGroup() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Thêm Thông Tin Nhóm Lương</div>
+                    <div className="title">Add information group salary</div>
                     <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
                 </div>
             </div>
@@ -47,7 +47,8 @@ export default function AddSalaryGroup() {
             <div className="row fied-data-row">
                 <div>
                     <CustomInputField
-                        title="Mã Nhóm Lương *:"
+                        title="Group salary code"
+                        required={true}
                         value={salaryGroupDetail?.maNhomLuong || ''}
                         type="text"
                         handleChange={(event) => {
@@ -55,7 +56,8 @@ export default function AddSalaryGroup() {
                         }}
                     />
                     <CustomInputField
-                        title="Tên Nhóm Lương *:"
+                        title="Group salary name"
+                        required={true}
                         value={salaryGroupDetail?.tenNhomLuong || ''}
                         type="text"
                         handleChange={(event) => {
@@ -72,7 +74,7 @@ export default function AddSalaryGroup() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Thêm</span>
+                    <span class="text">Add</span>
                 </button>
             </div>
             <ToastContainer />

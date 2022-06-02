@@ -26,10 +26,10 @@ export default function AddManagerTax() {
             console.log(maNv)
             console.log(managerTaxDetail);
             if (!managerTaxDetail.maSoThue.trim().length ) {
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
             } else
                 if (!valiThue.test(managerTaxDetail.maSoThue) ) {
-                    setSubmitError({ status: true, error: 'Thông tin không đúng định dạng' })
+                    setSubmitError({ status: true, error: 'Information incorrectly format' })
                 }
                 else {
                     setIsSubmit(true)

@@ -27,14 +27,14 @@ export default function ViewContract() {
         <div className="homepage">
             <div className="title">List of Contract</div>
             <div className="table-frame">
-            <div>
+            {/* <div>
                 <button className="save-button" onClick={()=>navigate(`/manager/addcontract`)}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">Add</span>
                 </button>
-            </div>
+            </div> */}
                 <table class="table table-bordered">
                     <thead>
                         <tr className="head">

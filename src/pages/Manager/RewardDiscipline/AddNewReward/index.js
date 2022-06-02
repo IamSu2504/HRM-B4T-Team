@@ -33,7 +33,7 @@ export default function AddReward() {
             const { phanLoaiID, lyDo, maNv } = rewardDisciplineDetail
 
             if (!phanLoaiID.trim().length || !lyDo.trim().length || !maNv.trim().length) {
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
                 setIsSubmit(true)
 

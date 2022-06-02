@@ -55,7 +55,7 @@ export default function ViewCertificate() {
         </div>
         <div>
           <p className="hoten">{userDetail?.tenNv}</p>
-          <p className="manhanvien">Mã Số Nhân Viên: {userDetail?.id}</p>
+          <p className="manhanvien">Employee code: {userDetail?.id}</p>
           {/* <p className="manhanvien">Giới tính: {userDetail?.gioiTinh ? 'Nam' : 'Nữ'}</p> */}
         </div>
 
@@ -65,9 +65,9 @@ export default function ViewCertificate() {
             return (
               <div>
                 <p className="contents"><img className="img-contents" src="/employee/dot.svg" />{certificateItem?.certificateID?.loaiChungChi}</p>
-                <p className="contents">Nơi Cấp: {certificateItem?.noiCap}</p>
-                <p className="contents">Ngày Cấp: {certificateItem?.ngayCap}</p>
-                <p className="contents">Điểm: {certificateItem?.diemSo}</p>
+                <p className="contents">Place of issue: {certificateItem?.noiCap}</p>
+                <p className="contents">Date of issue: {certificateItem?.ngayCap}</p>
+                <p className="contents">Scores: {certificateItem?.diemSo}</p>
               </div>
             )
           })}

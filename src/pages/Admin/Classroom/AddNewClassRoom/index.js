@@ -17,13 +17,13 @@ export default function AddClassRoom() {
             const {maPhongHoc, tenPhongHoc} = classRoomDetail
     
             if ( !maPhongHoc.trim().length ||  !tenPhongHoc.trim().length){
-                setSubmitError({status: true, error: 'Thông tin không được bỏ trống'})
+                setSubmitError({status: true, error: 'Information is not blank'})
             }else{
                 setIsSubmit(true)
     
                 const updateRes = await ClassRoomAPI.addNewClassRoom({...classRoomDetail})
                 if ( updateRes?.status === 200 ){
-                    toast.success('Thêm mới thông tin thành công')
+                    toast.success('Add new successful information')
                 }
             }
         }catch(error){

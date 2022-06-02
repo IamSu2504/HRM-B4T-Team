@@ -41,7 +41,7 @@ export default function RegisterShift() {
             const { userID, shiftCategoryID, roomID, date } = registerShiftDetail
             console.log('registerShiftDetail >>>>> ', registerShiftDetail)
             if (!userID?.trim()?.length || !shiftCategoryID?.trim()?.length || !roomID.toString().trim()?.length || !date?.trim()?.length) {
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
                 setIsSubmit(true)
                 const addRes = await RegisterShiftAPI.addNewRegisterShift({ ...registerShiftDetail })

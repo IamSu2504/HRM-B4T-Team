@@ -18,7 +18,7 @@ export default function Forgot() {
       setForgotError({ status: false, error: '' })
       let gmail2 = [gmail]
       if (!gmail.trim().length) {
-        setForgotError({ status: true, error: 'Gmail không thể để trống' })
+        setForgotError({ status: true, error: 'Gmail is not blank' })
       } else {
 
         const forgotRes = await ForgotAPI.forgot(gmail2)

@@ -17,13 +17,13 @@ export default function AddDepartment() {
             const { maPhongBan, tenPhongBan } = departmentDetail
 
             if (!maPhongBan.trim().length || !tenPhongBan.trim().length) {
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
                 setIsSubmit(true)
 
                 const updateRes = await DepartmentAPI.addNewDepartment({ ...departmentDetail })
                 if (updateRes?.status === 200) {
-                    toast.success('Thêm mới thông tin thành công')
+                    toast.success('Add new successful information')
                 }
             }
         } catch (error) {

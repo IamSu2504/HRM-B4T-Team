@@ -53,7 +53,7 @@ export default function ViewAllUser() {
       const deleteRes = await UserAPI.deleteUser(userId)
 
       if (deleteRes?.status === 200) {
-        toast('Xóa thành công')
+        toast('Delete success')
         getAllUser()
       }
     } catch (error) {
@@ -137,14 +137,14 @@ export default function ViewAllUser() {
         <table class="table2" id="userTable" >
           <thead>
             <tr className="head">
-              <th scope="col">STT</th>
-              <th scope="col">Mã nhân viên</th>
-              <th scope="col">Ảnh</th>
-              <th scope="col">Tên nhân viên</th>
-              <th scope="col">Giới tính</th>
-              <th scope="col">Ngày sinh</th>
-              <th scope="col">Số điện thoại</th>
-              <th scope="col">Trang thái</th>
+              <th scope="col">No.</th>
+              <th scope="col">Employee code</th>
+              <th scope="col">Image</th>
+              <th scope="col">Employee name</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Date of birthday</th>
+              <th scope="col">Phone number</th>
+              <th scope="col">Status </th>
 
             </tr>
           </thead>
@@ -162,7 +162,7 @@ export default function ViewAllUser() {
                   <td>{userItem?.ngaySinh}</td>
                   <td>{userItem?.soDienThoai}</td>
                   <td>
-                    <div>{userItem?.trangThai == 'Working' ? <a className="jobactive">Đang làm việc</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
+                    <div>{userItem?.trangThai == 'Working' ? <a className="jobactive">Working</a> : <a className="jobdeactive">Leaved</a>}</div>
                   </td>
                   {/* <td>
                     <div>{userItem?.trangThaiLaoDong ? <a className="jobactive">Đang Hoạt Động</a> : <a className="jobdeactive">Đã Nghỉ Việc</a>}</div>
@@ -199,7 +199,7 @@ export default function ViewAllUser() {
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-        labelRowsPerPage='Người dùng trong trang'
+        labelRowsPerPage='Users in the page'
       />
     </div>
   );

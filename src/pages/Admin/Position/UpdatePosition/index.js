@@ -32,13 +32,13 @@ export default function UpdatePosition() {
             const { maChucVu, tenChucVu } = positionDetail
 
             if (!maChucVu.trim().length || !tenChucVu.trim().length) {
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
                 setIsSubmit(true)
 
                 const updateRes = await PositionAPI.updatePosition({ id: positionId, ...positionDetail })
                 if (updateRes?.status === 200) {
-                    toast.success('Cập nhật thông tin thành công')
+                    toast.success('Successfully updated')
                 }
             }
         } catch (error) {

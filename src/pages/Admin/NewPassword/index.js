@@ -35,21 +35,21 @@ export default function NewPassword() {
       setSubmitError({ status: false, error: '' })
 
       if (!newpassword.trim().length) {
-        setSubmitError({ status: true, error: 'Mật khẩu không được bỏ trống' })
+        setSubmitError({ status: true, error: 'Password is not blank' })
       }
       else
         if (!repassword.trim().length) {
-          setSubmitError({ status: true, error: 'Nhập Lại Mật khẩu không được bỏ trống' })
+          setSubmitError({ status: true, error: 'Re-password is not blank' })
         } else
           if (!(newpassword === repassword)) {
-            setSubmitError({ status: true, error: 'Nhập Lại Mật Khẩu Chưa Đúng' })
+            setSubmitError({ status: true, error: 'Re-password is incorrect' })
           }
           else {
             setIsSubmit(true)
 
             const updateRes = await ForgotAPI.updatePassword({ id: accountDetail?.id, username: accountDetail?.username, password: repassword, maNv: accountDetail?.maNv, roleID: accountDetail?.role?.id })
             if (updateRes?.status === 200) {
-              toast.success('Cập nhật mật khẩu thành công')
+              toast.success('Successful password update')
             }
           }
     } catch (error) {

@@ -201,12 +201,12 @@ export default function UpdateUser() {
         || !diaChiTamTru.toString().trim()?.length || !atmNganHang.toString().trim()?.length || !soAtm.toString().trim()?.length
         || !ngayBatDauLam.toString().trim()?.length
       ) {
-        setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+        setSubmitError({ status: true, error: 'Information is not blank' })
       }
       else
         if (!valiCccd.test(cccd) || !validator.isEmail(email) || !valiHoChieu.test(hoChieu) || !valiSoDienThoai.test(soDienThoai) ||
           (soDienThoai2.toString().trim()?.length && !valiSoDienThoai2.test(soDienThoai2))) {
-          setSubmitError({ status: true, error: 'Thông tin sai định dạng' })
+          setSubmitError({ status: true, error: 'Incorrect format information' })
         }
         else {
 
@@ -300,7 +300,7 @@ export default function UpdateUser() {
             require={true}
             handleChange={(event) => {
               if (!valiCccd.test(event.target.value)) {
-                setCheckCccd('Căn cước công dân sai định dạng')
+                setCheckCccd('Citizenship identity format incorrectly')
               }
               else
                 setCheckCccd('')
@@ -349,7 +349,7 @@ export default function UpdateUser() {
             disabled={false}
             handleChange={(event) => {
               if (!valiHoChieu.test(event.target.value)) {
-                setCheckHoChieu('Hộ chiếu sai định dạng')
+                setCheckHoChieu('Passport format incorrectly')
               }
               else
                 setCheckHoChieu('')
@@ -440,7 +440,7 @@ export default function UpdateUser() {
             title="Gender"
 
             value={userDetail?.gioiTinh}
-            option={[{ label: "Nam", value: true }, { label: "Nữ", value: false }]}
+            option={[{ label: "Male", value: true }, { label: "Female", value: false }]}
             require={true}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, gioiTinh: event.currentTarget.value })
@@ -524,7 +524,7 @@ export default function UpdateUser() {
             require={true}
             handleChange={(event) => {
               if (!valiSoDienThoai.test(event.target.value)) {
-                setCheckSoDienThoai('Số Điện Thoại sai định dạng')
+                setCheckSoDienThoai('Phone number format incorrectly')
               }
               else
                 setCheckSoDienThoai('')
@@ -542,7 +542,7 @@ export default function UpdateUser() {
             handleChange={(event) => {
               
               if (!valiSoDienThoai2.test(event.target.value) && (event.target.value)) {
-                setCheckSoDienThoai2('Số điện thoại 2 sai định dạng')
+                setCheckSoDienThoai2('Phone number 2 format incorrectly')
               }
               else
                 setCheckSoDienThoai2('')
@@ -558,7 +558,7 @@ export default function UpdateUser() {
             require={true}
             handleChange={(event) => {
               if (!validator.isEmail(event.target.value)) {
-                setCheckEmail('Email sai định dạng')
+                setCheckEmail('Email format incorrectly')
               }
               else
                 setCheckEmail('')

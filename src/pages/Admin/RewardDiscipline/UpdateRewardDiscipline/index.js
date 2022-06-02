@@ -36,13 +36,13 @@ export default function UpdateRewardDiscipline() {
             const { danhMuc, tieuDe } = rewardDisciplineDetail
 
             if (!danhMuc.trim().length || !tieuDe.trim().length) {
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
                 setIsSubmit(true)
 
                 const updateRes = await RewardDisciplineAPI.updateRewardDiscipline({ id: rewardDisciplineId, ...rewardDisciplineDetail })
                 if (updateRes?.status === 200) {
-                    toast.success('Cập nhật thông tin thành công')
+                    toast.success('Successfully updated')
                 }
             }
         } catch (error) {

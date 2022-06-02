@@ -46,13 +46,13 @@ export default function UpdateManagerInsurance() {
             const { idLoaiBH, maSoBH, tienBH, maNV } = managerInsuranceDetail
 
             if (!idLoaiBH.trim().length || !maSoBH.trim().length || !tienBH.trim().length || !maNV.trim().length) {
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
                 setIsSubmit(true)
 
                 const updateRes = await ManagerInsuranceAPI.updateManagerInsurance({ id: managerInsuranceId, ...managerInsuranceDetail })
                 if (updateRes?.status === 200) {
-                    toast.success('Cập nhật thông tin thành công')
+                    toast.success('Successfully updated')
                 }
             }
         } catch (error) {

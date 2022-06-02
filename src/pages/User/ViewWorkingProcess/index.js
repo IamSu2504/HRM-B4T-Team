@@ -55,7 +55,7 @@ export default function ViewWorkingProcess() {
         </div>
         <div>
           <p className="hoten">{userDetail?.tenNv}</p>
-          <p className="manhanvien">Mã Số Nhân Viên: {userDetail?.id}</p>
+          <p className="manhanvien">Employee code: {userDetail?.id}</p>
           {/* <p className="manhanvien">Giới tính: {userDetail?.gioiTinh ? 'Nam' : 'Nữ'}</p> */}
         </div>
 
@@ -64,11 +64,11 @@ export default function ViewWorkingProcess() {
           {workingProcessDetail.map((workingProcessItem, workingProcessIndex) => {
             return (
               <div>
-                <p className="contents">Phòng Làm Việc: {workingProcessItem?.idPhongBan?.maPhongBan} : {workingProcessItem?.idPhongBan?.tenPhongBan}</p>
-                <p className="contents">Chức Vụ: {workingProcessItem?.idChucVu?.tenChucVu}</p>
-                <p className="contents">Ngày Bắt Đầu Làm: {workingProcessItem?.ngayVao}</p>
-                <p className="contents">Ngày Kết Thúc: {workingProcessItem?.ngayRa}</p>
-                <p className="contents">Ngày Kết Thúc: {workingProcessItem?.trangThai ? 'Đang Làm Việc' : 'Đã Nghỉ'}</p>
+                <p className="contents">Department: {workingProcessItem?.idPhongBan?.maPhongBan} : {workingProcessItem?.idPhongBan?.tenPhongBan}</p>
+                <p className="contents">Position: {workingProcessItem?.idChucVu?.tenChucVu}</p>
+                <p className="contents">Start date: {workingProcessItem?.ngayVao}</p>
+                <p className="contents">End date: {workingProcessItem?.ngayRa}</p>
+                <p className="contents">Status: {workingProcessItem?.trangThai ? 'Working' : 'Leaved'}</p>
               </div>
             )
           })}

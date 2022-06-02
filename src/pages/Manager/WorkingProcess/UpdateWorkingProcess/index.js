@@ -71,7 +71,7 @@ export default function UpdateWorkingProcess() {
             if (!idPhongBan.toString()?.trim()?.length || !idChucVu.toString()?.trim()?.length
                 || !ngayVao.toString()?.trim()?.length || !ngayRa.toString()?.trim()?.length || !trangThai.toString()?.trim()?.length || !maNV.toString()?.trim()?.length) {
                 
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
                 setIsSubmit(true)
               

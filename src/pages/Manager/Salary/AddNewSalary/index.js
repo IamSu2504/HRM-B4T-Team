@@ -61,7 +61,7 @@ export default function AddSalary() {
             console.log('>>>>', salaryDetail.maHD)
             if (!maHD.toString().trim()?.length || !idBacLuong.toString().trim()?.length || !luongCoBan.toString().trim()?.length
                 || !phuCapKhac.toString().trim()?.length || !ngayHieuLuc.toString().trim()?.length || !ngayKetThuc.toString().trim()?.length) {
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
                 setIsSubmit(true)
                 console.log('da vao day 4')
@@ -144,7 +144,7 @@ export default function AddSalary() {
                         disabled = {true}
                     />
                     <CustomInputField
-                        title="End date"
+                        title="Expiration date"
                         require={true}
                         type="date"
                         value = {contractDetail?.ngayHetHan}
@@ -157,7 +157,7 @@ export default function AddSalary() {
                     />
                     <CustomInputField
                         title="Note"
-                        require={true}
+                        require={false}
                         type="text"
                         handleChange={(event) => {
                             setSalaryDetail({ ...salaryDetail, ghiChu: event.target.value })

@@ -32,13 +32,13 @@ export default function UpdateSalaryGroup() {
             const {maNhomLuong, tenNhomLuong} = salaryGroupDetail
     
             if ( !maNhomLuong.trim().length ||  !tenNhomLuong.trim().length){
-                setSubmitError({status: true, error: 'Thông tin không được bỏ trống'})
+                setSubmitError({status: true, error: 'Information is not blank'})
             }else{
                 setIsSubmit(true)
     
                 const updateRes = await SalaryGroupAPI.updateSalaryGroup({id: salaryGroupId, ...salaryGroupDetail})
                 if ( updateRes?.status === 200 ){
-                    toast.success('Cập nhật thông tin thành công')
+                    toast.success('Successfully updated')
                 }
             }
         }catch(error){
@@ -54,7 +54,7 @@ export default function UpdateSalaryGroup() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Chỉnh Sửa Thông Tin Nhóm Lương</div>
+                    <div className="title">Edit information group salary</div>
                     <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
                 </div>
             </div>
@@ -69,7 +69,8 @@ export default function UpdateSalaryGroup() {
                     />
 
                     <CustomInputField
-                        title="Mã Nhóm Lương *:"
+                        title="Group salary code"
+                        required={true}
                         value={salaryGroupDetail?.maNhomLuong || ''}
                         type="text"
                         handleChange={(event) => {
@@ -77,7 +78,8 @@ export default function UpdateSalaryGroup() {
                         }}
                     />
                     <CustomInputField
-                        title="Tên Nhóm Lương *:"
+                        title="Group salary name"
+                        required={true}
                         value={salaryGroupDetail?.tenNhomLuong || ''}
                         type="text"
                         handleChange={(event) => {
@@ -95,7 +97,7 @@ export default function UpdateSalaryGroup() {
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
-                    <span class="text">Lưu thông tin</span>
+                    <span class="text">Save</span>
                 </button>
             </div>
             <ToastContainer />

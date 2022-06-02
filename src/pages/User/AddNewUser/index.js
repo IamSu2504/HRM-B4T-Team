@@ -126,11 +126,11 @@ export default function AddNewUser() {
         || !diaChiTamTru.toString().trim()?.length || !atmNganHang.toString().trim()?.length || !soAtm.toString().trim()?.length
         || !ngayBatDauLam.toString().trim()?.length
       ) {
-        setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+        setSubmitError({ status: true, error: 'Information is not blank' })
       } else
         if (!valiCccd.test(cccd) || !validator.isEmail(email) || !valiHoChieu.test(hoChieu) || !valiSoDienThoai.test(soDienThoai) ||
           (soDienThoai2.toString().trim()?.length && !valiSoDienThoai2.test(soDienThoai2))) {
-          setSubmitError({ status: true, error: 'Thông tin sai định dạng' })
+          setSubmitError({ status: true, error: 'Incorrect format information' })
         }
         else {
           setIsSubmit(true)

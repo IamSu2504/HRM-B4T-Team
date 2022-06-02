@@ -24,7 +24,7 @@ export default function AddWorkingProcess() {
             const { idPhongBan, idChucVu, ngayVao, ngayRa, trangThai, maNV } = workingProcessDetail
 
             if (!idPhongBan.trim().length || !idChucVu.trim().length || !ngayVao.trim().length || !ngayRa.trim().length || !trangThai.trim().length || !maNV.trim().length) {
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
                 setIsSubmit(true)
 

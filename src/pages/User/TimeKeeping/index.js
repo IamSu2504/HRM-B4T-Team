@@ -144,7 +144,7 @@ export default function ViewTimekeeping() {
                     </table>
                 </div>
                 <div>
-                    <div className="title-sub">Thống kê</div>
+                    <div className="title-sub">Statistical</div>
                     <div>
                         <table className="description">
                             <tr>

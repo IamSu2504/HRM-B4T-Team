@@ -34,7 +34,7 @@ export default function UpdateSalaryGrade() {
             const { maBacLuong, tenBacLuong, khoangLuongTu, khoangLuongDen } = salaryGradeDetail
             if (!maBacLuong.toString().trim().length || !tenBacLuong.toString().trim().length || !khoangLuongTu.toString().trim().length || !khoangLuongDen.toString().trim().length) {
                 console.log('da vao day 1')
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
 
             } else {
                 setIsSubmit(true)

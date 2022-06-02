@@ -35,7 +35,7 @@ export default function AddContract() {
             
             if (!maHD.toString().trim()?.length || !loaiHopDong.toString().trim()?.length || !ngayHieuLuc.toString().trim()?.length
                 || !ngayHetHan.toString().trim()?.length || !ghiChu.toString().trim()?.length || !maNV.toString().trim()?.length) {
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
                 setIsSubmit(true)
 

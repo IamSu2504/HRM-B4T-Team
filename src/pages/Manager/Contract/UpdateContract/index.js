@@ -59,7 +59,7 @@ export default function UpdateContract() {
                 || !contractDetail?.ngayHieuLuc.toString()?.trim()?.length || !contractDetail?.ngayHetHan.toString()?.trim()?.length || !contractDetail?.ghiChu.toString()?.trim()?.length
                 || !contractDetail?.trangThai.toString()?.trim()?.length || !contractDetail?.maNV.toString()?.trim()?.length) {
 
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
                 setIsSubmit(true)
                 console.log("maHD", maHD)

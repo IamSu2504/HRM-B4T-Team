@@ -70,25 +70,25 @@ export default function LeaveRequest() {
             disabled={false}
             require={true}
           />
-          <button type="button" class="btn btn-primary">Gửi yêu cầu</button>
+          <button type="button" class="btn btn-primary">Send request</button>
         </div>
       </div>
 
       {/* Danh sách */}
       <div className="homepage">
 
-        <div className="title">Danh sách yêu cầu</div>
+        <div className="title">List of request</div>
         <div className="table-frame">
           <table class="table table-bordered">
             <thead>
               <tr className="head">
-                <th scope="col">STT</th>
-                <th scope="col">Hình thức nghỉ</th>
-                <th scope="col">Lý do</th>
-                <th scope="col">Người duyệt</th>
-                <th scope="col">Ca</th>
-                <th scope="col">Ngày</th>
-                <th scope="col">Trạng thái</th>
+                <th scope="col">No.</th>
+                <th scope="col">Type of leave</th>
+                <th scope="col">Reason</th>
+                <th scope="col">Approveder</th>
+                <th scope="col">Shift</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
               </tr>
               {/* ****************** Ví dụ ***********************/}
               <tr>

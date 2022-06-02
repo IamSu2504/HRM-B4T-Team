@@ -32,7 +32,7 @@ export default function UpdateTax() {
             const {maPhanLoai, tenLoaiThue} = taxDetail
     
             if ( !maPhanLoai.trim().length ||  !tenLoaiThue.trim().length){
-                setSubmitError({status: true, error: 'Thông tin không được bỏ trống'})
+                setSubmitError({status: true, error: 'Information is not blank'})
             }else{
                 setIsSubmit(true)
     

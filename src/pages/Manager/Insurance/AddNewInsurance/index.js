@@ -28,10 +28,10 @@ export default function AddManagerInsurance() {
             console.log(maNv)
             console.log(managerInsuranceDetail);
             if (!managerInsuranceDetail.BHXH.trim().length || !managerInsuranceDetail.BHYT.trim().length || !managerInsuranceDetail.CD.trim().length) {
-                setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
+                setSubmitError({ status: true, error: 'Information is not blank' })
             } else
                 if (!valiBaoHiemXaHoi.test(managerInsuranceDetail.BHXH) || !valiBaoHiemYTe.test(managerInsuranceDetail.BHYT) || !valiCongDoan.test(managerInsuranceDetail.CD)) {
-                    setSubmitError({ status: true, error: 'Thông tin không đúng định dạng' })
+                    setSubmitError({ status: true, error: 'Information incorrectly format' })
                 }
                 else {
                     setIsSubmit(true)
@@ -88,14 +88,15 @@ export default function AddManagerInsurance() {
                         }}
                     />
                     <CustomInputField
-                        title='Bảo Hiểm Xã Hội'
+                        title='Social insurance'
+                        placehole={"10 numbers"}
                         type="text"
                         disabled={false}
                         require={true}
                         // placeholder = 'BHXH gồm mười số'
                         handleChange={(event) => {
                             if ((event.target.value) && !valiBaoHiemXaHoi.test(event.target.value)) {
-                                setCheckBaoHiemXaHoi('Bao Hiem Xa Hoi incorrect format')
+                                setCheckBaoHiemXaHoi('Social insurance incorrect format')
 
                             }
                             else {
@@ -107,13 +108,14 @@ export default function AddManagerInsurance() {
                     />
                     <span style={{ fontSize: '10px', color: 'red', }}>{checkBaoHiemXaHoi}</span>
                     <CustomInputField
-                        title='Bảo Hiểm Y Tế'
+                        title='Health Insurance'
+                        placehole={"5 characters (the first 2 letters and the last 3 numbers)"}
                         type="text"
                         disabled={false}
                         require={true}
                         handleChange={(event) => {
                             if ((event.target.value) && !valiBaoHiemYTe.test(event.target.value)) {
-                                setCheckBaoHiemYTe('Bao Hiem Y Te incorrect format')
+                                setCheckBaoHiemYTe('Health Insurance incorrect format')
 
                             }
                             else {
@@ -125,13 +127,14 @@ export default function AddManagerInsurance() {
                     />
                     <span style={{ fontSize: '10px', color: 'red', }}>{checkBaoHiemYTe}</span>
                     <CustomInputField
-                        title='Công Đoàn'
+                        title='Trade union code'
+                        placehole={"10 numbers"}
                         type="text"
                         disabled={false}
                         require={true}
                         handleChange={(event) => {
                             if ((event.target.value) && !valiCongDoan.test(event.target.value)) {
-                                setCheckCongDoan('Cong Doan incorrect format')
+                                setCheckCongDoan('Trade union code incorrect format')
 
                             }
                             else {
