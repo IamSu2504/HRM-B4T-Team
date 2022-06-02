@@ -131,6 +131,8 @@ import MUpdateDiscipline from "../pages/Manager/RewardDiscipline/UpdateDisciplin
 
 import MOutdated from "../pages/Manager/Report/Outdated";
 
+import MViewReportSalary from "../pages/Manager/ReportSalary/ViewReportSalary";
+
 import MViewLeaveRequest from "../pages/Manager/LeaveRequest"
 
 import MViewWorkingProcess from "../pages/Manager/WorkingProcess/ViewWorkingProcess";
@@ -272,7 +274,7 @@ export default function MainApp() {
         <Route exact path="/manager/updateTax/:managerInsuranceId" element={<ManagerLayoutPrivateRoute><MUpdateTax /></ManagerLayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewSalary" element={<ManagerLayoutPrivateRoute><MViewSalary /></ManagerLayoutPrivateRoute>} />
-        <Route exact path="/manager/addSalary/:maNv&&:maHD" element={<ManagerLayoutPrivateRoute><MAddSalary/></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/addSalary/:maNv&&:maHd" element={<ManagerLayoutPrivateRoute><MAddSalary/></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/updateSalary/:managerInsuranceId" element={<ManagerLayoutPrivateRoute><MUpdateSalary /></ManagerLayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewallcontract" element={<ManagerLayoutPrivateRoute><MViewContract /></ManagerLayoutPrivateRoute>} />
@@ -293,7 +295,7 @@ export default function MainApp() {
         <Route exact path="/manager/updatediscipline/:rewardDisciplineId"  element={<ManagerLayoutPrivateRoute><MUpdateDiscipline /></ManagerLayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewallworkingProcess" element={<ManagerLayoutPrivateRoute><MViewWorkingProcess /></ManagerLayoutPrivateRoute>} />
-        <Route exact path="/manager/addworkingProcess" element={<ManagerLayoutPrivateRoute><MAddWorkingProcess /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/addworkingProcess/:maNv" element={<ManagerLayoutPrivateRoute><MAddWorkingProcess /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/updateworkingProcess/:workingProcessId" element={<ManagerLayoutPrivateRoute><MUpdateWorkingProcess /></ManagerLayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewleaveRequest"  element={<ManagerLayoutPrivateRoute><MViewLeaveRequest /></ManagerLayoutPrivateRoute>} />
@@ -301,6 +303,7 @@ export default function MainApp() {
         <Route exact path="/manager/viewshift/:maNv"  element={<ManagerLayoutPrivateRoute><ViewRegisterShift /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/homepage" element={<ManagerHomePagePrivateRoute />} />  
         <Route exact path="/manager/outdated"  element={<ManagerLayoutPrivateRoute><MOutdated /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/reportSalary"  element={<ManagerLayoutPrivateRoute><MViewReportSalary /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/workingProcess/:maNv"  element={<ManagerLayoutPrivateRoute><UViewWorkingProcess /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/certificate/:maNv"  element={<ManagerLayoutPrivateRoute><UViewCertificate /></ManagerLayoutPrivateRoute>} />
         

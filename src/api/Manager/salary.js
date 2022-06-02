@@ -6,6 +6,11 @@ const ManagerSalaryAPI = {
         return AxiosClient.get(url);
     },
 
+    getReportSalary() {
+        const url = `/report/salary`;
+        return AxiosClient.get(url);
+    },
+
     getManagerSalaryById(id) {
         const url = `/salary/${id}`;
         return AxiosClient.get(url);
@@ -18,6 +23,7 @@ const ManagerSalaryAPI = {
 
     addNewManagerSalary({maHD, idBacLuong, luongCoBan, phuCapKhac, ngayHieuLuc, ngayKetThuc, ghiChu}) {
         const url = `/salary`;
+        console.log('trong api',{maHD, idBacLuong, luongCoBan, phuCapKhac, ngayHieuLuc, ngayKetThuc, ghiChu} )
         return AxiosClient.post(url, {maHD, idBacLuong, luongCoBan, phuCapKhac, ngayHieuLuc, ngayKetThuc, ghiChu});
     },
 

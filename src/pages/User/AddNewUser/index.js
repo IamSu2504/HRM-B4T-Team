@@ -137,6 +137,7 @@ export default function AddNewUser() {
 
           const updateRes = await UserAPI.addNewUser({ ...userDetail })
           if (updateRes?.status === 200) {
+            toast.success(updateRes?.data)
             navigate(`/manager/addcontract/${newMaNv}`)
           }
         }

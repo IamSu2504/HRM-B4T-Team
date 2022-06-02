@@ -7,16 +7,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import ManagerWorkingProcessAPI from "../../../../api/Manager/workingProcess";
 import DepartmentAPI from "../../../../api/department";
 import PositionAPI from "../../../../api/position";
+import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function AddWorkingProcess() {
     const [workingProcessDetail, setWorkingProcessDetail] = useState({ idPhongBan: '', idChucVu: '', ngayVao: '', ngayRa: '', trangThai: '', maNV: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
-
+    const { maNv } = useParams()
+    const navigate = useNavigate()
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
+            console.log('>>>>>',workingProcessDetail)
+            workingProcessDetail.maNV = maNv
             const { idPhongBan, idChucVu, ngayVao, ngayRa, trangThai, maNV } = workingProcessDetail
 
             if (!idPhongBan.trim().length || !idChucVu.trim().length || !ngayVao.trim().length || !ngayRa.trim().length || !trangThai.trim().length || !maNV.trim().length) {
@@ -26,7 +30,7 @@ export default function AddWorkingProcess() {
 
                 const addRes = await ManagerWorkingProcessAPI.addNewManagerWorkingProcess({ ...workingProcessDetail })
                 if (addRes?.status === 200) {
-                    toast.success(addRes?.data)
+                    navigate(`/manager/viewUser/${maNv}`)
                 }
             }
         } catch (error) {
@@ -77,6 +81,7 @@ export default function AddWorkingProcess() {
                 <div>
                     <CustomSelectBox
                         title="Department"
+                        value = {workingProcessDetail.idPhongBan || 1}
                         option={listDepartment.map((departmentItem) => {
                             return (
                                 { label: departmentItem.tenPhongBan, value: departmentItem.id }
@@ -89,6 +94,7 @@ export default function AddWorkingProcess() {
                     />
                     <CustomSelectBox
                         title="Position"
+                        value = {workingProcessDetail.idChucVu || 1}
                         option={listPosition.map((positionItem) => {
                             return (
                                 { label: positionItem.tenChucVu, value: positionItem.id }
@@ -104,9 +110,7 @@ export default function AddWorkingProcess() {
                         require={true}
                         type="date"
                         handleChange={(event) => {
-                            const parts = event.target.value.split('-');
-                            const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-                            setWorkingProcessDetail({ ...workingProcessDetail, ngayVao: mydate })
+                            setWorkingProcessDetail({ ...workingProcessDetail, ngayVao: event.target.value })
                         }}
                     />
                     <CustomInputField
@@ -114,13 +118,13 @@ export default function AddWorkingProcess() {
                         require={true}
                         type="date"
                         handleChange={(event) => {
-                            const parts = event.target.value.split('-');
-                            const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-                            setWorkingProcessDetail({ ...workingProcessDetail, ngayRa: mydate })
+                        
+                            setWorkingProcessDetail({ ...workingProcessDetail, ngayRa: event.target.value })
                         }}
                     />
                     <CustomSelectBox
                         title="Status"
+                        value = {workingProcessDetail.trangThai || true}
                         option={
                             [{ label: "Working", value: true }, { label: "Finished", value: false }]
                         }
@@ -133,9 +137,8 @@ export default function AddWorkingProcess() {
                         title="Employee code"
                         require={true}
                         type="text"
-                        handleChange={(event) => {
-                            setWorkingProcessDetail({ ...workingProcessDetail, maNV: event.target.value })
-                        }}
+                        value={maNv}
+                        disabled = {true}
                     />
                 </div>
             </div>

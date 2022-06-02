@@ -17,12 +17,12 @@ export default function AddSalary() {
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const { maNv } = useParams()
-    const { maHD } = useParams()
+    const { maHd } = useParams()
     const [contractDetail, setContractDetail] = useState()
 
     const getContractById = async () => {
-        if (maHD){
-            const newMaNvRes = await ManagercontractAPI.getManagerContractById(maHD)
+        if (maHd){
+            const newMaNvRes = await ManagercontractAPI.getManagerContractById(maHd)
             if (newMaNvRes?.status === 200) {
                 setContractDetail(newMaNvRes?.data)
             }
@@ -45,25 +45,28 @@ export default function AddSalary() {
     }, [])
 
 
-    const [salaryDetail, setSalaryDetail] = useState({ maHD: '', idBacLuong: '', luongCoBan: '', phuCapKhac: '', ngayHieuLuc: '', ngayKetThuc: '' , ghiChu: ''})
+    const [salaryDetail, setSalaryDetail] = useState({ maHD: '', idBacLuong: '1', luongCoBan: '', phuCapKhac: '', ngayHieuLuc: '', ngayKetThuc: '' , ghiChu: ''})
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
             console.log('da vao day 1')
             console.log('da vao day 2')
-            console.log('>>>>>maHD',maHD)
-            console.log('da vao day 2')
-            console.log('>>>>>maNV',maNv)
-            console.log('da vao day 3')
-            const { maHD, idBacLuong, luongCoBan, phuCapKhac, ngayHieuLuc, ngayKetThuc, ghiChu } = salaryDetail
             
+            console.log('da vao day 3')
+            salaryDetail.maHD = maHd
+            salaryDetail.ngayHieuLuc = contractDetail.ngayHieuLuc
+            salaryDetail.ngayKetThuc = contractDetail.ngayHetHan
+            const { maHD, idBacLuong, luongCoBan, phuCapKhac, ngayHieuLuc, ngayKetThuc, ghiChu } = salaryDetail
+            console.log('>>>>', salaryDetail)
+            console.log('>>>>', salaryDetail.maHD)
             if (!maHD.toString().trim()?.length || !idBacLuong.toString().trim()?.length || !luongCoBan.toString().trim()?.length
                 || !phuCapKhac.toString().trim()?.length || !ngayHieuLuc.toString().trim()?.length || !ngayKetThuc.toString().trim()?.length) {
                 setSubmitError({ status: true, error: 'Thông tin không được bỏ trống' })
             } else {
                 setIsSubmit(true)
-
+                console.log('da vao day 4')
                 const addRes = await ManagerSalaryAPI.addNewManagerSalary({ ...salaryDetail })
+                console.log('da vao day 5')
                 if (addRes?.status === 200) {
                     navigate(`/manager/addInsurance/${maNv}`)
                 }
@@ -94,7 +97,7 @@ export default function AddSalary() {
                         title="Contract code"
                         require={true}
                         type="text"
-                        value={maHD}
+                        value={maHd}
                         disabled={true}
                     />
 
@@ -139,11 +142,6 @@ export default function AddSalary() {
                         type="date"
                         value = {contractDetail?.ngayHieuLuc}
                         disabled = {true}
-                        handleChange={(event) => {
-                            // const parts = event.target.value.split('-');
-                            // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-                            setSalaryDetail({ ...salaryDetail, ngayHieuLuc: event.target.value })
-                        }}
                     />
                     <CustomInputField
                         title="End date"
@@ -151,11 +149,11 @@ export default function AddSalary() {
                         type="date"
                         value = {contractDetail?.ngayHetHan}
                         disabled = {true}
-                        handleChange={(event) => {
-                            // const parts = event.target.value.split('-');
-                            // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-                            setSalaryDetail({ ...salaryDetail, ngayKetThuc: event.target.value })
-                        }}
+                        // handleChange={(event) => {
+                        //     // const parts = event.target.value.split('-');
+                        //     // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
+                        //     setSalaryDetail({ ...salaryDetail, ngayKetThuc: event.target.value })
+                        // }}
                     />
                     <CustomInputField
                         title="Note"

@@ -181,6 +181,10 @@ export default function ManagerLayout(props) {
                         <img src="/menu/list-icon.svg" />
                         <span style={{ marginLeft: '15px' }}>Expiring Employee</span>
                       </div>
+                      <div onClick={() => navigate('/manager/reportSalary')}>
+                        <img src="/menu/list-icon.svg" />
+                        <span style={{ marginLeft: '15px' }}>Salary</span>
+                      </div>
                     </div>
                   </div>
                 </div>
