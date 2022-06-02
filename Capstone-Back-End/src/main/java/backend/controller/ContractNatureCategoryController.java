@@ -21,7 +21,7 @@ public class ContractNatureCategoryController {
         try {
             List<ContractNatureCategory> list = service.getAll();
             if(list.isEmpty()){
-                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.OK);
+                return new ResponseEntity<>("List Category is empty!", HttpStatus.OK);
             }
             else {
                 return new ResponseEntity<>(list, HttpStatus.OK);
@@ -37,7 +37,7 @@ public class ContractNatureCategoryController {
             int id = Integer.parseInt(pv);
             ContractNatureCategory c = service.getById(id);
             if(c==null){
-                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Category not found.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
@@ -50,9 +50,9 @@ public class ContractNatureCategoryController {
         try {
             ContractNatureCategory c = service.save(contractNatureCategory);
             if(c == null){
-                return new ResponseEntity<>("Danh mục đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Category already exist!", HttpStatus.EXPECTATION_FAILED);
             }
-            return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Add successful!", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -65,7 +65,7 @@ public class ContractNatureCategoryController {
             contractNatureCategory.setId(id);
             ContractNatureCategory t = service.save(contractNatureCategory);
             if(t==null){
-                return new ResponseEntity<>("Tính chất hợp đồng đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Contract Nature already existed!", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Update successfully", HttpStatus.OK);
         }catch(Exception e){
@@ -77,7 +77,7 @@ public class ContractNatureCategoryController {
     public ResponseEntity<?> delete(@PathVariable("id") int id) {
         try {
             service.delete(id);
-            return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Delete successful!", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }

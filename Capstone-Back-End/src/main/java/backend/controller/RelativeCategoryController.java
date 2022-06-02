@@ -21,7 +21,7 @@ public class RelativeCategoryController {
         try {
             List<RelativeCategory> list = service.getAll();
             if(list.isEmpty()){
-                return new ResponseEntity<>("Category is empty.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List category is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){

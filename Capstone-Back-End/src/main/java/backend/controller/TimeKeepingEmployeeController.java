@@ -21,7 +21,7 @@ public class TimeKeepingEmployeeController {
         try {
             List<TimeKeepingEmployee> listTimeKeeping = service.getAll();
             if(listTimeKeeping.isEmpty()){
-                return new ResponseEntity<>("Danh sách chấm công trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List timekeeping is empty!", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listTimeKeeping, HttpStatus.OK);
         }catch(Exception e){
@@ -34,7 +34,7 @@ public class TimeKeepingEmployeeController {
         try {
             List<TimeKeepingEmployee> list = service.getSearched(text.trim());
             if (list.isEmpty()) {
-                return new ResponseEntity<>("Chưa có người dùng được tạo", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("There're no employees yet.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class TimeKeepingEmployeeController {
             int id = Integer.parseInt(pv);
             TimeKeepingEmployee c = service.getById(id);
             if(c==null){
-                return new ResponseEntity<>("Không tìm thấy danh sách chấm công", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List timekeeping not found!", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){

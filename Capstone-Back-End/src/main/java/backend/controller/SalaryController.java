@@ -22,7 +22,7 @@ public class SalaryController {
         try {
             List<Salary> listSalary = service.getAll();
             if(listSalary.isEmpty()){
-                return new ResponseEntity<>("Danh sách lương trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List salary is empty!", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listSalary, HttpStatus.OK);
         }catch(Exception e){
@@ -36,7 +36,7 @@ public class SalaryController {
             int id = Integer.parseInt(pv);
             Salary c = service.getById(id);
             if(c==null){
-                return new ResponseEntity<>("Lương không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Salary does not exist!", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
@@ -60,7 +60,7 @@ public class SalaryController {
             if(mess!=null){
                 return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Add successful!", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -72,7 +72,7 @@ public class SalaryController {
             int id = Integer.parseInt(pv);
             request.setId(id);
             if (service.getById(id) == null) {
-                return new ResponseEntity<>("Lương không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Salary does not exist!", HttpStatus.NOT_FOUND);
             }
             String mess = service.getSaveMessage(request);
             if(mess!=null){

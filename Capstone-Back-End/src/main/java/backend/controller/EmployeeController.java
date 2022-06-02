@@ -30,7 +30,7 @@ public class EmployeeController {
         try {
             List<Employee> list = service.getAll();
             if (list.isEmpty()) {
-                return new ResponseEntity<>("No employee created", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("There're no employees yet.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {

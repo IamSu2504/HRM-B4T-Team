@@ -22,7 +22,7 @@ public class RewardDisciplineController {
         try {
             List<RewardDiscipline> list = service.getAllReward();
             if(list.isEmpty()){
-                return new ResponseEntity<>("Danh sách khen thưởng trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List reward is empty!", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){
@@ -36,7 +36,7 @@ public class RewardDisciplineController {
             int id = Integer.parseInt(pv);
             RewardDiscipline rd = service.getRewardById(id);
             if(rd==null){
-                return new ResponseEntity<>("Thông tin khen thưởng không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Reward not existed!", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(rd, HttpStatus.OK);
         }catch(Exception e){
@@ -49,7 +49,7 @@ public class RewardDisciplineController {
         try {
             List<RewardDiscipline> list = service.getAllDiscipline();
             if(list.isEmpty()){
-                return new ResponseEntity<>("Danh sách kỉ luật trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List discipline is empty!", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){
@@ -63,7 +63,7 @@ public class RewardDisciplineController {
             int id = Integer.parseInt(pv);
             RewardDiscipline rd = service.getDisciplineById(id);
             if(rd==null){
-                return new ResponseEntity<>("Thông tin kỉ luật không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Discipline not existed!", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(rd, HttpStatus.OK);
         }catch(Exception e){
@@ -76,7 +76,7 @@ public class RewardDisciplineController {
         try {
             String mess = service.getSaveMessage(request);
             if(mess==null){
-                return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
+                return new ResponseEntity<>("Add successful!", HttpStatus.OK);
             }
             return new ResponseEntity<>(mess, HttpStatus.EXPECTATION_FAILED);
         }catch(Exception e){

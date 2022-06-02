@@ -21,7 +21,7 @@ public class MarriageCategoryController {
         try {
             List<MarriageCategory> list = service.getAll();
             if(list.isEmpty()){
-                return new ResponseEntity<>("Category is empty.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List category is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){

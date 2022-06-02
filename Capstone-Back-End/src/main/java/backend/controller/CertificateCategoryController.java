@@ -22,7 +22,7 @@ public class CertificateCategoryController {
         try {
             List<CertificateCategory> listCertificateCategory = service.getAll();
             if(listCertificateCategory.isEmpty()){
-                return new ResponseEntity<>("Category is empty.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List category is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listCertificateCategory, HttpStatus.OK);
         }catch(Exception e){
@@ -92,7 +92,7 @@ public class CertificateCategoryController {
             }
             listCertificateCategory = service.getSearched(text);
             if(listCertificateCategory.isEmpty()){
-                return new ResponseEntity<>("Can't search.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Search list is empty!", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listCertificateCategory, HttpStatus.OK);
         }catch(Exception e){

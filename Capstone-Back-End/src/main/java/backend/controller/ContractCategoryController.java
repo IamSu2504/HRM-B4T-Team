@@ -22,7 +22,7 @@ public class ContractCategoryController {
         try {
             List<ContractCategory> listContractCategory = service.getAll();
             if(listContractCategory.isEmpty()){
-                return new ResponseEntity<>("Danh sách danh mục trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List category is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listContractCategory, HttpStatus.OK);
         }catch(Exception e){
@@ -36,7 +36,7 @@ public class ContractCategoryController {
             int id = Integer.parseInt(pv);
             ContractCategory c = service.getById(id);
             if(c==null){
-                return new ResponseEntity<>("Không tìm thấy danh mục", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Category not found!", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
@@ -49,7 +49,7 @@ public class ContractCategoryController {
         try {
             ContractCategory t = service.save(contractCategory);
             if(t==null){
-                return new ResponseEntity<>("Mã loại hợp đồng đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Contract type code already existed!", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Thêm thành công", HttpStatus.OK);
         }catch(Exception e){
@@ -64,7 +64,7 @@ public class ContractCategoryController {
             contractCategory.setId(id);
             ContractCategory t = service.save(contractCategory);
             if(t==null){
-                return new ResponseEntity<>("Mã loại hợp đồng đã tồn tại", HttpStatus.EXPECTATION_FAILED);
+                return new ResponseEntity<>("Contract type code already existed!", HttpStatus.EXPECTATION_FAILED);
             }
             return new ResponseEntity<>("Update successfully", HttpStatus.OK);
         }catch(Exception e){
@@ -77,7 +77,7 @@ public class ContractCategoryController {
         try {
             int id = Integer.parseInt(pv);
             service.delete(id);
-            return new ResponseEntity<>("Xóa thành công", HttpStatus.OK);
+            return new ResponseEntity<>("Delete successful!", HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -88,7 +88,7 @@ public class ContractCategoryController {
         try {
             List<ContractCategory> listContractCategory = service.getSearched(text);
             if(listContractCategory.isEmpty()){
-                return new ResponseEntity<>("Danh sách tìm kiếm trống", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Search list is empty!", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listContractCategory, HttpStatus.OK);
         }catch(Exception e){

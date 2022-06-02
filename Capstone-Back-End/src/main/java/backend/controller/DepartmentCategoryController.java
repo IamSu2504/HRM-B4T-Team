@@ -22,7 +22,7 @@ public class DepartmentCategoryController {
         try {
             List<DepartmentCategory> listDepartmentCategory = service.getAll();
             if(listDepartmentCategory.isEmpty()){
-                return new ResponseEntity<>("Category is empty.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List category is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listDepartmentCategory, HttpStatus.OK);
         }catch(Exception e){

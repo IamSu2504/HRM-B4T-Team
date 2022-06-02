@@ -23,7 +23,7 @@ public class RoleController {
         try {
             List<Role> list = service.getAll();
             if(list.isEmpty()){
-                return new ResponseEntity<>("Chưa có quyền tài khoản được tạo", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Role haven't been created yet!", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         }catch(Exception e){

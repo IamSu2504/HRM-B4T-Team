@@ -22,7 +22,7 @@ public class ContractController {
         try {
             List<Contract> listContract = service.getAll();
             if(listContract.isEmpty()){
-                return new ResponseEntity<>("No contract existed", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Don't have contract existed", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listContract, HttpStatus.OK);
         }catch(Exception e){
@@ -35,7 +35,7 @@ public class ContractController {
         try {
             List<Contract> listContract = service.getAllByEmp(id);
             if(listContract.isEmpty()){
-                return new ResponseEntity<>("No contract existed", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Don't have contract existed", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listContract, HttpStatus.OK);
         }catch(Exception e){
@@ -48,7 +48,7 @@ public class ContractController {
         try {
             Contract c = service.getById(pv);
             if(c==null){
-                return new ResponseEntity<>("Contract not existed", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Contract does not exist", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(c, HttpStatus.OK);
         }catch(Exception e){
@@ -87,7 +87,7 @@ public class ContractController {
     public ResponseEntity<?> update(@PathVariable("id") String pv, @RequestBody CreateUpdateContractRequest request) {
         try {
             if (service.getById(pv) == null) {
-                return new ResponseEntity<>("Contract not existed", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Contract does not exist", HttpStatus.NOT_FOUND);
             }
             request.setMaHD(pv);
             String mess = service.getUpdateMessage(request);

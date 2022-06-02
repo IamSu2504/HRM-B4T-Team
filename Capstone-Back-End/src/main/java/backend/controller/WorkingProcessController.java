@@ -22,7 +22,7 @@ public class WorkingProcessController {
         try {
             List<WorkingProcess> listWP = service.getAll();
             if(listWP.isEmpty()){
-                return new ResponseEntity<>("Working process is empty.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List working process is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listWP, HttpStatus.OK);
         }catch(Exception e){

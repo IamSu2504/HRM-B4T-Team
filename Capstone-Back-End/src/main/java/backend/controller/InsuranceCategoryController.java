@@ -21,7 +21,7 @@ public class InsuranceCategoryController {
         try {
             List<InsuranceCategory> listInsuranceCategory = service.getAll();
             if(listInsuranceCategory.isEmpty()){
-                return new ResponseEntity<>("Category is empty.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List category is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listInsuranceCategory, HttpStatus.OK);
         }catch(Exception e){

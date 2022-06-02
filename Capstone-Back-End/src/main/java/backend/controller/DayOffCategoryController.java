@@ -21,7 +21,7 @@ public class DayOffCategoryController {
         try {
             List<DayOffCategory> listDayOffCategory = service.getAll();
             if(listDayOffCategory.isEmpty()){
-                return new ResponseEntity<>("Category is empty.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List category is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listDayOffCategory, HttpStatus.OK);
         }catch(Exception e){

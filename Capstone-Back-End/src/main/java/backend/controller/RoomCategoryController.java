@@ -21,7 +21,7 @@ public class RoomCategoryController {
         try {
             List<RoomCategory> listClassRoomCategory = service.getAll();
             if(listClassRoomCategory.isEmpty()){
-                return new ResponseEntity<>("Category is empty.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List category is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listClassRoomCategory, HttpStatus.OK);
         }catch(Exception e){

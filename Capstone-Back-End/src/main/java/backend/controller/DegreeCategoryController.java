@@ -21,7 +21,7 @@ public class DegreeCategoryController {
         try {
             List<DegreeCategory> listDegreeCategory = service.getAll();
             if(listDegreeCategory.isEmpty()){
-                return new ResponseEntity<>("Category is empty.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List category is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listDegreeCategory, HttpStatus.OK);
         }catch(Exception e){

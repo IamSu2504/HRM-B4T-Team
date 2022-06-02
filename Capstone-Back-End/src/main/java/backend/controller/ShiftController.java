@@ -26,7 +26,7 @@ public class ShiftController {
     public ResponseEntity<?> getEmployeeTotalShift(@RequestBody int month, @PathVariable("id") String id) {
         try {
             if(employeeService.getById(id)==null){
-                return new ResponseEntity<>("Mã Employee not existed", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("Employee code not existed", HttpStatus.INTERNAL_SERVER_ERROR);
             }
             int totalShiftInMonth = service.getEmployeeTotalShiftInMonth(id,month);
             return new ResponseEntity<>(totalShiftInMonth, HttpStatus.OK);
@@ -52,12 +52,12 @@ public class ShiftController {
     public ResponseEntity<?> create(@RequestBody CreateUpdateShiftRequest request) {
         try {
             String mess = service.getSaveShiftMessage(request);
-            if (mess.contains("thành công")) {
+            if (mess.contains("successfully")) {
                 return new ResponseEntity<>(mess, HttpStatus.OK);
             }
             else {
                 if (mess.equals("")) {
-                    return new ResponseEntity<>("Đăng kí ca làm thành công", HttpStatus.INTERNAL_SERVER_ERROR);
+                    return new ResponseEntity<>("Shift registration successful!", HttpStatus.INTERNAL_SERVER_ERROR);
                 } else {
                     return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
@@ -72,13 +72,13 @@ public class ShiftController {
         try {
             int id = Integer.parseInt(pv);
             if (service.getById(id) == null) {
-                return new ResponseEntity<>("Ca làm không tồn tại", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Shift does not exist!", HttpStatus.NOT_FOUND);
             }
             String mess = service.getSaveShiftMessage(request);
             if(mess == null){
-                return new ResponseEntity<>("Đăng kí ca làm thành công", HttpStatus.OK);
+                return new ResponseEntity<>("Shift registration successful!", HttpStatus.OK);
             }
-            if (mess.contains("thành công")) {
+            if (mess.contains("successfully")) {
                 return new ResponseEntity<>(mess, HttpStatus.OK);
             }
             return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);

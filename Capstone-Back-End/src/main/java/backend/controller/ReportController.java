@@ -54,7 +54,7 @@ public class ReportController {
         try {
             List<WorkingProcess> reports = service.getEmployeeWorkingProcessReportMess(employeeID);
             if(reports == null){
-                return new ResponseEntity<>("Mã Employee not existed", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("Employee code not existed", HttpStatus.INTERNAL_SERVER_ERROR);
             }
             return new ResponseEntity<>(reports, HttpStatus.OK);
         } catch (Exception e) {

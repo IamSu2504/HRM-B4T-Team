@@ -21,7 +21,7 @@ public class TaxCategoryController {
         try {
             List<TaxCategory> listTaxCategory = service.getAll();
             if(listTaxCategory.isEmpty()){
-                return new ResponseEntity<>("Category is empty.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List category is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listTaxCategory, HttpStatus.OK);
         }catch(Exception e){

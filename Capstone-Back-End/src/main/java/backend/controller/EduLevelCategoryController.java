@@ -20,7 +20,7 @@ public class EduLevelCategoryController {
         try {
             List<EduLevelCategory> listEduCategory = service.getAll();
             if(listEduCategory.isEmpty()){
-                return new ResponseEntity<>("Category is empty.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List category is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(listEduCategory, HttpStatus.OK);
         }catch(Exception e){
