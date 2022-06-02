@@ -41,23 +41,23 @@ public class RewardDisciplineService {
     public String getSaveMessage(CreateUpdateRewardDisciplineRequest request) {
 
         if (!userRepo.findById(request.getMaNv()).isPresent()) {
-            return "Mã Employee not existed";
+            return "Employee ID not existed";
         }
 
         // Add
         if (request.getId() == null) {
             if (rewardDisciplineRepo.getDublicate(request.getMaNv(), request.getPhanLoaiID()) != null) {
-                return "Thông tin khen thưởng/kỉ luật đã tồn tại";
+                return "Reward/Discipline exsited";
             }
         }
         // Update
         else {
             if (!rewardDisciplineRepo.findById(request.getId()).isPresent()) {
-                return "Thông tin khen thưởng/kỉ luật không tồn tại";
+                return "Reward/Discipline not exsited";
             }
             RewardDiscipline oldRewardDiscipline = rewardDisciplineRepo.findById(request.getId()).get();
             if (oldRewardDiscipline.getUser() != userRepo.findById(request.getMaNv()).get() && oldRewardDiscipline.getPhanLoai() != rewardDisciplineCategoryRepo.findById(request.getPhanLoaiID()).get() && rewardDisciplineRepo.getDublicate(request.getMaNv(), request.getPhanLoaiID()) != null) {
-                return "Đã có thông tin khen thưởng/kỉ luật khác trùng mã nhân viên và phân loại";
+                return "Employee " + oldRewardDiscipline.getUser().getTenNv() + "(" + oldRewardDiscipline.getUser().getId() + ") had this kind of reward/discipline" ;
             }
         }
 

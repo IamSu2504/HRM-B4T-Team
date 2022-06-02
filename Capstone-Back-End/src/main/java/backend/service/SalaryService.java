@@ -55,10 +55,10 @@ public class SalaryService {
         double maxSalary = newSalary.getIdBacLuong().getKhoangLuongDen();
 
         if (newSalary.getLuongCoBan() < minSalary || newSalary.getLuongCoBan() > maxSalary) {
-            return "Lương cơ bản bắt buộc trong khoảng " + minSalary + " đến " + maxSalary;
+            return "Basic salary must be from " + minSalary + " to " + maxSalary;
         }
         if (newSalary.getNgayHieuLuc().compareTo(newSalary.getNgayKetThuc()) >= 0) {
-            return "Ngày hiệu lực phải trước ngày kết thúc";
+            return "Effective date must be before expiration date";
         }
 
         String start = sdf.format(newSalary.getNgayHieuLuc());
@@ -67,7 +67,7 @@ public class SalaryService {
         if (newSalary.getId() != null) {
 
             if (salaryRepo.getLuongStartInRange2(c.getMaHD(), start, end, newSalary.getId()) != null || salaryRepo.getLuongEndInRange2(c.getMaHD(), start, end, newSalary.getId()) != null) {
-                return "Đã tồn tại lương trong hợp đồng mã " + c.getMaHD() + " có hiệu lực trong khoảng thời gian từ " + start + " đến " + end;
+                return "Contract with ID " + c.getMaHD() + " has another salary effective from " + sdf2.format(newSalary.getNgayHieuLuc()) + " to " + sdf2.format(newSalary.getNgayKetThuc());
             }
             salaryRepo.save(newSalary);
             return null;
@@ -78,10 +78,10 @@ public class SalaryService {
                 return "Ngày hiệu lực của lương bắt buộc là ngày hiệu lực của hợp đồng: " + sdf2.format(c.getNgayHieuLuc());
             }
             if (newSalary.getNgayKetThuc().compareTo(c.getNgayHetHan()) > 0) {
-                return "Ngày kết thúc bắt buộc không được sau ngày hết hạn của hợp đồng: " + sdf2.format(c.getNgayHetHan());
+                return "Salary's expiration date must not be after contract's expiration date: " + sdf2.format(c.getNgayHetHan());
             }
             if (salaryRepo.getLuongStartInRange(c.getMaHD(), start, end) != null || salaryRepo.getLuongEndInRange(c.getMaHD(), start, end) != null) {
-                return "Đã tồn tại lương trong hợp đồng mã " + c.getMaHD() + " có hiệu lực trong khoảng thời gian từ " + start + " đến " + end;
+                return "Contract with ID " + c.getMaHD() + " has another salary effective from " + sdf2.format(newSalary.getNgayHieuLuc()) + " to " + sdf2.format(newSalary.getNgayKetThuc());
             }
             salaryRepo.save(newSalary);
             return null;
