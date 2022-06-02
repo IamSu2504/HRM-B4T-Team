@@ -35,7 +35,7 @@ export default function AddManagerTax() {
                     setIsSubmit(true)
                     const updateRes1 = await ManagerTaxAPI.addNewManagerTax({ idLoaiThue: "1", maSoThue: managerTaxDetail.maSoThue, maNV: maNv })
                     if (updateRes1?.status === 200) {
-                        navigate(`/manager/viewuser/${maNv}`)
+                        navigate(`/manager/addworkingProcess/${maNv}`)
                     }
                 }
 

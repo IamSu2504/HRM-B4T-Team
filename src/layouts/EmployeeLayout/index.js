@@ -139,7 +139,7 @@ export default function EmployeeLayout(props) {
                                                     <div className="content1">
                                                         <img src="/menu/employer.svg" />
                                                     </div>
-                                                    <div className="content2">Timekeeping</div>
+                                                    <div className="content2">Working Infomation</div>
                                                 </div>
                                                 <div className="content3">
                                                     <img src="/menu/down-arrow.svg" />
@@ -153,17 +153,19 @@ export default function EmployeeLayout(props) {
                                         data-parent="#accordion"
                                     >
                                         <div className="card-body">
-                                            <div onClick={() => navigate('/employee/timeKeeping')}>
+                                           
+                                            <div>
                                                 <img src="/menu/list-icon.svg" />
-                                                <span style={{ marginLeft: '15px' }}>Timekeeping</span>
+                                                <span style={{ marginLeft: '15px' }}>DayOff</span>
+                                            </div>
+                                            
+                                            <div onClick={() => navigate(`/employee/viewshift/${localStorage.getItem('maNV')}`)}>
+                                                <img src="/menu/list-icon.svg" />
+                                                <span style={{ marginLeft: '15px' }}>Shifts</span>
                                             </div>
                                             <div>
                                                 <img src="/menu/list-icon.svg" />
-                                                <span style={{ marginLeft: '15px' }}>Leave</span>
-                                            </div>
-                                            <div onClick={() => navigate('/admin/registerShift')}>
-                                                <img src="/menu/list-icon.svg" />
-                                                <span style={{ marginLeft: '15px' }}>Register for Shifts</span>
+                                                <span style={{ marginLeft: '15px' }}>Leave Request</span>
                                             </div>
                                         </div>
                                     </div>

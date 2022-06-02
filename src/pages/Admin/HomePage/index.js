@@ -33,8 +33,8 @@ export default function AdminHomePage(props) {
           <ul>
             <li onClick={() => navigate('/admin/viewaccount')}>Account</li>
             <li onClick={() => navigate('/admin/viewsalarygrade')}>Categories</li>
-            <li>Contract information</li>
-            <li>Timekeeping</li>
+           
+           
           </ul>
         </div>
       </div>

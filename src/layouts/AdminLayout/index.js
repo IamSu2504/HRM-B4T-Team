@@ -279,7 +279,7 @@ export default function AdminLayout(props) {
                     </div>
                   </div>
                 </div>
-                <div className="card">
+                {/* <div className="card">
                   <div className="card-header">
                     <a
                       className="card-link"
@@ -319,7 +319,7 @@ export default function AdminLayout(props) {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
