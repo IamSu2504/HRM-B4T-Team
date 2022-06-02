@@ -36,7 +36,7 @@ public class SalaryCategoryService {
         newCategory.setKhoangLuongTu(request.getKhoangLuongTu());
 
         if(newCategory.getKhoangLuongDen() <= newCategory.getKhoangLuongTu()){
-            return "Khoảng lương từ phải nhỏ hơn khoảng lương đến";
+            return "Minimum salary must be smaller than maximum salary";
         }
 
         // update
@@ -45,7 +45,7 @@ public class SalaryCategoryService {
             SalaryCategory oldCategory = salaryCategoryRepo.findById(newCategory.getId()).get();
             if (!newCategory.getMaBacLuong().equalsIgnoreCase(oldCategory.getMaBacLuong())) {
                 if (salaryCategoryRepo.getByMaBacLuong(newCategory.getMaBacLuong()) != null) {
-                    return "Mã bậc lương đã tồn tại";
+                    return "Wage ID existed";
                 } else {
                     salaryCategoryRepo.save(newCategory);
                     return null;
@@ -57,7 +57,7 @@ public class SalaryCategoryService {
         // add
         else {
             if (salaryCategoryRepo.getByMaBacLuong(newCategory.getMaBacLuong()) != null) {
-                return "Mã bậc lương đã tồn tại";
+                return "Wage ID existed";
             } else {
                 salaryCategoryRepo.save(newCategory);
                 return null;

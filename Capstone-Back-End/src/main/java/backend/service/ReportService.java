@@ -118,7 +118,7 @@ public class ReportService {
                     chucVu = w.getIdChucVu().getTenChucVu();
                     phongBan = w.getIdPhongBan().getTenPhongBan();
                     // Teacher
-                    if (w.getIdChucVu().getTenChucVu().toUpperCase().equalsIgnoreCase("TEACHER")) {
+                    if (w.getIdChucVu().getTenChucVu().equalsIgnoreCase("TEACHER")) {
                         soCaToiThieu = 80;
                         luongMoiCa = luongCoBan / soCaToiThieu;
                         soCa = shiftRepo.getTotalShiftInRange(formattedMonthStart,formattedMonthEnd,e.getId());
