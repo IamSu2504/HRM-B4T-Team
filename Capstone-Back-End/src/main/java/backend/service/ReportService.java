@@ -20,6 +20,9 @@ public class ReportService {
     private SalaryRepository salaryRepo;
 
     @Autowired
+    LeaveRequestRepository leaveRepo;
+
+    @Autowired
     private HolidayCategoryRepository holidayRepo;
 
     @Autowired
@@ -63,6 +66,7 @@ public class ReportService {
             int soCaLamThem = 0;
             int soCaToiThieu;
             int soCaChiuThue;
+            int soCaNghiToiDa = 48;
             String chucVu;
             String phongBan;
             Contract c;
@@ -78,6 +82,19 @@ public class ReportService {
             String formattedMonthEnd = sdf.format(gc.getTime());
             Date monthEnd = gc.getTime();
             List<Salary> salaries = salaryRepo.getAllLuongThang(formattedMonthEnd, formattedMonthStart);
+
+            // get first + day right before current month
+            String formattedYearStart = null;
+            String beforeMonthStart = null;
+            if(monthStart.getMonth()!=1) {
+                gc.set(Calendar.MONTH, 1);
+                gc.set(Calendar.DAY_OF_MONTH, 1);
+                formattedYearStart = sdf.format(gc.getTime());
+                gc.setTime(monthStart);
+                gc.add(Calendar.DAY_OF_MONTH, -1);
+                beforeMonthStart = sdf.format(gc.getTime());
+            }
+
 
             for (Salary s : salaries) {
                 Employee e = empRepo.findById(s.getHopDong().getMaNV()).get();
@@ -117,7 +134,7 @@ public class ReportService {
                         }
 
                         // luong OT
-                        luongOT = soCaLamThem * luongMoiCa * 1.5;
+                        luongOT = soCaLamThem * luongMoiCa * 2;
 
                         // luong tinh theo ca
                         luongTruocThue = luongMoiCa * soCaChiuThue;
@@ -173,17 +190,80 @@ public class ReportService {
                         luongMoiCa = luongCoBan / soCaToiThieu;
                         soCa = getMinimumShifts();
 
+                        // update soCaToiThieu
+                        List<HolidayCategory> holidays = holidayRepo.getNgayLeTrongKhoang(formattedMonthStart,formattedMonthEnd);
+                        if(!holidays.isEmpty()){
+                            soCaToiThieu -= holidays.size()*4;
+                        }
+
+                        // tinh buoi nghi
+                        int soCaNghiTinhLuong = 0;
+                         // so buoi nghi tu dau nam
+                        if(formattedYearStart!=null && beforeMonthStart!=null) {
+                            List<LeaveRequest> caDaNghi = leaveRepo.getByMaNVInRange(e.getId(), formattedYearStart, beforeMonthStart);
+                            if (!caDaNghi.isEmpty()) {
+                                for (LeaveRequest cdn : caDaNghi) {
+                                    if (cdn.getIdNghi().getLoaiNghi().toLowerCase().contains("leave slot")) {
+                                        soCaNghiTinhLuong += 1;
+                                    } else if (cdn.getIdNghi().getLoaiNghi().toLowerCase().equals("leave morning slot")) {
+                                        soCaNghiTinhLuong += 2;
+                                    } else if (cdn.getIdNghi().getLoaiNghi().toLowerCase().equals("leave afternoon slot")) {
+                                        soCaNghiTinhLuong += 2;
+                                    } else if (cdn.getIdNghi().getLoaiNghi().toLowerCase().equals("leave full day")) {
+                                        soCaNghiTinhLuong += 4;
+                                    }
+                                }
+                            }
+                        }
+                        List<LeaveRequest> leaveRequests = leaveRepo.getByMaNVInRange(e.getId(),formattedMonthStart,formattedMonthEnd);
+                        if(!leaveRequests.isEmpty()){
+                            for (LeaveRequest caNghiTrongThang : leaveRequests) {
+                                if (caNghiTrongThang.getIdNghi().getLoaiNghi().toLowerCase().contains("leave slot")) {
+                                    soCaNghiTinhLuong += 1;
+                                    if(soCaNghiTinhLuong > soCaNghiToiDa) {
+                                       soCa -= 1;
+                                    }
+                                } else if (caNghiTrongThang.getIdNghi().getLoaiNghi().toLowerCase().equals("leave morning slot") || caNghiTrongThang.getIdNghi().getLoaiNghi().toLowerCase().equals("leave afternoon slot")) {
+                                    soCaNghiTinhLuong += 2;
+                                    if(soCaNghiTinhLuong > soCaNghiToiDa) {
+                                        if(soCaNghiTinhLuong - soCaNghiToiDa < 2){
+                                            soCa -= soCaNghiTinhLuong - soCaNghiToiDa;
+                                        }
+                                        else{
+                                            soCa -= 2;
+                                        }
+                                    }
+                                } else if (caNghiTrongThang.getIdNghi().getLoaiNghi().toLowerCase().equals("leave full day")) {
+                                    soCaNghiTinhLuong += 4;
+                                    if(soCaNghiTinhLuong > soCaNghiToiDa) {
+                                        if(soCaNghiTinhLuong - soCaNghiToiDa < 4){
+                                            soCa -= soCaNghiTinhLuong - soCaNghiToiDa;
+                                        }
+                                        else{
+                                            soCa -= 4;
+                                        }
+                                    }
+                                } else if (caNghiTrongThang.getIdNghi().getLoaiNghi().toLowerCase().equals("unpaid leave")) {
+                                    soCa -= 4;
+                                }
+                            }
+                        }
+
                         // so ca lam
-                        if (soCa > 80) {
-                            soCaLamThem = soCa - 80;
-                            soCa = 80;
+                        if (soCa > soCaToiThieu) {
+                            soCaLamThem = soCa - soCaToiThieu;
+                            soCaChiuThue = soCaToiThieu;
+                        }
+                        else{
+                            soCaLamThem = 0;
+                            soCaChiuThue = soCa;
                         }
 
                         // luong OT
-                        luongOT = soCaLamThem * luongMoiCa * 1.5;
+                        luongOT = soCaLamThem * luongMoiCa * 2;
 
                         // luong tinh theo ca
-                        luongTruocThue = luongMoiCa * soCa;
+                        luongTruocThue = luongMoiCa * soCaChiuThue;
 
                         // giam tru gia canh
                         if (c.getGiamTruGiaCanh() == null) {
@@ -238,6 +318,7 @@ public class ReportService {
                     sr.setChucVu(chucVu);
                     sr.setPhongBan(phongBan);
                     sr.setSoCaToiThieu(soCaToiThieu);
+                    sr.setSoCaLamThem(soCaLamThem);
                     sr.setSoCa(soCa);
                     sr.setLuongCoBan(luongCoBan);
                     sr.setBaoHiemYte(baoHiemYte);
