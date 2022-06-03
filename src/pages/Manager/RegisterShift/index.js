@@ -38,6 +38,7 @@ export default function RegisterShift() {
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
+
             const { userID, shiftCategoryID, roomID, date } = registerShiftDetail
             console.log('registerShiftDetail >>>>> ', registerShiftDetail)
             if (!userID?.trim()?.length || !shiftCategoryID?.trim()?.length || !roomID.toString().trim()?.length || !date?.trim()?.length) {
@@ -185,11 +186,13 @@ export default function RegisterShift() {
                             // setRegisterShiftDetail({ ...registerShiftDetail, date: event.target.value })
                             // console.log(event.target.value)
                             var curr = new Date(event.target.value);
-                            setI(curr.toLocaleDateString())
-                            setRegisterShiftDetail({ ...registerShiftDetail, date: curr.toLocaleDateString() })
+                            setI(curr.toISOString().split('T')[0])
+                            setRegisterShiftDetail({ ...registerShiftDetail, date: curr.toISOString().split('T')[0]})
 
-                            var ngayTu = new Date(curr.setDate(curr.getDate() - curr.getDay())).toLocaleDateString();
-                            var ngayDen = new Date(curr.setDate(curr.getDate() - curr.getDay() + 6)).toLocaleDateString();
+                            var ngayTu = new Date(curr.setDate(curr.getDate() - curr.getDay())).toLocaleDateString()
+                            var ngayDen = new Date(curr.setDate(curr.getDate() - curr.getDay() + 6)).toLocaleDateString()
+                            // var ngayTu2 = ngayTu.toISOString().split('T')[0]
+                            // var ngayDen2 = ngayDen.toISOString().split('T')[0]
                             setNgayTu(ngayTu)
                             setNgayDen(ngayDen)
 
@@ -252,15 +255,15 @@ export default function RegisterShift() {
                                 <tr className="head">
                                     <th scope="col"></th>
                           
-
-                                    <th scope="col">Sunday</th>
+                                    
+                                    
                                     <th scope="col">Monday</th>
                                     <th scope="col">Tuesday</th>
                                     <th scope="col">Wednesday</th>
                                     <th scope="col">Thursday</th>
                                     <th scope="col">Friday</th>
                                     <th scope="col">Saturday </th>
-
+                                    <th scope="col">Sunday</th>
                                 </tr>
                             </thead>
                             {

@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ManagerSalaryAPI from "../../../../api/Manager/salary";
 import CustomPopover from "../../../../components/CustomPopover";
 import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ReactHtmlTableToExcel from "react-html-table-to-excel";
 
 export default function ViewReportSalary() {
     const [listReportSalary, setListReportSalary] = useState([])
@@ -12,10 +13,10 @@ export default function ViewReportSalary() {
 
     const navigate = useNavigate()
 
-    const getAllReportSalary = async() => {
+    const getAllReportSalary = async () => {
         console.log('da vao day 1')
         const reportSalaryRes = await ManagerSalaryAPI.getReportSalary()
-        if ( reportSalaryRes?.status === 200 ){
+        if (reportSalaryRes?.status === 200) {
             console.log('reportSalaryRes?.data: ', reportSalaryRes?.data)
             setListReportSalary(reportSalaryRes?.data)
         }
@@ -27,37 +28,45 @@ export default function ViewReportSalary() {
 
     return (
         <div className="homepage">
+           
             <div className="title">List of Report Salary</div>
+            <ReactHtmlTableToExcel
+                className="btn btn-info"
+                table="reportSalaryTable"
+                filename="Report Salary Report Excel file"
+                sheet="Sheet"
+                buttonText="Export to Excel"
+            />
             <div className="table-frame">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="reportSalaryTable">
                     <thead>
                         <tr className="head">
                             <th scope="col">Employee Code</th>
                             <th scope="col">Empolyee Name</th>
                             <th scope="col">Position</th>
                             <th scope="col">Department</th>
-                            <th scope="col">Lương Cơ Bản</th>
-                            <th scope="col">Giảm Trừ Gia Cảnh</th>
-                            <th scope="col">Số Ca Tối Thiểu</th>
-                            <th scope="col">Số Ca</th>
-                            <th scope="col">Số Ca Làm Thêm</th>
-                            <th scope="col">Lương OT</th>
-                            <th scope="col">Lương Trước Thuế</th>
-                            <th scope="col">Lương Chị Thuế</th>
-                            <th scope="col">Thuế TNCN</th>
-                            <th scope="col">BHXH</th>
-                            <th scope="col">BHYT</th>
-                            <th scope="col">Công Đoàn</th>
-                            <th scope="col">Tổng</th>
+                            <th scope="col">Basic Salary</th>
+                            <th scope="col">Family Allowances</th>
+                            <th scope="col">Minimum Number Of Shifts</th>
+                            <th scope="col">Number of Shifts Worked</th>
+                            <th scope="col">Number of Overtime Shifts</th>
+                            <th scope="col">Overtime Salary</th>
+                            <th scope="col">Gross Income</th>
+                            <th scope="col">Taxable Salary</th>
+                            <th scope="col">Personal Income tax</th>
+                            <th scope="col">Social Insurance</th>
+                            <th scope="col">Health Insurance</th>
+                            <th scope="col">Trade Union Fees</th>
+                            <th scope="col">Total Salary</th>
                         </tr>
                     </thead>
                     <tbody>
                         {listReportSalary.map((reportSalaryItem, reportSalaryIndex) => {
                             return (
                                 <tr key={`tax-item-${reportSalaryIndex}`}>
-                                    <th scope="row">{reportSalaryIndex + 1}</th>
+                                    {/* <th scope="row">{reportSalaryIndex + 1}</th> */}
                                     <td>{reportSalaryItem?.maNv}</td>
-                                    
+
                                     <td>{reportSalaryItem?.tenNV}</td>
                                     <td>{reportSalaryItem?.chucVu}</td>
                                     <td>{reportSalaryItem?.phongBan}</td>

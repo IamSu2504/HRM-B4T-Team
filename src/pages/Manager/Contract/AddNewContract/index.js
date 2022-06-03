@@ -6,13 +6,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ManagercontractAPI from "../../../../api/Manager/contract";
 import ContractAPI from "../../../../api/contract";
-import { useParams , useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function AddContract() {
 
-    
+
     const navigate = useNavigate();
+    const [ngayhethan, setngayhethan] = useState('')
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const { maNv } = useParams()
@@ -32,7 +33,7 @@ export default function AddContract() {
             contractDetail.maNV = maNv
             console.log(contractDetail)
             const { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, maNV } = contractDetail
-            
+
             if (!maHD.toString().trim()?.length || !loaiHopDong.toString().trim()?.length || !ngayHieuLuc.toString().trim()?.length
                 || !ngayHetHan.toString().trim()?.length || !ghiChu.toString().trim()?.length || !maNV.toString().trim()?.length) {
                 setSubmitError({ status: true, error: 'Information is not blank' })
@@ -89,7 +90,7 @@ export default function AddContract() {
                     <CustomSelectBox
                         title="Type of contract"
                         require={true}
-                        value = {contractDetail?.loaiHopDong || 1}
+                        value={contractDetail?.loaiHopDong || 1}
                         option={listContract.map((contractItem) => {
                             return (
                                 { label: `${contractItem.maLoaiHopDong} - ${contractItem.tenLoaiHopDong}`, value: contractItem.id }
@@ -104,25 +105,44 @@ export default function AddContract() {
                         require={true}
                         type="date"
                         handleChange={(event) => {
-                            // const parts = event.target.value.split('-');
-                            // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-
                             setContractDetail({ ...contractDetail, ngayHieuLuc: event.target.value })
+                            let numberdate = 0;
+
+                            if (contractDetail.loaiHopDong == 1)
+                                numberdate = 365
+                            else
+                                if (contractDetail.loaiHopDong == 2)
+                                    numberdate = 730
+                                else
+                                    if (contractDetail.loaiHopDong == 3)
+                                        numberdate = 1095
+                                    else
+                                        if (contractDetail.loaiHopDong == 4)
+                                            numberdate = 60
+                                        else
+                                            if (contractDetail.loaiHopDong == 5)
+                                                numberdate = 60
+
+                            let date = new Date(event.target.value)
+                            date = date.setDate(date.getDate() + numberdate)
+                            let date2 = new Date(date).toISOString().split('T')[0]
+                            setngayhethan(date2)
                         }}
                     />
+
                     <CustomInputField
                         title="Expiration date"
                         require={true}
                         type="date"
+                        disabled={false}
+                        value={ngayhethan}
                         handleChange={(event) => {
-                            // const parts = event.target.value.split('-');
-                            // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
                             setContractDetail({ ...contractDetail, ngayHetHan: event.target.value })
                         }}
                     />
                     <CustomInputField
                         title="Note"
-                        require={true}
+                        require={false}
                         type="text"
                         handleChange={(event) => {
                             setContractDetail({ ...contractDetail, ghiChu: event.target.value })
@@ -135,7 +155,7 @@ export default function AddContract() {
                         value={maNv}
                         type="text"
                         disabled={true}
-                        
+
                     />
                 </div>
             </div>

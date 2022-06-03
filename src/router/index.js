@@ -180,9 +180,9 @@ export default function MainApp() {
         <Route exact path="/admin/updatetax/:taxId" element={<AdminLayoutPrivateRoute><UpdateTax /></AdminLayoutPrivateRoute>} />
         <Route exact path="/admin/addtax" element={<AdminLayoutPrivateRoute><AddTax /></AdminLayoutPrivateRoute>} />
 
-        {/* <Route exact path="/admin/viewshift" element={<AdminLayoutPrivateRoute><ViewShift /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewshift" element={<AdminLayoutPrivateRoute><ViewShift /></AdminLayoutPrivateRoute>} />
         <Route exact path="/admin/updateshift/:shiftId" element={<AdminLayoutPrivateRoute><UpdateShift /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/addshift" element={<AdminLayoutPrivateRoute><AddShift /></AdminLayoutPrivateRoute>} /> */}
+        <Route exact path="/admin/addshift" element={<AdminLayoutPrivateRoute><AddShift /></AdminLayoutPrivateRoute>} />
 
         <Route exact path="/admin/viewposition" element={<AdminLayoutPrivateRoute><ViewPosition /></AdminLayoutPrivateRoute>} />
         <Route exact path="/admin/updateposition/:positionId" element={<AdminLayoutPrivateRoute><UpdatePosition /></AdminLayoutPrivateRoute>} />
@@ -262,7 +262,7 @@ export default function MainApp() {
 
         {/* RegisterShift */}
         <Route exact path="/admin/registerShift" element={<AdminLayoutPrivateRoute><RegisterShift /></AdminLayoutPrivateRoute>} />
-        <Route exact path="/admin/viewshift/:maNv"  element={<AdminLayoutPrivateRoute><ViewRegisterShift /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewregistershift/:maNv"  element={<AdminLayoutPrivateRoute><ViewRegisterShift /></AdminLayoutPrivateRoute>} />
         <Route exact path="/admin/homepage" element={<AdminHomePagePrivateRoute/>} />
         {/* manager */}
         <Route exact path="/manager/viewallInsurance" element={<ManagerLayoutPrivateRoute><MViewInsurance /></ManagerLayoutPrivateRoute>} />
