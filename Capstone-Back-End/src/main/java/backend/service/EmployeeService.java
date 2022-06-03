@@ -57,9 +57,7 @@ public class EmployeeService {
         }
         Employee oldUser = employeeRepo.findById(newUser.getId().toUpperCase()).get();
 
-        if (oldUser.getId().equalsIgnoreCase(newUser.getId()) && employeeRepo.findById(newUser.getId()).isPresent()) {
-            return "Employee ID existed";
-        } else if (oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && employeeRepo.getBySdt(newUser.getSoDienThoai()) != null) {
+        if (oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && employeeRepo.getBySdt(newUser.getSoDienThoai()) != null) {
             return "Phone number existed";
         } else if (oldUser.getEmail().equalsIgnoreCase(newUser.getEmail()) && employeeRepo.getByEmail(newUser.getEmail()) != null) {
             return "Email existed";
