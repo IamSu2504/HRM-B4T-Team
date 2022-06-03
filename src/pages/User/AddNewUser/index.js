@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { dateTimeConverter } from "../../../utils/util";
 import validator from 'validator'
+import { Dialog } from "@mui/material";
 
 export default function AddNewUser() {
   const navigate = useNavigate();
@@ -120,8 +121,8 @@ export default function AddNewUser() {
       console.log('test user: ', userDetail)
       if (!tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
         || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
-        || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length 
-        || !email.toString().trim()?.length 
+        || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length
+        || !email.toString().trim()?.length
         || !noiSinh.toString().trim()?.length || !queQuan.toString().trim()?.length || !diaChiThuongTru.toString().trim()?.length
         || !diaChiTamTru.toString().trim()?.length || !atmNganHang.toString().trim()?.length || !soAtm.toString().trim()?.length
         || !ngayBatDauLam.toString().trim()?.length
@@ -269,7 +270,7 @@ export default function AddNewUser() {
 
             type="text"
             disabled={false}
-            placeholder={"E.g. +84xxxxxxxxx"}
+            placeholder={"E.g. 0987654321"}
             require={true}
             handleChange={(event) => {
               if ((event.target.value).toString().trim()?.length && !valiSoDienThoai.test(event.target.value)) {
@@ -283,7 +284,7 @@ export default function AddNewUser() {
           <span style={{ fontSize: '10px', color: 'red', }}>{checSoDienThoai}</span>
           <CustomInputField
             title="Phone number 2"
-            placeholder={"E.g. 02xxxxxxxxx"}
+            placeholder={"E.g. 0987654321"}
             type="text"
             disabled={false}
             require={false}
@@ -304,7 +305,7 @@ export default function AddNewUser() {
             disabled={false}
             require={true}
             handleChange={(event) => {
-              if ( (event.target.value) && !validator.isEmail(event.target.value)) {
+              if ((event.target.value) && !validator.isEmail(event.target.value)) {
                 setCheckEmail('Email incorrect format')
               }
               else

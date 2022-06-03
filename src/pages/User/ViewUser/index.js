@@ -94,7 +94,7 @@ export default function ViewUser() {
           <p className="contents">Passport issuance date: {userDetail?.ngayCapHoChieu}</p>
           <p className="contents">Passport expiration date: {userDetail?.ngayHetHanHoChieu}</p>
           <p className="contents">Place of birth: {userDetail?.noiSinh}</p>
-          <p className="contents">Home town: {userDetail?.noiSinh}</p>
+          <p className="contents">Home town: {userDetail?.queQuan}</p>
           <p className="contents">Bank name: {userDetail?.atmNganHang}</p>
           <p className="contents">ATM number: {userDetail?.soAtm}</p>
           <p className="contents">Date start work: {userDetail?.ngayBatDauLam}</p>
