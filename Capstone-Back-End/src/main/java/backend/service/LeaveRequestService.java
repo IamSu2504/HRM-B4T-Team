@@ -76,10 +76,10 @@ public class LeaveRequestService {
                 String chucVu = positionRepo.getByMaNvInRange(newLeave.getUser().getId(), monthFirst, monthEnd).getTenChucVu();
                 String shiftName = newLeave.getShiftID().getTenCa();
                 // check teacher
-                if (chucVu.toLowerCase().contains("giáo viên")) {
+                if (chucVu.toLowerCase().contains("Teacher")) {
 
                     // check ca lam co dung khong
-                    if (shiftName.equalsIgnoreCase("Ca 7") || shiftName.equalsIgnoreCase("Ca 6")) {
+                    if (shiftName.equalsIgnoreCase("Slot 6") || shiftName.equalsIgnoreCase("Slot 7")) {
                         return "Not your shift. Can not register.";
                     }
 
@@ -87,7 +87,7 @@ public class LeaveRequestService {
                     LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
                     if (dublicateShift != null) {
                         if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
-                            return "You were registered " + newLeave.getShiftID().getTenCa();
+                            return "You were registered for" + newLeave.getShiftID().getTenCa();
                         }
                     }
 
@@ -107,12 +107,12 @@ public class LeaveRequestService {
                 } else {
 
                     //check chuc vu
-                    if (chucVu.toLowerCase().contains("giám đốc") || chucVu.toLowerCase().contains("phó giám đốc")) {
+                    if (chucVu.toLowerCase().contains("Director") || chucVu.toLowerCase().contains("Vice Director")) {
                         return "Director and Vice Director don't need to register.";
                     }
 
                     // check ca lam co dung khong
-                    if (!shiftName.equalsIgnoreCase("Ca 6") && !shiftName.equalsIgnoreCase("Ca 7")) {
+                    if (!shiftName.equalsIgnoreCase("Slot 6") && !shiftName.equalsIgnoreCase("Slot 7")) {
                         return "Not your shift. Can not register.";
                     }
 
@@ -125,9 +125,9 @@ public class LeaveRequestService {
                     LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
                     if (dublicateShift != null) {
                         if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
-                            return "You were registered " + newLeave.getShiftID().getTenCa();
+                            return "You were registered for " + newLeave.getShiftID().getTenCa();
                         }
-                    }
+                       }
 
                     // check dang ky nghi vao ngay nghi le
                     List<HolidayCategory> holidays = holidayCategoryRepository.findAll();
@@ -161,10 +161,10 @@ public class LeaveRequestService {
                 String shiftName = newLeave.getShiftID().getTenCa();
 
                 // check teacher
-                if (chucVu.toLowerCase().contains("giáo viên")) {
+                if (chucVu.toLowerCase().contains("Teacher")) {
 
                     // check ca lam co dung khong
-                    if (shiftName.equalsIgnoreCase("Ca 7") || shiftName.equalsIgnoreCase("Ca 6")) {
+                    if (shiftName.equalsIgnoreCase("Slot 6") || shiftName.equalsIgnoreCase("Slot 7")) {
                         return "Not your shift. Can not register.";
                     }
 
@@ -172,7 +172,7 @@ public class LeaveRequestService {
                     LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
                     if (dublicateShift != null) {
                         if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
-                            return "You were registered " + newLeave.getShiftID().getTenCa();
+                            return "You were registered for " + newLeave.getShiftID().getTenCa();
                         }
                     }
 
@@ -193,12 +193,12 @@ public class LeaveRequestService {
                 } else {
 
                     //check chuc vu
-                    if (chucVu.toLowerCase().contains("giám đốc") || chucVu.toLowerCase().contains("phó giám đốc")) {
+                    if (chucVu.toLowerCase().contains("Director") || chucVu.toLowerCase().contains("Vice Director")) {
                         return "Director and Vice Director don't need to register.";
                     }
 
                     // check ca lam co dung khong
-                    if (!shiftName.equalsIgnoreCase("Ca 6") && !shiftName.equalsIgnoreCase("Ca 7")) {
+                    if (!shiftName.equalsIgnoreCase("Slot 6") && !shiftName.equalsIgnoreCase("Slot 7")) {
                         return "Not your shift. Can not register.";
                     }
 
@@ -211,7 +211,7 @@ public class LeaveRequestService {
                     LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
                     if (dublicateShift != null) {
                         if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
-                            return "You were registered " + newLeave.getShiftID().getTenCa();
+                            return "You were registered for " + newLeave.getShiftID().getTenCa();
                         }
                     }
 

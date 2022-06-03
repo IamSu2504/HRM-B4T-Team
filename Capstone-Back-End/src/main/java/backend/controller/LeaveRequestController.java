@@ -23,7 +23,7 @@ public class LeaveRequestController {
         try {
             List<LeaveRequest> list = service.getAll();
             if (list.isEmpty()) {
-                return new ResponseEntity<>("List of leave request id empty.", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("List of leave request is empty.", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
