@@ -86,9 +86,7 @@ public class LeaveRequestService {
                     // check ngay nghi da dang ky
                     LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
                     if (dublicateShift != null) {
-                        if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
                             return "You were registered for" + newLeave.getShiftID().getTenCa();
-                        }
                     }
 
                     // check dang ky nghi vao ngay nghi le
@@ -124,9 +122,7 @@ public class LeaveRequestService {
                     // check ngay nghi da dang ky
                     LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
                     if (dublicateShift != null) {
-                        if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
                             return "You were registered for " + newLeave.getShiftID().getTenCa();
-                        }
                        }
 
                     // check dang ky nghi vao ngay nghi le
@@ -142,6 +138,7 @@ public class LeaveRequestService {
             }
             //add
             else{
+                Integer soNghi = null;
                 // check emp existed
                 if (!empRepo.findById(request.getUser()).isPresent()) {
                     return "Employee code " + request.getUser() + " doesn't exist";
@@ -171,9 +168,7 @@ public class LeaveRequestService {
                     // check ngay nghi da dang ky
                     LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
                     if (dublicateShift != null) {
-                        if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
                             return "You were registered for " + newLeave.getShiftID().getTenCa();
-                        }
                     }
 
                     // check dang ky nghi vao ngay nghi le
@@ -210,9 +205,7 @@ public class LeaveRequestService {
                     // check ngay nghi da dang ky
                     LeaveRequest dublicateShift = leaveRequestRepository.getDublicateLeaveRequest(newLeave.getUser().getId(), newLeave.getShiftID().getId(), sdf.format(newLeave.getDate()), newLeave.getIdNghi().getId());
                     if (dublicateShift != null) {
-                        if (dublicateShift.getUser().getId().equalsIgnoreCase(newLeave.getUser().getId())) {
                             return "You were registered for " + newLeave.getShiftID().getTenCa();
-                        }
                     }
 
                     // check dang ky nghi vao ngay nghi le
@@ -233,7 +226,7 @@ public class LeaveRequestService {
 
     public LeaveRequest getNewLeaveRequest(CreateUpdateLeaveRequest request) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
             LeaveRequest s = new LeaveRequest();
             s.setId(request.getId());
@@ -258,5 +251,6 @@ public class LeaveRequestService {
             return null;
         }
     }
+
 }
 

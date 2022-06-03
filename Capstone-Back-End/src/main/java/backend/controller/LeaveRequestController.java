@@ -2,6 +2,7 @@ package backend.controller;
 
 import backend.entity.CreateUpdateLeaveRequest;
 import backend.entity.CreateUpdateShiftRequest;
+import backend.entity.DayOff;
 import backend.entity.LeaveRequest;
 import backend.service.LeaveRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +53,6 @@ public class LeaveRequestController {
             if (mess == null) {
                 return new ResponseEntity<>("Send leave request successful.", HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            if (mess.contains("thành công")) {
-                return new ResponseEntity<>(mess, HttpStatus.OK);
-            }
             return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -72,9 +70,6 @@ public class LeaveRequestController {
             String mess = service.createLeaveRequest(request);
             if (mess == null) {
                 return new ResponseEntity<>("Approve successful.", HttpStatus.OK);
-            }
-            if (mess.contains("thành công")) {
-                return new ResponseEntity<>(mess, HttpStatus.OK);
             }
             return new ResponseEntity<>(mess, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
