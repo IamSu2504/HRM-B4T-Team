@@ -117,11 +117,8 @@ public class EmployeeController {
 
             // update image
             user.setImage(fileName);
-            String updateMess = service.getUpdateUserMessage(user);
-            if (updateMess == null)
-                return new ResponseEntity<>(HttpStatus.OK);
-            else
-                return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+            service.normalSave(user);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (IOException ioe) {
             //if something went bad, we need to inform client about it
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);

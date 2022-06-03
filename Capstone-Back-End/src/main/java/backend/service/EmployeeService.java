@@ -194,5 +194,9 @@ public class EmployeeService {
         return employeeRepo.getByEmail(mail);
     }
 
+    public Employee normalSave(Employee e) {
+        return employeeRepo.save(e);
+    }
+
 }
 
