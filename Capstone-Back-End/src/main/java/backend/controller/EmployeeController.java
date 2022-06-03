@@ -119,8 +119,7 @@ public class EmployeeController {
             user.setImage(fileName);
             service.normalSave(user);
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (IOException ioe) {
-            //if something went bad, we need to inform client about it
+        } catch (Exception ioe) {
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
