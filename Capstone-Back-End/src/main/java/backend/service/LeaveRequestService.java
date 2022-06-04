@@ -51,7 +51,7 @@ public class LeaveRequestService {
 
             // get first+last of current month
             Calendar calendar = Calendar.getInstance();
-            calendar.set(YearMonth.now().getYear(), sdf2.parse(request.getDate()).getMonth()-1,1);
+            calendar.set(YearMonth.now().getYear(), newLeave.getDate().getMonth()-1,1);
             calendar.set(Calendar.DAY_OF_MONTH, 1);
             String monthFirst = sdf.format(calendar.getTime());
             calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
@@ -76,7 +76,7 @@ public class LeaveRequestService {
                 String chucVu = positionRepo.getByMaNvInRange(newLeave.getUser().getId(), monthFirst, monthEnd).getTenChucVu();
                 String shiftName = newLeave.getShiftID().getTenCa();
                 // check teacher
-                if (chucVu.toLowerCase().contains("Teacher")) {
+                if (chucVu.toLowerCase().contains("teacher")) {
 
                     // check ca lam co dung khong
                     if (shiftName.equalsIgnoreCase("Slot 6") || shiftName.equalsIgnoreCase("Slot 7")) {
@@ -101,7 +101,7 @@ public class LeaveRequestService {
                 } else {
 
                     //check chuc vu
-                    if (chucVu.toLowerCase().contains("Director") || chucVu.toLowerCase().contains("Vice Director")) {
+                    if (chucVu.toLowerCase().contains("director") || chucVu.toLowerCase().contains("vice director")) {
                         return "Director and Vice Director don't need to register.";
                     }
 
@@ -149,7 +149,7 @@ public class LeaveRequestService {
                 String shiftName = newLeave.getShiftID().getTenCa();
 
                 // check teacher
-                if (chucVu.toLowerCase().contains("Teacher")) {
+                if (chucVu.toLowerCase().contains("teacher")) {
 
                     // check ca lam co dung khong
                     if (shiftName.equalsIgnoreCase("Slot 6") || shiftName.equalsIgnoreCase("Slot 7")) {
@@ -174,7 +174,7 @@ public class LeaveRequestService {
                 } else {
 
                     //check chuc vu
-                    if (chucVu.toLowerCase().contains("Director") || chucVu.toLowerCase().contains("Vice Director")) {
+                    if (chucVu.toLowerCase().contains("director") || chucVu.toLowerCase().contains("vice director")) {
                         return "Director and Vice Director don't need to register.";
                     }
 

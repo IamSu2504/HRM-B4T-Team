@@ -1,8 +1,11 @@
 package backend.entity;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreateUpdateShiftCategoryRequest {
 
     private Integer id;
