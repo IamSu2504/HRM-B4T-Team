@@ -11,7 +11,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function AddCertificate() {
-    const [certificateDetail, setCertificateDetail] = useState({ certificateID: '', ngayCap: '', noiCap: '', maNV: '', diemSo: '' })
+    const [certificateDetail, setCertificateDetail] = useState({ certificateID: '1', ngayCap: '', noiCap: '', maNV: '', diemSo: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const { maNv } = useParams()

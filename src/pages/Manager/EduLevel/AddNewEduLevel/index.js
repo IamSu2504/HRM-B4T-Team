@@ -13,7 +13,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function AddEduLevel() {
-    const [eduLevelDetail, setEduLevelDetail] = useState({ idChuyenMon: '', idTrinhDo: '', idBangCap: '', tenTruong: '', thoiGianTu: '', thoiGianDen: '', maNV: '' })
+    const [eduLevelDetail, setEduLevelDetail] = useState({ idChuyenMon: '1', idTrinhDo: '1', idBangCap: '1', tenTruong: '', thoiGianTu: '', thoiGianDen: '', maNV: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const { maNv } = useParams()
@@ -160,7 +160,7 @@ export default function AddEduLevel() {
                     <CustomInputField
                         title="From"
                         require={true}
-                        type="date"
+                        type="text"
                         handleChange={(event) => {
                             setEduLevelDetail({ ...eduLevelDetail, thoiGianTu: event.target.value })
 
@@ -170,7 +170,7 @@ export default function AddEduLevel() {
                     <CustomInputField
                         title="To"
                         require={true}
-                        type="date"
+                        type="text"
                         handleChange={(event) => {
                             setEduLevelDetail({ ...eduLevelDetail, thoiGianDen: event.target.value })
 

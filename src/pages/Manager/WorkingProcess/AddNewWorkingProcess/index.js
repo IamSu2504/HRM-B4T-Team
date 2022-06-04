@@ -11,7 +11,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function AddWorkingProcess() {
-    const [workingProcessDetail, setWorkingProcessDetail] = useState({ idPhongBan: '', idChucVu: '', ngayVao: '', ngayRa: '', trangThai: '', maNV: '' })
+    const [workingProcessDetail, setWorkingProcessDetail] = useState({ idPhongBan: '1', idChucVu: '1', ngayVao: '', ngayRa: '', trangThai: "true", maNV: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const { maNv } = useParams()
@@ -89,7 +89,7 @@ export default function AddWorkingProcess() {
                         })}
                         require={true}
                         handleChange={(event) => {
-                            setWorkingProcessDetail({ ...workingProcessDetail, idPhongBan: event.currentTarget.value })
+                            setWorkingProcessDetail({ ...workingProcessDetail, idPhongBan: event.target.value })
                         }}
                     />
                     <CustomSelectBox
@@ -102,7 +102,7 @@ export default function AddWorkingProcess() {
                         })}
                         require={true}
                         handleChange={(event) => {
-                            setWorkingProcessDetail({ ...workingProcessDetail, idChucVu: event.currentTarget.value })
+                            setWorkingProcessDetail({ ...workingProcessDetail, idChucVu: event.target.value })
                         }}
                     />
                     <CustomInputField
@@ -130,7 +130,7 @@ export default function AddWorkingProcess() {
                         }
                         require={true}
                         handleChange={(event) => {
-                            setWorkingProcessDetail({ ...workingProcessDetail, trangThai: event.currentTarget.value })
+                            setWorkingProcessDetail({ ...workingProcessDetail, trangThai: event.target.value })
                         }}
                     />
                     <CustomInputField
