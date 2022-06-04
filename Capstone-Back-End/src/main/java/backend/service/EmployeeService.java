@@ -57,6 +57,49 @@ public class EmployeeService {
         }
         Employee oldUser = employeeRepo.findById(newUser.getId().toUpperCase()).get();
 
+        if(newUser.getSoDienThoai()!=null){
+            try {
+                String sdt = newUser.getSoDienThoai();
+                Integer.parseInt(sdt);
+                if(sdt.length()!=10){
+                    return "Phone number must be a number with 10 characters";
+                }
+            } catch (Exception e) {
+                return "Phone number must be a number with 10 characters";
+            }
+        }
+        if(newUser.getSoDienThoai2()!=null){
+            try {
+                String sdt = newUser.getSoDienThoai2();
+                Integer.parseInt(sdt);
+                if(sdt.length()!=10){
+                    return "Phone number 2 must be a number with 10 characters";
+                }
+            } catch (Exception e) {
+                return "Phone number 2 must be a number with 10 characters";
+            }
+        }
+        if(newUser.getHoChieu()!=null){
+                String hc = newUser.getHoChieu();
+                if(hc.length()!=8){
+                    return "Passport must have 8 characters";
+                }
+                char[] chars = hc.toCharArray();
+                for(int i=0;i<chars.length;i++){
+                    char c = chars[i];
+                    if(i==0) {
+                        if(!Character.isAlphabetic(c)) {
+                            return "Passport must have the first character as alphabet";
+                        }
+                    }
+                    else{
+                        if(!Character.isDigit(c)) {
+                            return "Passport must have characters after the first one as digit";
+                        }
+                    }
+                }
+        }
+
         if (oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && employeeRepo.getBySdt(newUser.getSoDienThoai()) != null) {
             return "Phone number existed";
         } else if (oldUser.getEmail().equalsIgnoreCase(newUser.getEmail()) && employeeRepo.getByEmail(newUser.getEmail()) != null) {
