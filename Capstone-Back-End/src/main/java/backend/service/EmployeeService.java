@@ -108,7 +108,7 @@ public class EmployeeService {
             return "ATM number existed";
         } else if (oldUser.getCccd().equalsIgnoreCase(newUser.getCccd()) && employeeRepo.getByCccd(newUser.getCccd()) != null) {
             return "Citizen ID existed";
-        } else if (oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu()) && newUser.getHoChieu() != null && employeeRepo.getByHoChieu(newUser.getHoChieu()) != null) {
+        } else if (newUser.getHoChieu() != null && (oldUser.getHoChieu()!=null && oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu())) && employeeRepo.getByHoChieu(newUser.getHoChieu()) != null) {
             return "Passport number existed";
         }
 
