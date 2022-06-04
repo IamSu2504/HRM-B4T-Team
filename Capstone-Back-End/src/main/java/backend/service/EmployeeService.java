@@ -33,10 +33,10 @@ public class EmployeeService {
     public String getNewID() {
         String lastID = employeeRepo.getLastID();
         String newID = "NV";
-        for (int i =1; i<=4-String.valueOf(Integer.parseInt(lastID.substring(2,lastID.length()))+1).length(); i++){
+        for (int i = 1; i <= 4 - String.valueOf(Integer.parseInt(lastID.substring(2, lastID.length())) + 1).length(); i++) {
             newID += '0';
         }
-        newID += String.valueOf(Integer.parseInt(lastID.substring(2,lastID.length()))+1);
+        newID += String.valueOf(Integer.parseInt(lastID.substring(2, lastID.length())) + 1);
         return newID;
     }
 
@@ -59,47 +59,46 @@ public class EmployeeService {
         Employee oldUser = employeeRepo.findById(request.getId().toUpperCase()).get();
         Employee newUser = getNewUser(request);
 
-        if(oldUser.getNgayNghiViec()!=null && newUser.getNgayNghiViec()!=null && oldUser.getNgayNghiViec().before(new Date())){
-          return "Employee with ID " + oldUser.getId() + " leaved. Update fail";
+        if (oldUser.getNgayNghiViec() != null && newUser.getNgayNghiViec() != null && oldUser.getNgayNghiViec().before(new Date())) {
+            return "Employee with ID " + oldUser.getId() + " leaved. Update fail";
         }
 
-        if(newUser.getSoDienThoai()!=null){
+        if (newUser.getSoDienThoai() != null) {
             try {
                 String sdt = newUser.getSoDienThoai();
                 Integer.parseInt(sdt);
-                if(sdt.length()!=10){
+                if (sdt.length() != 10) {
                     return "Phone number must be a number with 10 characters";
                 }
             } catch (Exception e) {
                 return "Phone number must be a number with 10 characters";
             }
         }
-        if(newUser.getSoDienThoai2()!=null){
+        if (newUser.getSoDienThoai2() != null) {
             try {
                 String sdt = newUser.getSoDienThoai2();
                 Integer.parseInt(sdt);
-                if(sdt.length()!=10){
+                if (sdt.length() != 10) {
                     return "Phone number 2 must be a number with 10 characters";
                 }
             } catch (Exception e) {
                 return "Phone number 2 must be a number with 10 characters";
             }
         }
-        if(newUser.getHoChieu()!=null){
+        if (newUser.getHoChieu() != null) {
             String hc = newUser.getHoChieu();
-            if(hc.length()!=8){
+            if (hc.length() != 8) {
                 return "Passport must have 8 characters";
             }
             char[] chars = hc.toCharArray();
-            for(int i=0;i<chars.length;i++){
+            for (int i = 0; i < chars.length; i++) {
                 char c = chars[i];
-                if(i==0) {
-                    if(!Character.isAlphabetic(c)) {
+                if (i == 0) {
+                    if (!Character.isAlphabetic(c)) {
                         return "Passport must have the first character as alphabet";
                     }
-                }
-                else{
-                    if(!Character.isDigit(c)) {
+                } else {
+                    if (!Character.isDigit(c)) {
                         return "Passport must have characters after the first one as digit";
                     }
                 }
@@ -118,7 +117,7 @@ public class EmployeeService {
             return "ATM number existed";
         } else if (!oldUser.getCccd().equalsIgnoreCase(newUser.getCccd()) && employeeRepo.getByCccd(newUser.getCccd()) != null) {
             return "Citizen ID existed";
-        } else if (newUser.getHoChieu() != null && (oldUser.getHoChieu()!=null && !oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu())) && employeeRepo.getByHoChieu(newUser.getHoChieu()) != null) {
+        } else if (newUser.getHoChieu() != null && (oldUser.getHoChieu() != null && !oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu())) && employeeRepo.getByHoChieu(newUser.getHoChieu()) != null) {
             return "Passport number existed";
         }
 
@@ -170,22 +169,26 @@ public class EmployeeService {
             newUser.setTenNv(request.getTenNv());
             newUser.setGioiTinh(request.isGioiTinh());
             newUser.setSoDienThoai(request.getSoDienThoai());
-            newUser.setSoDienThoai2(request.getSoDienThoai2());
+            if (request.getSoDienThoai2() != null && !request.getSoDienThoai2().equals(""))
+                newUser.setSoDienThoai2(request.getSoDienThoai2());
             newUser.setEmail(request.getEmail());
-            newUser.setCccd(request.getCccd());
+            if (request.getCccd() != null && !request.getCccd().equals(""))
+                newUser.setCccd(request.getCccd());
             newUser.setQueQuan(request.getQueQuan());
             newUser.setDiaChiThuongTru(request.getDiaChiThuongTru());
             newUser.setDiaChiTamTru(request.getDiaChiTamTru());
             newUser.setAtmNganHang(request.getAtmNganHang());
             newUser.setSoAtm(request.getSoAtm());
             newUser.setDiaChiTamTru(request.getDiaChiTamTru());
-            newUser.setEmail(request.getEmail());
             newUser.setGioiTinh(request.isGioiTinh());
             newUser.setEmail(request.getEmail());
-            newUser.setHoChieu(request.getHoChieu());
-            newUser.setNoiCapHoChieu(request.getNoiCapHoChieu());
+            if (request.getHoChieu() != null && !request.getHoChieu().equals(""))
+                newUser.setHoChieu(request.getHoChieu());
+            if (request.getNoiCapHoChieu() != null && !request.getNoiCapHoChieu().equals(""))
+                newUser.setNoiCapHoChieu(request.getNoiCapHoChieu());
             newUser.setLyDoNghi(request.getLyDoNghi());
-            newUser.setNoiCapCccd(request.getNoiCapCccd());
+            if (request.getNoiCapCccd() != null && !request.getNoiCapCccd().equals(""))
+                newUser.setNoiCapCccd(request.getNoiCapCccd());
             newUser.setDiaChiTamTru(request.getDiaChiTamTru());
             newUser.setNoiSinh(request.getNoiSinh());
 
