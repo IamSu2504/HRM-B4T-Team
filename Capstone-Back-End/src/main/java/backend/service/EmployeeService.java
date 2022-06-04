@@ -51,29 +51,6 @@ public class EmployeeService {
             return null;
     }
 
-    public String getUpdateUserMessage(Employee newUser) {
-        if (!employeeRepo.findById(newUser.getId().toUpperCase()).isPresent()) {
-            return "Employee not existed";
-        }
-        Employee oldUser = employeeRepo.findById(newUser.getId().toUpperCase()).get();
-
-        if (oldUser.getSoDienThoai().equalsIgnoreCase(newUser.getSoDienThoai()) && employeeRepo.getBySdt(newUser.getSoDienThoai()) != null) {
-            return "Phone number existed";
-        } else if (oldUser.getEmail().equalsIgnoreCase(newUser.getEmail()) && employeeRepo.getByEmail(newUser.getEmail()) != null) {
-            return "Email existed";
-        } else if (oldUser.getSoAtm().equalsIgnoreCase(newUser.getSoAtm()) && employeeRepo.getBySoAtm(newUser.getSoAtm()) != null) {
-            return "ATM number existed";
-        } else if (oldUser.getCccd().equalsIgnoreCase(newUser.getCccd()) && employeeRepo.getByCccd(newUser.getCccd()) != null) {
-            return "Citizen ID existed";
-        } else if (oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu()) && newUser.getHoChieu() != null && employeeRepo.getByHoChieu(newUser.getHoChieu()) != null) {
-            return "Passport number existed";
-        }
-
-        newUser.setImage(oldUser.getImage());
-        employeeRepo.save(newUser);
-        return null;
-    }
-
     public String getUpdateUserMessage(CreateUpdateUserRequest request) {
         if (!employeeRepo.findById(request.getId().toUpperCase()).isPresent()) {
             return "Employee not existed";
@@ -84,6 +61,49 @@ public class EmployeeService {
 
         if(oldUser.getNgayNghiViec()!=null && newUser.getNgayNghiViec()!=null && oldUser.getNgayNghiViec().before(new Date())){
           return "Employee with ID " + oldUser.getId() + " leaved. Update fail";
+        }
+
+        if(newUser.getSoDienThoai()!=null){
+            try {
+                String sdt = newUser.getSoDienThoai();
+                Integer.parseInt(sdt);
+                if(sdt.length()!=10){
+                    return "Phone number must be a number with 10 characters";
+                }
+            } catch (Exception e) {
+                return "Phone number must be a number with 10 characters";
+            }
+        }
+        if(newUser.getSoDienThoai2()!=null){
+            try {
+                String sdt = newUser.getSoDienThoai2();
+                Integer.parseInt(sdt);
+                if(sdt.length()!=10){
+                    return "Phone number 2 must be a number with 10 characters";
+                }
+            } catch (Exception e) {
+                return "Phone number 2 must be a number with 10 characters";
+            }
+        }
+        if(newUser.getHoChieu()!=null){
+            String hc = newUser.getHoChieu();
+            if(hc.length()!=8){
+                return "Passport must have 8 characters";
+            }
+            char[] chars = hc.toCharArray();
+            for(int i=0;i<chars.length;i++){
+                char c = chars[i];
+                if(i==0) {
+                    if(!Character.isAlphabetic(c)) {
+                        return "Passport must have the first character as alphabet";
+                    }
+                }
+                else{
+                    if(!Character.isDigit(c)) {
+                        return "Passport must have characters after the first one as digit";
+                    }
+                }
+            }
         }
 
         if (newUser == null)
@@ -98,7 +118,7 @@ public class EmployeeService {
             return "ATM number existed";
         } else if (!oldUser.getCccd().equalsIgnoreCase(newUser.getCccd()) && employeeRepo.getByCccd(newUser.getCccd()) != null) {
             return "Citizen ID existed";
-        } else if (!oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu()) && newUser.getHoChieu() != null && employeeRepo.getByHoChieu(newUser.getHoChieu()) != null) {
+        } else if (newUser.getHoChieu() != null && (oldUser.getHoChieu()!=null && !oldUser.getHoChieu().equalsIgnoreCase(newUser.getHoChieu())) && employeeRepo.getByHoChieu(newUser.getHoChieu()) != null) {
             return "Passport number existed";
         }
 
@@ -169,19 +189,19 @@ public class EmployeeService {
             newUser.setDiaChiTamTru(request.getDiaChiTamTru());
             newUser.setNoiSinh(request.getNoiSinh());
 
-            if (request.getNgayBatDauLam() != null)
+            if (request.getNgayBatDauLam() != null && !request.getNgayBatDauLam().equals(""))
                 newUser.setNgayBatDauLam(sdf.parse(request.getNgayBatDauLam()));
-            if (request.getNgaySinh() != null)
+            if (request.getNgaySinh() != null && !request.getNgaySinh().equals(""))
                 newUser.setNgaySinh(sdf.parse(request.getNgaySinh()));
-            if (request.getNgayCapCccd() != null)
+            if (request.getNgayCapCccd() != null && !request.getNgayCapCccd().equals(""))
                 newUser.setNgayCapCccd(sdf.parse(request.getNgayCapCccd()));
-            if (request.getNgayHetHanCccd() != null)
+            if (request.getNgayHetHanCccd() != null && !request.getNgayHetHanCccd().equals(""))
                 newUser.setNgayHetHanCccd(sdf.parse(request.getNgayHetHanCccd()));
-            if (request.getNgayCapHoChieu() != null)
+            if (request.getNgayCapHoChieu() != null && !request.getNgayCapHoChieu().equals(""))
                 newUser.setNgayCapHoChieu(sdf.parse(request.getNgayCapHoChieu()));
-            if (request.getNgayHetHanHoChieu() != null)
+            if (request.getNgayHetHanHoChieu() != null && !request.getNgayHetHanHoChieu().equals(""))
                 newUser.setNgayHetHanHoChieu(sdf.parse(request.getNgayHetHanHoChieu()));
-            if (request.getNgayNghiViec() != null)
+            if (request.getNgayNghiViec() != null && !request.getNgayNghiViec().equals(""))
                 newUser.setNgayNghiViec(sdf.parse(request.getNgayNghiViec()));
             return newUser;
 

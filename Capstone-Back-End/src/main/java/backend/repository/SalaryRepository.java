@@ -15,8 +15,12 @@ public interface SalaryRepository extends JpaRepository<Salary, Integer> {
     Salary getByMaHD(String maHopDong);
 
     @Query(value = "SELECT l.* FROM hrm_b4t.luongnhanvien l, hopdong h, nhanvien n\n" +
-            "where l.ma_hop_dong = h.ma_hop_dong and h.ma_nv = n.ma_nv and n.ma_nv = ? order by l.ngay_hieu_luc desc LIMIT 1", nativeQuery = true)
-    Salary getLast(String maNV);
+            "where l.ma_hop_dong = h.ma_hop_dong and h.ma_nv = n.ma_nv and n.ma_nv = ? and h.ma_hop_dong=? order by l.ngay_hieu_luc desc LIMIT 1", nativeQuery = true)
+    Salary getLast(String maNV,String maHopDong);
+
+    @Query(value = "SELECT l.* FROM hrm_b4t.luongnhanvien l, hopdong h, nhanvien n\n" +
+            "where l.ma_hop_dong = h.ma_hop_dong and h.ma_nv = n.ma_nv and n.ma_nv = ? and h.ma_hop_dong=? and l.ngay_ket_thuc>=?", nativeQuery = true)
+    List<Salary> getSalariesAfter(String maNV,String maHopDong,String date);
 
     @Query(value = "SELECT * FROM luongnhanvien \n" +
             "WHERE id IN (SELECT MAX(id) FROM luongnhanvien group by ma_hop_dong ) and ngay_hieu_luc <= ? and (ngay_ket_thuc >= ? or ngay_ket_thuc is null)" , nativeQuery = true)

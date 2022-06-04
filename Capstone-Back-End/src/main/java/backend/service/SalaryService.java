@@ -45,7 +45,7 @@ public class SalaryService {
         Salary newSalary = getNewSalary(request);
 
         if (newSalary == null) {
-            return "Lỗi lấy thông tin lương mới";
+            return "Error getting new salary's data";
         }
         Contract c = newSalary.getHopDong();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -57,35 +57,52 @@ public class SalaryService {
         if (newSalary.getLuongCoBan() < minSalary || newSalary.getLuongCoBan() > maxSalary) {
             return "Basic salary must be from " + minSalary + " to " + maxSalary;
         }
-        if (newSalary.getNgayHieuLuc().compareTo(newSalary.getNgayKetThuc()) >= 0) {
-            return "Effective date must be before expiration date";
-        }
-
-        String start = sdf.format(newSalary.getNgayHieuLuc());
-        String end = sdf.format(newSalary.getNgayKetThuc());
-        // update
-        if (newSalary.getId() != null) {
-
-            if (salaryRepo.getLuongStartInRange2(c.getMaHD(), start, end, newSalary.getId()) != null || salaryRepo.getLuongEndInRange2(c.getMaHD(), start, end, newSalary.getId()) != null) {
-                return "Contract with ID " + c.getMaHD() + " has another salary effective from " + sdf2.format(newSalary.getNgayHieuLuc()) + " to " + sdf2.format(newSalary.getNgayKetThuc());
+        if (newSalary.getNgayKetThuc()!=null) {
+            if(compareDate(newSalary.getNgayHieuLuc(),newSalary.getNgayKetThuc())>=0) {
+                return "Effective date must be before expiration date";
             }
-            salaryRepo.save(newSalary);
-            return null;
         }
         // add
-        else {
-            if (newSalary.getNgayHieuLuc().compareTo(c.getNgayHieuLuc()) != 0) {
-                return "Ngày hiệu lực của lương bắt buộc là ngày hiệu lực của hợp đồng: " + sdf2.format(c.getNgayHieuLuc());
+        Salary lastSalary = salaryRepo.getLast(newSalary.getHopDong().getMaNV(), newSalary.getHopDong().getMaHD());
+        // infinite contract
+        if (c.getNgayHetHan() == null) {
+            if (newSalary.getNgayKetThuc() != null) {
+                return "New salary must not have expiration date";
             }
-            if (newSalary.getNgayKetThuc().compareTo(c.getNgayHetHan()) > 0) {
-                return "Salary's expiration date must not be after contract's expiration date: " + sdf2.format(c.getNgayHetHan());
+        } else {
+            if (compareDate(newSalary.getNgayKetThuc(), c.getNgayHetHan()) != 0) {
+                return "New salary's expiration date must be contract's expiration date: " + sdf2.format(c.getNgayHetHan());
             }
-            if (salaryRepo.getLuongStartInRange(c.getMaHD(), start, end) != null || salaryRepo.getLuongEndInRange(c.getMaHD(), start, end) != null) {
-                return "Contract with ID " + c.getMaHD() + " has another salary effective from " + sdf2.format(newSalary.getNgayHieuLuc()) + " to " + sdf2.format(newSalary.getNgayKetThuc());
+            if (compareDate(newSalary.getNgayHieuLuc(), c.getNgayHetHan()) >= 0) {
+                return "New salary's effective date must be contract's expiration date: " + sdf2.format(c.getNgayHetHan());
             }
-            salaryRepo.save(newSalary);
-            return null;
+            if (compareDate(newSalary.getNgayHieuLuc(), c.getNgayHieuLuc()) <0) {
+                return "New salary's effective date must not be before contract's effective date: " + sdf2.format(c.getNgayHieuLuc());
+            }
         }
+        // salaries before existed
+        if (lastSalary != null) {
+            if (newSalary.getNgayHieuLuc().getDate() != 1) {
+                return "New salary's effective date must be the first of a month.";
+            }
+            // delete salaries after
+            List<Salary> salariesAfterCurrent = salaryRepo.getSalariesAfter(c.getMaNV(), c.getMaHD(), sdf.format(newSalary.getNgayHieuLuc()));
+            if (!salariesAfterCurrent.isEmpty()) {
+                for (Salary s : salariesAfterCurrent) {
+                    salaryRepo.deleteById(s.getId());
+                }
+            }
+            // update salary before
+            lastSalary.setNgayKetThuc(getDateBefore(newSalary.getNgayHieuLuc()));
+            salaryRepo.save(lastSalary);
+        }
+        else{
+            if (compareDate(newSalary.getNgayHieuLuc(), c.getNgayHieuLuc()) != 0) {
+                return "New salary's effective date must be contract's effective date: " + sdf2.format(c.getNgayHieuLuc());
+            }
+        }
+        salaryRepo.save(newSalary);
+        return null;
     }
 
     public Salary getNewSalary(CreateUpdateSalaryRequest request) {
@@ -106,5 +123,21 @@ public class SalaryService {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public int compareDate(Date d1, Date d2) {
+        Calendar c = Calendar.getInstance();
+        c.set(d1.getYear(), d1.getMonth(), d1.getDate());
+        d1 = c.getTime();
+        c.set(d2.getYear(), d2.getMonth(), d2.getDate());
+        d2 = c.getTime();
+        return d1.compareTo(d2);
+    }
+
+    public Date getDateBefore(Date d) {
+        Calendar c = Calendar.getInstance();
+        c.set(d.getYear()+1900, d.getMonth(), d.getDate(), 0, 0, 0);
+        c.add(Calendar.DAY_OF_MONTH, -1);
+        return c.getTime();
     }
 }
