@@ -97,10 +97,6 @@ public class LeaveRequestService {
                         }
                     }
 
-//                  check 12 ngay nghi phep
-                    Integer soBuoiNghi = dORepo.getByMaNV(newLeave.getUser().getId()).getSoBuoiNghi();
-                    if (soBuoiNghi > 12) {
-                        return "You have absent more than the specified number of session.";                    }
                     // check not teacher
                 } else {
 
@@ -112,11 +108,6 @@ public class LeaveRequestService {
                     // check ca lam co dung khong
                     if (!shiftName.equalsIgnoreCase("Slot 6") && !shiftName.equalsIgnoreCase("Slot 7")) {
                         return "Not your shift. Can not register.";
-                    }
-
-                    Integer soBuoiNghi = dORepo.getByMaNV(newLeave.getUser().getId()).getSoBuoiNghi();
-                    if (soBuoiNghi >= 12) {
-                        return "You have absent more than the specified number of session.";
                     }
 
                     // check ngay nghi da dang ky
@@ -179,11 +170,6 @@ public class LeaveRequestService {
                         }
                     }
 
-                    // check 12 ngay nghi phep
-                    Integer soBuoiNghi = dORepo.getByMaNV(newLeave.getUser().getId()).getSoBuoiNghi();
-                    if (soBuoiNghi > 12) {
-                        return "You have absent more than the specified number of session.";
-                    }
                     // check not teacher
                 } else {
 
@@ -195,11 +181,6 @@ public class LeaveRequestService {
                     // check ca lam co dung khong
                     if (!shiftName.equalsIgnoreCase("Slot 6") && !shiftName.equalsIgnoreCase("Slot 7")) {
                         return "Not your shift. Can not register.";
-                    }
-
-                    Integer soBuoiNghi = dORepo.getByMaNV(newLeave.getUser().getId()).getSoBuoiNghi();
-                    if (soBuoiNghi >= 12) {
-                        return "You have absent more than the specified number of session.";
                     }
 
                     // check ngay nghi da dang ky
