@@ -14,7 +14,29 @@
     color: #000000;
     margin-bottom: 30px;
 }
-
+.jobactive {
+    background: rgba(32, 207, 70, 0.74);
+    border-radius: 20px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .jobdeactive {
+    background: rgba(225, 0, 0, 0.63);
+    border-radius: 20px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+    padding: 5px;
+    text-align: center;
+  }
 .view-contract-page .save-button {
     background: #34AACF;
     border-radius: 8px;
