@@ -71,8 +71,8 @@ public class ContractService {
                 return "Employee "+e.getTenNv()+"(" + newContract.getMaNV() + ") is having an in-term contract("+c.getMaHD()+") end in "+sdf2.format(c.getNgayHetHan())+". Add failed";
             }
             else{
-                if(getNoTimeDate(c.getNgayHetHan()).compareTo(getNoTimeDate(new Date()))>=0){
-                    return "Employee "+e.getTenNv()+"(" + newContract.getMaNV() + ") is having an in-term contract("+c.getMaHD()+") end in "+sdf2.format(c.getNgayHetHan())+". Add failed";
+                if(getNoTimeDate(c.getNgayHetHan()).compareTo(getNoTimeDate(new Date()))>=0) {
+                    return "Employee " + e.getTenNv() + "(" + newContract.getMaNV() + ") is having an in-term contract(" + c.getMaHD() + ") end in " + sdf2.format(c.getNgayHetHan()) + ". Add failed";
                 }
             }
 
@@ -103,6 +103,7 @@ public class ContractService {
             return "End date must be after start date";
         }
         Employee e = empRepo.findById(newContract.getMaNV()).get();
+
         // update
         if(repo.findById(newContract.getMaHD()).isPresent()){
             String start = sdf.format(newContract.getNgayHieuLuc());
@@ -150,6 +151,17 @@ public class ContractService {
         try {
             Calendar c = Calendar.getInstance();
             c.set(d.getYear(),d.getMonth(),d.getDate(),0,0,0);
+            return c.getTime();
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    public Date getDayBefore(Date d){
+        try {
+            Calendar c = Calendar.getInstance();
+            c.setTime(d);
+            c.add(Calendar.DAY_OF_MONTH,-1);
             return c.getTime();
         } catch (Exception e){
             return null;
