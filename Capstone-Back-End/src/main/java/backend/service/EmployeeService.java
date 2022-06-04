@@ -169,19 +169,19 @@ public class EmployeeService {
             newUser.setDiaChiTamTru(request.getDiaChiTamTru());
             newUser.setNoiSinh(request.getNoiSinh());
 
-            if (request.getNgayBatDauLam() != null)
+            if (request.getNgayBatDauLam() != null && !request.getNgayBatDauLam().equals(""))
                 newUser.setNgayBatDauLam(sdf.parse(request.getNgayBatDauLam()));
-            if (request.getNgaySinh() != null)
+            if (request.getNgaySinh() != null && !request.getNgaySinh().equals(""))
                 newUser.setNgaySinh(sdf.parse(request.getNgaySinh()));
-            if (request.getNgayCapCccd() != null)
+            if (request.getNgayCapCccd() != null && !request.getNgayCapCccd().equals(""))
                 newUser.setNgayCapCccd(sdf.parse(request.getNgayCapCccd()));
-            if (request.getNgayHetHanCccd() != null)
+            if (request.getNgayHetHanCccd() != null && !request.getNgayHetHanCccd().equals(""))
                 newUser.setNgayHetHanCccd(sdf.parse(request.getNgayHetHanCccd()));
-            if (request.getNgayCapHoChieu() != null)
+            if (request.getNgayCapHoChieu() != null && !request.getNgayCapHoChieu().equals(""))
                 newUser.setNgayCapHoChieu(sdf.parse(request.getNgayCapHoChieu()));
-            if (request.getNgayHetHanHoChieu() != null)
+            if (request.getNgayHetHanHoChieu() != null && !request.getNgayHetHanHoChieu().equals(""))
                 newUser.setNgayHetHanHoChieu(sdf.parse(request.getNgayHetHanHoChieu()));
-            if (request.getNgayNghiViec() != null)
+            if (request.getNgayNghiViec() != null && !request.getNgayNghiViec().equals(""))
                 newUser.setNgayNghiViec(sdf.parse(request.getNgayNghiViec()));
             return newUser;
 
