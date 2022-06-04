@@ -83,4 +83,15 @@ public class SalaryController {
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") String pv) {
+        try {
+            int id = Integer.parseInt(pv);
+            service.delete(id);
+            return new ResponseEntity<>("Delete successfully", HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

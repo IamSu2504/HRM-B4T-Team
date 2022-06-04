@@ -140,4 +140,8 @@ public class SalaryService {
         c.add(Calendar.DAY_OF_MONTH, -1);
         return c.getTime();
     }
+
+    public void delete(int id){
+       salaryRepo.deleteById(id);
+    }
 }
