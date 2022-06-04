@@ -37,7 +37,7 @@ public class SalaryService {
         }
     }
 
-    public Salary getByContractID(String contractID) {
+    public List<Salary> getByContractID(String contractID) {
         return salaryRepo.getByMaHD(contractID);
     }
 
@@ -117,7 +117,7 @@ public class SalaryService {
             s.setPhuCapKhac(request.getPhuCapKhac());
             if (request.getNgayHieuLuc() != null)
                 s.setNgayHieuLuc(sdf.parse(request.getNgayHieuLuc()));
-            if (request.getNgayKetThuc() != null)
+            if (request.getNgayKetThuc() != null && !request.getNgayKetThuc().equals(""))
                 s.setNgayKetThuc(sdf.parse(request.getNgayKetThuc()));
             return s;
         } catch (Exception e) {

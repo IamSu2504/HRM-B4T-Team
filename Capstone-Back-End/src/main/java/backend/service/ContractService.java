@@ -32,10 +32,10 @@ public class ContractService {
     public String getLastID() {
         String lastID = repo.getLastID();
         String newID = "HD";
-        for (int i =1; i<=4-String.valueOf(Integer.parseInt(lastID.substring(2,lastID.length()))+1).length(); i++){
+        for (int i = 1; i <= 4 - String.valueOf(Integer.parseInt(lastID.substring(2, lastID.length())) + 1).length(); i++) {
             newID += '0';
         }
-        newID += String.valueOf(Integer.parseInt(lastID.substring(2,lastID.length()))+1);
+        newID += String.valueOf(Integer.parseInt(lastID.substring(2, lastID.length())) + 1);
         return newID;
     }
 
@@ -56,40 +56,43 @@ public class ContractService {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
 
-        if(newContract.getNgayHetHan().compareTo(newContract.getNgayHieuLuc())<=0){
+        if (newContract.getNgayHetHan().compareTo(newContract.getNgayHieuLuc()) <= 0) {
             return "End date must be after start date";
         }
         Employee e = empRepo.findById(newContract.getMaNV()).get();
         // add
-        if(!repo.findById(newContract.getMaHD()).isPresent()){
+        if (!repo.findById(newContract.getMaHD()).isPresent()) {
             String start = sdf.format(newContract.getNgayHieuLuc());
-            String end = sdf.format(newContract.getNgayHetHan());
-            Contract c;
-
-            c = repo.getLast(e.getId());
-            if(c.getNgayHetHan()==null){
-                return "Employee "+e.getTenNv()+"(" + newContract.getMaNV() + ") is having an in-term contract("+c.getMaHD()+") end in "+sdf2.format(c.getNgayHetHan())+". Add failed";
+            String end = sdf.format(new Date(8099, 1, 1));
+            if (newContract.getNgayHetHan() != null) {
+                end = sdf.format(newContract.getNgayHetHan());
             }
-            else{
-                if(getNoTimeDate(c.getNgayHetHan()).compareTo(getNoTimeDate(new Date()))>=0) {
-                    return "Employee " + e.getTenNv() + "(" + newContract.getMaNV() + ") is having an in-term contract(" + c.getMaHD() + ") end in " + sdf2.format(c.getNgayHetHan()) + ". Add failed";
+
+            Contract c;
+            c = repo.getLast(e.getId());
+            if (c != null) {
+                if (c.getNgayHetHan() == null) {
+                    return "Employee " + e.getTenNv() + "(" + newContract.getMaNV() + ") had an in-term contract(" + c.getMaHD() + ") end in " + sdf2.format(c.getNgayHetHan()) + ". Add failed";
+                } else {
+                    if (getNoTimeDate(c.getNgayHetHan()).compareTo(getNoTimeDate(new Date())) >= 0) {
+                        return "Employee " + e.getTenNv() + "(" + newContract.getMaNV() + ") had an in-term contract(" + c.getMaHD() + ") end in " + sdf2.format(c.getNgayHetHan()) + ". Add failed";
+                    }
                 }
             }
 
-            if(repo.getContractStartInRange(start,end,newContract.getMaNV())!=null){
-                c = repo.getContractStartInRange(start,end,newContract.getMaNV());
-                return "Employee "+e.getTenNv()+"(" + newContract.getMaNV() + ") had a contract("+c.getMaHD()+") available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Contracts cannot have same dates";
+            if (repo.getContractStartInRange(start, end, newContract.getMaNV()) != null) {
+                c = repo.getContractStartInRange(start, end, newContract.getMaNV());
+                    return "Employee " + e.getTenNv() + "(" + newContract.getMaNV() + ") had a contract(" + c.getMaHD() + ") available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Contracts cannot have same dates";
             }
-            if(repo.getContractEndInRange(start,end,newContract.getMaNV())!=null){
-                c = repo.getContractEndInRange(start,end,newContract.getMaNV());
-                return "Employee "+e.getTenNv()+"(" + newContract.getMaNV() + ") had a contract("+c.getMaHD()+") available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Contracts cannot have same dates";
+            if (repo.getContractEndInRange(start, end, newContract.getMaNV()) != null) {
+                c = repo.getContractEndInRange(start, end, newContract.getMaNV());
+                    return "Employee " + e.getTenNv() + "(" + newContract.getMaNV() + ") had a contract(" + c.getMaHD() + ") available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Contracts cannot have same dates";
             }
 
             newContract.setTrangThai(true);
             repo.save(newContract);
             return null;
-        }
-        else{
+        } else {
             return "Contract ID existed";
         }
     }
@@ -99,24 +102,27 @@ public class ContractService {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
 
-        if(newContract.getNgayHetHan().compareTo(newContract.getNgayHieuLuc())<=0){
+        if (newContract.getNgayHetHan().compareTo(newContract.getNgayHieuLuc()) <= 0) {
             return "End date must be after start date";
         }
         Employee e = empRepo.findById(newContract.getMaNV()).get();
 
         // update
-        if(repo.findById(newContract.getMaHD()).isPresent()){
+        if (repo.findById(newContract.getMaHD()).isPresent()) {
             String start = sdf.format(newContract.getNgayHieuLuc());
-            String end = sdf.format(newContract.getNgayHetHan());
+            String end = sdf.format(new Date(8099, 1, 1));
+            if (newContract.getNgayHetHan() != null) {
+                end = sdf.format(newContract.getNgayHetHan());
+            }
             Contract c;
 
-            if(repo.getContractStartInRange2(start,end,newContract.getMaNV(),newContract.getMaHD())!=null){
-                c = repo.getContractStartInRange2(start,end,newContract.getMaNV(),newContract.getMaHD());
-                return "Employee "+e.getTenNv()+"(" + newContract.getMaNV() + ") had a contract("+c.getMaHD()+") available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Contracts cannot have same dates";
+            if (repo.getContractStartInRange2(start, end, newContract.getMaNV(), newContract.getMaHD()) != null) {
+                c = repo.getContractStartInRange2(start, end, newContract.getMaNV(), newContract.getMaHD());
+                return "Employee " + e.getTenNv() + "(" + newContract.getMaNV() + ") had a contract(" + c.getMaHD() + ") available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Contracts cannot have same dates";
             }
-            if(repo.getContractEndInRange2(start,end,newContract.getMaNV(),newContract.getMaHD())!=null){
-                c = repo.getContractEndInRange2(start,end,newContract.getMaNV(),newContract.getMaHD());
-                return "Employee "+e.getTenNv()+"(" + newContract.getMaNV() + ") had a contract("+c.getMaHD()+") available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Contracts cannot have same dates";
+            if (repo.getContractEndInRange2(start, end, newContract.getMaNV(), newContract.getMaHD()) != null) {
+                c = repo.getContractEndInRange2(start, end, newContract.getMaNV(), newContract.getMaHD());
+                return "Employee " + e.getTenNv() + "(" + newContract.getMaNV() + ") had a contract(" + c.getMaHD() + ") available from " + sdf2.format(c.getNgayHieuLuc()) + " to " + sdf2.format(c.getNgayHetHan()) + ". Contracts cannot have same dates";
             }
 
             newContract.setTrangThai(true);
@@ -126,7 +132,7 @@ public class ContractService {
         return "Contract not existed, update fail";
     }
 
-    public Contract getNewContract(CreateUpdateContractRequest request){
+    public Contract getNewContract(CreateUpdateContractRequest request) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -135,35 +141,35 @@ public class ContractService {
             s.setLoaiHopDong(contractCategoryRepository.findById(request.getLoaiHopDong()).get());
             s.setGhiChu(request.getGhiChu());
             s.setMaNV(request.getMaNV());
-            if(request.getNgayHieuLuc() != null)
+            if (request.getNgayHieuLuc() != null)
                 s.setNgayHieuLuc(sdf.parse(request.getNgayHieuLuc()));
-            if(request.getNgayHetHan() != null)
+            if (request.getNgayHetHan() != null && !request.getNgayHetHan().equals(""))
                 s.setNgayHetHan(sdf.parse(request.getNgayHetHan()));
             s.setTrangThai(request.getTrangThai());
             s.setGiamTruGiaCanh(request.getGiamTruGiaCanh());
             return s;
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    public Date getNoTimeDate(Date d){
+    public Date getNoTimeDate(Date d) {
         try {
             Calendar c = Calendar.getInstance();
-            c.set(d.getYear(),d.getMonth(),d.getDate(),0,0,0);
+            c.set(d.getYear(), d.getMonth(), d.getDate(), 0, 0, 0);
             return c.getTime();
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    public Date getDayBefore(Date d){
+    public Date getDayBefore(Date d) {
         try {
             Calendar c = Calendar.getInstance();
             c.setTime(d);
-            c.add(Calendar.DAY_OF_MONTH,-1);
+            c.add(Calendar.DAY_OF_MONTH, -1);
             return c.getTime();
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

@@ -11,8 +11,8 @@ import java.util.List;
 @Repository
 public interface SalaryRepository extends JpaRepository<Salary, Integer> {
 
-    @Query(value = "SELECT * FROM hrm_b4t.luongnhanvien where Upper(ma_hop_dong) =  UPPER(?)", nativeQuery = true)
-    Salary getByMaHD(String maHopDong);
+    @Query(value = "SELECT * FROM hrm_b4t.luongnhanvien where Upper(ma_hop_dong) = UPPER(?)", nativeQuery = true)
+    List<Salary> getByMaHD(String maHopDong);
 
     @Query(value = "SELECT l.* FROM hrm_b4t.luongnhanvien l, hopdong h, nhanvien n\n" +
             "where l.ma_hop_dong = h.ma_hop_dong and h.ma_nv = n.ma_nv and n.ma_nv = ? and h.ma_hop_dong=? order by l.ngay_hieu_luc desc LIMIT 1", nativeQuery = true)
