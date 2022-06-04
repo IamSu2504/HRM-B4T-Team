@@ -130,7 +130,10 @@ export default function AddNewUser() {
       ) {
         setSubmitError({ status: true, error: 'Information is not blank' })
       } else
-        if (!valiCccd.test(cccd) || !validator.isEmail(email) || !valiHoChieu.test(hoChieu) || !valiSoDienThoai.test(soDienThoai) ||
+        if ((cccd.toString().trim()?.length && !valiCccd.test(cccd)) ||
+          (email.toString().trim()?.length && !validator.isEmail(email)) ||
+          (hoChieu.toString().trim()?.length && !valiHoChieu.test(hoChieu)) ||
+          (soDienThoai.toString().trim()?.length && !valiSoDienThoai.test(soDienThoai)) ||
           (soDienThoai2.toString().trim()?.length && !valiSoDienThoai2.test(soDienThoai2))) {
           setSubmitError({ status: true, error: 'Incorrect format information' })
         }

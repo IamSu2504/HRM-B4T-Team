@@ -189,32 +189,29 @@ export default function UpdateUser() {
       //   || !diaChiTamTru.toString()?.trim()?.length || !atmNganHang.toString()?.trim()?.length || !soAtm.toString()?.trim()?.length
       //   || !trangThaiLaoDong.toString()?.trim()?.length || !ngayBatDauLam.toString()?.trim()?.length || !ngayNghiViec.toString()?.trim()?.length 
       //   || !lyDoNghi.toString()?.trim()?.length)
-
-
-
       if (!tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
         || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
         || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length
-        || !email.toString().trim()?.length || !cccd.toString().trim()?.length || !noiCapCccd.toString().trim()?.length
-        || !ngayCapCccd.toString().trim()?.length || !ngayHetHanCccd.toString().trim()?.length || !hoChieu.toString().trim()?.length
-        || !noiCapHoChieu.toString().trim()?.length || !ngayCapHoChieu.toString().trim()?.length || !ngayHetHanHoChieu.toString().trim()?.length
+        || !email.toString().trim()?.length
         || !noiSinh.toString().trim()?.length || !queQuan.toString().trim()?.length || !diaChiThuongTru.toString().trim()?.length
         || !diaChiTamTru.toString().trim()?.length || !atmNganHang.toString().trim()?.length || !soAtm.toString().trim()?.length
         || !ngayBatDauLam.toString().trim()?.length
       ) {
         setSubmitError({ status: true, error: 'Information is not blank' })
-      }
-      else
-        if (!valiCccd.test(cccd) || !validator.isEmail(email) || !valiHoChieu.test(hoChieu) || !valiSoDienThoai.test(soDienThoai) ||
+      } else
+        if ((cccd.toString().trim()?.length && !valiCccd.test(cccd)) ||
+          (email.toString().trim()?.length && !validator.isEmail(email)) ||
+          (hoChieu.toString().trim()?.length && !valiHoChieu.test(hoChieu)) ||
+          (soDienThoai.toString().trim()?.length && !valiSoDienThoai.test(soDienThoai)) ||
           (soDienThoai2.toString().trim()?.length && !valiSoDienThoai2.test(soDienThoai2))) {
           setSubmitError({ status: true, error: 'Incorrect format information' })
         }
         else {
-
+          setIsSubmit(true)
           const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail })
           if (updateRes?.status === 200) {
             toast.success(updateRes?.data)
-            console.log('aaaa', updateRes?.data)
+            console.log('aaaa2', updateRes?.data)
             const formData = new FormData();
             formData.append("file", userImage);
             try {
@@ -286,7 +283,7 @@ export default function UpdateUser() {
         <div>
           <CustomSelectBox
             title="Gender"
-            value={userDetail?.gioiTinh}
+            value={userDetail?.gioiTinh || true}
             option={[{ label: "Male", value: true }, { label: "Female", value: false }]}
             require={true}
             handleChange={(event) => {
@@ -370,7 +367,7 @@ export default function UpdateUser() {
             disabled={false}
             require={true}
             handleChange={(event) => {
-              if (!valiSoDienThoai.test(event.target.value)) {
+              if ((event.target.value).toString().trim()?.length && !valiSoDienThoai.test(event.target.value)) {
                 setCheckSoDienThoai('Phone number format incorrectly')
               }
               else
