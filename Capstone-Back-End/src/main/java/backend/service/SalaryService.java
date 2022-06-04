@@ -37,7 +37,7 @@ public class SalaryService {
         }
     }
 
-    public Salary getByContractID(String contractID) {
+    public List<Salary> getByContractID(String contractID) {
         return salaryRepo.getByMaHD(contractID);
     }
 
@@ -117,7 +117,7 @@ public class SalaryService {
             s.setPhuCapKhac(request.getPhuCapKhac());
             if (request.getNgayHieuLuc() != null)
                 s.setNgayHieuLuc(sdf.parse(request.getNgayHieuLuc()));
-            if (request.getNgayKetThuc() != null)
+            if (request.getNgayKetThuc() != null && !request.getNgayKetThuc().equals(""))
                 s.setNgayKetThuc(sdf.parse(request.getNgayKetThuc()));
             return s;
         } catch (Exception e) {
@@ -139,5 +139,9 @@ public class SalaryService {
         c.set(d.getYear()+1900, d.getMonth(), d.getDate(), 0, 0, 0);
         c.add(Calendar.DAY_OF_MONTH, -1);
         return c.getTime();
+    }
+
+    public void delete(int id){
+       salaryRepo.deleteById(id);
     }
 }
