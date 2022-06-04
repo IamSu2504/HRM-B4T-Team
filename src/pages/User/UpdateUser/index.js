@@ -168,27 +168,19 @@ export default function UpdateUser() {
 
   const handleUpdate = async () => {
     try {
-      var valid = false;
+      
       setSubmitError({ status: false, error: '' })
-      const { tinhChatHopDongID, tinhTrangHonNhanID,
+      const { id, tinhChatHopDongID, tinhTrangHonNhanID,
         quocTichID, tenNv, ngaySinh,
         gioiTinh, soDienThoai, soDienThoai2,
         email, cccd, noiCapCccd, ngayCapCccd, ngayHetHanCccd,
         hoChieu, noiCapHoChieu, ngayCapHoChieu, ngayHetHanHoChieu,
         noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
-        soAtm, ngayBatDauLam, ngayNghiViec, lyDoNghi
+        soAtm, ngayBatDauLam
       } = userDetail;
-
-      // if (!tinhChatHopDongID.toString()?.trim()?.length || !tinhTrangHonNhanID.toString()?.trim()?.length
-      //   || !quocTichID.trim().toString()?.trim()?.length || !tenNv.toString()?.trim()?.length || !ngaySinh.toString()?.trim()?.length
-      //   || !gioiTinh.toString()?.trim()?.length || !soDienThoai.toString()?.trim()?.length || !soDienThoai2.toString()?.trim()?.length
-      //   || !email.toString()?.trim()?.length || !cccd.toString()?.trim()?.length || !noiCapCccd.toString()?.trim()?.length
-      //   || !ngayCapCccd.toString()?.trim()?.length || !ngayHetHanCccd.toString()?.trim()?.length || !hoChieu.toString()?.trim()?.length
-      //   || !noiCapHoChieu.toString()?.trim()?.length || !ngayCapHoChieu.toString()?.trim()?.length || !ngayHetHanHoChieu.toString()?.trim()?.length
-      //   || !noiSinh.toString()?.trim()?.length || !queQuan.toString()?.trim()?.length || !diaChiThuongTru.toString()?.trim()?.length
-      //   || !diaChiTamTru.toString()?.trim()?.length || !atmNganHang.toString()?.trim()?.length || !soAtm.toString()?.trim()?.length
-      //   || !trangThaiLaoDong.toString()?.trim()?.length || !ngayBatDauLam.toString()?.trim()?.length || !ngayNghiViec.toString()?.trim()?.length 
-      //   || !lyDoNghi.toString()?.trim()?.length)
+      
+     
+      console.log('test user: ', userDetail)
       if (!tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
         || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
         || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length
@@ -207,7 +199,9 @@ export default function UpdateUser() {
           setSubmitError({ status: true, error: 'Incorrect format information' })
         }
         else {
+          console.log('da vao day nhe')
           setIsSubmit(true)
+          console.log('>>>>>', userDetail)
           const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail })
           if (updateRes?.status === 200) {
             toast.success(updateRes?.data)
@@ -230,11 +224,9 @@ export default function UpdateUser() {
         }
     } catch (error) {
       if (error.response) {
-        console.log(error)
         setSubmitError({ status: true, error: error.response.data })
       }
     } finally {
-      console.log("da vao day 4")
       setIsSubmit(false)
     }
   }
