@@ -16,7 +16,14 @@ const ManagerSalaryAPI = {
         return AxiosClient.get(url);
     },
 
+    getManagerSalaryByHD(maHd) {
+        
+        const url = `/salary/employee/${maHd}`;
+        return AxiosClient.get(url);
+    },
+
     updateManagerSalary({id, maHD, idBacLuong, luongCoBan, phuCapKhac, ngayHieuLuc, ngayKetThuc, ghiChu}) {
+        console.log('da vao api')
         const url = `/salary/${id}`;
         return AxiosClient.put(url, { maHD, idBacLuong, luongCoBan, phuCapKhac, ngayHieuLuc, ngayKetThuc, ghiChu});
     },
@@ -27,6 +34,10 @@ const ManagerSalaryAPI = {
         return AxiosClient.post(url, {maHD, idBacLuong, luongCoBan, phuCapKhac, ngayHieuLuc, ngayKetThuc, ghiChu});
     },
 
+    Delete(id){
+        const url = `/salary/${id}`;
+        return AxiosClient.delete(url);
+    }
 }
 
 export default ManagerSalaryAPI;

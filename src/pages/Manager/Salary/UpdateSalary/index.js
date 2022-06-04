@@ -1,70 +1,81 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import ManagercontractAPI from "../../../../api/Manager/contract";
-import ContractAPI from "../../../../api/contract";
 import CustomInputField from "../../../../components/customInputField";
 import CustomSelectBox from "../../../../components/customSelectbox";
 import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import ManagercontractAPI from "../../../../api/Manager/contract";
+import ManagerSalaryAPI from "../../../../api/Manager/salary";
+import SalaryAPI from "../../../../api/SalaryGrade";
+import { useParams , useNavigate} from "react-router-dom";
 
 export default function UpdateSalary() {
-    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', trangThai: '', maNV: '' })
+    const [salaryDetail, setSalaryDetail] = useState({ maHD: '', idBacLuong: '1', luongCoBan: '', phuCapKhac: '', ngayHieuLuc: '', ngayKetThuc: '' , ghiChu: ''})
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
-    const { maHD } = useParams()
+    const { id } = useParams()
 
-    const getContractDetail = async () => {
-        if (maHD) {
-            const contractRes = await ManagercontractAPI.getManagerContractById(maHD)
+    const getSalaryDetail = async () => {
+        if (id) {
+            const contractRes = await ManagerSalaryAPI.getManagerSalaryById(id)
 
             if (contractRes?.status === 200) {
-                setContractDetail({
-
-                    loaiHopDong: contractRes?.data?.loaiHopDong?.id,
-                    ngayHieuLuc: contractRes?.data?.ngayHieuLuc,
-                    ngayHetHan: contractRes?.data?.ngayHetHan,
-                    ghiChu: contractRes?.data?.ghiChu,
-                    trangThai: contractRes?.data?.trangThai,
-                    maNV: contractRes?.data?.maNV
-                })
+                setSalaryDetail(contractRes?.data)
             }
         }
     }
 
     useEffect(() => {
-        getContractDetail()
+        getSalaryDetail()
     }, [])
 
-    const [listContract, setListContract] = useState([])
+    // const [listContract, setListContract] = useState([])
 
-    const getAllContract = async () => {
-        const contractRes = await ContractAPI.getAll()
+    // const getAllContract = async () => {
+    //     const contractRes = await ContractAPI.getAll()
+    //     if (contractRes?.status === 200) {
+    //         setListContract(contractRes?.data)
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     getAllContract()
+    // }, [])
+
+    const [listSalary, setListSalary] = useState([])
+
+    const getAllSalary = async () => {
+        const contractRes = await SalaryAPI.getAll()
         if (contractRes?.status === 200) {
-            setListContract(contractRes?.data)
+            setListSalary(contractRes?.data)
         }
     }
 
     useEffect(() => {
-        getAllContract()
+       
+        getAllSalary()
     }, [])
-
     const handleUpdate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
             // const { loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, trangThai, maNV } = contractDetail
-
-            if (!contractDetail?.loaiHopDong.toString()?.trim()?.length
-                || !contractDetail?.ngayHieuLuc.toString()?.trim()?.length || !contractDetail?.ngayHetHan.toString()?.trim()?.length || !contractDetail?.ghiChu.toString()?.trim()?.length
-                || !contractDetail?.trangThai.toString()?.trim()?.length || !contractDetail?.maNV.toString()?.trim()?.length) {
+            console.log('da vao day 1')
+            console.log('>>>>',salaryDetail)
+            salaryDetail.maHD = salaryDetail?.hopDong?.maHD
+            
+            if (!salaryDetail?.maHD.toString()?.trim()?.length
+                || !salaryDetail?.idBacLuong.toString()?.trim()?.length || !salaryDetail?.luongCoBan.toString()?.trim()?.length
+                 || !salaryDetail?.phuCapKhac.toString()?.trim()?.length
+                || !salaryDetail?.ngayHieuLuc.toString()?.trim()?.length || !salaryDetail?.ngayKetThuc.toString()?.trim()?.length
+                ) {
 
                 setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
+                console.log('da vao day 2 ')
                 setIsSubmit(true)
-                console.log("maHD", maHD)
-                console.log("user", contractDetail)
-                const updateRes = await ManagercontractAPI.updateManagerContract({ maHD: maHD, ...contractDetail })
+               
+              
+                const updateRes = await ManagerSalaryAPI.updateManagerSalary({ id: id, ...salaryDetail })
                 if (updateRes?.status === 200) {
                     toast.success(updateRes?.data)
                 }
@@ -84,90 +95,87 @@ export default function UpdateSalary() {
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
-                    <div className="title">Edit Contract Information</div>
+                    <div className="title">Update Salary Information</div>
                     <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
-                <div>
+            <div>
                     <CustomInputField
                         title="Contract code"
                         require={true}
-                        value={maHD}
-                        disabled={true}
                         type="text"
-                    // handleChange={(event) => {
-                    //     setContractDetail({ ...contractDetail, maHD: event.target.value })
-                    // }}
+                        value={salaryDetail?.hopDong?.maHD}
+                        disabled={true}
                     />
 
                     <CustomSelectBox
-                        title="Type of contract"
+                        title="Salary Grade"
                         require={true}
-                        value={contractDetail?.loaiHopDong}
-                        option={listContract.map((contractItem) => {
+                        value = {salaryDetail?.idBacLuong || 1}
+                        option={listSalary.map((salaryItem) => {
                             return (
-                                { label: `${contractItem.maLoaiHopDong} - ${contractItem.tenLoaiHopDong}`, value: contractItem.id }
+                                { label: `${salaryItem.maBacLuong} - ${salaryItem.tenBacLuong}`, value: salaryItem.id }
                             )
                         })}
-
                         handleChange={(event) => {
-                            setContractDetail({ ...contractDetail, loaiHopDong: event.currentTarget.value })
+                            setSalaryDetail({ ...salaryDetail, idBacLuong: event.target.value })
                         }}
                     />
                     <CustomInputField
-                        title="Effective date"
+                        title="Basic Salary"
                         require={true}
-                        value={contractDetail?.ngayHieuLuc}
-                        type="date"
+                        type="text"
+                        value = {salaryDetail?.luongCoBan || ''}
                         handleChange={(event) => {
                             // const parts = event.target.value.split('-');
                             // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-                            var mydate = new Date(event.target.value).toLocaleDateString();
-                            setContractDetail({ ...contractDetail, ngayHieuLuc: mydate })
+
+                            setSalaryDetail({ ...salaryDetail, luongCoBan: event.target.value })
+                        }}
+                    />
+                    <CustomInputField
+                        title="Allowance"
+                        require={true}
+                        type="text"
+                        value = {salaryDetail?.phuCapKhac || ''}
+                        handleChange={(event) => {
+                            // const parts = event.target.value.split('-');
+                            // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
+
+                            setSalaryDetail({ ...salaryDetail, phuCapKhac: event.target.value })
                         }}
                     />
                     <CustomInputField
                         title="Expiration date"
                         require={true}
-                        value={contractDetail?.ngayHetHan}
                         type="date"
+                        value = {salaryDetail?.ngayHieuLuc}
+                        disabled = {false}
                         handleChange={(event) => {
-                            // const parts = event.target.value.split('-');
-                            // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-                            var mydate = new Date(event.target.value).toLocaleDateString();
-                            setContractDetail({ ...contractDetail, ngayHetHan: mydate })
+                           
+                            setSalaryDetail({ ...salaryDetail, ngayHieuLuc: event.target.value })
+                        }}
+                    />
+                    <CustomInputField
+                        title="Expiration date"
+                        require={true}
+                        type="date"
+                        value = {salaryDetail?.ngayKetThuc}
+                        disabled = {false}
+                        handleChange={(event) => {
+                           
+                            setSalaryDetail({ ...salaryDetail, ngayKetThuc: event.target.value })
                         }}
                     />
                     <CustomInputField
                         title="Note"
                         require={false}
-                        value={contractDetail?.ghiChu}
                         type="text"
+                        value = {salaryDetail?.ghiChu}
                         handleChange={(event) => {
-                            setContractDetail({ ...contractDetail, ghiChu: event.target.value })
-                        }}
-                    />
-                    {/* <CustomSelectBox
-                        title="Status"
-                        value={contractDetail?.trangThai}
-                        option={
-                            [{ label: "Đang Hiệu Lực", value: true }, { label: "Đã Hết Hiệu Lực", value: false }]
-                        }
-                        require={true}
-                        handleChange={(event) => {
-                            setContractDetail({ ...contractDetail, trangThai: event.currentTarget.value })
-                        }}
-                    /> */}
-                    <CustomInputField
-                        title="Employee code"
-                        require={true}
-                        disabled={true}
-                        value={contractDetail?.maNV}
-                        type="text"
-                        handleChange={(event) => {
-                            setContractDetail({ ...contractDetail, maNV: event.target.value })
+                            setSalaryDetail({ ...salaryDetail, ghiChu: event.target.value })
                         }}
                     />
 

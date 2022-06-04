@@ -114,7 +114,7 @@ import MViewTax from "../pages/Manager/Tax/ViewTax";
 import MAddTax from "../pages/Manager/Tax/AddNewTax";
 import MUpdateTax from "../pages/Manager/Tax/UpdateTax";
 
-import MViewSalary from "../pages/Manager/Salary/ViewSalary";
+import MViewSalary from "../pages/User/Salary";
 import MAddSalary from "../pages/Manager/Salary/AddNewSalary";
 import MUpdateSalary from "../pages/Manager/Salary/UpdateSalary";
 
@@ -279,13 +279,13 @@ export default function MainApp() {
         <Route exact path="/manager/addTax/:maNv" element={<ManagerLayoutPrivateRoute><MAddTax /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/updateTax/:managerInsuranceId" element={<ManagerLayoutPrivateRoute><MUpdateTax /></ManagerLayoutPrivateRoute>} />
 
-        <Route exact path="/manager/viewSalary" element={<ManagerLayoutPrivateRoute><MViewSalary /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/viewSalary/:maNv&&:maHd" element={<ManagerLayoutPrivateRoute><MViewSalary /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/addSalary/:maNv&&:maHd" element={<ManagerLayoutPrivateRoute><MAddSalary/></ManagerLayoutPrivateRoute>} />
-        <Route exact path="/manager/updateSalary/:managerInsuranceId" element={<ManagerLayoutPrivateRoute><MUpdateSalary /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/updateSalary/:id" element={<ManagerLayoutPrivateRoute><MUpdateSalary /></ManagerLayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewallcontract" element={<ManagerLayoutPrivateRoute><MViewContract /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/addcontract/:maNv" element={<ManagerLayoutPrivateRoute><MAddContract /></ManagerLayoutPrivateRoute>} />
-        <Route exact path="/manager/updatecontract/:maHD" element={<ManagerLayoutPrivateRoute><MUpdateContract /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/updatecontract/:maHd" element={<ManagerLayoutPrivateRoute><MUpdateContract /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/viewcontract/:maNv"  element={<ManagerLayoutPrivateRoute><EViewContract /></ManagerLayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewallUser" element={<ManagerLayoutPrivateRoute><ViewAllUser /></ManagerLayoutPrivateRoute>} />

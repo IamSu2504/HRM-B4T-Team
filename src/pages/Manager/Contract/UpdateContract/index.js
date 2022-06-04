@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ManagercontractAPI from "../../../../api/Manager/contract";
 import ContractAPI from "../../../../api/contract";
 import CustomInputField from "../../../../components/customInputField";
@@ -10,15 +10,16 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function UpdateContract() {
-    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', trangThai: '', maNV: '' })
+    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '1', ngayHieuLuc: '', ngayHetHan: '', giamTruGiaCanh: '', ghiChu: '', maNV: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
-    const { maHD } = useParams()
-
+    const { maHd } = useParams()
+    const [ngayhethan2, setngayhethan2] = useState('')
+    const navigate = useNavigate();
     const getContractDetail = async () => {
-        if (maHD) {
-            const contractRes = await ManagercontractAPI.getManagerContractById(maHD)
-
+        if (maHd) {
+            const contractRes = await ManagercontractAPI.getManagerContractById(maHd)
+            console.log()
             if (contractRes?.status === 200) {
                 setContractDetail({
 
@@ -26,7 +27,7 @@ export default function UpdateContract() {
                     ngayHieuLuc: contractRes?.data?.ngayHieuLuc,
                     ngayHetHan: contractRes?.data?.ngayHetHan,
                     ghiChu: contractRes?.data?.ghiChu,
-                    trangThai: contractRes?.data?.trangThai,
+                    giamTruGiaCanh: contractRes?.data?.giamTruGiaCanh,
                     maNV: contractRes?.data?.maNV
                 })
             }
@@ -54,17 +55,19 @@ export default function UpdateContract() {
         try {
             setSubmitError({ status: false, error: '' })
             // const { loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, trangThai, maNV } = contractDetail
-
+            console.log('>>>>', contractDetail)
+            // if (contractDetail?.loaiHopDong == 6)
+            //     contractDetail.ngayHetHan = null
             if (!contractDetail?.loaiHopDong.toString()?.trim()?.length
-                || !contractDetail?.ngayHieuLuc.toString()?.trim()?.length || !contractDetail?.ngayHetHan.toString()?.trim()?.length || !contractDetail?.ghiChu.toString()?.trim()?.length
-                || !contractDetail?.trangThai.toString()?.trim()?.length || !contractDetail?.maNV.toString()?.trim()?.length) {
+                || !contractDetail?.ngayHieuLuc.toString()?.trim()?.length || !contractDetail?.ngayHetHan.toString()?.trim()?.length ||
+                !contractDetail?.maNV.toString()?.trim()?.length) {
 
                 setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
                 setIsSubmit(true)
-                console.log("maHD", maHD)
+                console.log("maHD", maHd)
                 console.log("user", contractDetail)
-                const updateRes = await ManagercontractAPI.updateManagerContract({ maHD: maHD, ...contractDetail })
+                const updateRes = await ManagercontractAPI.updateManagerContract({ maHD: maHd, ...contractDetail })
                 if (updateRes?.status === 200) {
                     toast.success(updateRes?.data)
                 }
@@ -80,6 +83,39 @@ export default function UpdateContract() {
         }
     }
 
+    const getngayhethan = async () => {
+        let numberdate = 0;
+
+        if (contractDetail.loaiHopDong == 1)
+            numberdate = 365
+        else
+            if (contractDetail.loaiHopDong == 2)
+                numberdate = 730
+            else
+                if (contractDetail.loaiHopDong == 3)
+                    numberdate = 1095
+                else
+                    if (contractDetail.loaiHopDong == 4)
+                        numberdate = 60
+                    else
+                        if (contractDetail.loaiHopDong == 5)
+                            numberdate = 60
+                        else
+                            if (contractDetail.loaiHopDong == 6)
+                                numberdate = 36500
+
+
+        let date = new Date(contractDetail.ngayHieuLuc)
+        date = date.setDate(date.getDate() + numberdate)
+        let date2 = new Date(date).toISOString().split('T')[0]
+        setngayhethan2(date2)
+        setContractDetail({ ...contractDetail, ngayHetHan: date2 })
+    }
+
+    useEffect(() => {
+        getngayhethan()
+    }, [contractDetail.loaiHopDong, contractDetail.ngayHieuLuc])
+
     return (
         <div className="update-account-page">
             <div className="row">
@@ -94,14 +130,23 @@ export default function UpdateContract() {
                     <CustomInputField
                         title="Contract code"
                         require={true}
-                        value={maHD}
+                        value={maHd}
                         disabled={true}
                         type="text"
                     // handleChange={(event) => {
                     //     setContractDetail({ ...contractDetail, maHD: event.target.value })
                     // }}
                     />
-
+                    <CustomInputField
+                        title="Employee code"
+                        require={true}
+                        disabled={true}
+                        value={contractDetail?.maNV}
+                        type="text"
+                        handleChange={(event) => {
+                            setContractDetail({ ...contractDetail, maNV: event.target.value })
+                        }}
+                    />
                     <CustomSelectBox
                         title="Type of contract"
                         require={true}
@@ -124,20 +169,28 @@ export default function UpdateContract() {
                         handleChange={(event) => {
                             // const parts = event.target.value.split('-');
                             // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-                            var mydate = new Date(event.target.value).toLocaleDateString();
-                            setContractDetail({ ...contractDetail, ngayHieuLuc: mydate })
+
+                            setContractDetail({ ...contractDetail, ngayHieuLuc: event.target.value })
                         }}
                     />
                     <CustomInputField
                         title="Expiration date"
                         require={true}
-                        value={contractDetail?.ngayHetHan}
+                        value={contractDetail?.ngayHetHan || ngayhethan2}
                         type="date"
                         handleChange={(event) => {
                             // const parts = event.target.value.split('-');
                             // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-                            var mydate = new Date(event.target.value).toLocaleDateString();
-                            setContractDetail({ ...contractDetail, ngayHetHan: mydate })
+
+                            setContractDetail({ ...contractDetail, ngayHetHan: event.target.value })
+                        }}
+                    />
+                    <CustomInputField
+                        title="Family Allowances"
+                        require={false}
+                        type="text"
+                        handleChange={(event) => {
+                            setContractDetail({ ...contractDetail, giamTruGiaCanh: event.target.value })
                         }}
                     />
                     <CustomInputField
@@ -160,16 +213,8 @@ export default function UpdateContract() {
                             setContractDetail({ ...contractDetail, trangThai: event.currentTarget.value })
                         }}
                     /> */}
-                    <CustomInputField
-                        title="Employee code"
-                        require={true}
-                        disabled={true}
-                        value={contractDetail?.maNV}
-                        type="text"
-                        handleChange={(event) => {
-                            setContractDetail({ ...contractDetail, maNV: event.target.value })
-                        }}
-                    />
+
+
 
                 </div>
             </div>
@@ -182,6 +227,12 @@ export default function UpdateContract() {
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">Save</span>
+                </button>
+                <button className="save-button" onClick={() => navigate(`/manager/viewcontract/${contractDetail.maNV}`)}>
+                    <span class="image">
+                        <img src="/home/save-icon.svg" />
+                    </span>
+                    <span class="text">Contract {contractDetail.maNV}</span>
                 </button>
             </div>
             <ToastContainer />

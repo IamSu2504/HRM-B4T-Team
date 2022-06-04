@@ -23,15 +23,16 @@ export default function UpdateUser() {
   const [mount, setMount] = useState(false)
   const [listMarriage, setListMarriage] = useState([])
   const [userDetail, setUserDetail] = useState({
-    tinhChatHopDongID: '', tinhTrangHonNhanID: '',
-    quocTichID: '', tenNv: '', ngaySinh: '', gioiTinh: '',
+    id: '',
+    tinhChatHopDongID: '1', tinhTrangHonNhanID: '1',
+    quocTichID: '1', tenNv: '', ngaySinh: '', gioiTinh: true,
     soDienThoai: '', soDienThoai2: '', email: '',
     cccd: '', noiCapCccd: '', ngayCapCccd: '',
     ngayHetHanCccd: '', hoChieu: '', noiCapHoChieu: '',
     ngayCapHoChieu: '', ngayHetHanHoChieu: '', noiSinh: '',
     queQuan: '', diaChiThuongTru: '', diaChiTamTru: '',
     atmNganHang: '', soAtm: '',
-    ngayBatDauLam: '', ngayNghiViec: '', lyDoNghi: ''
+    ngayBatDauLam: ''
 
   })
   const [submitError, setSubmitError] = useState({ status: false, error: '' })
@@ -168,7 +169,7 @@ export default function UpdateUser() {
 
   const handleUpdate = async () => {
     try {
-      
+
       setSubmitError({ status: false, error: '' })
       const { id, tinhChatHopDongID, tinhTrangHonNhanID,
         quocTichID, tenNv, ngaySinh,
@@ -178,9 +179,7 @@ export default function UpdateUser() {
         noiSinh, queQuan, diaChiThuongTru, diaChiTamTru, atmNganHang,
         soAtm, ngayBatDauLam
       } = userDetail;
-      
-     
-      console.log('test user: ', userDetail)
+      console.log('>>>>', userDetail)
       if (!tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
         || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
         || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length
@@ -191,17 +190,19 @@ export default function UpdateUser() {
       ) {
         setSubmitError({ status: true, error: 'Information is not blank' })
       } else
-        if ((cccd.toString().trim()?.length && !valiCccd.test(cccd)) ||
-          (email.toString().trim()?.length && !validator.isEmail(email)) ||
-          (hoChieu.toString().trim()?.length && !valiHoChieu.test(hoChieu)) ||
-          (soDienThoai.toString().trim()?.length && !valiSoDienThoai.test(soDienThoai)) ||
-          (soDienThoai2.toString().trim()?.length && !valiSoDienThoai2.test(soDienThoai2))) {
+        if (
+          (cccd.toString().trim()?.length && !valiCccd.test(cccd)) ||
+          (email.toString().trim()?.length && !validator.isEmail(email)) 
+          //(hoChieu.toString().trim()?.length && !valiHoChieu.test(hoChieu)) 
+          // (soDienThoai.toString().trim()?.length && !valiSoDienThoai.test(soDienThoai)) ||
+          // (soDienThoai2.toString().trim()?.length && !valiSoDienThoai2.test(soDienThoai2))
+          ) {
           setSubmitError({ status: true, error: 'Incorrect format information' })
         }
-        else {
-          console.log('da vao day nhe')
+        else 
+        {
           setIsSubmit(true)
-          console.log('>>>>>', userDetail)
+
           const updateRes = await UserAPI.updateUser({ id: maNv, ...userDetail })
           if (updateRes?.status === 200) {
             toast.success(updateRes?.data)
@@ -222,6 +223,8 @@ export default function UpdateUser() {
 
           }
         }
+
+
     } catch (error) {
       if (error.response) {
         setSubmitError({ status: true, error: error.response.data })
@@ -431,8 +434,8 @@ export default function UpdateUser() {
 
             value={userDetail?.ngayNghiViec}
             type="date"
-            disabled={true} //yyyy-mm-dd
-            require={true}
+            disabled={false} //yyyy-mm-dd
+            require={false}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, ngayNghiViec: event.target.value })
             }}
@@ -442,8 +445,8 @@ export default function UpdateUser() {
 
             value={userDetail?.lyDoNghi || ''}
             type="text"
-            disabled={true}
-            require={true}
+            disabled={false}
+            require={false}
             handleChange={(event) => {
               setUserDetail({ ...userDetail, lyDoNghi: event.target.value })
             }}

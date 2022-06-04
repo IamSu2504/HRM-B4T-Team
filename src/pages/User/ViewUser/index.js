@@ -39,7 +39,7 @@ export default function ViewUser() {
     if (maNv) {
       const certificateAPIRes = await MCertificateAPI.getByMaNV(maNv)
       if (certificateAPIRes?.status === 200) {
-        console.log('>>>>>', certificateAPIRes?.data)
+        
         setCertificate(certificateAPIRes?.data)
       }
     }
@@ -160,25 +160,7 @@ export default function ViewUser() {
             <span class="text">Edit information</span>
           </button>
         </div>
-        <div onClick={() => {
-          if (localStorage.getItem('role') === 'Admin') {
-            navigate(`/admin/viewshift/${maNv}`)
-          }
-          else
-            if (localStorage.getItem('role') === 'Manager') {
-              navigate(`/manager/viewshift/${maNv}`)
-            }
-            else {
-              navigate(`/employee/viewshift/${maNv}`)
-            }
-        }}>
-          <button className="save-button">
-            <span class="image">
-              <img src="/home/save-icon.svg" />
-            </span>
-            <span class="text">Shift</span>
-          </button>
-        </div>
+       
         <div onClick={() => {
           if (localStorage.getItem('role') === 'Admin') {
             navigate(`/admin/viewcontract/${maNv}`)
@@ -196,6 +178,25 @@ export default function ViewUser() {
               <img src="/home/save-icon.svg" />
             </span>
             <span class="text">Contract</span>
+          </button>
+        </div>
+        <div onClick={() => {
+          if (localStorage.getItem('role') === 'Admin') {
+            navigate(`/admin/viewshift/${maNv}`)
+          }
+          else
+            if (localStorage.getItem('role') === 'Manager') {
+              navigate(`/manager/viewshift/${maNv}`)
+            }
+            else {
+              navigate(`/employee/viewshift/${maNv}`)
+            }
+        }}>
+          <button className="save-button">
+            <span class="image">
+              <img src="/home/save-icon.svg" />
+            </span>
+            <span class="text">Shift</span>
           </button>
         </div>
         <div onClick={() => {
