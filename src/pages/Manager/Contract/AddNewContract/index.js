@@ -108,14 +108,7 @@ export default function AddContract() {
                     <div className="title">Add Contract Information</div>
                     <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
-                {haveNewContract ? <div>
-                    <button className="save-button" onClick={() => navigate(`/manager/addSalary/${maNv}&&${newMaHd}`)}>
-                        <span class="image">
-                            <img src="/home/save-icon.svg" />
-                        </span>
-                        <span class="text">Add Contract For {maNv}</span>
-                    </button>
-                </div> : <div></div>}
+
             </div>
 
             <div className="row fied-data-row">
@@ -191,13 +184,20 @@ export default function AddContract() {
             <div>
                 {submitError.status && <div className="tax-update-error">{submitError.error}</div>}
             </div>
-            <div>
-                <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
+            <div className="list-button">
+                {haveNewContract ? <div>
+                    <button className="add-contract" onClick={() => navigate(`/manager/addSalary/${maNv}&&${newMaHd}`)}>
+                        <span class="image">
+                            <img src="/home/save-icon.svg" />
+                        </span>
+                        <span class="text"> Add Salary For {maNv}</span>
+                    </button>
+                </div> : <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">Add</span>
-                </button>
+                </button>}
                 {/* <button className="save-button" onClick={() => navigate(`/manager/viewcontract/${maNv}`)}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />

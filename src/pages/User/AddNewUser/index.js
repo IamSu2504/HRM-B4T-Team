@@ -178,14 +178,6 @@ export default function AddNewUser() {
           <div className="title">Add Information of Employee</div>
           <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
         </div>
-        {haveNewUser ? <div>
-          <button className="save-button" onClick={() => navigate(`/manager/addcontract/${newMaNv}`)}>
-            <span class="image">
-              <img src="/home/save-icon.svg" />
-            </span>
-            <span class="text">Add Contract For {haveNewUser}</span>
-          </button>
-        </div> : <div></div>}
       </div>
       <br></br>
       <div className="row fied-data-row">
@@ -522,14 +514,22 @@ export default function AddNewUser() {
         {submitError.status && <div >{submitError.error}</div>}
       </div>
       <div className="list-button">
-        <div>
+        {haveNewUser ? <div>
+          <button className="add-contract" onClick={() => navigate(`/manager/addcontract/${newMaNv}`)}>
+            <span class="image">
+              <img src="/home/save-icon.svg" />
+            </span>
+            <span class="text"> Add Contract For {haveNewUser}</span>
+          </button>
+        </div> : <div>
           <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
             <span class="image">
               <img src="/home/save-icon.svg" />
             </span>
             <span class="text">Add</span>
           </button>
-        </div>
+        </div>}
+
         {/* <div>
           {viewuserDetail ? <button className="save-button" onClick={() => navigate(`/manager/viewuser/${newMaNv}`)}>
             <span class="image">

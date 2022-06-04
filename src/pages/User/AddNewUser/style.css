@@ -78,6 +78,16 @@
   color: #FFFFFF;
   margin-left: 10px;
 }
+.add-contract{
+  background: #34AACF;
+  border-radius: 8px;
+  height: 46px;
+  border: unset;
+  margin-right: 15px;
+  width: 245px;
+  margin-top: 10px;
+  float: right;
+}
 
 .update-account-page-error {
   color: red;
