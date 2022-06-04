@@ -24,7 +24,6 @@ public class SalaryService {
     @Autowired
     private SalaryCategoryRepository salaryCategoryRepository;
 
-
     public List<Salary> getAll() {
         return salaryRepo.findAll();
     }
