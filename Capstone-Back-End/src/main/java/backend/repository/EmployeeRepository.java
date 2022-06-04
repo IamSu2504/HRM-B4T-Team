@@ -51,4 +51,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,String> {
     )
     List<Employee> getSearched(String text);
 
+    @Query(value = "select * from nhanvien n where (select a.ma_nv from account a where a.ma_nv = n.ma_nv) is null", nativeQuery = true)
+    List<Employee> getNotCreatedEmp();
 }

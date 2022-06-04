@@ -165,4 +165,17 @@ public class EmployeeController {
         }
     }
 
+    @GetMapping(value = "/notCreated")
+    public ResponseEntity<?> getNotCreated() {
+        try {
+            List<Employee> emps = service.getNotCreated();
+            if(emps.isEmpty()){
+                return new ResponseEntity<>("No employee not having account", HttpStatus.OK);
+            }
+            return new ResponseEntity<>(emps, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

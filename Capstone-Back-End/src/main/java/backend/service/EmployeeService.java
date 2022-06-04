@@ -221,5 +221,9 @@ public class EmployeeService {
         return employeeRepo.save(e);
     }
 
+    public List<Employee> getNotCreated() {
+        return employeeRepo.getNotCreatedEmp();
+    }
+
 }
 
