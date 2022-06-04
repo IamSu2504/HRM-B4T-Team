@@ -75,7 +75,7 @@ public class Contract {
             Calendar c= Calendar.getInstance();
             c.setTime(ngayHetHan);
             c.set(ngayHetHan.getYear()+1900,ngayHetHan.getMonth(),ngayHetHan.getDate(),8,0,0);
-            if(ngayHetHan.after(new Date())){
+            if(ngayHetHan.before(new Date())){
                 return false;
             }
             else{
