@@ -1,5 +1,6 @@
 package backend.service;
 
+import backend.entity.CertificateManager;
 import backend.entity.CreateUpdateInsuranceRequest;
 import backend.entity.Insurance;
 import backend.entity.InsuranceCategory;
@@ -22,6 +23,10 @@ public class InsuranceService {
 
     public List<Insurance> getAll(){
         return repo.findAll();
+    }
+
+    public List<Insurance> getByMaNV(String maNV){
+        return repo.getByMaNV(maNV);
     }
 
     public Insurance getById(int id)
