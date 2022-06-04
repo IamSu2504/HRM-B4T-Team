@@ -374,7 +374,7 @@ export default function UpdateUser() {
             value={userDetail?.soDienThoai2 || ''}
             type="text"
             disabled={false}
-            require={true}
+            require={false}
             handleChange={(event) => {
 
               if (!valiSoDienThoai2.test(event.target.value) && (event.target.value)) {

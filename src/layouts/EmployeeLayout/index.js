@@ -152,13 +152,7 @@ export default function EmployeeLayout(props) {
                                         className="collapse"
                                         data-parent="#accordion"
                                     >
-                                        <div className="card-body">
-                                           
-                                            <div>
-                                                <img src="/menu/list-icon.svg" />
-                                                <span style={{ marginLeft: '15px' }}>DayOff</span>
-                                            </div>
-                                            
+                                        <div className="card-body">                                            
                                             <div onClick={() => navigate(`/employee/viewshift/${localStorage.getItem('maNV')}`)}>
                                                 <img src="/menu/list-icon.svg" />
                                                 <span style={{ marginLeft: '15px' }}>Shifts</span>
