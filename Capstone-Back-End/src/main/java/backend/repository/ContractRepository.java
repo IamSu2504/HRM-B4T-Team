@@ -37,4 +37,8 @@ public interface ContractRepository extends JpaRepository<Contract, String> {
 
     @Query(value = "SELECT c FROM Contract c where c.maNV = ?3 and ((c.ngayHieuLuc between ?1 and ?2) or (c.ngayHetHan between ?1 and ?2))")
     Contract getContractInRange(Date start,Date end,String empID);
+
+    @Query(value = "SELECT h.* FROM hopdong h, nhanvien n\n" +
+            "where h.ma_nv = n.ma_nv and n.ma_nv = ? order by h.ngay_hieu_luc desc limit 1", nativeQuery = true)
+    Contract getLast(String maNV);
 }
