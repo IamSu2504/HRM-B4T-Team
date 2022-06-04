@@ -71,7 +71,7 @@ public class CertificateManagerService {
 
     public CertificateManager getNewCertificate(CreateUpdateCertificateRequest request){
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
             CertificateManager i = new CertificateManager();
             i.setId(request.getId());
