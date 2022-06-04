@@ -141,7 +141,7 @@ export default function AddSalary() {
                         require={true}
                         type="date"
                         value = {contractDetail?.ngayHieuLuc}
-                        disabled = {true}
+                        disabled = {false}
                     />
                     <CustomInputField
                         title="Expiration date"

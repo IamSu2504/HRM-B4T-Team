@@ -139,6 +139,12 @@ import MViewWorkingProcess from "../pages/Manager/WorkingProcess/ViewWorkingProc
 import MAddWorkingProcess from "../pages/Manager/WorkingProcess/AddNewWorkingProcess";
 import MUpdateWorkingProcess from "../pages/Manager/WorkingProcess/UpdateWorkingProcess";
 
+import MAddCertificate from "../pages/Manager/Certificate/AddNewCertificate";
+import MUpdateCertificate from "../pages/Manager/Certificate/UpdateCertificate";
+
+import MAddEduLevel from "../pages/Manager/EduLevel/AddNewEduLevel";
+import MUpdateEduLevel from "../pages/Manager/EduLevel/UpdateEduLevel";
+
 import RegisterShifts from "../pages/Manager/RegisterShift";
 
 //Employee
@@ -296,7 +302,13 @@ export default function MainApp() {
 
         <Route exact path="/manager/viewallworkingProcess" element={<ManagerLayoutPrivateRoute><MViewWorkingProcess /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/addworkingProcess/:maNv" element={<ManagerLayoutPrivateRoute><MAddWorkingProcess /></ManagerLayoutPrivateRoute>} />
-        <Route exact path="/manager/updateworkingProcess/:workingProcessId" element={<ManagerLayoutPrivateRoute><MUpdateWorkingProcess /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/updateworkingProcess/:Id" element={<ManagerLayoutPrivateRoute><MUpdateWorkingProcess /></ManagerLayoutPrivateRoute>} />
+
+        <Route exact path="/manager/addcertificate/:maNv" element={<ManagerLayoutPrivateRoute><MAddCertificate /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/updatecertificate/:Id" element={<ManagerLayoutPrivateRoute><MUpdateCertificate /></ManagerLayoutPrivateRoute>} />
+
+        <Route exact path="/manager/addeduLevel/:maNv" element={<ManagerLayoutPrivateRoute><MAddEduLevel /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/manager/updateeduLevel/:Id" element={<ManagerLayoutPrivateRoute><MUpdateEduLevel /></ManagerLayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewleaveRequest"  element={<ManagerLayoutPrivateRoute><MViewLeaveRequest /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/registershifts"  element={<ManagerLayoutPrivateRoute><RegisterShifts /></ManagerLayoutPrivateRoute>} />

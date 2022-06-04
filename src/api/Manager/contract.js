@@ -16,15 +16,15 @@ const ManagerContractAPI = {
         return AxiosClient.get(url);
     },
 
-    updateManagerContract({maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, maNV}) {
+    updateManagerContract({maHD, loaiHopDong, ngayHieuLuc, ngayHetHan,giamTruGiaCanh, ghiChu, maNV}) {
         const url = `/contract/${maHD}`;
-        return AxiosClient.put(url, { loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, maNV});
+        return AxiosClient.put(url, { loaiHopDong, ngayHieuLuc, ngayHetHan,giamTruGiaCanh, ghiChu, maNV});
     },
 
-    addNewManagercontract({maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, maNV}) {
+    addNewManagercontract({maHD, loaiHopDong, ngayHieuLuc, ngayHetHan,giamTruGiaCanh, ghiChu, maNV}) {
         // console.log()
         const url = `/contract`;
-        return AxiosClient.post(url, {maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, maNV});
+        return AxiosClient.post(url, {maHD, loaiHopDong, ngayHieuLuc, ngayHetHan,giamTruGiaCanh, ghiChu, maNV});
     },
 
 }

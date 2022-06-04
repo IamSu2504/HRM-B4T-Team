@@ -10,10 +10,9 @@ import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function AddContract() {
-
-
+    const [haveNewContract, setHaveNewContract] = useState()
     const navigate = useNavigate();
-    const [ngayhethan, setngayhethan] = useState('')
+    const [ngayhethan2, setngayhethan2] = useState('')
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const { maNv } = useParams()
@@ -25,24 +24,27 @@ export default function AddContract() {
         }
     }
 
-    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '', ngayHieuLuc: '', ngayHetHan: '', ghiChu: '', maNV: '' })
+    const [contractDetail, setContractDetail] = useState({ maHD: '', loaiHopDong: '1', ngayHieuLuc: '', ngayHetHan: '', giamTruGiaCanh: '', ghiChu: '', maNV: '' })
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
             contractDetail.maHD = newMaHd
             contractDetail.maNV = maNv
             console.log(contractDetail)
-            const { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, ghiChu, maNV } = contractDetail
+            const { maHD, loaiHopDong, ngayHieuLuc, ngayHetHan, giamTruGiaCanh, ghiChu, maNV } = contractDetail
 
             if (!maHD.toString().trim()?.length || !loaiHopDong.toString().trim()?.length || !ngayHieuLuc.toString().trim()?.length
-                || !ngayHetHan.toString().trim()?.length || !ghiChu.toString().trim()?.length || !maNV.toString().trim()?.length) {
+                || !ngayHetHan.toString().trim()?.length || !maNV.toString().trim()?.length) {
                 setSubmitError({ status: true, error: 'Information is not blank' })
             } else {
                 setIsSubmit(true)
 
                 const addRes = await ManagercontractAPI.addNewManagercontract({ ...contractDetail })
                 if (addRes?.status === 200) {
-                    navigate(`/manager/addSalary/${maNv}&&${maHD}`)
+                    toast.success(addRes?.data)
+                    setHaveNewContract(maNV)
+                    // setTimeout(navigate(`/manager/addSalary/${maNv}&&${maHD}`), 4000)
+
                 }
             }
         } catch (error) {
@@ -68,6 +70,37 @@ export default function AddContract() {
         getAllContract()
     }, [])
 
+    const getngayhethan = async () => {
+        let numberdate = 0;
+
+        if (contractDetail.loaiHopDong == 1)
+            numberdate = 365
+        else
+            if (contractDetail.loaiHopDong == 2)
+                numberdate = 730
+            else
+                if (contractDetail.loaiHopDong == 3)
+                    numberdate = 1095
+                else
+                    if (contractDetail.loaiHopDong == 4)
+                        numberdate = 60
+                    else
+                        if (contractDetail.loaiHopDong == 5)
+                            numberdate = 60
+                        else
+                            if (contractDetail.loaiHopDong == 6)
+                                numberdate = 36500
+
+        let date = new Date(contractDetail.ngayHieuLuc)
+        date = date.setDate(date.getDate() + numberdate)
+        let date2 = new Date(date).toISOString().split('T')[0]
+        setngayhethan2(date2)
+        setContractDetail({ ...contractDetail, ngayHetHan: date2 })
+    }
+
+    useEffect(() => {
+        getngayhethan()
+    }, [contractDetail.loaiHopDong, contractDetail.ngayHieuLuc])
     return (
         <div className="update-account-page">
             <div className="row">
@@ -75,6 +108,14 @@ export default function AddContract() {
                     <div className="title">Add Contract Information</div>
                     <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
+                {haveNewContract ? <div>
+                    <button className="save-button" onClick={() => navigate(`/manager/addSalary/${maNv}&&${newMaHd}`)}>
+                        <span class="image">
+                            <img src="/home/save-icon.svg" />
+                        </span>
+                        <span class="text">Add Contract For {maNv}</span>
+                    </button>
+                </div> : <div></div>}
             </div>
 
             <div className="row fied-data-row">
@@ -86,7 +127,14 @@ export default function AddContract() {
                         value={newMaHd}
                         disabled={true}
                     />
+                    <CustomInputField
+                        title="Employee code"
+                        require={true}
+                        value={maNv}
+                        type="text"
+                        disabled={true}
 
+                    />
                     <CustomSelectBox
                         title="Type of contract"
                         require={true}
@@ -106,27 +154,7 @@ export default function AddContract() {
                         type="date"
                         handleChange={(event) => {
                             setContractDetail({ ...contractDetail, ngayHieuLuc: event.target.value })
-                            let numberdate = 0;
 
-                            if (contractDetail.loaiHopDong == 1)
-                                numberdate = 365
-                            else
-                                if (contractDetail.loaiHopDong == 2)
-                                    numberdate = 730
-                                else
-                                    if (contractDetail.loaiHopDong == 3)
-                                        numberdate = 1095
-                                    else
-                                        if (contractDetail.loaiHopDong == 4)
-                                            numberdate = 60
-                                        else
-                                            if (contractDetail.loaiHopDong == 5)
-                                                numberdate = 60
-
-                            let date = new Date(event.target.value)
-                            date = date.setDate(date.getDate() + numberdate)
-                            let date2 = new Date(date).toISOString().split('T')[0]
-                            setngayhethan(date2)
                         }}
                     />
 
@@ -135,9 +163,17 @@ export default function AddContract() {
                         require={true}
                         type="date"
                         disabled={false}
-                        value={ngayhethan}
+                        value={ngayhethan2}
                         handleChange={(event) => {
                             setContractDetail({ ...contractDetail, ngayHetHan: event.target.value })
+                        }}
+                    />
+                    <CustomInputField
+                        title="Family Allowances"
+                        require={false}
+                        type="text"
+                        handleChange={(event) => {
+                            setContractDetail({ ...contractDetail, giamTruGiaCanh: event.target.value })
                         }}
                     />
                     <CustomInputField
@@ -149,14 +185,7 @@ export default function AddContract() {
                         }}
                     />
 
-                    <CustomInputField
-                        title="Employee code"
-                        require={true}
-                        value={maNv}
-                        type="text"
-                        disabled={true}
 
-                    />
                 </div>
             </div>
             <div>

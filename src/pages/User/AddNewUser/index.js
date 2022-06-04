@@ -15,6 +15,7 @@ import validator from 'validator'
 
 export default function AddNewUser() {
   const navigate = useNavigate();
+  const [haveNewUser, setHaveNewUser] = useState()
   const [listPosition, setListPosition] = useState([])
   const getAllPosition = async () => {
     const positionRes = await PositionAPI.getAll()
@@ -120,8 +121,8 @@ export default function AddNewUser() {
       console.log('test user: ', userDetail)
       if (!tinhChatHopDongID.toString().trim()?.length || !tinhTrangHonNhanID.toString().trim()?.length
         || !quocTichID.toString().trim()?.length || !tenNv.toString().trim()?.length || !ngaySinh.toString().trim()?.length
-        || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length 
-        || !email.toString().trim()?.length 
+        || !gioiTinh.toString().trim()?.length || !soDienThoai.toString().trim()?.length
+        || !email.toString().trim()?.length
         || !noiSinh.toString().trim()?.length || !queQuan.toString().trim()?.length || !diaChiThuongTru.toString().trim()?.length
         || !diaChiTamTru.toString().trim()?.length || !atmNganHang.toString().trim()?.length || !soAtm.toString().trim()?.length
         || !ngayBatDauLam.toString().trim()?.length
@@ -138,7 +139,9 @@ export default function AddNewUser() {
           const updateRes = await UserAPI.addNewUser({ ...userDetail })
           if (updateRes?.status === 200) {
             toast.success(updateRes?.data)
-            navigate(`/manager/addcontract/${newMaNv}`)
+            setHaveNewUser(newMaNv)
+            //setTimeout(navigate(`/manager/addcontract/${newMaNv}`), 4000)
+
           }
         }
     } catch (error) {
@@ -171,6 +174,14 @@ export default function AddNewUser() {
           <div className="title">Add Information of Employee</div>
           <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
         </div>
+        {haveNewUser ? <div>
+          <button className="save-button" onClick={() => navigate(`/manager/addcontract/${newMaNv}`)}>
+            <span class="image">
+              <img src="/home/save-icon.svg" />
+            </span>
+            <span class="text">Add Contract For {haveNewUser}</span>
+          </button>
+        </div> : <div></div>}
       </div>
       <br></br>
       <div className="row fied-data-row">
@@ -304,7 +315,7 @@ export default function AddNewUser() {
             disabled={false}
             require={true}
             handleChange={(event) => {
-              if ( (event.target.value) && !validator.isEmail(event.target.value)) {
+              if ((event.target.value) && !validator.isEmail(event.target.value)) {
                 setCheckEmail('Email incorrect format')
               }
               else
