@@ -72,7 +72,9 @@ public class Contract {
             return true;
         }
         if(ngayHetHan !=null){
-            Date toDay = new Date();
+            Calendar c= Calendar.getInstance();
+            c.setTime(ngayHetHan);
+            c.set(ngayHetHan.getYear()+1900,ngayHetHan.getMonth(),ngayHetHan.getDate(),8,0,0);
             if(ngayHetHan.after(new Date())){
                 return false;
             }

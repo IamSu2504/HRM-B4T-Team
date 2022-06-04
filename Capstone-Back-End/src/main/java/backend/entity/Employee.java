@@ -131,7 +131,10 @@ public class Employee {
             return "Working";
         }
         else {
-            if(ngayNghiViec.before(new Date())) {
+            Calendar c= Calendar.getInstance();
+            c.setTime(ngayNghiViec);
+            c.set(ngayNghiViec.getYear()+1900,ngayNghiViec.getMonth(),ngayNghiViec.getDate(),8,0,0);
+            if(c.getTime().before(new Date())) {
                 return "Leaved";
             }
             return "Working";

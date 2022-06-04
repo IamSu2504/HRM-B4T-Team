@@ -46,6 +46,24 @@ public class WorkingProcess {
     @Column(name = "ma_nv")
     private String maNV;
 
+    @Transient
+    private String trangThai;
+
+    public String getTrangThai(){
+        if(ngayRa==null){
+            return "Active";
+        }
+        else {
+            Calendar c= Calendar.getInstance();
+            c.setTime(ngayRa);
+            c.set(ngayRa.getYear()+1900,ngayRa.getMonth(),ngayRa.getDate(),8,0,0);
+            if(c.getTime().before(new Date())) {
+                return "Non-active";
+            }
+            return "Active";
+        }
+    }
+
     public Date getNgayVao() {
         if (ngayVao != null) {
             ngayVao.setHours(8);
