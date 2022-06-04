@@ -77,4 +77,13 @@ public class LeaveRequestController {
 
         }
     }
+
+    @GetMapping(value = "/emp/{id}")
+    public ResponseEntity<?> getEmpTotal(@PathVariable("id") String id) {
+        try {
+            return new ResponseEntity<>(service.getTotal(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

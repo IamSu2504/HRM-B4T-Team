@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Service
@@ -30,7 +33,7 @@ public class LeaveRequestService {
     private HolidayCategoryRepository holidayCategoryRepository;
 
     @Autowired
-    private WorkingProcessRepository workingProcessRepository;
+    LeaveRequestRepository leaveRepo;
 
     @Autowired
     private PositionCategoryRepository positionRepo;
@@ -231,6 +234,41 @@ public class LeaveRequestService {
         } else {
             return null;
         }
+    }
+
+    public int getTotal(String maNV) {
+        int soCaNghi = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        int year=new Date().getYear();
+        Calendar calendarStart=Calendar.getInstance();
+        calendarStart.set(Calendar.YEAR,year+1900);
+        calendarStart.set(Calendar.MONTH,0);
+        calendarStart.set(Calendar.DAY_OF_MONTH,1);
+        // returning the first date
+        String start=sdf.format(calendarStart.getTime());
+
+        Calendar calendarEnd=Calendar.getInstance();
+        calendarEnd.set(Calendar.YEAR,year+1900);
+        calendarEnd.set(Calendar.MONTH,11);
+        calendarEnd.set(Calendar.DAY_OF_MONTH,31);
+        // returning the last date
+        String end=sdf.format(calendarEnd.getTime());
+
+            List<LeaveRequest> caDaNghi = leaveRepo.getByMaNVInRange(maNV, start, end);
+            if (!caDaNghi.isEmpty()) {
+                for (LeaveRequest cdn : caDaNghi) {
+                    if (cdn.getIdNghi().getLoaiNghi().toLowerCase().contains("leave slot")) {
+                        soCaNghi += 1;
+                    } else if (cdn.getIdNghi().getLoaiNghi().equalsIgnoreCase("Leave morning slot")) {
+                        soCaNghi += 2;
+                    } else if (cdn.getIdNghi().getLoaiNghi().equalsIgnoreCase("Leave afternoon slot")) {
+                        soCaNghi += 2;
+                    } else if (cdn.getIdNghi().getLoaiNghi().equalsIgnoreCase("Leave full day")) {
+                        soCaNghi += 4;
+                    }
+                }
+            }
+        return soCaNghi;
     }
 
 }

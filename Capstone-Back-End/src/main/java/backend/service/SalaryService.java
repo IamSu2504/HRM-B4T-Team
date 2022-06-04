@@ -54,7 +54,7 @@ public class SalaryService {
         double maxSalary = newSalary.getIdBacLuong().getKhoangLuongDen();
 
         if (newSalary.getLuongCoBan() < minSalary || newSalary.getLuongCoBan() > maxSalary) {
-            return "Basic salary must be from " + minSalary + " to " + maxSalary;
+            return "Basic salary must be from " + String.format("%.2f",minSalary) + " to " +String.format("%.2f",maxSalary);
         }
         if (newSalary.getNgayKetThuc()!=null) {
             if(compareDate(newSalary.getNgayHieuLuc(),newSalary.getNgayKetThuc())>=0) {

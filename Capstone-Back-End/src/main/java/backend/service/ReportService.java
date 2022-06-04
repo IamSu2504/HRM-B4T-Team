@@ -316,6 +316,7 @@ public class ReportService {
                     sr.setMaNv(e.getId());
                     sr.setTenNV(e.getTenNv());
                     sr.setChucVu(chucVu);
+                    sr.setPhuCap(phuCapKhac);
                     sr.setPhongBan(phongBan);
                     sr.setSoCaToiThieu(soCaToiThieu);
                     sr.setSoCaLamThem(soCaLamThem);
