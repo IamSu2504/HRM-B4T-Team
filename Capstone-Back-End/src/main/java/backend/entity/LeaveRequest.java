@@ -48,13 +48,4 @@ public class LeaveRequest {
     @Column(name = "status")
     private String status;
 
-    public Date getDate(){
-        if (date != null) {
-            date.setHours(8);
-            return date;
-        } else {
-            return null;
-        }
-    }
-
 }
