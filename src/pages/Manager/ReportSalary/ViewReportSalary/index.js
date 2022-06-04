@@ -28,7 +28,7 @@ export default function ViewReportSalary() {
 
     return (
         <div className="homepage">
-           
+
             <div className="title">List of Report Salary</div>
             <ReactHtmlTableToExcel
                 className="btn btn-info"
@@ -38,57 +38,58 @@ export default function ViewReportSalary() {
                 buttonText="Export to Excel"
             />
             <div className="table-frame">
-                <table class="table table-bordered" id="reportSalaryTable">
-                    <thead>
-                        <tr className="head">
-                            <th scope="col">Employee Code</th>
-                            <th scope="col">Empolyee Name</th>
-                            <th scope="col">Position</th>
-                            <th scope="col">Department</th>
-                            <th scope="col">Basic Salary</th>
-                            <th scope="col">Family Allowances</th>
-                            <th scope="col">Minimum Number Of Shifts</th>
-                            <th scope="col">Number of Shifts Worked</th>
-                            <th scope="col">Number of Overtime Shifts</th>
-                            <th scope="col">Overtime Salary</th>
-                            <th scope="col">Gross Income</th>
-                            <th scope="col">Taxable Salary</th>
-                            <th scope="col">Personal Income tax</th>
-                            <th scope="col">Social Insurance</th>
-                            <th scope="col">Health Insurance</th>
-                            <th scope="col">Trade Union Fees</th>
-                            <th scope="col">Total Salary</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {listReportSalary.map((reportSalaryItem, reportSalaryIndex) => {
-                            return (
-                                <tr key={`tax-item-${reportSalaryIndex}`}>
-                                    {/* <th scope="row">{reportSalaryIndex + 1}</th> */}
-                                    <td>{reportSalaryItem?.maNv}</td>
+                <div className="scroll">
+                    <table class="table table-bordered" id="reportSalaryTable">
+                        <thead>
+                            <tr className="head">
+                                <th scope="col">Employee Code</th>
+                                <th scope="col">Empolyee Name</th>
+                                <th scope="col">Position</th>
+                                <th scope="col">Department</th>
+                                <th scope="col">Basic Salary</th>
+                                <th scope="col">Family Allowances</th>
+                                <th scope="col">Minimum Number Of Shifts</th>
+                                <th scope="col">Number of Shifts Worked</th>
+                                <th scope="col">Number of Overtime Shifts</th>
+                                <th scope="col">Overtime Salary</th>
+                                <th scope="col">Gross Income</th>
+                                <th scope="col">Taxable Salary</th>
+                                <th scope="col">Personal Income tax</th>
+                                <th scope="col">Social Insurance</th>
+                                <th scope="col">Health Insurance</th>
+                                <th scope="col">Trade Union Fees</th>
+                                <th scope="col">Total Salary</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {listReportSalary.map((reportSalaryItem, reportSalaryIndex) => {
+                                return (
+                                    <tr key={`tax-item-${reportSalaryIndex}`}>
+                                        {/* <th scope="row">{reportSalaryIndex + 1}</th> */}
+                                        <td>{reportSalaryItem?.maNv}</td>
+                                        <td>{reportSalaryItem?.tenNV}</td>
+                                        <td>{reportSalaryItem?.chucVu}</td>
+                                        <td>{reportSalaryItem?.phongBan}</td>
+                                        <td>{reportSalaryItem?.luongCoBan}</td>
+                                        <td>{reportSalaryItem?.giamTruGiaCanh}</td>
+                                        <td>{reportSalaryItem?.soCaToiThieu}</td>
+                                        <td>{reportSalaryItem?.soCa}</td>
+                                        <td>{reportSalaryItem?.soCaLamThem}</td>
+                                        <td>{reportSalaryItem?.luongOT}</td>
+                                        <td>{reportSalaryItem?.luongTruocThue}</td>
+                                        <td>{reportSalaryItem?.luongChiuThueTNCN}</td>
+                                        <td>{reportSalaryItem?.thueTNCN}</td>
+                                        <td>{reportSalaryItem?.baoHiemXaHoi}</td>
+                                        <td>{reportSalaryItem?.baoHiemYte}</td>
+                                        <td>{reportSalaryItem?.congDoan}</td>
+                                        <td>{reportSalaryItem?.tong}</td>
+                                    </tr>
+                                )
+                            })}
 
-                                    <td>{reportSalaryItem?.tenNV}</td>
-                                    <td>{reportSalaryItem?.chucVu}</td>
-                                    <td>{reportSalaryItem?.phongBan}</td>
-                                    <td>{reportSalaryItem?.luongCoBan}</td>
-                                    <td>{reportSalaryItem?.giamTruGiaCanh}</td>
-                                    <td>{reportSalaryItem?.soCaToiThieu}</td>
-                                    <td>{reportSalaryItem?.soCa}</td>
-                                    <td>{reportSalaryItem?.soCaLamThem}</td>
-                                    <td>{reportSalaryItem?.luongOT}</td>
-                                    <td>{reportSalaryItem?.luongTruocThue}</td>
-                                    <td>{reportSalaryItem?.luongChiuThueTNCN}</td>
-                                    <td>{reportSalaryItem?.thueTNCN}</td>
-                                    <td>{reportSalaryItem?.baoHiemXaHoi}</td>
-                                    <td>{reportSalaryItem?.baoHiemYte}</td>
-                                    <td>{reportSalaryItem?.congDoan}</td>
-                                    <td>{reportSalaryItem?.tong}</td>
-                                </tr>
-                            )
-                        })}
-
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             {/* <div className="pagination-frame">
                 <nav aria-label="Page navigation example">
