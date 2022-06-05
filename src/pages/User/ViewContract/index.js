@@ -81,7 +81,7 @@ export default function ViewContract() {
                                             </tr>
                                             <tr>
                                                 <th>Status:</th>
-                                                <td><div>{contractItem.trangThai == 'Working' ? <i className="jobactive">Working</i> : <i className="jobdeactive">Leaved</i>}</div></td>
+                                                <td><div>{contractItem.trangThai ? <i className="jobactive">Working</i> : <i className="jobdeactive">Leaved</i>}</div></td>
                                                 
                                             </tr>
                                         </table>

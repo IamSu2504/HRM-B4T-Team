@@ -157,10 +157,10 @@ export default function EmployeeLayout(props) {
                                                 <img src="/menu/list-icon.svg" />
                                                 <span style={{ marginLeft: '15px' }}>Shifts</span>
                                             </div>
-                                            <div>
+                                            {/* <div>
                                                 <img src="/menu/list-icon.svg" />
                                                 <span style={{ marginLeft: '15px' }}>Leave Request</span>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </div>
