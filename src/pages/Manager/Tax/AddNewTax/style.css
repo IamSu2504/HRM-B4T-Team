@@ -39,7 +39,9 @@
     }
   }
   
-  
+  .list-button{
+    display: flex;
+  }
   .update-account-page .avatar-row {
     margin-top: 30px;
     justify-content: space-between;
@@ -73,4 +75,7 @@
     text-align: center;
     color: #FFFFFF;
     margin-left: 10px;
+  }
+  .add-contract{
+    width: 300px;
   }

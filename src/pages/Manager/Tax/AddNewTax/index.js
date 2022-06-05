@@ -10,32 +10,35 @@ import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function AddManagerTax() {
+    const [haveNewTax, setHaveNewTax] = useState()
     const [managerTaxDetail, setManagerTaxDetail] = useState([])
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const { maNv } = useParams()
     const navigate = useNavigate();
     const [checkThue, setCheckThue] = useState('')
-    
+
     var valiThue = /^[0-9]{12}$/;
-    
+
 
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
             console.log(maNv)
             console.log(managerTaxDetail);
-            if (!managerTaxDetail.maSoThue.trim().length ) {
+            if (!managerTaxDetail.maSoThue.trim().length) {
                 setSubmitError({ status: true, error: 'Information is not blank' })
             } else
-                if (!valiThue.test(managerTaxDetail.maSoThue) ) {
+                if (!valiThue.test(managerTaxDetail.maSoThue)) {
                     setSubmitError({ status: true, error: 'Information incorrectly format' })
                 }
                 else {
                     setIsSubmit(true)
                     const updateRes1 = await ManagerTaxAPI.addNewManagerTax({ idLoaiThue: "1", maSoThue: managerTaxDetail.maSoThue, maNV: maNv })
                     if (updateRes1?.status === 200) {
-                        navigate(`/manager/addworkingProcess/${maNv}`)
+                        toast.success(updateRes1?.data)
+                        setHaveNewTax(maNv)
+                        // navigate(`/manager/addworkingProcess/${maNv}`)
                     }
                 }
 
@@ -83,14 +86,14 @@ export default function AddManagerTax() {
                         }}
                     />
                     <CustomInputField
-                        title='Thuế Thu Nhập Cá Nhân'
+                        title='Personal income tax code'
                         type="text"
                         disabled={false}
                         require={true}
-                        
+                        placeholder={'10 numbers'}
                         handleChange={(event) => {
                             if ((event.target.value) && !valiThue.test(event.target.value)) {
-                                setCheckThue('Mã Số Thuế incorrect format')
+                                setCheckThue('Tax code incorrect format')
 
                             }
                             else {
@@ -101,19 +104,31 @@ export default function AddManagerTax() {
                         }}
                     />
                     <span style={{ fontSize: '10px', color: 'red', }}>{checkThue}</span>
-                    
+
                 </div>
             </div>
             <div>
                 {submitError.status && <div className="tax-update-error">{submitError.error}</div>}
             </div>
-            <div>
-                <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Add</span>
-                </button>
+            <div className="list-button">
+                {
+                    haveNewTax ?
+                        <div>
+                            <button className="add-contract" onClick={() => navigate(`/manager/addworkingProcess/${maNv}`)}>
+                                <span class="image">
+                                    <img src="/home/save-icon.svg" />
+                                </span>
+                                <span class="text"> Add WorkingProcess For {maNv}</span>
+                            </button>
+                        </div> :
+                        <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
+                            <span class="image">
+                                <img src="/home/save-icon.svg" />
+                            </span>
+                            <span class="text">Add</span>
+                        </button>
+                }
+
             </div>
             <ToastContainer />
         </div>

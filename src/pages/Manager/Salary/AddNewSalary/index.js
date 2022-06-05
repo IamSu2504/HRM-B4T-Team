@@ -7,12 +7,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import ManagercontractAPI from "../../../../api/Manager/contract";
 import ManagerSalaryAPI from "../../../../api/Manager/salary";
 import SalaryAPI from "../../../../api/SalaryGrade";
-import { useParams , useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function AddSalary() {
 
-    
+    const [haveNewSalary, setHaveNewSalary] = useState()
     const navigate = useNavigate();
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
@@ -21,13 +21,13 @@ export default function AddSalary() {
     const [contractDetail, setContractDetail] = useState()
 
     const getContractById = async () => {
-        if (maHd){
+        if (maHd) {
             const newMaNvRes = await ManagercontractAPI.getManagerContractById(maHd)
             if (newMaNvRes?.status === 200) {
                 setContractDetail(newMaNvRes?.data)
             }
         }
-        
+
     }
 
     const [listSalary, setListSalary] = useState([])
@@ -45,13 +45,13 @@ export default function AddSalary() {
     }, [])
 
 
-    const [salaryDetail, setSalaryDetail] = useState({ maHD: '', idBacLuong: '1', luongCoBan: '', phuCapKhac: '', ngayHieuLuc: '', ngayKetThuc: '' , ghiChu: ''})
+    const [salaryDetail, setSalaryDetail] = useState({ maHD: '', idBacLuong: '1', luongCoBan: '', phuCapKhac: '', ngayHieuLuc: '', ngayKetThuc: '', ghiChu: '' })
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
             console.log('da vao day 1')
             console.log('da vao day 2')
-            
+
             console.log('da vao day 3')
             salaryDetail.maHD = maHd
             salaryDetail.ngayHieuLuc = contractDetail.ngayHieuLuc
@@ -68,7 +68,9 @@ export default function AddSalary() {
                 const addRes = await ManagerSalaryAPI.addNewManagerSalary({ ...salaryDetail })
                 console.log('da vao day 5')
                 if (addRes?.status === 200) {
-                    navigate(`/manager/addInsurance/${maNv}`)
+                    toast.success(addRes?.data)
+                    setHaveNewSalary(maNv)
+                    // navigate(`/manager/addInsurance/${maNv}`)
                 }
             }
         } catch (error) {
@@ -80,7 +82,7 @@ export default function AddSalary() {
         }
     }
 
-    
+
 
     return (
         <div className="update-account-page">
@@ -104,10 +106,10 @@ export default function AddSalary() {
                     <CustomSelectBox
                         title="Salary Grade"
                         require={true}
-                        value = {salaryDetail?.idBacLuong || 1}
+                        value={salaryDetail?.idBacLuong || 1}
                         option={listSalary.map((salaryItem) => {
                             return (
-                                { label: `${salaryItem.maBacLuong} - ${salaryItem.tenBacLuong}`, value: salaryItem.id }
+                                { label: `${salaryItem.maBacLuong} - ${salaryItem.tenBacLuong} - Khoảng: ${salaryItem.khoangLuongTu} - ${salaryItem.khoangLuongDen}`, value: salaryItem.id }
                             )
                         })}
                         handleChange={(event) => {
@@ -140,20 +142,20 @@ export default function AddSalary() {
                         title="Expiration date"
                         require={true}
                         type="date"
-                        value = {contractDetail?.ngayHieuLuc}
-                        disabled = {false}
+                        value={contractDetail?.ngayHieuLuc}
+                        disabled={false}
                     />
                     <CustomInputField
                         title="Expiration date"
                         require={true}
                         type="date"
-                        value = {contractDetail?.ngayHetHan}
-                        disabled = {true}
-                        // handleChange={(event) => {
-                        //     // const parts = event.target.value.split('-');
-                        //     // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
-                        //     setSalaryDetail({ ...salaryDetail, ngayKetThuc: event.target.value })
-                        // }}
+                        value={contractDetail?.ngayHetHan}
+                        disabled={true}
+                    // handleChange={(event) => {
+                    //     // const parts = event.target.value.split('-');
+                    //     // const mydate = parts[2] + '/' + parts[1] + '/' + parts[0]
+                    //     setSalaryDetail({ ...salaryDetail, ngayKetThuc: event.target.value })
+                    // }}
                     />
                     <CustomInputField
                         title="Note"
@@ -170,13 +172,23 @@ export default function AddSalary() {
             <div>
                 {submitError.status && <div className="tax-update-error">{submitError.error}</div>}
             </div>
-            <div>
-                <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Add</span>
-                </button>
+            <div className="list-button">
+                {haveNewSalary ?
+                    <div>
+                        <button className="add-contract" onClick={() => navigate(`/manager/addInsurance/${maNv}`)}>
+                            <span class="image">
+                                <img src="/home/save-icon.svg" />
+                            </span>
+                            <span class="text"> Add Insurance For {maNv}</span>
+                        </button>
+                    </div> : 
+                    <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
+                        <span class="image">
+                            <img src="/home/save-icon.svg" />
+                        </span>
+                        <span class="text">Add</span>
+                    </button>}
+
                 {/* <button className="save-button" onClick={() => navigate(`/manager/viewcontract/${maNv}`)}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />

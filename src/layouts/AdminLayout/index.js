@@ -29,7 +29,7 @@ export default function AdminLayout(props) {
               </div>
               <div className="user-info">
                 <div className="noti-icon">
-                  <img src="/menu/noti-icon.svg" />
+                  
                 </div>
                 <Popover
                   isOpen={visibleInfoPopover}

@@ -11,6 +11,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function AddCertificate() {
+    const [haveNewCertificate, setHaveNewCertificate] = useState()
     const [certificateDetail, setCertificateDetail] = useState({ certificateID: '1', ngayCap: '', noiCap: '', maNV: '', diemSo: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
@@ -31,7 +32,9 @@ export default function AddCertificate() {
 
                 const addRes = await ManagerCertificateAPI.addNewManagerCertificate({ ...certificateDetail })
                 if (addRes?.status === 200) {
-                    navigate(`/manager/addeduLevel/${maNv}`)
+                    toast.success(addRes?.data)
+                    setHaveNewCertificate(maNv)
+                    //navigate(`/manager/addeduLevel/${maNv}`)
                 }
             }
         } catch (error) {
@@ -123,13 +126,25 @@ export default function AddCertificate() {
             <div>
                 {submitError.status && <div className="tax-update-error">{submitError.error}</div>}
             </div>
-            <div>
-                <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Add</span>
-                </button>
+            <div className="list-button">
+                {
+                     haveNewCertificate ?
+                     <div>
+                         <button className="add-contract" onClick={() => navigate(`/manager/addeduLevel/${maNv}`)}>
+                             <span class="image">
+                                 <img src="/home/save-icon.svg" />
+                             </span>
+                             <span class="text"> Add EduLevel For {maNv}</span>
+                         </button>
+                     </div> :
+                     <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
+                     <span class="image">
+                         <img src="/home/save-icon.svg" />
+                     </span>
+                     <span class="text">Add</span>
+                 </button>
+                }
+                
             </div>
             <ToastContainer />
         </div>

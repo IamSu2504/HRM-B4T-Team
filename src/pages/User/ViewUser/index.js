@@ -39,7 +39,7 @@ export default function ViewUser() {
     if (maNv) {
       const certificateAPIRes = await MCertificateAPI.getByMaNV(maNv)
       if (certificateAPIRes?.status === 200) {
-        
+
         setCertificate(certificateAPIRes?.data)
       }
     }
@@ -160,7 +160,7 @@ export default function ViewUser() {
             <span class="text">Edit information</span>
           </button>
         </div>
-       
+
         <div onClick={() => {
           if (localStorage.getItem('role') === 'Admin') {
             navigate(`/admin/viewcontract/${maNv}`)
@@ -201,14 +201,14 @@ export default function ViewUser() {
         </div>
         <div onClick={() => {
           if (localStorage.getItem('role') === 'Admin') {
-            navigate(`/admin/workingProcess/${maNv}`)
+            navigate(`/admin/viewworkingProcess/${maNv}`)
           }
           else
             if (localStorage.getItem('role') === 'Manager') {
-              navigate(`/manager/workingProcess/${maNv}`)
+              navigate(`/manager/viewworkingProcess/${maNv}`)
             }
             else {
-              navigate(`/employee/workingProcess/${maNv}`)
+              navigate(`/employee/viewworkingProcess/${maNv}`)
             }
         }}>
           <button className="save-button" >
@@ -228,14 +228,14 @@ export default function ViewUser() {
         </div> */}
         <div onClick={() => {
           if (localStorage.getItem('role') === 'Admin') {
-            navigate(`/admin/certificate/${maNv}`)
+            navigate(`/admin/viewcertificate/${maNv}`)
           }
           else
             if (localStorage.getItem('role') === 'Manager') {
-              navigate(`/manager/certificate/${maNv}`)
+              navigate(`/manager/viewcertificate/${maNv}`)
             }
             else {
-              navigate(`/employee/certificate/${maNv}`)
+              navigate(`/employee/viewcertificate/${maNv}`)
             }
         }}>
           <button className="save-button">
@@ -243,6 +243,25 @@ export default function ViewUser() {
               <img src="/home/save-icon.svg" />
             </span>
             <span class="text">English certificate</span>
+          </button>
+        </div>
+        <div onClick={() => {
+          if (localStorage.getItem('role') === 'Admin') {
+            navigate(`/admin/ViewEduLevel/${maNv}`)
+          }
+          else
+            if (localStorage.getItem('role') === 'Manager') {
+              navigate(`/manager/ViewEduLevel/${maNv}`)
+            }
+            else {
+              navigate(`/employee/ViewEduLevel/${maNv}`)
+            }
+        }}>
+          <button className="save-button">
+            <span class="image">
+              <img src="/home/save-icon.svg" />
+            </span>
+            <span class="text">EduLevel</span>
           </button>
         </div>
       </div>

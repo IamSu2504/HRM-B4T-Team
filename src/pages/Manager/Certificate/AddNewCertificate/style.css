@@ -74,3 +74,9 @@
     color: #FFFFFF;
     margin-left: 10px;
   }
+  .list-button{
+    display: flex;
+  }
+  .add-contract{
+    width: 300px;
+  }

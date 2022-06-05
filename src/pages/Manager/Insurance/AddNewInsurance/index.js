@@ -10,6 +10,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function AddManagerInsurance() {
+    const [haveNewInsurance, setHaveNewInsurance] = useState()
     const [managerInsuranceDetail, setManagerInsuranceDetail] = useState([])
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
@@ -40,7 +41,9 @@ export default function AddManagerInsurance() {
                     const updateRes2 = await ManagerInsuranceAPI.addNewManagerInsurance({ idLoaiBH: "2", maSoBH: managerInsuranceDetail.BHYT, maNV: maNv })
                     const updateRes3 = await ManagerInsuranceAPI.addNewManagerInsurance({ idLoaiBH: "3", maSoBH: managerInsuranceDetail.CD, maNV: maNv })
                     if (updateRes1?.status === 200) {
-                        navigate(`/manager/addTax/${maNv}`)
+                        toast.success(updateRes1?.data)
+                        setHaveNewInsurance(maNv)
+                        //navigate(`/manager/addTax/${maNv}`)
                     }
                 }
 
@@ -150,13 +153,25 @@ export default function AddManagerInsurance() {
             <div>
                 {submitError.status && <div className="tax-update-error">{submitError.error}</div>}
             </div>
-            <div>
-                <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Add</span>
-                </button>
+            <div className="list-button">
+                {
+                    haveNewInsurance ?
+                        <div>
+                            <button className="add-contract" onClick={() => navigate(`/manager/addTax/${maNv}`)}>
+                                <span class="image">
+                                    <img src="/home/save-icon.svg" />
+                                </span>
+                                <span class="text"> Add Tax For {maNv}</span>
+                            </button>
+                        </div> :
+                        <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
+                            <span class="image">
+                                <img src="/home/save-icon.svg" />
+                            </span>
+                            <span class="text">Add</span>
+                        </button>
+                }
+
             </div>
             <ToastContainer />
         </div>

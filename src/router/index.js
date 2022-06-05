@@ -135,13 +135,15 @@ import MViewReportSalary from "../pages/Manager/ReportSalary/ViewReportSalary";
 
 import MViewLeaveRequest from "../pages/Manager/LeaveRequest"
 
-import MViewWorkingProcess from "../pages/Manager/WorkingProcess/ViewWorkingProcess";
+import MViewWorkingProcess from "../pages/User/ViewWorkingProcess";
 import MAddWorkingProcess from "../pages/Manager/WorkingProcess/AddNewWorkingProcess";
 import MUpdateWorkingProcess from "../pages/Manager/WorkingProcess/UpdateWorkingProcess";
 
+import MViewCertificate from "../pages/User/ViewCertificate";
 import MAddCertificate from "../pages/Manager/Certificate/AddNewCertificate";
 import MUpdateCertificate from "../pages/Manager/Certificate/UpdateCertificate";
 
+import MViewEduLevel from "../pages/User/ViewEduLevel";
 import MAddEduLevel from "../pages/Manager/EduLevel/AddNewEduLevel";
 import MUpdateEduLevel from "../pages/Manager/EduLevel/UpdateEduLevel";
 
@@ -153,7 +155,7 @@ import ELeaveRequest from "../pages/Employee/LeaveRequest";
 
 
 
-import RegisterShift from "../pages/Manager/RegisterShift";
+import UviewShifts from "../pages/User/ViewRegisterShift";
 import ViewRegisterShift from "../pages/User/ViewRegisterShift";
 //user 
 import UViewWorkingProcess from "../pages/User/ViewWorkingProcess"; 
@@ -267,7 +269,7 @@ export default function MainApp() {
         <Route exact path="/admin/updateuser/:maNv" element={<AdminLayoutPrivateRoute><UpdateUser /></AdminLayoutPrivateRoute>} />
 
         {/* RegisterShift */}
-        <Route exact path="/admin/registerShift" element={<AdminLayoutPrivateRoute><RegisterShift /></AdminLayoutPrivateRoute>} />
+        
         <Route exact path="/admin/viewregistershift/:maNv"  element={<AdminLayoutPrivateRoute><ViewRegisterShift /></AdminLayoutPrivateRoute>} />
         <Route exact path="/admin/homepage" element={<AdminHomePagePrivateRoute/>} />
         {/* manager */}
@@ -278,7 +280,9 @@ export default function MainApp() {
         <Route exact path="/manager/viewallTax" element={<ManagerLayoutPrivateRoute><MViewTax /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/addTax/:maNv" element={<ManagerLayoutPrivateRoute><MAddTax /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/updateTax/:managerInsuranceId" element={<ManagerLayoutPrivateRoute><MUpdateTax /></ManagerLayoutPrivateRoute>} />
-
+        
+        <Route exact path="/admin/viewSalary/:maNv&&:maHd" element={<AdminLayoutPrivateRoute><MViewSalary /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/employee/viewSalary/:maNv&&:maHd" element={<EmployeeLayoutPrivateRoute><MViewSalary /></EmployeeLayoutPrivateRoute>} />
         <Route exact path="/manager/viewSalary/:maNv&&:maHd" element={<ManagerLayoutPrivateRoute><MViewSalary /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/addSalary/:maNv&&:maHd" element={<ManagerLayoutPrivateRoute><MAddSalary/></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/updateSalary/:id" element={<ManagerLayoutPrivateRoute><MUpdateSalary /></ManagerLayoutPrivateRoute>} />
@@ -299,19 +303,34 @@ export default function MainApp() {
         <Route exact path="/manager/adddiscipline"  element={<ManagerLayoutPrivateRoute><MAddDiscipline /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/updatereward/:rewardDisciplineId" element={<ManagerLayoutPrivateRoute><MUpdateReward /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/updatediscipline/:rewardDisciplineId"  element={<ManagerLayoutPrivateRoute><MUpdateDiscipline /></ManagerLayoutPrivateRoute>} />
-
-        <Route exact path="/manager/viewallworkingProcess" element={<ManagerLayoutPrivateRoute><MViewWorkingProcess /></ManagerLayoutPrivateRoute>} />
+        
+        <Route exact path="/admin/viewworkingProcess/:maNv" element={<AdminLayoutPrivateRoute><MViewWorkingProcess /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/employee/viewworkingProcess/:maNv" element={<EmployeeLayoutPrivateRoute><MViewWorkingProcess /></EmployeeLayoutPrivateRoute>} />
+        <Route exact path="/manager/viewworkingProcess/:maNv" element={<ManagerLayoutPrivateRoute><MViewWorkingProcess /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/addworkingProcess/:maNv" element={<ManagerLayoutPrivateRoute><MAddWorkingProcess /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/updateworkingProcess/:Id" element={<ManagerLayoutPrivateRoute><MUpdateWorkingProcess /></ManagerLayoutPrivateRoute>} />
 
+        <Route exact path="/admin/viewcertificate/:maNv" element={<AdminLayoutPrivateRoute><MViewCertificate /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/employee/viewcertificate/:maNv" element={<EmployeeLayoutPrivateRoute><MViewCertificate /></EmployeeLayoutPrivateRoute>} />
+        <Route exact path="/manager/viewcertificate/:maNv" element={<ManagerLayoutPrivateRoute><MViewCertificate /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/addcertificate/:maNv" element={<ManagerLayoutPrivateRoute><MAddCertificate /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/updatecertificate/:Id" element={<ManagerLayoutPrivateRoute><MUpdateCertificate /></ManagerLayoutPrivateRoute>} />
-
+        
+        <Route exact path="/admin/ViewEduLevel/:maNv" element={<AdminLayoutPrivateRoute><MViewEduLevel /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/manager/ViewEduLevel/:maNv" element={<ManagerLayoutPrivateRoute><MViewEduLevel /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/employee/ViewEduLevel/:maNv" element={<EmployeeLayoutPrivateRoute><MViewEduLevel /></EmployeeLayoutPrivateRoute>} />
         <Route exact path="/manager/addeduLevel/:maNv" element={<ManagerLayoutPrivateRoute><MAddEduLevel /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/updateeduLevel/:Id" element={<ManagerLayoutPrivateRoute><MUpdateEduLevel /></ManagerLayoutPrivateRoute>} />
 
         <Route exact path="/manager/viewleaveRequest"  element={<ManagerLayoutPrivateRoute><MViewLeaveRequest /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/registershifts"  element={<ManagerLayoutPrivateRoute><RegisterShifts /></ManagerLayoutPrivateRoute>} />
+
+        <Route exact path="/manager/viewshift/:maNv"  element={<ManagerLayoutPrivateRoute><UviewShifts /></ManagerLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewshift/:maNv"  element={<AdminLayoutPrivateRoute><UviewShifts /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/employee/viewshift/:maNv"  element={<EmployeeLayoutPrivateRoute><UviewShifts /></EmployeeLayoutPrivateRoute>} />
+
+        <Route exact path="/admin/viewshift/:maNv"  element={<AdminLayoutPrivateRoute><ViewRegisterShift /></AdminLayoutPrivateRoute>} />
+        <Route exact path="/employee/viewshift/:maNv"  element={<EmployeeLayoutPrivateRoute><ViewRegisterShift /></EmployeeLayoutPrivateRoute>} />
         <Route exact path="/manager/viewshift/:maNv"  element={<ManagerLayoutPrivateRoute><ViewRegisterShift /></ManagerLayoutPrivateRoute>} />
         <Route exact path="/manager/homepage" element={<ManagerHomePagePrivateRoute />} />  
         <Route exact path="/manager/outdated"  element={<ManagerLayoutPrivateRoute><MOutdated /></ManagerLayoutPrivateRoute>} />
@@ -325,13 +344,14 @@ export default function MainApp() {
         <Route exact path="/employee/updateuser/:maNv"  element={<EmployeeLayoutPrivateRoute><UpdateUser /></EmployeeLayoutPrivateRoute>} />
        
         <Route exact path="/employee/viewtimekeeping"  element={<EmployeeLayoutPrivateRoute><ViewTimekeeping /></EmployeeLayoutPrivateRoute>} />
+        <Route exact path="/admin/viewcontract/:maNv"  element={<AdminLayoutPrivateRoute><EViewContract /></AdminLayoutPrivateRoute>} />
         <Route exact path="/employee/viewcontract/:maNv"  element={<EmployeeLayoutPrivateRoute><EViewContract /></EmployeeLayoutPrivateRoute>} />
         <Route exact path="/employee/workingProcess/:maNv"  element={<EmployeeLayoutPrivateRoute><UViewWorkingProcess /></EmployeeLayoutPrivateRoute>} />
         <Route exact path="/employee/certificate/:maNv"  element={<EmployeeLayoutPrivateRoute><UViewCertificate /></EmployeeLayoutPrivateRoute>} />
         <Route exact path="/employee/timeKeeping"  element={<EmployeeLayoutPrivateRoute><TimeKeeping /></EmployeeLayoutPrivateRoute>} />
 
         <Route exact path="/employee/leaveRequest"  element={<EmployeeLayoutPrivateRoute><ELeaveRequest /></EmployeeLayoutPrivateRoute>} />
-        <Route exact path="/employee/viewshift/:maNv"  element={<EmployeeLayoutPrivateRoute><ViewRegisterShift /></EmployeeLayoutPrivateRoute>} />
+       
 
         {/* user */}
       </Routes>

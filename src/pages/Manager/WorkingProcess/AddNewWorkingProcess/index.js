@@ -11,6 +11,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function AddWorkingProcess() {
+    const [haveNewWorkingProcess, setHaveNewWorkingProcess] = useState()
     const [workingProcessDetail, setWorkingProcessDetail] = useState({ idPhongBan: '1', idChucVu: '1', ngayVao: '', ngayRa: '', trangThai: "true", maNV: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
@@ -19,7 +20,7 @@ export default function AddWorkingProcess() {
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
-            console.log('>>>>>',workingProcessDetail)
+            console.log('>>>>>', workingProcessDetail)
             workingProcessDetail.maNV = maNv
             const { idPhongBan, idChucVu, ngayVao, ngayRa, trangThai, maNV } = workingProcessDetail
 
@@ -30,7 +31,9 @@ export default function AddWorkingProcess() {
 
                 const addRes = await ManagerWorkingProcessAPI.addNewManagerWorkingProcess({ ...workingProcessDetail })
                 if (addRes?.status === 200) {
-                    navigate(`/manager/addcertificate/${maNv}`)
+                    toast.success(addRes?.data)
+                    setHaveNewWorkingProcess(maNv)
+                    //navigate(`/manager/addcertificate/${maNv}`)
                 }
             }
         } catch (error) {
@@ -81,7 +84,7 @@ export default function AddWorkingProcess() {
                 <div>
                     <CustomSelectBox
                         title="Department"
-                        value = {workingProcessDetail.idPhongBan || 1}
+                        value={workingProcessDetail.idPhongBan || 1}
                         option={listDepartment.map((departmentItem) => {
                             return (
                                 { label: departmentItem.tenPhongBan, value: departmentItem.id }
@@ -94,7 +97,7 @@ export default function AddWorkingProcess() {
                     />
                     <CustomSelectBox
                         title="Position"
-                        value = {workingProcessDetail.idChucVu || 1}
+                        value={workingProcessDetail.idChucVu || 1}
                         option={listPosition.map((positionItem) => {
                             return (
                                 { label: positionItem.tenChucVu, value: positionItem.id }
@@ -118,15 +121,15 @@ export default function AddWorkingProcess() {
                         require={true}
                         type="date"
                         handleChange={(event) => {
-                        
+
                             setWorkingProcessDetail({ ...workingProcessDetail, ngayRa: event.target.value })
                         }}
                     />
                     <CustomSelectBox
                         title="Status"
-                        value = {workingProcessDetail.trangThai || true}
+                        value={workingProcessDetail.trangThai || true}
                         option={
-                            [{ label: "Working", value: true }, { label: "Finished", value: false }]
+                            [{ label: "Working", value: true }, { label: "Leaved", value: false }]
                         }
                         require={true}
                         handleChange={(event) => {
@@ -138,20 +141,32 @@ export default function AddWorkingProcess() {
                         require={true}
                         type="text"
                         value={maNv}
-                        disabled = {true}
+                        disabled={true}
                     />
                 </div>
             </div>
             <div>
                 {submitError.status && <div className="tax-update-error">{submitError.error}</div>}
             </div>
-            <div>
-                <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Add</span>
-                </button>
+            <div className="list-button">
+                {
+                    haveNewWorkingProcess ?
+                        <div>
+                            <button className="add-contract" onClick={() => navigate(`/manager/addcertificate/${maNv}`)}>
+                                <span class="image">
+                                    <img src="/home/save-icon.svg" />
+                                </span>
+                                <span class="text"> Add Certificate For {maNv}</span>
+                            </button>
+                        </div> :
+                        <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
+                            <span class="image">
+                                <img src="/home/save-icon.svg" />
+                            </span>
+                            <span class="text">Add</span>
+                        </button>
+                }
+
             </div>
             <ToastContainer />
         </div>

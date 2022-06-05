@@ -25,6 +25,11 @@ const AccountAPI = {
         const url = `/account/${id}`;
         return AxiosClient.delete(url);
     },
+
+    getUsernotCreated(){
+        const url = `/user/notCreated`;
+        return AxiosClient.get(url);
+    }
 }
 
 export default AccountAPI;

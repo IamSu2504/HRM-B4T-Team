@@ -9,18 +9,20 @@ import AccountAPI from "../../../../api/account";
 import RoleAPI from "../../../../api/role";
 
 export default function AddAccount() {
-    const [accountDetail, setAccountDetail] = useState({ username: '', password: '', maNv: '', roleID: '' })
+    const [accountDetail, setAccountDetail] = useState({ username: '', password: '', maNv: '', roleID: '1' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
     const navigate = useNavigate()
+    const [addusername, setAddusername ] = useState([])
     const handleCreate = async () => {
         try {
             setSubmitError({ status: false, error: '' })
+            accountDetail.username = addusername
             const { username, password, maNv, roleID } = accountDetail
 
+            console.log('>>>>>',accountDetail)
 
-
-            if (!username.trim().length || !password.trim().length || !maNv.trim().length) {
+            if (!username.toString()?.trim()?.length || !password.toString()?.trim()?.length || !maNv.toString()?.trim()?.length) {
                 setSubmitError({ status: true, error: 'Information cannot be left blank' })
 
             } else {
@@ -53,25 +55,58 @@ export default function AddAccount() {
         getAllRole()
     }, [])
 
+
+    const [listUserNotCreated, setListUserNotCreated] = useState([])
+
+    const getListUserNotCreated = async () => {
+        const roleRes = await AccountAPI.getUsernotCreated()
+        if (roleRes?.status === 200) {
+            setListUserNotCreated(roleRes?.data)
+        }
+    }
+
+    useEffect(() => {
+        getListUserNotCreated()
+    }, [])
+
     return (
         <div className="update-account-page">
             <div className="row">
                 <div className="col-12">
                     <div className="title">Add Account Information</div>
-                    <div className="title-sub">Fields with <span style={{color:"red"}}>*</span> cannot be left blank</div>
+                    <div className="title-sub">Fields with <span style={{ color: "red" }}>*</span> cannot be left blank</div>
                 </div>
             </div>
 
             <div className="row fied-data-row">
                 <div>
+
+                    <CustomSelectBox
+                        title="Employee Code"
+                        option={listUserNotCreated.map((userNotCreatedItem) => {
+                            return (
+                                { label: userNotCreatedItem.id, value: new Array(userNotCreatedItem.id, userNotCreatedItem.email)}
+                            )
+                        })}
+                        require={true}
+                        //value={accountDetail?.maNv || ''}
+                        handleChange={(event) => {
+                            
+                            let arr = event.target.value.toString().split(",");
+
+                            console.log('....', arr)
+                            setAccountDetail({ ...accountDetail, maNv: arr[0] })
+                            setAddusername( arr[1] )
+                            
+                            
+                        }}
+                    />
+
                     <CustomInputField
                         title="Username"
-                        value={accountDetail?.username || ''}
+                        value={addusername || ''}
                         type="text"
-                        handleChange={(event) => {
-                            setAccountDetail({ ...accountDetail, username: event.target.value })
-                        }}
-                        require={true}
+                        disabled={true}
                     />
                     <CustomInputField
                         title="Password"
@@ -82,22 +117,14 @@ export default function AddAccount() {
                         }}
                         require={true}
                     />
-                    <CustomInputField
-                        title="Employee code"
-                        value={accountDetail?.maNv || ''}
-                        type="text"
-                        handleChange={(event) => {
-                            setAccountDetail({ ...accountDetail, maNv: event.target.value })
-                        }}
-                        require={true}
-                    />
                     <CustomSelectBox
 
 
                         title="Role"
-                        option = {listRole.map((roleItem) =>{
-                            return(
-                                {label: roleItem.tenRole, value: roleItem.id}
+
+                        option={listRole.map((roleItem) => {
+                            return (
+                                { label: roleItem.tenRole, value: roleItem.id }
 
                             )
                         })}

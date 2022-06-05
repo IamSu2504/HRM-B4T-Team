@@ -32,7 +32,7 @@ export default function ManagerLayout(props) {
               </div>
               <div className="user-info">
                 <div className="noti-icon">
-                  <img src="/menu/noti-icon.svg" />
+                 
                 </div>
                 <Popover
                   isOpen={visibleInfoPopover}
@@ -159,21 +159,21 @@ export default function ManagerLayout(props) {
                         <a href="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection2e579c81c5bd288a8287" style={{color: 'unset', textDecoration: 'unset'}} target='_blank'>
                           <img src="/menu/list-icon.svg" />
                           <span style={{ marginLeft: '15px' }}>
-                            Overview
+                          Personnel management
                           </span>
                         </a>  
                       </div>
                       <div>
                         <a href="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection63438c805d4b6ea33c12" style={{color: 'unset', textDecoration: 'unset'}} target='_blank'>
                           <img src="/menu/list-icon.svg" />
-                          <span style={{ marginLeft: '15px' }}>Teacher
+                          <span style={{ marginLeft: '15px' }}>Teacher management
                           </span>
                         </a>
                       </div>
                       <div >
                         <a href="https://app.powerbi.com/groups/me/reports/587e8395-c40c-4405-b452-5a2f230f2329/ReportSection227818c02b928ad9c8fa" style={{color: 'unset', textDecoration: 'unset'}} target='_blank'>
                           <img src="/menu/list-icon.svg" />
-                          <span style={{ marginLeft: '15px' }}>Employee salary
+                          <span style={{ marginLeft: '15px' }}>Manage personnel salary
                           </span>
                         </a>
                       </div>

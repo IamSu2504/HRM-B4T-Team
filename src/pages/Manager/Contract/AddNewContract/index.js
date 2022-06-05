@@ -185,19 +185,21 @@ export default function AddContract() {
                 {submitError.status && <div className="tax-update-error">{submitError.error}</div>}
             </div>
             <div className="list-button">
-                {haveNewContract ? <div>
-                    <button className="add-contract" onClick={() => navigate(`/manager/addSalary/${maNv}&&${newMaHd}`)}>
+                {haveNewContract ?
+                    <div>
+                        <button className="add-contract" onClick={() => navigate(`/manager/addSalary/${maNv}&&${newMaHd}`)}>
+                            <span class="image">
+                                <img src="/home/save-icon.svg" />
+                            </span>
+                            <span class="text"> Add Salary For {maNv}</span>
+                        </button>
+                    </div> :
+                    <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
                         <span class="image">
                             <img src="/home/save-icon.svg" />
                         </span>
-                        <span class="text"> Add Salary For {maNv}</span>
-                    </button>
-                </div> : <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
-                    <span class="image">
-                        <img src="/home/save-icon.svg" />
-                    </span>
-                    <span class="text">Add</span>
-                </button>}
+                        <span class="text">Add</span>
+                    </button>}
                 {/* <button className="save-button" onClick={() => navigate(`/manager/viewcontract/${maNv}`)}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />

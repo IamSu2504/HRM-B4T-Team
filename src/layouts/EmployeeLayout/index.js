@@ -29,7 +29,7 @@ export default function EmployeeLayout(props) {
                             </div>
                             <div className="user-info">
                                 <div className="noti-icon">
-                                    <img src="/menu/noti-icon.svg" />
+                                    
                                 </div>
                                 <Popover
                                     isOpen={visibleInfoPopover}
@@ -153,7 +153,7 @@ export default function EmployeeLayout(props) {
                                         data-parent="#accordion"
                                     >
                                         <div className="card-body">                                            
-                                            <div onClick={() => navigate(`/employee/viewshift/${localStorage.getItem('maNV')}`)}>
+                                            <div onClick={() => navigate(`/employee/viewshift/${localStorage.getItem('maNv')}`)}>
                                                 <img src="/menu/list-icon.svg" />
                                                 <span style={{ marginLeft: '15px' }}>Shifts</span>
                                             </div>

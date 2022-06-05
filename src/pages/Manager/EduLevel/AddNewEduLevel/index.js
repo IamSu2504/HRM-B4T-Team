@@ -13,6 +13,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 
 export default function AddEduLevel() {
+    const [haveNewEduLevel, setHaveNewEduLevel] = useState()
     const [eduLevelDetail, setEduLevelDetail] = useState({ idChuyenMon: '1', idTrinhDo: '1', idBangCap: '1', tenTruong: '', thoiGianTu: '', thoiGianDen: '', maNV: '' })
     const [submitError, setSubmitError] = useState({ status: false, error: '' })
     const [isSubmit, setIsSubmit] = useState(false)
@@ -34,7 +35,9 @@ export default function AddEduLevel() {
 
                 const addRes = await ManagerEduLevelAPI.addNewManagerEduLevel({ ...eduLevelDetail })
                 if (addRes?.status === 200) {
-                    navigate(`/manager/viewUser/${maNv}`)
+                    toast.success(addRes?.data)
+                    setHaveNewEduLevel(maNv)
+                    //navigate(`/manager/viewUser/${maNv}`)
                 }
             }
         } catch (error) {
@@ -159,6 +162,7 @@ export default function AddEduLevel() {
                     />
                     <CustomInputField
                         title="From"
+                        placeholder={'School year from'}
                         require={true}
                         type="text"
                         handleChange={(event) => {
@@ -169,6 +173,7 @@ export default function AddEduLevel() {
 
                     <CustomInputField
                         title="To"
+                        placeholder={'School year to'}
                         require={true}
                         type="text"
                         handleChange={(event) => {
@@ -182,13 +187,25 @@ export default function AddEduLevel() {
             <div>
                 {submitError.status && <div className="tax-update-error">{submitError.error}</div>}
             </div>
-            <div>
-                <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
+            <div className="list-button">
+                {
+                    haveNewEduLevel ?
+                    <div>
+                        <button className="add-contract" onClick={() => navigate(`/manager/viewUser/${maNv}`)}>
+                            <span class="image">
+                                <img src="/home/save-icon.svg" />
+                            </span>
+                            <span class="text"> View User For {maNv}</span>
+                        </button>
+                    </div> :
+                    <button className="save-button" disabled={isSubmit} onClick={() => handleCreate()}>
                     <span class="image">
                         <img src="/home/save-icon.svg" />
                     </span>
                     <span class="text">Add</span>
                 </button>
+                }
+                
             </div>
             <ToastContainer />
         </div>

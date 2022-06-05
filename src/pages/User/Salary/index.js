@@ -88,23 +88,23 @@ export default function ViewSalary() {
                                                     <td>{salaryItem.luongCoBan || ''}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Phụ Cấp Khác:</th>
+                                                    <th>Other allowances:</th>
                                                     <td>{salaryItem.phuCapKhac || ''}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Ngày Hiệu Lực:</th>
+                                                    <th>Effective date:</th>
                                                     <td>{salaryItem.ngayHieuLuc || ''}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Ngày kết Thúc:</th>
+                                                    <th>Expiration Date:</th>
                                                     <td>{salaryItem.ngayKetThuc || ''}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Ghi Chú:</th>
+                                                    <th>Note:</th>
                                                     <td>{salaryItem.ghiChu || ''}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Tổng Lương:</th>
+                                                    <th>Total salary:</th>
                                                     <td>{salaryItem.tongLuong || ''}</td>
                                                 </tr>
                                             </table>

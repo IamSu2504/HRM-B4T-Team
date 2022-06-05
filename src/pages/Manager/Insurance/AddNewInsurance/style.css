@@ -74,3 +74,6 @@
     color: #FFFFFF;
     margin-left: 10px;
   }
+  .list-button{
+    display: flex;
+  }
