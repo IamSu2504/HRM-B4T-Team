@@ -39,17 +39,7 @@ public class Shift {
     private RoomCategory room;
 
     @Column(name = "ngay")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
-
-    public Date getDate() {
-        if (date != null) {
-            date.setHours(8);
-            return date;
-        } else {
-            return null;
-        }
-    }
 
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -41,7 +42,6 @@ public class Employee {
     private String tenNv;
 
     @Column(name = "ngay_sinh")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngaySinh;
 
@@ -64,12 +64,10 @@ public class Employee {
     private String noiCapCccd;
 
     @Column(name = "ngay_cap_cccd")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayCapCccd;
 
     @Column(name = "ngay_het_han_cccd")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayHetHanCccd;
 
@@ -80,12 +78,10 @@ public class Employee {
     private String noiCapHoChieu;
 
     @Column(name = "ngay_cap_ho_chieu")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayCapHoChieu;
 
     @Column(name = "ngay_het_han_ho_chieu")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayHetHanHoChieu;
 
@@ -108,12 +104,10 @@ public class Employee {
     private String soAtm;
 
     @Column(name = "ngay_bat_dau_lam")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayBatDauLam;
 
     @Column(name = "ngay_nghi_viec")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayNghiViec;
 
@@ -131,63 +125,10 @@ public class Employee {
             return "Working";
         }
         else {
-            Calendar c= Calendar.getInstance();
-            c.setTime(ngayNghiViec);
-            c.set(ngayNghiViec.getYear()+1900,ngayNghiViec.getMonth(),ngayNghiViec.getDate(),8,0,0);
-            if(c.getTime().before(new Date())) {
+            if(ngayNghiViec.before(new Date())) {
                 return "Leaved";
             }
             return "Working";
         }
     }
-
-    public Date getNgaySinh(){
-        if (ngaySinh != null) {
-            ngaySinh.setHours(8);
-        }
-        return ngaySinh;
-    }
-
-    public Date getNgayCapCccd(){
-        if (ngayCapCccd != null) {
-            ngayCapCccd.setHours(8);
-        }
-        return ngayCapCccd;
-    }
-
-    public Date getNgayHetHanCccd(){
-        if (ngayHetHanCccd != null) {
-            ngayHetHanCccd.setHours(8);
-        }
-        return ngayHetHanCccd;
-    }
-
-    public Date getNgayCapHoChieu(){
-        if (ngayCapHoChieu != null) {
-            ngayCapHoChieu.setHours(8);
-        }
-        return ngayCapHoChieu;
-    }
-
-    public Date getNgayHetHanHoChieu(){
-        if (ngayHetHanHoChieu != null) {
-            ngayHetHanHoChieu.setHours(8);
-        }
-        return ngayHetHanHoChieu;
-    }
-
-    public Date getNgayBatDauLam(){
-        if (ngayBatDauLam != null) {
-            ngayBatDauLam.setHours(8);
-        }
-        return ngayBatDauLam;
-    }
-
-    public Date getNgayNghiViec(){
-        if (ngayNghiViec != null) {
-            ngayNghiViec.setHours(8);
-        }
-        return ngayNghiViec;
-    }
-
 }

@@ -1,14 +1,12 @@
 package backend.entity;
 
+import backend.util.DecimalJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 
 import javax.persistence.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 @Setter
 @Getter
@@ -26,12 +24,10 @@ public class Contract {
     private ContractCategory loaiHopDong;
 
     @Column(name = "ngay_hieu_luc")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayHieuLuc;
 
     @Column(name = "ngay_het_han")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayHetHan;
 
@@ -45,36 +41,11 @@ public class Contract {
     private String maNV;
 
     @Column(name = "giam_tru_gia_canh")
+    @JsonSerialize(using = DecimalJsonSerializer.class)
     private Double giamTruGiaCanh;
 
-    public Date getNgayHieuLuc(){
-            if (ngayHieuLuc != null) {
-                ngayHieuLuc.setHours(8);
-                return ngayHieuLuc;
-            } else {
-                return null;
-            }
-    }
-
-    public Date getNgayHetHan(){
-        if (ngayHetHan != null) {
-            ngayHetHan.setHours(8);
-            return ngayHetHan;
-        } else {
-            return null;
-        }
-    }
-
     public Boolean getTrangThai(){
-        if (ngayHetHan != null) {
-            ngayHetHan.setHours(8);
-        } else {
-            return true;
-        }
         if(ngayHetHan !=null){
-            Calendar c= Calendar.getInstance();
-            c.setTime(ngayHetHan);
-            c.set(ngayHetHan.getYear()+1900,ngayHetHan.getMonth(),ngayHetHan.getDate(),8,0,0);
             if(ngayHetHan.before(new Date())){
                 return false;
             }
@@ -84,5 +55,4 @@ public class Contract {
         }
         return true;
     }
-
 }

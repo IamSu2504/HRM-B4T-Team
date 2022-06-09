@@ -1,6 +1,8 @@
 package backend.entity;
 
+import backend.util.DecimalJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,18 +37,18 @@ public class Salary {
     private SalaryCategory idBacLuong;
 
     @Column(name = "luong_co_ban")
+    @JsonSerialize(using = DecimalJsonSerializer.class)
     private Double luongCoBan;
 
     @Column(name = "phu_cap_khac")
+    @JsonSerialize(using = DecimalJsonSerializer.class)
     private Double phuCapKhac;
 
     @Column(name = "ngay_hieu_luc")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayHieuLuc;
 
     @Column(name = "ngay_ket_thuc")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngayKetThuc;
 
@@ -59,23 +61,4 @@ public class Salary {
     public double getTongLuong(){
         return luongCoBan + phuCapKhac;
     }
-
-    public Date getNgayHieuLuc(){
-            if (ngayHieuLuc != null) {
-                ngayHieuLuc.setHours(8);
-                return ngayHieuLuc;
-            } else {
-                return null;
-            }
-    }
-
-    public Date getNgayKetThuc(){
-        if (ngayKetThuc != null) {
-            ngayKetThuc.setHours(8);
-            return ngayKetThuc;
-        } else {
-            return null;
-        }
-    }
-
 }

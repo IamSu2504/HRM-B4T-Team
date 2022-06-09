@@ -23,20 +23,10 @@ public class HolidayCategory {
     private Integer id;
 
     @Column(name = "ngay")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date ngay;
 
     @Column(name = "ten_ngay_le")
     private String tenNgayLe;
-
-//    public Date getNgay(){
-//        if (ngay != null) {
-//            ngay.setHours(8);
-//            return ngay;
-//        } else {
-//            return null;
-//        }
-//    }
 
 }

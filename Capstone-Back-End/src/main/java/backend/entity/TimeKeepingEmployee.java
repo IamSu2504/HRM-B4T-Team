@@ -28,23 +28,9 @@ public class TimeKeepingEmployee {
     private String maNV;
 
     @Column(name = "datetime")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date dateTime;
 
     @Column(name = "status")
     private String status;
 
-    private Date getDateTime() {
-        if (dateTime != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return sdf.parse(sdf.format(dateTime));
-            } catch (ParseException e) {
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
 }

@@ -34,12 +34,10 @@ public class WorkingProcess {
     private PositionCategory idChucVu;
 
     @Column(name = "ngay_vao")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date ngayVao;
 
     @Column(name = "ngay_ra")
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date ngayRa;
 
@@ -54,31 +52,10 @@ public class WorkingProcess {
             return "Active";
         }
         else {
-            Calendar c= Calendar.getInstance();
-            c.setTime(ngayRa);
-            c.set(ngayRa.getYear()+1900,ngayRa.getMonth(),ngayRa.getDate(),8,0,0);
-            if(c.getTime().before(new Date())) {
+            if(ngayRa.before(new Date())) {
                 return "Non-active";
             }
             return "Active";
-        }
-    }
-
-    public Date getNgayVao() {
-        if (ngayVao != null) {
-            ngayVao.setHours(8);
-            return ngayVao;
-        } else {
-            return null;
-        }
-    }
-
-    public Date getNgayRa() {
-        if (ngayRa != null) {
-            ngayRa.setHours(8);
-            return ngayRa;
-        } else {
-            return null;
         }
     }
 }
