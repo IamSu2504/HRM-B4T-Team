@@ -1,0 +1,159 @@
+.manager-homepage {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+}
+
+.manager-homepage>div {
+  width: 50%;
+  height: 100%;
+}
+
+.manager-homepage .left {
+  background-color: #416E86;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  position: relative;
+}
+
+.manager-homepage .right {
+  position: relative;
+}
+
+.manager-homepage .right .dot1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.manager-homepage .right .dot2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.manager-homepage .right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.manager-homepage .left .tile-on {
+  margin-top: 50px;
+  border-bottom: 3px solid white;
+}
+
+.manager-homepage .left .name {
+  color: white;
+  margin-top: 40px;
+}
+
+.manager-homepage .left .position {
+  font-size: 20px;
+  color: white;
+}
+
+.manager-homepage .left .menu {
+  margin-top: 150px;
+}
+
+.manager-homepage .left .menu ul {
+  list-style: none;
+  text-align: left;
+  padding-left: 0;
+  color: white;
+  font-size: 30px;
+}
+
+.manager-homepage .left .menu ul li {
+  width: fit-content;
+}
+
+.manager-homepage .left .menu ul li:hover {
+  text-decoration: underline;
+}
+
+.manager-homepage .left .underlined {
+  margin-top: 100px;
+  border-bottom: 3px solid white;
+  position: absolute;
+  bottom: 50px;
+}
+
+@media screen and (max-width: 600px) {
+  .manager-homepage .left {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .manager-homepage .left .name {
+    font-size: 30px;
+  }
+
+  .manager-homepage .left .menu ul {
+    font-size: 20px;
+  }
+
+  .manager-homepage .left .underlined {
+    width: calc(100% - 100px);
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1064px) {
+  .manager-homepage .left {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+  .manager-homepage .left .name {
+    font-size: 35px;
+  }
+
+  .manager-homepage .left .menu ul {
+    font-size: 24px;
+  }
+
+  .manager-homepage .left .underlined {
+    width: calc(100% - 200px);
+  }
+}
+
+@media screen and (min-width: 1065px) and (max-width: 1500px) {
+  .manager-homepage .left {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+
+  .manager-homepage .left .name {
+    font-size: 50px;
+  }
+
+  .manager-homepage .left .menu ul {
+    font-size: 30px;
+  }
+
+  .manager-homepage .left .underlined {
+    width: calc(100% - 300px);
+  }
+}
+
+@media screen and (min-width: 1501px) {
+  .manager-homepage .left {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+
+  .manager-homepage .left .name {
+    font-size: 55px;
+  }
+
+  .manager-homepage .left .menu ul {
+    font-size: 34px;
+  }
+
+  .manager-homepage .left .underlined {
+    width: calc(100% - 400px);
+  }
+}

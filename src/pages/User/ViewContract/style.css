@@ -1,0 +1,109 @@
+.view-contract-page {
+    background: #EFECEC;
+    padding: 20px;
+    margin-top: 10px;
+    border: 1px solid black;
+    background: #FFFFFF;
+}
+
+.view-contract-page .title {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 35px;
+    color: #000000;
+    margin-bottom: 30px;
+}
+.jobactive {
+    background: rgba(32, 207, 70, 0.74);
+    border-radius: 20px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .jobdeactive {
+    background: rgba(225, 0, 0, 0.63);
+    border-radius: 20px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+    padding: 5px;
+    text-align: center;
+  }
+.view-contract-page .save-button {
+    background: #34AACF;
+    border-radius: 8px;
+    margin-top: 10px;
+    width: fit-content;
+    height: 46px;
+    border: unset;
+}
+
+.text {
+    color: white;
+    font-weight: bold;
+}
+
+
+.view-contract-page .title-sub {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 21px;
+    color: #000000;
+    margin-top: 9px;
+    margin-bottom: 15px;
+}
+
+.view-contract-page .list-contract {
+    border: 1px dashed gray;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.view-contract-page .list-contract .title-list {
+    text-align: center;
+}
+
+.view-contract-page .list-contract .title-list>p {
+    margin-bottom: 0px;
+}
+
+.view-contract-page .fied-data-row {
+    justify-content: space-between;
+}
+
+.view-contract-page .fied-data-row>div {
+    width: 48%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+th,
+td {
+    padding-bottom: 10px;
+}
+
+th {
+    padding-right: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    .view-contract-page .fied-data-row>div {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .view-contract-page .avatar-row>div {
+        width: 100%;
+    }
+}

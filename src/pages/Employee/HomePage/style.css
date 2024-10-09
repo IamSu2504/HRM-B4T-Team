@@ -1,0 +1,83 @@
+.employee-homepage {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.employee-homepage .bg {
+  width: 100%;
+  height: 100%;
+}
+
+.employee-homepage .bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.employee-homepage .bg-top {
+  position: absolute;
+  width: 30%;
+  height: 80%;
+  background: #3A637A;
+  top: 0;
+  left: 50px;
+  opacity: 0.9;
+  color: white;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 30px;
+}
+
+.employee-homepage .bg-top .name {
+  font-size: 60px;
+}
+
+.employee-homepage .bg-top .position {
+  font-size: 20px;
+}
+
+.employee-homepage .bg-top .menu ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 110px;
+  font-size: 35px;
+}
+
+.employee-homepage .bg-top .menu ul li {
+  cursor: pointer;
+  width: fit-content;
+}
+.employee-homepage .bg-top .menu ul li:hover {
+  text-decoration: underline;
+}
+
+.employee-homepage .dot1 {
+  width: 400px;
+  height: 300px;
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  right: -70px;
+}
+
+.employee-homepage .dot1 img {
+  width: 100%;
+  height: 100%;
+}
+
+.employee-homepage .dot2 {
+  width: 250px;
+  height: 300px;
+  z-index: 3;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.employee-homepage .dot2 img {
+  width: 100%;
+  height: 100%;
+}

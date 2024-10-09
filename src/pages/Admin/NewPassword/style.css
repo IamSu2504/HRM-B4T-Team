@@ -1,0 +1,123 @@
+ .forgot-page {
+  background: #ffffff;
+  width: 100vw;
+  height: 100vh;
+  padding-left: 35%;
+  padding-top: 5%;
+
+}
+.forgot-page .forgot-frame {
+  width: 50%;
+  height: 90%;
+  border-radius: 20px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  padding: 40px 40px;
+
+}
+
+.forgot-page .forgot-frame .right {
+  width: 100%;
+  height: 100%;
+  background: #f1f1f1;
+  border-radius: 15px;
+}
+.forgot-page .forgot-frame .right .img {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.forgot-page .forgot-frame .right .img img {
+  width: 125px;
+  height: 125px;
+}
+.forgot-page .forgot-frame .right .user-input {
+  margin-top: 20px;
+}
+.forgot-page .forgot-frame .right .pw-input {
+  width: 100%;
+  position: relative;
+  margin-top: 20px;
+}
+.forgot-page .forgot-frame .right .forgot-button {
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 20px;
+}
+.forgot-page .forgot-frame .right .forgot-button button {
+  width: 100%;
+  height: 54px;
+  border-radius: 20px;
+  background: #34aacf;
+  border: transparent;
+  outline: none;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  color: #fff;
+}
+.forgot-page .forgot-frame .right .forgot-pw-txt {
+  margin-top: 15px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 23px;
+  color: #34aacf;
+  margin-left: 15%;
+  cursor: pointer;
+}
+.forgot-page .forgot-frame .right .forgot-pw-txt:hover {
+  text-decoration: underline;
+  color: red;
+}
+.forgot-page .forgot-frame .right input {
+  width: 90%;
+  margin-left: 5%;
+  height: 64px;
+  border-radius: 15px;
+  background: #cfcfcf;
+  border: transparent;
+  padding-left: 10px;
+  padding-right: 60px;
+  outline: none;
+}
+
+.input-icon {
+  position : absolute;
+  top: 13px;
+  right: 50px
+}
+
+.input-icon img {
+  width: 30px;
+  height: 30px
+}
+@media screen and (max-width: 700px) {
+  .forgot-page .forgot-frame .left {
+    display: none;
+ }
+ .forgot-page .forgot-frame > div {
+    width: 100% !important;
+ }
+  .forgot-page input {
+    height: 55px !important;
+ }
+}
+@media screen and (min-width: 700px) and (max-width: 900px) {
+  .forgot-page .forgot-frame {
+    padding: 20px;
+ }
+ .forgot-page .forgot-frame .left {
+    width: 40%;
+ }
+ .forgot-page .forgot-frame .right {
+    width: 55%;
+ }
+} 
+
+.forgot-page .forgot-error {
+  color: red;
+  padding: 20px;
+}

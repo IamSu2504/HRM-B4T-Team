@@ -1,0 +1,126 @@
+.update-account-page {
+  padding: 20px;
+  margin-top: 10px;
+  border: 1px solid black;
+  background: #FFFFFF;
+}
+
+/* .update-account-page .title {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 26px;
+  line-height: 35px;
+  color: #000000;
+}
+
+.update-account-page .title-sub {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 21px;
+  color: #000000;
+  margin-top: 9px;
+} */
+
+
+@media screen and (max-width: 768px) {
+  .update-account-page .fied-data-row>div {
+    width: 100%;
+  }
+}
+
+/* =======================  */
+.update-account-page .avatar-row {
+  display: flex;
+  /* flex-wrap: wrap;
+  flex-direction: row; */
+  padding: 0px 100px 0 100px;
+}
+
+.update-account-page .avatar-row img {
+  display: block;
+  max-width: 300px;
+  max-height: 250px;
+  width: auto;
+  height: auto;
+}
+
+.update-account-page .avatar-row .img-contents {
+  margin: 0px 15px 0px 0px;
+  height: 30px;
+  width: 30px;
+  float: left;
+}
+
+.update-account-page .avatar-row>div {
+  margin-left: 10px;
+}
+
+.update-account-page .avatar-row .title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #3489cf;
+}
+
+.update-account-page .avatar-row .title:after {
+  content: '';
+  display: block;
+  width: 45%;
+  height: 4px;
+  background-image: -webkit-linear-gradient(left, #73D2F6, #08C 22%, #7FC400 36%, #FFD583 48%, #FFB21E 63%, #FF4D4D 76%, #503873);
+  background-image: linear-gradient(to right, #73D2F6, #08C 22%, #7FC400 36%, #FFD583 48%, #FFB21E 63%, #FF4D4D 76%, #503873);
+}
+
+.update-account-page .avatar-row .hoten {
+  color: #3489cf;
+  font-size: 34px;
+  font-weight: bold;
+}
+
+.update-account-page .avatar-row .manhanvien {
+  font-size: 25px;
+  font-weight: 500;
+  color: #34AACF;
+}
+
+.update-account-page .avatar-row .contents {
+  font-size: 15px;
+  font-weight: 500;
+  color: #34AACF;
+  text-align: left;
+  padding-left: 20px;
+}
+
+
+
+/*========================== */
+
+
+@media screen and (max-width: 768px) {
+  .update-account-page .avatar-row>div {
+    width: 100%;
+  }
+}
+
+.update-account-page .save-button {
+  background: #34AACF;
+  border-radius: 8px;
+  margin-top: 10px;
+  width: fit-content;
+  height: 46px;
+  border: unset;
+  margin-right: 15px;
+}
+.list-button{
+  display: flex;
+}
+
+.update-account-page .save-button .text {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  color: #FFFFFF;
+  margin-left: 10px;
+}

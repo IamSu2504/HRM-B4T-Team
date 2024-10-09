@@ -1,0 +1,189 @@
+.admin-homepage {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-homepage .bg {
+  width: 100%;
+  height: 100%;
+}
+
+.admin-homepage .bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.admin-homepage .bg-top {
+  position: absolute;
+  right: -200px;
+}
+
+.admin-homepage .bg-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.9;
+}
+
+.admin-homepage .content {
+  z-index: 2;
+  position: absolute;
+  top: 40px;
+  right: 50px;
+  color: white;
+}
+
+.admin-homepage .content .position {
+  text-align: right;
+  padding-right: 30px;
+  font-size: 24px;
+}
+
+.admin-homepage .content .position p {
+  border-bottom: 3px solid white;
+  width: 50%;
+  margin-left: 50%;
+}
+
+.admin-homepage .content .list-menu {
+  color: white;
+  margin-top: 50px;
+  text-align: right;
+  padding-right: 30px;
+}
+.admin-homepage .content .list-menu>ul>li:hover {
+  text-decoration: underline;
+}
+
+.admin-homepage .content .list-menu ul {
+  list-style: none;
+  font-size: 26px;
+}
+
+.admin-homepage .content .list-menu ul li{
+  cursor: pointer;
+}
+
+.admin-homepage .dot1 {
+  width: 400px;
+  height: 300px;
+  z-index: 3;
+  position: absolute;
+  bottom: 0
+}
+
+.admin-homepage .dot1 img {
+  width: 100%;
+  height: 100%;
+  top: 0
+}
+
+.admin-homepage .dot2 {
+  width: 200px;
+  height: 100px;
+  z-index: 3;
+  position: absolute;
+  bottom: 150px;
+  right: 150px
+}
+
+.admin-homepage .dot2 img {
+  width: 100%;
+  height: 100%;
+  top: 0
+}
+
+.admin-homepage .dot3 {
+  width: 200px;
+  height: 100px;
+  z-index: 3;
+  position: absolute;
+  top: 150px;
+  right: 500px
+}
+
+.admin-homepage .dot3 img {
+  width: 100%;
+  height: 100%;
+  top: 0
+}
+
+.logout {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 23px;
+  color: white;
+  cursor: pointer;
+  width: 45px;
+  margin: -10px 0px 25px 88%;
+}
+.logout:hover {
+  text-decoration: underline;
+  color: yellow;
+}
+
+@media screen and (min-width: 601px) and (max-width: 1064px) {
+  .admin-homepage .bg-top {
+    width: 800px;
+    top: -150px;
+  }
+
+  .admin-homepage .content .name {
+    font-size: 60px;
+  }
+
+  .admin-homepage .dot2 {
+    right: 50px
+  }
+
+  .admin-homepage .dot3 {
+    right: 400px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .admin-homepage .bg-top {
+    width: 650px;
+    top: -150px;
+  }
+
+  .admin-homepage .content .name {
+    font-size: 44px;
+  }
+
+  .admin-homepage .dot2 {
+    right: 5px
+  }
+
+  .admin-homepage .dot3 {
+    right: 250px;
+  }
+}
+
+
+@media screen and (min-width: 1065px) and (max-width: 1500px) {
+  .admin-homepage .bg-top {
+    width: 900px;
+    top: -250px;
+  }
+
+  .admin-homepage .content .name {
+    font-size: 74px;
+  }
+}
+
+@media screen and (min-width: 1501px) {
+  .admin-homepage .bg-top {
+    width: 950px;
+    top: -280px;
+  }
+
+  .admin-homepage .content .name {
+    font-size: 80px;
+  }
+}
